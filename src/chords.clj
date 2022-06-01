@@ -69,3 +69,9 @@
 (chord :c minor)            ;; => [:c :d# :g]
 (chord :c minor seven)      ;; => [:c :d# :g :a#]
 (chord :c minor maj-seven)  ;; => [:c :d# :g :b]
+
+(chord :a major)  ;; => [:a :c# :e]
+(chord :a minor)  ;; => [:a :c :e]
+
+(chord :e major)  ;; => [:e :g# :b]
+(chord :e minor)  ;; => [:e :g :b]
