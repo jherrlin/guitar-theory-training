@@ -32,24 +32,40 @@
        (drop-while #(not= % x))
        (second)))
 
+(def id identity)
 (def sharp succ)
 (def flat  pred)
+(def half  1)
+(def whole 2)
+(def major-steps [whole whole half whole whole whole])
+(def minor-steps #(assoc % 1 half 2 whole 4 half))
+(defn intervall [xs]
+  (->> xs
+       (reduce
+        (fn [xs' x]
+          (conj xs' (+ (last xs') x))) [0])
+       (map #(fn [xs] (nth xs %)))
+       (apply juxt)))
+(def major-scale-tones (->> major-steps intervall))
+(def minor-scale-tones (->> major-steps minor-steps intervall))
+(def triad (juxt #(nth % 0) #(nth % 2) #(nth % 4)))
+(def major (comp triad major-scale-tones))
+(def minor (comp triad minor-scale-tones))
+(def sus2  (comp (juxt #(nth % 0) #(nth % 1) #(nth % 4)) major-scale-tones))
+(def sus4  (comp (juxt #(nth % 0) #(nth % 3) #(nth % 4)) major-scale-tones))
 
-(let [t (fn [x] (fn [xs] (nth xs x)))]
-  ;;                   Hel   Hel   Halv  Hel   Hel   Hel
-  (def major (juxt (t 0) (t 2) (t 4) (t 5) (t 7) (t 9) (t 11)))
+(-> major-steps minor-steps)
 
-  ;;                   Hel   Halv  Hel   Hel   Halv  Hel
-  (def minor (juxt (t 0) (t 2) (t 3) (t 5) (t 7) (t 8) (t 10)))
+(major tones)
+(minor tones)
+(sus2  tones)
+(sus4  tones)
 
-  (def triad (juxt (t 0) (t 2) (t 4)))
-  )
-
-(defn chord-p [tones root major-or-minor & [color]]
+(defn chord-p [tones root base & [color]]
   (let [color' (if color
-                 (partial color tones (major tones))
+                 (partial color tones (major-scale-tones tones))
                  identity)]
-    (->> tones (find-root root) major-or-minor triad color')))
+    (->> tones (find-root root) base color')))
 
 (def chord (partial chord-p tones))
 
@@ -60,15 +76,14 @@
   (conj triad (septima scale-tones)))
 
 
-(minor tones) ;; => [:c :d :d# :f :g :g# :a#]
-(major tones) ;; => [:c :d :e  :f :g :a  :b]
-
 (chord :c major)            ;; => [:c :e :g]
 (chord :c major seven)      ;; => [:c :e :g :a#]
 (chord :c major maj-seven)  ;; => [:c :e :g :b]
 (chord :c minor)            ;; => [:c :d# :g]
 (chord :c minor seven)      ;; => [:c :d# :g :a#]
 (chord :c minor maj-seven)  ;; => [:c :d# :g :b]
+(chord :c sus2)             ;; => [:c :d :g]
+(chord :c sus4)             ;; => [:c :f :g]
 
 (chord :a major)  ;; => [:a :c# :e]
 (chord :a minor)  ;; => [:a :c :e]
