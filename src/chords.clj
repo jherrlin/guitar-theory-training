@@ -1,4 +1,5 @@
-(ns chords)
+(ns chords
+  (:require [clojure.string :as str]))
 
 (def tones [:c :c# :d :d# :e :f :f# :g :g# :a :a# :b])
 
@@ -117,11 +118,30 @@
       :chord     (minor-chord septima)
       :tones     septima}]))
 
-(-> tones
+(-> (find-root :e tones)
     major-scale-tones
     chords-in-major-scale)
 
 
+(->> (for [tone  tones
+           [k f] {:major           #(chord % major)
+                  :major-seven     #(chord % major seven)
+                  :major-maj-seven #(chord % major maj-seven)
+                  :minor           #(chord % minor)
+                  :minor-seven     #(chord % minor seven)
+                  :minor-maj-seven #(chord % minor maj-seven)
+                  :sus2            #(chord % sus2)
+                  :sus4            #(chord % sus4)}]
+       [tone k (f tone)])
+     (map (fn [[k m tones]]
+            (str
+             "** " (-> k name str/upper-case) " " (-> m name (str/replace "-" " ")) "\t\t\t\t:music:theory:chords:drill:"
+             "\n\n"
+             "   What notes are in the " (-> k name str/upper-case) " " (-> m name (str/replace "-" " ")) " chord?"
+             "\n\n"
+             "*** Answer \n\n   " tones "\n\n")))
+     (apply str)
+     (print))
 
 
 (chord :c major)            ;; => [:c :e :g]
