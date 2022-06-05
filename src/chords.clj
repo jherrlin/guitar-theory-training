@@ -61,19 +61,67 @@
 (sus2  tones)
 (sus4  tones)
 
-(defn chord-p [tones root base & [color]]
-  (let [color' (if color
-                 (partial color tones (major-scale-tones tones))
-                 identity)]
-    (->> tones (find-root root) base color')))
-
-(def chord (partial chord-p tones))
+(defn chord
+  ([root base]
+   (chord tones root base nil))
+  ([root base color]
+   (chord tones root base color))
+  ([tones root base & [color]]
+   (let [color' (if color
+                  (partial color tones (major-scale-tones tones))
+                  identity)]
+     (->> tones (find-root root) base color'))))
 
 (defn seven [all-tones scale-tones triad]
   (conj triad (-> (septima scale-tones) (flat all-tones))))
 
 (defn maj-seven [all-tones scale-tones triad]
   (conj triad (septima scale-tones)))
+
+
+(->> (find-root :c tones)
+     major-scale-tones)
+
+
+(defn chords-in-major-scale
+  "Chords in scale.
+  In:  `[:c :d :e :f :g :a :b]`
+  Out: `[,,, {:intervall :prim, :chord :c, :tones [:c :e :g]} ,,,]`"
+  [scale-tones]
+  (let [[prim sekund ters kvart kvint sext septima]
+        (map vector
+             scale-tones
+             (take 7 (drop 2 (cycle scale-tones)))
+             (take 7 (drop 4 (cycle scale-tones))))
+        major-chord #(-> % first)
+        minor-chord #(-> % first name (str "m") keyword)]
+    [{:intervall :prim
+      :chord     (major-chord prim)
+      :tones     prim}
+     {:intervall :sekund
+      :chord     (minor-chord sekund)
+      :tones     sekund}
+     {:intervall :ters
+      :chord     (minor-chord ters)
+      :tones     ters}
+     {:intervall :kvart
+      :chord     (major-chord kvart)
+      :tones     kvart}
+     {:intervall :kvint
+      :chord     (major-chord kvint)
+      :tones     kvint}
+     {:intervall :sext
+      :chord     (minor-chord sext)
+      :tones     sext}
+     {:intervall :septima
+      :chord     (minor-chord septima)
+      :tones     septima}]))
+
+(-> tones
+    major-scale-tones
+    chords-in-major-scale)
+
+
 
 
 (chord :c major)            ;; => [:c :e :g]
