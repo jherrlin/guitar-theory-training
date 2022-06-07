@@ -77,7 +77,7 @@
   (conj triad (-> (septima scale-tones) (flat all-tones))))
 
 (defn maj-seven [all-tones scale-tones triad]
-  (conj triad (septima scale-tones)))
+  (conj triad (->> all-tones)))
 
 
 (->> (find-root :c tones)
@@ -158,3 +158,93 @@
 
 (chord :e major)  ;; => [:e :g# :b]
 (chord :e minor)  ;; => [:e :g :b]
+
+
+
+(find-root :g# tones)                         ;; => [:g# :a :a# :b :c :c# :d :d# :e :f :f# :g]
+                                              ;;     1   2   3  4   5   6  7
+(-> (find-root :g# tones) major-scale-tones)  ;; => [:g# :a# :c :c# :d# :f :g]
+(-> (find-root :g# tones) minor-scale-tones)  ;; => [:g# :a# :b :c# :d# :e :f#]
+
+
+
+(chord :g# minor maj-seven) ;; => [:g# :b :d# :b]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(defn chord-base
+  ([tone]
+   (chord-base tone tones))
+  ([tone tones]
+   (let [tones'             (find-root tone tones)
+         major-scale-tones' (major-scale-tones tones')
+         minor-scale-tones' (minor-scale-tones tones')]
+     {:root              tone
+      :tones             tones'
+      :major-scale-tones major-scale-tones'
+      :minor-scale-tones minor-scale-tones'})))
+
+(def major)
+
+(chord-base :g#)
