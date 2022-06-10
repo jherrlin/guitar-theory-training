@@ -1,6 +1,6 @@
 (ns chords3
   (:require [clojure.string :as str]
-            [utils :refer [find-root fret-table-with-tones juxt-intervals]]))
+            [utils :refer [find-root fret-table-with-tones juxt-intervals find-chord succ]]))
 
 (comment
   (remove-ns 'chords3)
@@ -253,6 +253,52 @@
                    :s    doc}]))
        (into {}))
   )
+
+(find-chord chords-map tones [:c :g :e]) ;; => "C"
+(find-chord chords-map tones [:b :d :f]) ;; => "Bdim"
+(find-chord chords-map tones [:e :g :b]) ;; => "Em"
+
 ;; --------------------
 ;; Chords
 ;; --------------------
+
+;; --------------------
+;; Harmonization
+;; --------------------
+
+(rest [:a :b :c :d])
+
+(major-scale-tones tones)  ;; => [:c :d :e :f :g :a :b]
+
+(def triad   (juxt #(nth % 0) #(nth % 2) #(nth % 4)))
+(def seventh (juxt #(nth % 0) #(nth % 2) #(nth % 4) #(nth % 6)))
+
+
+(find-root :d (major-scale-tones tones))
+(find-root :d tones)
+
+(let [tone        :c
+      all-tones   tones
+      scale       major-scale-tones
+      scale-tones (scale (find-root tone all-tones))
+      f           seventh]
+  (loop [counter       0
+         [this & rest] scale-tones
+         chords        []]
+    (if (= counter 7)
+      chords
+      (let [chord-tones (f (find-root this scale-tones))
+            chord-name  (find-chord chords-map all-tones chord-tones)]
+        (recur
+         (inc counter)
+         rest
+         (conj chords {:chord-name  chord-name
+                       :chord-tones chord-tones})
+         )))))
+
+;; --------------------
+;; Harmonization
+;; --------------------
+
+(print
+ (fret-table-with-tones tones [:c :e :g :b]))
