@@ -171,6 +171,7 @@
 (defn chord [tone f]
   (f (chord-base tone)))
 
+(chord :c major-seven-flat-5) ;; => [:c :e :f# :a#]
 
 
 ;; ----------
