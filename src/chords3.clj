@@ -233,7 +233,7 @@
   "
   short:     m7b5
   full:      minor sevent flat 5
-  functions: 1 b3 d5 b7"
+  functions: 1 b3 b5 b7"
   (juxt-intervals
    [root minor-third diminished-fifth minor-seventh]))
 
@@ -243,7 +243,7 @@
   "
   short:     (maj7)b5
   full:      major major sevent flat 5
-  functions: 1 b d5 7"
+  functions: 1 b b5 7"
   (juxt-intervals
    [root major-third diminished-fifth major-seventh]))
 
@@ -269,7 +269,7 @@
   "dim7
   short:     dim7
   full:      diminished seventh
-  functions: 1 b3 d5 b7"
+  functions: 1 b3 b5 b7"
   (juxt-intervals
    [root minor-third diminished-fifth diminished-seventh]))
 
@@ -408,6 +408,7 @@
 (major-scale-tones tones)  ;; => [:c :d :e :f :g :a :b]
 
 (def triad   (juxt #(nth % 0) #(nth % 2) #(nth % 4)))
+(def sus   (juxt #(nth % 0) #(nth % 3) #(nth % 4)))
 (def seventh (juxt #(nth % 0) #(nth % 2) #(nth % 4) #(nth % 6)))
 
 (def harmonizations-map
@@ -430,25 +431,33 @@
                        :chord-tones chord-tones})))
           [])
          (mapv
-          (fn [i m]
-            (assoc m :position i))
+          (fn [i p m]
+            (assoc m :position p :index i))
+          (range 1 100)
           ["I" "ii" "iii" "IV" "V" "vi" "vii"]))))
 
 (def harmonizations-p (partial harmonizations scales-map chords-map tones))
 
-(harmonizations-p :c :major triad)
-(harmonizations-p :c :minor triad)
-(harmonizations-p :c :minor seventh)
+(defn harmonization-str [xs]
+  (str
+   (->> xs (map (comp #(format "  %-6s" %) :index)) (str/join))
+   "\n"
+   (->> xs (map (comp #(format "  %-6s" %) :chord-name)) (str/join))
+   "\n"
+   (->> xs (map (comp #(format "  %-6s" %) :position)) (str/join))))
 
-(->> (for [tone tones
-           mm   [:major :minor]
-           f    [:triad :seventh]]
-       {:tone tone
-        :m mm
-        :t f
-        :harmonizations
-        (harmonizations-p tone mm (get harmonizations-map f))})
-     #_(apply concat))
+
+
+((juxt #(nth % 0) #(nth % 4) #(nth % 5) #(nth % 3))
+ (map (fn [i m]
+        (assoc m :id i))
+      (range 1 8)
+      (harmonizations-p :c :minor triad)))
+
+
+(harmonizations-p :c :major seventh)
+
+
 
 ;; --------------------
 ;; Harmonization
@@ -571,9 +580,55 @@
              "\n\n\n"
              (fret-table-with-tones-p scale-tones)
              "\n")))
-     (apply str))))))
+     (apply str))
 
+     (->> (for [tone tones
+                [k1 s1]   [[:major "major"] [:minor "minor"]]
+                [k2 s2]   [[:triad "triad"] [:seventh "seventh"]]]
+            (let [harmonization (harmonizations-p tone k1 (get harmonizations-map k2))
+                  harmonization-str' (harmonization-str harmonization)]
+              {:tone tone
+               :tone-str (-> tone name str/upper-case)
+               :m s1
+               :t s2
+               :harmonization-str harmonization-str'}))
+          (map (fn [{:keys [tone tone-str m t harmonization-str]}]
+                 (str
+                  "** " (format "%-60s:music:theory:harmonizations:drill:" (str "Chords in: " tone-str " " m " " t))
+                  "\n\n"
+                  "   Name the diatonic chords in " tone-str " " m " " t " scale."
+                  "\n\n"
+                  "*** Answer "
+                  "\n\n"
+                  harmonization-str
+                  "\n\n")))
+          (apply str))))))
 
+(spit "/tmp/to-jorgen.org"
+      (with-out-str
+        (print
+         (str "#+OPTIONS: toc:nil\n\n"
+              (->> (for [tone tones
+                         [k1 s1]   [[:major "major"] [:minor "minor"]]
+                         [k2 s2]   [[:triad "triad"] [:seventh "seventh"]]]
+                     (let [harmonization (harmonizations-p tone k1 (get harmonizations-map k2))
+                           harmonization-str' (harmonization-str harmonization)]
+                       {:tone tone
+                        :tone-str (-> tone name str/upper-case)
+                        :m s1
+                        :t s2
+                        :harmonization-str harmonization-str'}))
+                   (map (fn [{:keys [tone tone-str m t harmonization-str]}]
+                          (str
+                           "** " tone-str " " m " " t " diatonic chords."
+                           "\n\n"
+                           "  #+BEGIN_SRC text"
+                           "\n"
+                           harmonization-str
+                           "\n"
+                           "  #+END_SRC"
+                           "\n\n")))
+                   (apply str))))))
 
 
 ;; --------------------
