@@ -61,6 +61,13 @@
                         :doc/full "major seventh"}
    :perfect-octave     {:f        perfect-octave
                         :doc/full "perfect octave"}})
+
+(defn interval [tones tone i]
+  (nth (find-root tone tones) i))
+
+(def interval-p (partial interval tones))
+
+(interval-p :c perfect-fifth)  ;; => :g
 ;; --------------------
 ;; Intervals
 ;; --------------------
@@ -69,12 +76,7 @@
 ;; Scales
 ;; --------------------
 (def major-scale-tones
-  "Major
-  label: Major
-  description: Major chord
-  functions:
-
-  "
+  "Major"
   (juxt-intervals
    [root major-second major-third perfect-fourth perfect-fifth major-sixth major-seventh]))
 
@@ -408,6 +410,9 @@
 (def triad   (juxt #(nth % 0) #(nth % 2) #(nth % 4)))
 (def seventh (juxt #(nth % 0) #(nth % 2) #(nth % 4) #(nth % 6)))
 
+(def harmonizations-map
+  {:triad   triad
+   :seventh seventh})
 
 (find-root :d (major-scale-tones tones))
 (find-root :d tones)
@@ -435,6 +440,15 @@
 (harmonizations-p :c :minor triad)
 (harmonizations-p :c :minor seventh)
 
+(->> (for [tone tones
+           mm   [:major :minor]
+           f    [:triad :seventh]]
+       {:tone tone
+        :m mm
+        :t f
+        :harmonizations
+        (harmonizations-p tone mm (get harmonizations-map f))})
+     #_(apply concat))
 
 ;; --------------------
 ;; Harmonization
@@ -497,7 +511,70 @@
                    "\n\n\n"
                    (fret-table-with-tones-p chord-tones)
                    "\n"))))
-          (apply str))))))
+          (apply str))
+     (->>
+      (for [tone                  tones
+            [_ {:keys [f]
+                full  :doc/full}] intervals-map]
+        (let [interval-tone (interval-p tone f)]
+          {:interval          (str/capitalize full)
+           :nr-of-semitones   f
+           :tone              tone
+           :interval-tone     interval-tone
+           :tone-str          (-> tone name str/upper-case)
+           :interval-tone-str (-> interval-tone name str/upper-case)}))
+      (map (fn [{:keys [interval interval-tone interval-tone-str nr-of-semitones tone tone-str]}]
+             (str
+              (str
+               "** " (format "%-60s:music:theory:intervals:drill:" (str interval " from " tone-str))
+               "\n\n"
+               "   " "What is the tone in " interval " interval from tone " tone-str "?"
+               "\n"
+               "   " "How many semitones are in the interval?"
+               "\n\n"
+               "*** Answer \n\n"
+               "    " "Tone in interval:  " interval-tone-str
+               "\n"
+               "    " "Numer of semitones: " nr-of-semitones
+               "\n\n"
+               "\n\n"
+               (fret-table-with-tones-p [tone interval-tone])
+               "\n\n")
+
+              (str
+               "** " (format "%-60s:music:theory:intervals:drill:" (str "Interval " nr-of-semitones " semitones from " tone-str))
+               "\n\n"
+               "   " "Name the interval " nr-of-semitones " semitones from " tone-str " and the tone in the interval."
+               "\n\n"
+               "*** Answer \n\n"
+               "    " interval-tone-str
+               "\n\n"
+               (fret-table-with-tones-p [tone interval-tone])
+               "\n\n"))))
+      (apply str))
+     (->> (for [tone              tones
+           [_ {:keys [s f]}] scales-map]
+       (let [scale-tones (f (find-root tone tones))
+             tones-str   (->> scale-tones (map (comp str/upper-case name)) (str/join ", "))]
+         {:scale-tones scale-tones
+          :display     s
+          :tone        (-> tone name str/upper-case)
+          :tones-str   tones-str}))
+     (map (fn [{:keys [scale-tones display tone tones-str]}]
+            (str
+             "** " (format "%-60s:music:theory:scales:drill:" (str "Tones in " tone " " display " scale"))
+             "\n\n"
+             "   " "What tones are in the " tone " " display " scale?"
+             "\n\n"
+             "*** Answer \n\n"
+             "    " "The tones are: " tones-str
+             "\n\n\n"
+             (fret-table-with-tones-p scale-tones)
+             "\n")))
+     (apply str))))))
+
+
+
 
 ;; --------------------
 ;; Org-drill

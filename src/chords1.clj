@@ -357,14 +357,14 @@
                   [:minor-scale-tones "Minor"]
                   [:minor-pentatonic-scale "Minor pentatonic"]
                   [:major-pentatonic-scale "Major pentatonic"]]]
-       (let [base'       (chord-base tone)
+          (let [base'       (chord-base tone)
              scale-tones (get base' k)
              tones-str   (->> scale-tones (map (comp str/upper-case name)) (str/join ", "))]
          {:scale-tones scale-tones
           :display     s
           :tone        (-> tone name str/upper-case)
           :tones-str   tones-str}))
-     (map (fn [{:keys [scale-tones display tone tones-str]}]
+        (map (fn [{:keys [scale-tones display tone tones-str]}]
             (str
              "** " (format "%-60s:music:theory:scales:drill:" (str "Tones in " tone " " display " scale"))
              "\n\n"
