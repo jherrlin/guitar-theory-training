@@ -65,3 +65,13 @@
        (cycle)
        (drop-while #(not= % x))
        (second)))
+
+(defn docstring->m [s]
+  (when s
+    (let [s             (str/trim s)
+          [_ short]     (re-find #"short:\s*(\S*)\n" s)
+          [_ full]      (re-find #"\n\s*full:\s*([a-zA-Z0-9 ]*)\n" s)
+          [_ functions] (re-find #"\n\s*functions:\s*(.*)" s)]
+      {:short     short
+       :full      full
+       :functions functions})))
