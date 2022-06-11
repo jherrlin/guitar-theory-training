@@ -236,6 +236,8 @@
     :f    minor-maj-seven-chord-tones,
     :s    "m(maj7)"}})
 
+(def find-chord-p (partial find-chord chords-map tones))
+
 (comment
   (->> (ns-publics 'chords3)
        (map (fn [[k v]]
@@ -258,6 +260,8 @@
 (find-chord chords-map tones [:b :d :f]) ;; => "Bdim"
 (find-chord chords-map tones [:e :g :b]) ;; => "Em"
 
+(find-chord-p [:e :g :b])
+
 ;; --------------------
 ;; Chords
 ;; --------------------
@@ -277,24 +281,29 @@
 (find-root :d (major-scale-tones tones))
 (find-root :d tones)
 
-(let [tone        :c
-      all-tones   tones
-      scale       major-scale-tones
-      scale-tones (scale (find-root tone all-tones))
-      f           seventh]
-  (loop [counter       0
-         [this & rest] scale-tones
-         chords        []]
-    (if (= counter 7)
-      chords
-      (let [chord-tones (f (find-root this scale-tones))
-            chord-name  (find-chord chords-map all-tones chord-tones)]
-        (recur
-         (inc counter)
-         rest
-         (conj chords {:chord-name  chord-name
-                       :chord-tones chord-tones})
-         )))))
+(defn harmonizations [scales-map chords-map all-tones tone scale f]
+  (let [scale-tones ((get-in scales-map [scale :f]) (find-root tone all-tones))]
+    (->> scale-tones
+         (reduce
+          (fn [m t]
+            (let [chord-tones (f (find-root t scale-tones))
+                  chord-name  (find-chord chords-map all-tones chord-tones)]
+              (conj m {:root        tone
+                       :scale       scale
+                       :chord-name  chord-name
+                       :chord-tones chord-tones})))
+          [])
+         (mapv
+          (fn [i m]
+            (assoc m :position i))
+          ["I" "ii" "iii" "IV" "V" "vi" "vii"]))))
+
+(def harmonizations-p (partial harmonizations scales-map chords-map tones))
+
+(harmonizations-p :c :major triad)
+(harmonizations-p :c :minor triad)
+(harmonizations-p :c :minor seventh)
+
 
 ;; --------------------
 ;; Harmonization
