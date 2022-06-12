@@ -1,13 +1,1 @@
-{:paths ["src" "test"]
- :deps  {com.cerner/clara-rules {:mvn/version "0.21.0"}}
-
- :aliases {:reveal   {:extra-deps {vlaaad/reveal {:mvn/version "1.3.212"}}
-                      :ns-default vlaaad.reveal
-                      :exec-fn    repl}
-           :runner   {:main-opts ["-m" "cognitect.test-runner"]}
-           :test     {:extra-paths ["test"]
-                      :extra-deps  {com.cognitect/test-runner {:git/url "https://github.com/cognitect-labs/test-runner.git"
-                                                               :sha     "b6b3193fcc42659d7e46ecd1884a228993441182"}
-                                    day8.re-frame/test        {:mvn/version "0.1.5"}}}
-           :outdated {:extra-deps {olical/depot {:mvn/version "2.0.1"}}
-                      :main-opts  ["-m" "depot.outdated.main"]}}}
+{:paths ["src" "test"]}
