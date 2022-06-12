@@ -1,3 +1,7 @@
-Learn music thoey via Clojure and Emacs Org-drill
+#+TITLE: Music thoey via Clojure and Emacs Org-drill
 
 The code in this repo is alpha and is subject to change.
+
+Clojure is used to generate Org drill flashcards with questions and answers.
+
+Questions and answers are in the music-theory-drills.org file.
