@@ -1,6 +1,6 @@
 #+STARTUP: overview
 
-** Notes in Cdim7                                              :music:theory:chords:drill:
+** Tones in Cdim7                                              :music:theory:chords:drill:
 
    What tones are in Cdim7 chord?
 
@@ -42,7 +42,7 @@
 | A  |    |    | C  |    |    | D# |    |    | F# |    |    | A  |    |    | C  |    |    | D# |    |    | F# |    |    | A  |
 |    |    | F# |    |    | A  |    |    | C  |    |    | D# |    |    | F# |    |    | A  |    |    | C  |    |    | D# |    |
 
-** Notes in C5                                                 :music:theory:chords:drill:
+** Tones in C5                                                 :music:theory:chords:drill:
 
    What tones are in C5 chord?
 
@@ -84,7 +84,7 @@
 |    |    |    | C  |    |    |    |    |    |    | G  |    |    |    |    | C  |    |    |    |    |    |    | G  |    |    |
 |    |    |    | G  |    |    |    |    | C  |    |    |    |    |    |    | G  |    |    |    |    | C  |    |    |    |    |
 
-** Notes in Cm7                                                :music:theory:chords:drill:
+** Tones in Cm7                                                :music:theory:chords:drill:
 
    What tones are in Cm7 chord?
 
@@ -126,7 +126,7 @@
 |    | A# |    | C  |    |    | D# |    |    |    | G  |    |    | A# |    | C  |    |    | D# |    |    |    | G  |    |    |
 |    |    |    | G  |    |    | A# |    | C  |    |    | D# |    |    |    | G  |    |    | A# |    | C  |    |    | D# |    |
 
-** Notes in C                                                  :music:theory:chords:drill:
+** Tones in C                                                  :music:theory:chords:drill:
 
    What tones are in C chord?
 
@@ -168,7 +168,7 @@
 |    |    |    | C  |    |    |    | E  |    |    | G  |    |    |    |    | C  |    |    |    | E  |    |    | G  |    |    |
 | E  |    |    | G  |    |    |    |    | C  |    |    |    | E  |    |    | G  |    |    |    |    | C  |    |    |    | E  |
 
-** Notes in C7                                                 :music:theory:chords:drill:
+** Tones in C7                                                 :music:theory:chords:drill:
 
    What tones are in C7 chord?
 
@@ -210,7 +210,7 @@
 |    | A# |    | C  |    |    |    | E  |    |    | G  |    |    | A# |    | C  |    |    |    | E  |    |    | G  |    |    |
 | E  |    |    | G  |    |    | A# |    | C  |    |    |    | E  |    |    | G  |    |    | A# |    | C  |    |    |    | E  |
 
-** Notes in Cm7b5                                              :music:theory:chords:drill:
+** Tones in Cm7b5                                              :music:theory:chords:drill:
 
    What tones are in Cm7b5 chord?
 
@@ -252,7 +252,7 @@
 |    | A# |    | C  |    |    | D# |    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |    | F# |    |    |    |
 |    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |
 
-** Notes in Cdim                                               :music:theory:chords:drill:
+** Tones in Cdim                                               :music:theory:chords:drill:
 
    What tones are in Cdim chord?
 
@@ -294,7 +294,7 @@
 |    |    |    | C  |    |    | D# |    |    | F# |    |    |    |    |    | C  |    |    | D# |    |    | F# |    |    |    |
 |    |    | F# |    |    |    |    |    | C  |    |    | D# |    |    | F# |    |    |    |    |    | C  |    |    | D# |    |
 
-** Notes in Cmaj7                                              :music:theory:chords:drill:
+** Tones in Cmaj7                                              :music:theory:chords:drill:
 
    What tones are in Cmaj7 chord?
 
@@ -336,7 +336,7 @@
 |    |    | B  | C  |    |    |    | E  |    |    | G  |    |    |    | B  | C  |    |    |    | E  |    |    | G  |    |    |
 | E  |    |    | G  |    |    |    | B  | C  |    |    |    | E  |    |    | G  |    |    |    | B  | C  |    |    |    | E  |
 
-** Notes in C(maj7)b5                                          :music:theory:chords:drill:
+** Tones in C(maj7)b5                                          :music:theory:chords:drill:
 
    What tones are in C(maj7)b5 chord?
 
@@ -378,7 +378,7 @@
 |    |    | B  | C  |    |    |    | E  |    | F# |    |    |    |    | B  | C  |    |    |    | E  |    | F# |    |    |    |
 | E  |    | F# |    |    |    |    | B  | C  |    |    |    | E  |    | F# |    |    |    |    | B  | C  |    |    |    | E  |
 
-** Notes in Csus2                                              :music:theory:chords:drill:
+** Tones in Csus2                                              :music:theory:chords:drill:
 
    What tones are in Csus2 chord?
 
@@ -420,7 +420,7 @@
 |    |    |    | C  |    | D  |    |    |    |    | G  |    |    |    |    | C  |    | D  |    |    |    |    | G  |    |    |
 |    |    |    | G  |    |    |    |    | C  |    | D  |    |    |    |    | G  |    |    |    |    | C  |    | D  |    |    |
 
-** Notes in Cm                                                 :music:theory:chords:drill:
+** Tones in Cm                                                 :music:theory:chords:drill:
 
    What tones are in Cm chord?
 
@@ -462,7 +462,7 @@
 |    |    |    | C  |    |    | D# |    |    |    | G  |    |    |    |    | C  |    |    | D# |    |    |    | G  |    |    |
 |    |    |    | G  |    |    |    |    | C  |    |    | D# |    |    |    | G  |    |    |    |    | C  |    |    | D# |    |
 
-** Notes in Csus2                                              :music:theory:chords:drill:
+** Tones in Csus2                                              :music:theory:chords:drill:
 
    What tones are in Csus2 chord?
 
@@ -504,7 +504,7 @@
 |    |    |    | C  |    |    |    |    | F  |    | G  |    |    |    |    | C  |    |    |    |    | F  |    | G  |    |    |
 |    | F  |    | G  |    |    |    |    | C  |    |    |    |    | F  |    | G  |    |    |    |    | C  |    |    |    |    |
 
-** Notes in Cm(maj7)                                           :music:theory:chords:drill:
+** Tones in Cm(maj7)                                           :music:theory:chords:drill:
 
    What tones are in Cm(maj7) chord?
 
@@ -546,7 +546,7 @@
 |    |    | B  | C  |    |    | D# |    |    |    | G  |    |    |    | B  | C  |    |    | D# |    |    |    | G  |    |    |
 |    |    |    | G  |    |    |    | B  | C  |    |    | D# |    |    |    | G  |    |    |    | B  | C  |    |    | D# |    |
 
-** Notes in C#dim7                                             :music:theory:chords:drill:
+** Tones in C#dim7                                             :music:theory:chords:drill:
 
    What tones are in C#dim7 chord?
 
@@ -588,7 +588,7 @@
 |    | A# |    |    | C# |    |    | E  |    |    | G  |    |    | A# |    |    | C# |    |    | E  |    |    | G  |    |    |
 | E  |    |    | G  |    |    | A# |    |    | C# |    |    | E  |    |    | G  |    |    | A# |    |    | C# |    |    | E  |
 
-** Notes in C#5                                                :music:theory:chords:drill:
+** Tones in C#5                                                :music:theory:chords:drill:
 
    What tones are in C#5 chord?
 
@@ -630,7 +630,7 @@
 |    |    |    |    | C# |    |    |    |    |    |    | G# |    |    |    |    | C# |    |    |    |    |    |    | G# |    |
 |    |    |    |    | G# |    |    |    |    | C# |    |    |    |    |    |    | G# |    |    |    |    | C# |    |    |    |
 
-** Notes in C#m7                                               :music:theory:chords:drill:
+** Tones in C#m7                                               :music:theory:chords:drill:
 
    What tones are in C#m7 chord?
 
@@ -672,7 +672,7 @@
 |    |    | B  |    | C# |    |    | E  |    |    |    | G# |    |    | B  |    | C# |    |    | E  |    |    |    | G# |    |
 | E  |    |    |    | G# |    |    | B  |    | C# |    |    | E  |    |    |    | G# |    |    | B  |    | C# |    |    | E  |
 
-** Notes in C#                                                 :music:theory:chords:drill:
+** Tones in C#                                                 :music:theory:chords:drill:
 
    What tones are in C# chord?
 
@@ -714,7 +714,7 @@
 |    |    |    |    | C# |    |    |    | F  |    |    | G# |    |    |    |    | C# |    |    |    | F  |    |    | G# |    |
 |    | F  |    |    | G# |    |    |    |    | C# |    |    |    | F  |    |    | G# |    |    |    |    | C# |    |    |    |
 
-** Notes in C#7                                                :music:theory:chords:drill:
+** Tones in C#7                                                :music:theory:chords:drill:
 
    What tones are in C#7 chord?
 
@@ -756,7 +756,7 @@
 |    |    | B  |    | C# |    |    |    | F  |    |    | G# |    |    | B  |    | C# |    |    |    | F  |    |    | G# |    |
 |    | F  |    |    | G# |    |    | B  |    | C# |    |    |    | F  |    |    | G# |    |    | B  |    | C# |    |    |    |
 
-** Notes in C#m7b5                                             :music:theory:chords:drill:
+** Tones in C#m7b5                                             :music:theory:chords:drill:
 
    What tones are in C#m7b5 chord?
 
@@ -798,7 +798,7 @@
 |    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |
 | E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |
 
-** Notes in C#dim                                              :music:theory:chords:drill:
+** Tones in C#dim                                              :music:theory:chords:drill:
 
    What tones are in C#dim chord?
 
@@ -840,7 +840,7 @@
 |    |    |    |    | C# |    |    | E  |    |    | G  |    |    |    |    |    | C# |    |    | E  |    |    | G  |    |    |
 | E  |    |    | G  |    |    |    |    |    | C# |    |    | E  |    |    | G  |    |    |    |    |    | C# |    |    | E  |
 
-** Notes in C#maj7                                             :music:theory:chords:drill:
+** Tones in C#maj7                                             :music:theory:chords:drill:
 
    What tones are in C#maj7 chord?
 
@@ -882,7 +882,7 @@
 |    |    |    | C  | C# |    |    |    | F  |    |    | G# |    |    |    | C  | C# |    |    |    | F  |    |    | G# |    |
 |    | F  |    |    | G# |    |    |    | C  | C# |    |    |    | F  |    |    | G# |    |    |    | C  | C# |    |    |    |
 
-** Notes in C#(maj7)b5                                         :music:theory:chords:drill:
+** Tones in C#(maj7)b5                                         :music:theory:chords:drill:
 
    What tones are in C#(maj7)b5 chord?
 
@@ -924,7 +924,7 @@
 |    |    |    | C  | C# |    |    |    | F  |    | G  |    |    |    |    | C  | C# |    |    |    | F  |    | G  |    |    |
 |    | F  |    | G  |    |    |    |    | C  | C# |    |    |    | F  |    | G  |    |    |    |    | C  | C# |    |    |    |
 
-** Notes in C#sus2                                             :music:theory:chords:drill:
+** Tones in C#sus2                                             :music:theory:chords:drill:
 
    What tones are in C#sus2 chord?
 
@@ -966,7 +966,7 @@
 |    |    |    |    | C# |    | D# |    |    |    |    | G# |    |    |    |    | C# |    | D# |    |    |    |    | G# |    |
 |    |    |    |    | G# |    |    |    |    | C# |    | D# |    |    |    |    | G# |    |    |    |    | C# |    | D# |    |
 
-** Notes in C#m                                                :music:theory:chords:drill:
+** Tones in C#m                                                :music:theory:chords:drill:
 
    What tones are in C#m chord?
 
@@ -1008,7 +1008,7 @@
 |    |    |    |    | C# |    |    | E  |    |    |    | G# |    |    |    |    | C# |    |    | E  |    |    |    | G# |    |
 | E  |    |    |    | G# |    |    |    |    | C# |    |    | E  |    |    |    | G# |    |    |    |    | C# |    |    | E  |
 
-** Notes in C#sus2                                             :music:theory:chords:drill:
+** Tones in C#sus2                                             :music:theory:chords:drill:
 
    What tones are in C#sus2 chord?
 
@@ -1050,7 +1050,7 @@
 |    |    |    |    | C# |    |    |    |    | F# |    | G# |    |    |    |    | C# |    |    |    |    | F# |    | G# |    |
 |    |    | F# |    | G# |    |    |    |    | C# |    |    |    |    | F# |    | G# |    |    |    |    | C# |    |    |    |
 
-** Notes in C#m(maj7)                                          :music:theory:chords:drill:
+** Tones in C#m(maj7)                                          :music:theory:chords:drill:
 
    What tones are in C#m(maj7) chord?
 
@@ -1092,7 +1092,7 @@
 |    |    |    | C  | C# |    |    | E  |    |    |    | G# |    |    |    | C  | C# |    |    | E  |    |    |    | G# |    |
 | E  |    |    |    | G# |    |    |    | C  | C# |    |    | E  |    |    |    | G# |    |    |    | C  | C# |    |    | E  |
 
-** Notes in Ddim7                                              :music:theory:chords:drill:
+** Tones in Ddim7                                              :music:theory:chords:drill:
 
    What tones are in Ddim7 chord?
 
@@ -1134,7 +1134,7 @@
 |    |    | B  |    |    | D  |    |    | F  |    |    | G# |    |    | B  |    |    | D  |    |    | F  |    |    | G# |    |
 |    | F  |    |    | G# |    |    | B  |    |    | D  |    |    | F  |    |    | G# |    |    | B  |    |    | D  |    |    |
 
-** Notes in D5                                                 :music:theory:chords:drill:
+** Tones in D5                                                 :music:theory:chords:drill:
 
    What tones are in D5 chord?
 
@@ -1176,7 +1176,7 @@
 | A  |    |    |    |    | D  |    |    |    |    |    |    | A  |    |    |    |    | D  |    |    |    |    |    |    | A  |
 |    |    |    |    |    | A  |    |    |    |    | D  |    |    |    |    |    |    | A  |    |    |    |    | D  |    |    |
 
-** Notes in Dm7                                                :music:theory:chords:drill:
+** Tones in Dm7                                                :music:theory:chords:drill:
 
    What tones are in Dm7 chord?
 
@@ -1218,7 +1218,7 @@
 | A  |    |    | C  |    | D  |    |    | F  |    |    |    | A  |    |    | C  |    | D  |    |    | F  |    |    |    | A  |
 |    | F  |    |    |    | A  |    |    | C  |    | D  |    |    | F  |    |    |    | A  |    |    | C  |    | D  |    |    |
 
-** Notes in D                                                  :music:theory:chords:drill:
+** Tones in D                                                  :music:theory:chords:drill:
 
    What tones are in D chord?
 
@@ -1260,7 +1260,7 @@
 | A  |    |    |    |    | D  |    |    |    | F# |    |    | A  |    |    |    |    | D  |    |    |    | F# |    |    | A  |
 |    |    | F# |    |    | A  |    |    |    |    | D  |    |    |    | F# |    |    | A  |    |    |    |    | D  |    |    |
 
-** Notes in D7                                                 :music:theory:chords:drill:
+** Tones in D7                                                 :music:theory:chords:drill:
 
    What tones are in D7 chord?
 
@@ -1302,7 +1302,7 @@
 | A  |    |    | C  |    | D  |    |    |    | F# |    |    | A  |    |    | C  |    | D  |    |    |    | F# |    |    | A  |
 |    |    | F# |    |    | A  |    |    | C  |    | D  |    |    |    | F# |    |    | A  |    |    | C  |    | D  |    |    |
 
-** Notes in Dm7b5                                              :music:theory:chords:drill:
+** Tones in Dm7b5                                              :music:theory:chords:drill:
 
    What tones are in Dm7b5 chord?
 
@@ -1344,7 +1344,7 @@
 |    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |
 |    | F  |    |    | G# |    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |    |    | C  |    | D  |    |    |
 
-** Notes in Ddim                                               :music:theory:chords:drill:
+** Tones in Ddim                                               :music:theory:chords:drill:
 
    What tones are in Ddim chord?
 
@@ -1386,7 +1386,7 @@
 |    |    |    |    |    | D  |    |    | F  |    |    | G# |    |    |    |    |    | D  |    |    | F  |    |    | G# |    |
 |    | F  |    |    | G# |    |    |    |    |    | D  |    |    | F  |    |    | G# |    |    |    |    |    | D  |    |    |
 
-** Notes in Dmaj7                                              :music:theory:chords:drill:
+** Tones in Dmaj7                                              :music:theory:chords:drill:
 
    What tones are in Dmaj7 chord?
 
@@ -1428,7 +1428,7 @@
 | A  |    |    |    | C# | D  |    |    |    | F# |    |    | A  |    |    |    | C# | D  |    |    |    | F# |    |    | A  |
 |    |    | F# |    |    | A  |    |    |    | C# | D  |    |    |    | F# |    |    | A  |    |    |    | C# | D  |    |    |
 
-** Notes in D(maj7)b5                                          :music:theory:chords:drill:
+** Tones in D(maj7)b5                                          :music:theory:chords:drill:
 
    What tones are in D(maj7)b5 chord?
 
@@ -1470,7 +1470,7 @@
 |    |    |    |    | C# | D  |    |    |    | F# |    | G# |    |    |    |    | C# | D  |    |    |    | F# |    | G# |    |
 |    |    | F# |    | G# |    |    |    |    | C# | D  |    |    |    | F# |    | G# |    |    |    |    | C# | D  |    |    |
 
-** Notes in Dsus2                                              :music:theory:chords:drill:
+** Tones in Dsus2                                              :music:theory:chords:drill:
 
    What tones are in Dsus2 chord?
 
@@ -1512,7 +1512,7 @@
 | A  |    |    |    |    | D  |    | E  |    |    |    |    | A  |    |    |    |    | D  |    | E  |    |    |    |    | A  |
 | E  |    |    |    |    | A  |    |    |    |    | D  |    | E  |    |    |    |    | A  |    |    |    |    | D  |    | E  |
 
-** Notes in Dm                                                 :music:theory:chords:drill:
+** Tones in Dm                                                 :music:theory:chords:drill:
 
    What tones are in Dm chord?
 
@@ -1554,7 +1554,7 @@
 | A  |    |    |    |    | D  |    |    | F  |    |    |    | A  |    |    |    |    | D  |    |    | F  |    |    |    | A  |
 |    | F  |    |    |    | A  |    |    |    |    | D  |    |    | F  |    |    |    | A  |    |    |    |    | D  |    |    |
 
-** Notes in Dsus2                                              :music:theory:chords:drill:
+** Tones in Dsus2                                              :music:theory:chords:drill:
 
    What tones are in Dsus2 chord?
 
@@ -1596,7 +1596,7 @@
 | A  |    |    |    |    | D  |    |    |    |    | G  |    | A  |    |    |    |    | D  |    |    |    |    | G  |    | A  |
 |    |    |    | G  |    | A  |    |    |    |    | D  |    |    |    |    | G  |    | A  |    |    |    |    | D  |    |    |
 
-** Notes in Dm(maj7)                                           :music:theory:chords:drill:
+** Tones in Dm(maj7)                                           :music:theory:chords:drill:
 
    What tones are in Dm(maj7) chord?
 
@@ -1638,7 +1638,7 @@
 | A  |    |    |    | C# | D  |    |    | F  |    |    |    | A  |    |    |    | C# | D  |    |    | F  |    |    |    | A  |
 |    | F  |    |    |    | A  |    |    |    | C# | D  |    |    | F  |    |    |    | A  |    |    |    | C# | D  |    |    |
 
-** Notes in D#dim7                                             :music:theory:chords:drill:
+** Tones in D#dim7                                             :music:theory:chords:drill:
 
    What tones are in D#dim7 chord?
 
@@ -1680,7 +1680,7 @@
 | A  |    |    | C  |    |    | D# |    |    | F# |    |    | A  |    |    | C  |    |    | D# |    |    | F# |    |    | A  |
 |    |    | F# |    |    | A  |    |    | C  |    |    | D# |    |    | F# |    |    | A  |    |    | C  |    |    | D# |    |
 
-** Notes in D#5                                                :music:theory:chords:drill:
+** Tones in D#5                                                :music:theory:chords:drill:
 
    What tones are in D#5 chord?
 
@@ -1722,7 +1722,7 @@
 |    | A# |    |    |    |    | D# |    |    |    |    |    |    | A# |    |    |    |    | D# |    |    |    |    |    |    |
 |    |    |    |    |    |    | A# |    |    |    |    | D# |    |    |    |    |    |    | A# |    |    |    |    | D# |    |
 
-** Notes in D#m7                                               :music:theory:chords:drill:
+** Tones in D#m7                                               :music:theory:chords:drill:
 
    What tones are in D#m7 chord?
 
@@ -1764,7 +1764,7 @@
 |    | A# |    |    | C# |    | D# |    |    | F# |    |    |    | A# |    |    | C# |    | D# |    |    | F# |    |    |    |
 |    |    | F# |    |    |    | A# |    |    | C# |    | D# |    |    | F# |    |    |    | A# |    |    | C# |    | D# |    |
 
-** Notes in D#                                                 :music:theory:chords:drill:
+** Tones in D#                                                 :music:theory:chords:drill:
 
    What tones are in D# chord?
 
@@ -1806,7 +1806,7 @@
 |    | A# |    |    |    |    | D# |    |    |    | G  |    |    | A# |    |    |    |    | D# |    |    |    | G  |    |    |
 |    |    |    | G  |    |    | A# |    |    |    |    | D# |    |    |    | G  |    |    | A# |    |    |    |    | D# |    |
 
-** Notes in D#7                                                :music:theory:chords:drill:
+** Tones in D#7                                                :music:theory:chords:drill:
 
    What tones are in D#7 chord?
 
@@ -1848,7 +1848,7 @@
 |    | A# |    |    | C# |    | D# |    |    |    | G  |    |    | A# |    |    | C# |    | D# |    |    |    | G  |    |    |
 |    |    |    | G  |    |    | A# |    |    | C# |    | D# |    |    |    | G  |    |    | A# |    |    | C# |    | D# |    |
 
-** Notes in D#m7b5                                             :music:theory:chords:drill:
+** Tones in D#m7b5                                             :music:theory:chords:drill:
 
    What tones are in D#m7b5 chord?
 
@@ -1890,7 +1890,7 @@
 | A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |
 |    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |
 
-** Notes in D#dim                                              :music:theory:chords:drill:
+** Tones in D#dim                                              :music:theory:chords:drill:
 
    What tones are in D#dim chord?
 
@@ -1932,7 +1932,7 @@
 | A  |    |    |    |    |    | D# |    |    | F# |    |    | A  |    |    |    |    |    | D# |    |    | F# |    |    | A  |
 |    |    | F# |    |    | A  |    |    |    |    |    | D# |    |    | F# |    |    | A  |    |    |    |    |    | D# |    |
 
-** Notes in D#maj7                                             :music:theory:chords:drill:
+** Tones in D#maj7                                             :music:theory:chords:drill:
 
    What tones are in D#maj7 chord?
 
@@ -1974,7 +1974,7 @@
 |    | A# |    |    |    | D  | D# |    |    |    | G  |    |    | A# |    |    |    | D  | D# |    |    |    | G  |    |    |
 |    |    |    | G  |    |    | A# |    |    |    | D  | D# |    |    |    | G  |    |    | A# |    |    |    | D  | D# |    |
 
-** Notes in D#(maj7)b5                                         :music:theory:chords:drill:
+** Tones in D#(maj7)b5                                         :music:theory:chords:drill:
 
    What tones are in D#(maj7)b5 chord?
 
@@ -2016,7 +2016,7 @@
 | A  |    |    |    |    | D  | D# |    |    |    | G  |    | A  |    |    |    |    | D  | D# |    |    |    | G  |    | A  |
 |    |    |    | G  |    | A  |    |    |    |    | D  | D# |    |    |    | G  |    | A  |    |    |    |    | D  | D# |    |
 
-** Notes in D#sus2                                             :music:theory:chords:drill:
+** Tones in D#sus2                                             :music:theory:chords:drill:
 
    What tones are in D#sus2 chord?
 
@@ -2058,7 +2058,7 @@
 |    | A# |    |    |    |    | D# |    | F  |    |    |    |    | A# |    |    |    |    | D# |    | F  |    |    |    |    |
 |    | F  |    |    |    |    | A# |    |    |    |    | D# |    | F  |    |    |    |    | A# |    |    |    |    | D# |    |
 
-** Notes in D#m                                                :music:theory:chords:drill:
+** Tones in D#m                                                :music:theory:chords:drill:
 
    What tones are in D#m chord?
 
@@ -2100,7 +2100,7 @@
 |    | A# |    |    |    |    | D# |    |    | F# |    |    |    | A# |    |    |    |    | D# |    |    | F# |    |    |    |
 |    |    | F# |    |    |    | A# |    |    |    |    | D# |    |    | F# |    |    |    | A# |    |    |    |    | D# |    |
 
-** Notes in D#sus2                                             :music:theory:chords:drill:
+** Tones in D#sus2                                             :music:theory:chords:drill:
 
    What tones are in D#sus2 chord?
 
@@ -2142,7 +2142,7 @@
 |    | A# |    |    |    |    | D# |    |    |    |    | G# |    | A# |    |    |    |    | D# |    |    |    |    | G# |    |
 |    |    |    |    | G# |    | A# |    |    |    |    | D# |    |    |    |    | G# |    | A# |    |    |    |    | D# |    |
 
-** Notes in D#m(maj7)                                          :music:theory:chords:drill:
+** Tones in D#m(maj7)                                          :music:theory:chords:drill:
 
    What tones are in D#m(maj7) chord?
 
@@ -2184,7 +2184,7 @@
 |    | A# |    |    |    | D  | D# |    |    | F# |    |    |    | A# |    |    |    | D  | D# |    |    | F# |    |    |    |
 |    |    | F# |    |    |    | A# |    |    |    | D  | D# |    |    | F# |    |    |    | A# |    |    |    | D  | D# |    |
 
-** Notes in Edim7                                              :music:theory:chords:drill:
+** Tones in Edim7                                              :music:theory:chords:drill:
 
    What tones are in Edim7 chord?
 
@@ -2226,7 +2226,7 @@
 |    | A# |    |    | C# |    |    | E  |    |    | G  |    |    | A# |    |    | C# |    |    | E  |    |    | G  |    |    |
 | E  |    |    | G  |    |    | A# |    |    | C# |    |    | E  |    |    | G  |    |    | A# |    |    | C# |    |    | E  |
 
-** Notes in E5                                                 :music:theory:chords:drill:
+** Tones in E5                                                 :music:theory:chords:drill:
 
    What tones are in E5 chord?
 
@@ -2268,7 +2268,7 @@
 |    |    | B  |    |    |    |    | E  |    |    |    |    |    |    | B  |    |    |    |    | E  |    |    |    |    |    |
 | E  |    |    |    |    |    |    | B  |    |    |    |    | E  |    |    |    |    |    |    | B  |    |    |    |    | E  |
 
-** Notes in Em7                                                :music:theory:chords:drill:
+** Tones in Em7                                                :music:theory:chords:drill:
 
    What tones are in Em7 chord?
 
@@ -2310,7 +2310,7 @@
 |    |    | B  |    |    | D  |    | E  |    |    | G  |    |    |    | B  |    |    | D  |    | E  |    |    | G  |    |    |
 | E  |    |    | G  |    |    |    | B  |    |    | D  |    | E  |    |    | G  |    |    |    | B  |    |    | D  |    | E  |
 
-** Notes in E                                                  :music:theory:chords:drill:
+** Tones in E                                                  :music:theory:chords:drill:
 
    What tones are in E chord?
 
@@ -2352,7 +2352,7 @@
 |    |    | B  |    |    |    |    | E  |    |    |    | G# |    |    | B  |    |    |    |    | E  |    |    |    | G# |    |
 | E  |    |    |    | G# |    |    | B  |    |    |    |    | E  |    |    |    | G# |    |    | B  |    |    |    |    | E  |
 
-** Notes in E7                                                 :music:theory:chords:drill:
+** Tones in E7                                                 :music:theory:chords:drill:
 
    What tones are in E7 chord?
 
@@ -2394,7 +2394,7 @@
 |    |    | B  |    |    | D  |    | E  |    |    |    | G# |    |    | B  |    |    | D  |    | E  |    |    |    | G# |    |
 | E  |    |    |    | G# |    |    | B  |    |    | D  |    | E  |    |    |    | G# |    |    | B  |    |    | D  |    | E  |
 
-** Notes in Em7b5                                              :music:theory:chords:drill:
+** Tones in Em7b5                                              :music:theory:chords:drill:
 
    What tones are in Em7b5 chord?
 
@@ -2436,7 +2436,7 @@
 |    | A# |    |    |    | D  |    | E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |    |    | G  |    |    |
 | E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |
 
-** Notes in Edim                                               :music:theory:chords:drill:
+** Tones in Edim                                               :music:theory:chords:drill:
 
    What tones are in Edim chord?
 
@@ -2478,7 +2478,7 @@
 |    | A# |    |    |    |    |    | E  |    |    | G  |    |    | A# |    |    |    |    |    | E  |    |    | G  |    |    |
 | E  |    |    | G  |    |    | A# |    |    |    |    |    | E  |    |    | G  |    |    | A# |    |    |    |    |    | E  |
 
-** Notes in Emaj7                                              :music:theory:chords:drill:
+** Tones in Emaj7                                              :music:theory:chords:drill:
 
    What tones are in Emaj7 chord?
 
@@ -2520,7 +2520,7 @@
 |    |    | B  |    |    |    | D# | E  |    |    |    | G# |    |    | B  |    |    |    | D# | E  |    |    |    | G# |    |
 | E  |    |    |    | G# |    |    | B  |    |    |    | D# | E  |    |    |    | G# |    |    | B  |    |    |    | D# | E  |
 
-** Notes in E(maj7)b5                                          :music:theory:chords:drill:
+** Tones in E(maj7)b5                                          :music:theory:chords:drill:
 
    What tones are in E(maj7)b5 chord?
 
@@ -2562,7 +2562,7 @@
 |    | A# |    |    |    |    | D# | E  |    |    |    | G# |    | A# |    |    |    |    | D# | E  |    |    |    | G# |    |
 | E  |    |    |    | G# |    | A# |    |    |    |    | D# | E  |    |    |    | G# |    | A# |    |    |    |    | D# | E  |
 
-** Notes in Esus2                                              :music:theory:chords:drill:
+** Tones in Esus2                                              :music:theory:chords:drill:
 
    What tones are in Esus2 chord?
 
@@ -2604,7 +2604,7 @@
 |    |    | B  |    |    |    |    | E  |    | F# |    |    |    |    | B  |    |    |    |    | E  |    | F# |    |    |    |
 | E  |    | F# |    |    |    |    | B  |    |    |    |    | E  |    | F# |    |    |    |    | B  |    |    |    |    | E  |
 
-** Notes in Em                                                 :music:theory:chords:drill:
+** Tones in Em                                                 :music:theory:chords:drill:
 
    What tones are in Em chord?
 
@@ -2646,7 +2646,7 @@
 |    |    | B  |    |    |    |    | E  |    |    | G  |    |    |    | B  |    |    |    |    | E  |    |    | G  |    |    |
 | E  |    |    | G  |    |    |    | B  |    |    |    |    | E  |    |    | G  |    |    |    | B  |    |    |    |    | E  |
 
-** Notes in Esus2                                              :music:theory:chords:drill:
+** Tones in Esus2                                              :music:theory:chords:drill:
 
    What tones are in Esus2 chord?
 
@@ -2688,7 +2688,7 @@
 | A  |    | B  |    |    |    |    | E  |    |    |    |    | A  |    | B  |    |    |    |    | E  |    |    |    |    | A  |
 | E  |    |    |    |    | A  |    | B  |    |    |    |    | E  |    |    |    |    | A  |    | B  |    |    |    |    | E  |
 
-** Notes in Em(maj7)                                           :music:theory:chords:drill:
+** Tones in Em(maj7)                                           :music:theory:chords:drill:
 
    What tones are in Em(maj7) chord?
 
@@ -2730,7 +2730,7 @@
 |    |    | B  |    |    |    | D# | E  |    |    | G  |    |    |    | B  |    |    |    | D# | E  |    |    | G  |    |    |
 | E  |    |    | G  |    |    |    | B  |    |    |    | D# | E  |    |    | G  |    |    |    | B  |    |    |    | D# | E  |
 
-** Notes in Fdim7                                              :music:theory:chords:drill:
+** Tones in Fdim7                                              :music:theory:chords:drill:
 
    What tones are in Fdim7 chord?
 
@@ -2772,7 +2772,7 @@
 |    |    | B  |    |    | D  |    |    | F  |    |    | G# |    |    | B  |    |    | D  |    |    | F  |    |    | G# |    |
 |    | F  |    |    | G# |    |    | B  |    |    | D  |    |    | F  |    |    | G# |    |    | B  |    |    | D  |    |    |
 
-** Notes in F5                                                 :music:theory:chords:drill:
+** Tones in F5                                                 :music:theory:chords:drill:
 
    What tones are in F5 chord?
 
@@ -2814,7 +2814,7 @@
 |    |    |    | C  |    |    |    |    | F  |    |    |    |    |    |    | C  |    |    |    |    | F  |    |    |    |    |
 |    | F  |    |    |    |    |    |    | C  |    |    |    |    | F  |    |    |    |    |    |    | C  |    |    |    |    |
 
-** Notes in Fm7                                                :music:theory:chords:drill:
+** Tones in Fm7                                                :music:theory:chords:drill:
 
    What tones are in Fm7 chord?
 
@@ -2856,7 +2856,7 @@
 |    |    |    | C  |    |    | D# |    | F  |    |    | G# |    |    |    | C  |    |    | D# |    | F  |    |    | G# |    |
 |    | F  |    |    | G# |    |    |    | C  |    |    | D# |    | F  |    |    | G# |    |    |    | C  |    |    | D# |    |
 
-** Notes in F                                                  :music:theory:chords:drill:
+** Tones in F                                                  :music:theory:chords:drill:
 
    What tones are in F chord?
 
@@ -2898,7 +2898,7 @@
 | A  |    |    | C  |    |    |    |    | F  |    |    |    | A  |    |    | C  |    |    |    |    | F  |    |    |    | A  |
 |    | F  |    |    |    | A  |    |    | C  |    |    |    |    | F  |    |    |    | A  |    |    | C  |    |    |    |    |
 
-** Notes in F7                                                 :music:theory:chords:drill:
+** Tones in F7                                                 :music:theory:chords:drill:
 
    What tones are in F7 chord?
 
@@ -2940,7 +2940,7 @@
 | A  |    |    | C  |    |    | D# |    | F  |    |    |    | A  |    |    | C  |    |    | D# |    | F  |    |    |    | A  |
 |    | F  |    |    |    | A  |    |    | C  |    |    | D# |    | F  |    |    |    | A  |    |    | C  |    |    | D# |    |
 
-** Notes in Fm7b5                                              :music:theory:chords:drill:
+** Tones in Fm7b5                                              :music:theory:chords:drill:
 
    What tones are in Fm7b5 chord?
 
@@ -2982,7 +2982,7 @@
 |    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |
 |    | F  |    |    | G# |    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |    | B  |    |    |    | D# |    |
 
-** Notes in Fdim                                               :music:theory:chords:drill:
+** Tones in Fdim                                               :music:theory:chords:drill:
 
    What tones are in Fdim chord?
 
@@ -3024,7 +3024,7 @@
 |    |    | B  |    |    |    |    |    | F  |    |    | G# |    |    | B  |    |    |    |    |    | F  |    |    | G# |    |
 |    | F  |    |    | G# |    |    | B  |    |    |    |    |    | F  |    |    | G# |    |    | B  |    |    |    |    |    |
 
-** Notes in Fmaj7                                              :music:theory:chords:drill:
+** Tones in Fmaj7                                              :music:theory:chords:drill:
 
    What tones are in Fmaj7 chord?
 
@@ -3066,7 +3066,7 @@
 | A  |    |    | C  |    |    |    | E  | F  |    |    |    | A  |    |    | C  |    |    |    | E  | F  |    |    |    | A  |
 | E  | F  |    |    |    | A  |    |    | C  |    |    |    | E  | F  |    |    |    | A  |    |    | C  |    |    |    | E  |
 
-** Notes in F(maj7)b5                                          :music:theory:chords:drill:
+** Tones in F(maj7)b5                                          :music:theory:chords:drill:
 
    What tones are in F(maj7)b5 chord?
 
@@ -3108,7 +3108,7 @@
 | A  |    | B  |    |    |    |    | E  | F  |    |    |    | A  |    | B  |    |    |    |    | E  | F  |    |    |    | A  |
 | E  | F  |    |    |    | A  |    | B  |    |    |    |    | E  | F  |    |    |    | A  |    | B  |    |    |    |    | E  |
 
-** Notes in Fsus2                                              :music:theory:chords:drill:
+** Tones in Fsus2                                              :music:theory:chords:drill:
 
    What tones are in Fsus2 chord?
 
@@ -3150,7 +3150,7 @@
 |    |    |    | C  |    |    |    |    | F  |    | G  |    |    |    |    | C  |    |    |    |    | F  |    | G  |    |    |
 |    | F  |    | G  |    |    |    |    | C  |    |    |    |    | F  |    | G  |    |    |    |    | C  |    |    |    |    |
 
-** Notes in Fm                                                 :music:theory:chords:drill:
+** Tones in Fm                                                 :music:theory:chords:drill:
 
    What tones are in Fm chord?
 
@@ -3192,7 +3192,7 @@
 |    |    |    | C  |    |    |    |    | F  |    |    | G# |    |    |    | C  |    |    |    |    | F  |    |    | G# |    |
 |    | F  |    |    | G# |    |    |    | C  |    |    |    |    | F  |    |    | G# |    |    |    | C  |    |    |    |    |
 
-** Notes in Fsus2                                              :music:theory:chords:drill:
+** Tones in Fsus2                                              :music:theory:chords:drill:
 
    What tones are in Fsus2 chord?
 
@@ -3234,7 +3234,7 @@
 |    | A# |    | C  |    |    |    |    | F  |    |    |    |    | A# |    | C  |    |    |    |    | F  |    |    |    |    |
 |    | F  |    |    |    |    | A# |    | C  |    |    |    |    | F  |    |    |    |    | A# |    | C  |    |    |    |    |
 
-** Notes in Fm(maj7)                                           :music:theory:chords:drill:
+** Tones in Fm(maj7)                                           :music:theory:chords:drill:
 
    What tones are in Fm(maj7) chord?
 
@@ -3276,7 +3276,7 @@
 |    |    |    | C  |    |    |    | E  | F  |    |    | G# |    |    |    | C  |    |    |    | E  | F  |    |    | G# |    |
 | E  | F  |    |    | G# |    |    |    | C  |    |    |    | E  | F  |    |    | G# |    |    |    | C  |    |    |    | E  |
 
-** Notes in F#dim7                                             :music:theory:chords:drill:
+** Tones in F#dim7                                             :music:theory:chords:drill:
 
    What tones are in F#dim7 chord?
 
@@ -3318,7 +3318,7 @@
 | A  |    |    | C  |    |    | D# |    |    | F# |    |    | A  |    |    | C  |    |    | D# |    |    | F# |    |    | A  |
 |    |    | F# |    |    | A  |    |    | C  |    |    | D# |    |    | F# |    |    | A  |    |    | C  |    |    | D# |    |
 
-** Notes in F#5                                                :music:theory:chords:drill:
+** Tones in F#5                                                :music:theory:chords:drill:
 
    What tones are in F#5 chord?
 
@@ -3360,7 +3360,7 @@
 |    |    |    |    | C# |    |    |    |    | F# |    |    |    |    |    |    | C# |    |    |    |    | F# |    |    |    |
 |    |    | F# |    |    |    |    |    |    | C# |    |    |    |    | F# |    |    |    |    |    |    | C# |    |    |    |
 
-** Notes in F#m7                                               :music:theory:chords:drill:
+** Tones in F#m7                                               :music:theory:chords:drill:
 
    What tones are in F#m7 chord?
 
@@ -3402,7 +3402,7 @@
 | A  |    |    |    | C# |    |    | E  |    | F# |    |    | A  |    |    |    | C# |    |    | E  |    | F# |    |    | A  |
 | E  |    | F# |    |    | A  |    |    |    | C# |    |    | E  |    | F# |    |    | A  |    |    |    | C# |    |    | E  |
 
-** Notes in F#                                                 :music:theory:chords:drill:
+** Tones in F#                                                 :music:theory:chords:drill:
 
    What tones are in F# chord?
 
@@ -3444,7 +3444,7 @@
 |    | A# |    |    | C# |    |    |    |    | F# |    |    |    | A# |    |    | C# |    |    |    |    | F# |    |    |    |
 |    |    | F# |    |    |    | A# |    |    | C# |    |    |    |    | F# |    |    |    | A# |    |    | C# |    |    |    |
 
-** Notes in F#7                                                :music:theory:chords:drill:
+** Tones in F#7                                                :music:theory:chords:drill:
 
    What tones are in F#7 chord?
 
@@ -3486,7 +3486,7 @@
 |    | A# |    |    | C# |    |    | E  |    | F# |    |    |    | A# |    |    | C# |    |    | E  |    | F# |    |    |    |
 | E  |    | F# |    |    |    | A# |    |    | C# |    |    | E  |    | F# |    |    |    | A# |    |    | C# |    |    | E  |
 
-** Notes in F#m7b5                                             :music:theory:chords:drill:
+** Tones in F#m7b5                                             :music:theory:chords:drill:
 
    What tones are in F#m7b5 chord?
 
@@ -3528,7 +3528,7 @@
 | A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |
 | E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |
 
-** Notes in F#dim                                              :music:theory:chords:drill:
+** Tones in F#dim                                              :music:theory:chords:drill:
 
    What tones are in F#dim chord?
 
@@ -3570,7 +3570,7 @@
 | A  |    |    | C  |    |    |    |    |    | F# |    |    | A  |    |    | C  |    |    |    |    |    | F# |    |    | A  |
 |    |    | F# |    |    | A  |    |    | C  |    |    |    |    |    | F# |    |    | A  |    |    | C  |    |    |    |    |
 
-** Notes in F#maj7                                             :music:theory:chords:drill:
+** Tones in F#maj7                                             :music:theory:chords:drill:
 
    What tones are in F#maj7 chord?
 
@@ -3612,7 +3612,7 @@
 |    | A# |    |    | C# |    |    |    | F  | F# |    |    |    | A# |    |    | C# |    |    |    | F  | F# |    |    |    |
 |    | F  | F# |    |    |    | A# |    |    | C# |    |    |    | F  | F# |    |    |    | A# |    |    | C# |    |    |    |
 
-** Notes in F#(maj7)b5                                         :music:theory:chords:drill:
+** Tones in F#(maj7)b5                                         :music:theory:chords:drill:
 
    What tones are in F#(maj7)b5 chord?
 
@@ -3654,7 +3654,7 @@
 |    | A# |    | C  |    |    |    |    | F  | F# |    |    |    | A# |    | C  |    |    |    |    | F  | F# |    |    |    |
 |    | F  | F# |    |    |    | A# |    | C  |    |    |    |    | F  | F# |    |    |    | A# |    | C  |    |    |    |    |
 
-** Notes in F#sus2                                             :music:theory:chords:drill:
+** Tones in F#sus2                                             :music:theory:chords:drill:
 
    What tones are in F#sus2 chord?
 
@@ -3696,7 +3696,7 @@
 |    |    |    |    | C# |    |    |    |    | F# |    | G# |    |    |    |    | C# |    |    |    |    | F# |    | G# |    |
 |    |    | F# |    | G# |    |    |    |    | C# |    |    |    |    | F# |    | G# |    |    |    |    | C# |    |    |    |
 
-** Notes in F#m                                                :music:theory:chords:drill:
+** Tones in F#m                                                :music:theory:chords:drill:
 
    What tones are in F#m chord?
 
@@ -3738,7 +3738,7 @@
 | A  |    |    |    | C# |    |    |    |    | F# |    |    | A  |    |    |    | C# |    |    |    |    | F# |    |    | A  |
 |    |    | F# |    |    | A  |    |    |    | C# |    |    |    |    | F# |    |    | A  |    |    |    | C# |    |    |    |
 
-** Notes in F#sus2                                             :music:theory:chords:drill:
+** Tones in F#sus2                                             :music:theory:chords:drill:
 
    What tones are in F#sus2 chord?
 
@@ -3780,7 +3780,7 @@
 |    |    | B  |    | C# |    |    |    |    | F# |    |    |    |    | B  |    | C# |    |    |    |    | F# |    |    |    |
 |    |    | F# |    |    |    |    | B  |    | C# |    |    |    |    | F# |    |    |    |    | B  |    | C# |    |    |    |
 
-** Notes in F#m(maj7)                                          :music:theory:chords:drill:
+** Tones in F#m(maj7)                                          :music:theory:chords:drill:
 
    What tones are in F#m(maj7) chord?
 
@@ -3822,7 +3822,7 @@
 | A  |    |    |    | C# |    |    |    | F  | F# |    |    | A  |    |    |    | C# |    |    |    | F  | F# |    |    | A  |
 |    | F  | F# |    |    | A  |    |    |    | C# |    |    |    | F  | F# |    |    | A  |    |    |    | C# |    |    |    |
 
-** Notes in Gdim7                                              :music:theory:chords:drill:
+** Tones in Gdim7                                              :music:theory:chords:drill:
 
    What tones are in Gdim7 chord?
 
@@ -3864,7 +3864,7 @@
 |    | A# |    |    | C# |    |    | E  |    |    | G  |    |    | A# |    |    | C# |    |    | E  |    |    | G  |    |    |
 | E  |    |    | G  |    |    | A# |    |    | C# |    |    | E  |    |    | G  |    |    | A# |    |    | C# |    |    | E  |
 
-** Notes in G5                                                 :music:theory:chords:drill:
+** Tones in G5                                                 :music:theory:chords:drill:
 
    What tones are in G5 chord?
 
@@ -3906,7 +3906,7 @@
 |    |    |    |    |    | D  |    |    |    |    | G  |    |    |    |    |    |    | D  |    |    |    |    | G  |    |    |
 |    |    |    | G  |    |    |    |    |    |    | D  |    |    |    |    | G  |    |    |    |    |    |    | D  |    |    |
 
-** Notes in Gm7                                                :music:theory:chords:drill:
+** Tones in Gm7                                                :music:theory:chords:drill:
 
    What tones are in Gm7 chord?
 
@@ -3948,7 +3948,7 @@
 |    | A# |    |    |    | D  |    |    | F  |    | G  |    |    | A# |    |    |    | D  |    |    | F  |    | G  |    |    |
 |    | F  |    | G  |    |    | A# |    |    |    | D  |    |    | F  |    | G  |    |    | A# |    |    |    | D  |    |    |
 
-** Notes in G                                                  :music:theory:chords:drill:
+** Tones in G                                                  :music:theory:chords:drill:
 
    What tones are in G chord?
 
@@ -3990,7 +3990,7 @@
 |    |    | B  |    |    | D  |    |    |    |    | G  |    |    |    | B  |    |    | D  |    |    |    |    | G  |    |    |
 |    |    |    | G  |    |    |    | B  |    |    | D  |    |    |    |    | G  |    |    |    | B  |    |    | D  |    |    |
 
-** Notes in G7                                                 :music:theory:chords:drill:
+** Tones in G7                                                 :music:theory:chords:drill:
 
    What tones are in G7 chord?
 
@@ -4032,7 +4032,7 @@
 |    |    | B  |    |    | D  |    |    | F  |    | G  |    |    |    | B  |    |    | D  |    |    | F  |    | G  |    |    |
 |    | F  |    | G  |    |    |    | B  |    |    | D  |    |    | F  |    | G  |    |    |    | B  |    |    | D  |    |    |
 
-** Notes in Gm7b5                                              :music:theory:chords:drill:
+** Tones in Gm7b5                                              :music:theory:chords:drill:
 
    What tones are in Gm7b5 chord?
 
@@ -4074,7 +4074,7 @@
 |    | A# |    |    | C# |    |    |    | F  |    | G  |    |    | A# |    |    | C# |    |    |    | F  |    | G  |    |    |
 |    | F  |    | G  |    |    | A# |    |    | C# |    |    |    | F  |    | G  |    |    | A# |    |    | C# |    |    |    |
 
-** Notes in Gdim                                               :music:theory:chords:drill:
+** Tones in Gdim                                               :music:theory:chords:drill:
 
    What tones are in Gdim chord?
 
@@ -4116,7 +4116,7 @@
 |    | A# |    |    | C# |    |    |    |    |    | G  |    |    | A# |    |    | C# |    |    |    |    |    | G  |    |    |
 |    |    |    | G  |    |    | A# |    |    | C# |    |    |    |    |    | G  |    |    | A# |    |    | C# |    |    |    |
 
-** Notes in Gmaj7                                              :music:theory:chords:drill:
+** Tones in Gmaj7                                              :music:theory:chords:drill:
 
    What tones are in Gmaj7 chord?
 
@@ -4158,7 +4158,7 @@
 |    |    | B  |    |    | D  |    |    |    | F# | G  |    |    |    | B  |    |    | D  |    |    |    | F# | G  |    |    |
 |    |    | F# | G  |    |    |    | B  |    |    | D  |    |    |    | F# | G  |    |    |    | B  |    |    | D  |    |    |
 
-** Notes in G(maj7)b5                                          :music:theory:chords:drill:
+** Tones in G(maj7)b5                                          :music:theory:chords:drill:
 
    What tones are in G(maj7)b5 chord?
 
@@ -4200,7 +4200,7 @@
 |    |    | B  |    | C# |    |    |    |    | F# | G  |    |    |    | B  |    | C# |    |    |    |    | F# | G  |    |    |
 |    |    | F# | G  |    |    |    | B  |    | C# |    |    |    |    | F# | G  |    |    |    | B  |    | C# |    |    |    |
 
-** Notes in Gsus2                                              :music:theory:chords:drill:
+** Tones in Gsus2                                              :music:theory:chords:drill:
 
    What tones are in Gsus2 chord?
 
@@ -4242,7 +4242,7 @@
 | A  |    |    |    |    | D  |    |    |    |    | G  |    | A  |    |    |    |    | D  |    |    |    |    | G  |    | A  |
 |    |    |    | G  |    | A  |    |    |    |    | D  |    |    |    |    | G  |    | A  |    |    |    |    | D  |    |    |
 
-** Notes in Gm                                                 :music:theory:chords:drill:
+** Tones in Gm                                                 :music:theory:chords:drill:
 
    What tones are in Gm chord?
 
@@ -4284,7 +4284,7 @@
 |    | A# |    |    |    | D  |    |    |    |    | G  |    |    | A# |    |    |    | D  |    |    |    |    | G  |    |    |
 |    |    |    | G  |    |    | A# |    |    |    | D  |    |    |    |    | G  |    |    | A# |    |    |    | D  |    |    |
 
-** Notes in Gsus2                                              :music:theory:chords:drill:
+** Tones in Gsus2                                              :music:theory:chords:drill:
 
    What tones are in Gsus2 chord?
 
@@ -4326,7 +4326,7 @@
 |    |    |    | C  |    | D  |    |    |    |    | G  |    |    |    |    | C  |    | D  |    |    |    |    | G  |    |    |
 |    |    |    | G  |    |    |    |    | C  |    | D  |    |    |    |    | G  |    |    |    |    | C  |    | D  |    |    |
 
-** Notes in Gm(maj7)                                           :music:theory:chords:drill:
+** Tones in Gm(maj7)                                           :music:theory:chords:drill:
 
    What tones are in Gm(maj7) chord?
 
@@ -4368,7 +4368,7 @@
 |    | A# |    |    |    | D  |    |    |    | F# | G  |    |    | A# |    |    |    | D  |    |    |    | F# | G  |    |    |
 |    |    | F# | G  |    |    | A# |    |    |    | D  |    |    |    | F# | G  |    |    | A# |    |    |    | D  |    |    |
 
-** Notes in G#dim7                                             :music:theory:chords:drill:
+** Tones in G#dim7                                             :music:theory:chords:drill:
 
    What tones are in G#dim7 chord?
 
@@ -4410,7 +4410,7 @@
 |    |    | B  |    |    | D  |    |    | F  |    |    | G# |    |    | B  |    |    | D  |    |    | F  |    |    | G# |    |
 |    | F  |    |    | G# |    |    | B  |    |    | D  |    |    | F  |    |    | G# |    |    | B  |    |    | D  |    |    |
 
-** Notes in G#5                                                :music:theory:chords:drill:
+** Tones in G#5                                                :music:theory:chords:drill:
 
    What tones are in G#5 chord?
 
@@ -4452,7 +4452,7 @@
 |    |    |    |    |    |    | D# |    |    |    |    | G# |    |    |    |    |    |    | D# |    |    |    |    | G# |    |
 |    |    |    |    | G# |    |    |    |    |    |    | D# |    |    |    |    | G# |    |    |    |    |    |    | D# |    |
 
-** Notes in G#m7                                               :music:theory:chords:drill:
+** Tones in G#m7                                               :music:theory:chords:drill:
 
    What tones are in G#m7 chord?
 
@@ -4494,7 +4494,7 @@
 |    |    | B  |    |    |    | D# |    |    | F# |    | G# |    |    | B  |    |    |    | D# |    |    | F# |    | G# |    |
 |    |    | F# |    | G# |    |    | B  |    |    |    | D# |    |    | F# |    | G# |    |    | B  |    |    |    | D# |    |
 
-** Notes in G#                                                 :music:theory:chords:drill:
+** Tones in G#                                                 :music:theory:chords:drill:
 
    What tones are in G# chord?
 
@@ -4536,7 +4536,7 @@
 |    |    |    | C  |    |    | D# |    |    |    |    | G# |    |    |    | C  |    |    | D# |    |    |    |    | G# |    |
 |    |    |    |    | G# |    |    |    | C  |    |    | D# |    |    |    |    | G# |    |    |    | C  |    |    | D# |    |
 
-** Notes in G#7                                                :music:theory:chords:drill:
+** Tones in G#7                                                :music:theory:chords:drill:
 
    What tones are in G#7 chord?
 
@@ -4578,7 +4578,7 @@
 |    |    |    | C  |    |    | D# |    |    | F# |    | G# |    |    |    | C  |    |    | D# |    |    | F# |    | G# |    |
 |    |    | F# |    | G# |    |    |    | C  |    |    | D# |    |    | F# |    | G# |    |    |    | C  |    |    | D# |    |
 
-** Notes in G#m7b5                                             :music:theory:chords:drill:
+** Tones in G#m7b5                                             :music:theory:chords:drill:
 
    What tones are in G#m7b5 chord?
 
@@ -4620,7 +4620,7 @@
 |    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |
 |    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |
 
-** Notes in G#dim                                              :music:theory:chords:drill:
+** Tones in G#dim                                              :music:theory:chords:drill:
 
    What tones are in G#dim chord?
 
@@ -4662,7 +4662,7 @@
 |    |    | B  |    |    | D  |    |    |    |    |    | G# |    |    | B  |    |    | D  |    |    |    |    |    | G# |    |
 |    |    |    |    | G# |    |    | B  |    |    | D  |    |    |    |    |    | G# |    |    | B  |    |    | D  |    |    |
 
-** Notes in G#maj7                                             :music:theory:chords:drill:
+** Tones in G#maj7                                             :music:theory:chords:drill:
 
    What tones are in G#maj7 chord?
 
@@ -4704,7 +4704,7 @@
 |    |    |    | C  |    |    | D# |    |    |    | G  | G# |    |    |    | C  |    |    | D# |    |    |    | G  | G# |    |
 |    |    |    | G  | G# |    |    |    | C  |    |    | D# |    |    |    | G  | G# |    |    |    | C  |    |    | D# |    |
 
-** Notes in G#(maj7)b5                                         :music:theory:chords:drill:
+** Tones in G#(maj7)b5                                         :music:theory:chords:drill:
 
    What tones are in G#(maj7)b5 chord?
 
@@ -4746,7 +4746,7 @@
 |    |    |    | C  |    | D  |    |    |    |    | G  | G# |    |    |    | C  |    | D  |    |    |    |    | G  | G# |    |
 |    |    |    | G  | G# |    |    |    | C  |    | D  |    |    |    |    | G  | G# |    |    |    | C  |    | D  |    |    |
 
-** Notes in G#sus2                                             :music:theory:chords:drill:
+** Tones in G#sus2                                             :music:theory:chords:drill:
 
    What tones are in G#sus2 chord?
 
@@ -4788,7 +4788,7 @@
 |    | A# |    |    |    |    | D# |    |    |    |    | G# |    | A# |    |    |    |    | D# |    |    |    |    | G# |    |
 |    |    |    |    | G# |    | A# |    |    |    |    | D# |    |    |    |    | G# |    | A# |    |    |    |    | D# |    |
 
-** Notes in G#m                                                :music:theory:chords:drill:
+** Tones in G#m                                                :music:theory:chords:drill:
 
    What tones are in G#m chord?
 
@@ -4830,7 +4830,7 @@
 |    |    | B  |    |    |    | D# |    |    |    |    | G# |    |    | B  |    |    |    | D# |    |    |    |    | G# |    |
 |    |    |    |    | G# |    |    | B  |    |    |    | D# |    |    |    |    | G# |    |    | B  |    |    |    | D# |    |
 
-** Notes in G#sus2                                             :music:theory:chords:drill:
+** Tones in G#sus2                                             :music:theory:chords:drill:
 
    What tones are in G#sus2 chord?
 
@@ -4872,7 +4872,7 @@
 |    |    |    |    | C# |    | D# |    |    |    |    | G# |    |    |    |    | C# |    | D# |    |    |    |    | G# |    |
 |    |    |    |    | G# |    |    |    |    | C# |    | D# |    |    |    |    | G# |    |    |    |    | C# |    | D# |    |
 
-** Notes in G#m(maj7)                                          :music:theory:chords:drill:
+** Tones in G#m(maj7)                                          :music:theory:chords:drill:
 
    What tones are in G#m(maj7) chord?
 
@@ -4914,7 +4914,7 @@
 |    |    | B  |    |    |    | D# |    |    |    | G  | G# |    |    | B  |    |    |    | D# |    |    |    | G  | G# |    |
 |    |    |    | G  | G# |    |    | B  |    |    |    | D# |    |    |    | G  | G# |    |    | B  |    |    |    | D# |    |
 
-** Notes in Adim7                                              :music:theory:chords:drill:
+** Tones in Adim7                                              :music:theory:chords:drill:
 
    What tones are in Adim7 chord?
 
@@ -4956,7 +4956,7 @@
 | A  |    |    | C  |    |    | D# |    |    | F# |    |    | A  |    |    | C  |    |    | D# |    |    | F# |    |    | A  |
 |    |    | F# |    |    | A  |    |    | C  |    |    | D# |    |    | F# |    |    | A  |    |    | C  |    |    | D# |    |
 
-** Notes in A5                                                 :music:theory:chords:drill:
+** Tones in A5                                                 :music:theory:chords:drill:
 
    What tones are in A5 chord?
 
@@ -4998,7 +4998,7 @@
 | A  |    |    |    |    |    |    | E  |    |    |    |    | A  |    |    |    |    |    |    | E  |    |    |    |    | A  |
 | E  |    |    |    |    | A  |    |    |    |    |    |    | E  |    |    |    |    | A  |    |    |    |    |    |    | E  |
 
-** Notes in Am7                                                :music:theory:chords:drill:
+** Tones in Am7                                                :music:theory:chords:drill:
 
    What tones are in Am7 chord?
 
@@ -5040,7 +5040,7 @@
 | A  |    |    | C  |    |    |    | E  |    |    | G  |    | A  |    |    | C  |    |    |    | E  |    |    | G  |    | A  |
 | E  |    |    | G  |    | A  |    |    | C  |    |    |    | E  |    |    | G  |    | A  |    |    | C  |    |    |    | E  |
 
-** Notes in A                                                  :music:theory:chords:drill:
+** Tones in A                                                  :music:theory:chords:drill:
 
    What tones are in A chord?
 
@@ -5082,7 +5082,7 @@
 | A  |    |    |    | C# |    |    | E  |    |    |    |    | A  |    |    |    | C# |    |    | E  |    |    |    |    | A  |
 | E  |    |    |    |    | A  |    |    |    | C# |    |    | E  |    |    |    |    | A  |    |    |    | C# |    |    | E  |
 
-** Notes in A7                                                 :music:theory:chords:drill:
+** Tones in A7                                                 :music:theory:chords:drill:
 
    What tones are in A7 chord?
 
@@ -5124,7 +5124,7 @@
 | A  |    |    |    | C# |    |    | E  |    |    | G  |    | A  |    |    |    | C# |    |    | E  |    |    | G  |    | A  |
 | E  |    |    | G  |    | A  |    |    |    | C# |    |    | E  |    |    | G  |    | A  |    |    |    | C# |    |    | E  |
 
-** Notes in Am7b5                                              :music:theory:chords:drill:
+** Tones in Am7b5                                              :music:theory:chords:drill:
 
    What tones are in Am7b5 chord?
 
@@ -5166,7 +5166,7 @@
 | A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |
 |    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |
 
-** Notes in Adim                                               :music:theory:chords:drill:
+** Tones in Adim                                               :music:theory:chords:drill:
 
    What tones are in Adim chord?
 
@@ -5208,7 +5208,7 @@
 | A  |    |    | C  |    |    | D# |    |    |    |    |    | A  |    |    | C  |    |    | D# |    |    |    |    |    | A  |
 |    |    |    |    |    | A  |    |    | C  |    |    | D# |    |    |    |    |    | A  |    |    | C  |    |    | D# |    |
 
-** Notes in Amaj7                                              :music:theory:chords:drill:
+** Tones in Amaj7                                              :music:theory:chords:drill:
 
    What tones are in Amaj7 chord?
 
@@ -5250,7 +5250,7 @@
 | A  |    |    |    | C# |    |    | E  |    |    |    | G# | A  |    |    |    | C# |    |    | E  |    |    |    | G# | A  |
 | E  |    |    |    | G# | A  |    |    |    | C# |    |    | E  |    |    |    | G# | A  |    |    |    | C# |    |    | E  |
 
-** Notes in A(maj7)b5                                          :music:theory:chords:drill:
+** Tones in A(maj7)b5                                          :music:theory:chords:drill:
 
    What tones are in A(maj7)b5 chord?
 
@@ -5292,7 +5292,7 @@
 | A  |    |    |    | C# |    | D# |    |    |    |    | G# | A  |    |    |    | C# |    | D# |    |    |    |    | G# | A  |
 |    |    |    |    | G# | A  |    |    |    | C# |    | D# |    |    |    |    | G# | A  |    |    |    | C# |    | D# |    |
 
-** Notes in Asus2                                              :music:theory:chords:drill:
+** Tones in Asus2                                              :music:theory:chords:drill:
 
    What tones are in Asus2 chord?
 
@@ -5334,7 +5334,7 @@
 | A  |    | B  |    |    |    |    | E  |    |    |    |    | A  |    | B  |    |    |    |    | E  |    |    |    |    | A  |
 | E  |    |    |    |    | A  |    | B  |    |    |    |    | E  |    |    |    |    | A  |    | B  |    |    |    |    | E  |
 
-** Notes in Am                                                 :music:theory:chords:drill:
+** Tones in Am                                                 :music:theory:chords:drill:
 
    What tones are in Am chord?
 
@@ -5376,7 +5376,7 @@
 | A  |    |    | C  |    |    |    | E  |    |    |    |    | A  |    |    | C  |    |    |    | E  |    |    |    |    | A  |
 | E  |    |    |    |    | A  |    |    | C  |    |    |    | E  |    |    |    |    | A  |    |    | C  |    |    |    | E  |
 
-** Notes in Asus2                                              :music:theory:chords:drill:
+** Tones in Asus2                                              :music:theory:chords:drill:
 
    What tones are in Asus2 chord?
 
@@ -5418,7 +5418,7 @@
 | A  |    |    |    |    | D  |    | E  |    |    |    |    | A  |    |    |    |    | D  |    | E  |    |    |    |    | A  |
 | E  |    |    |    |    | A  |    |    |    |    | D  |    | E  |    |    |    |    | A  |    |    |    |    | D  |    | E  |
 
-** Notes in Am(maj7)                                           :music:theory:chords:drill:
+** Tones in Am(maj7)                                           :music:theory:chords:drill:
 
    What tones are in Am(maj7) chord?
 
@@ -5460,7 +5460,7 @@
 | A  |    |    | C  |    |    |    | E  |    |    |    | G# | A  |    |    | C  |    |    |    | E  |    |    |    | G# | A  |
 | E  |    |    |    | G# | A  |    |    | C  |    |    |    | E  |    |    |    | G# | A  |    |    | C  |    |    |    | E  |
 
-** Notes in A#dim7                                             :music:theory:chords:drill:
+** Tones in A#dim7                                             :music:theory:chords:drill:
 
    What tones are in A#dim7 chord?
 
@@ -5502,7 +5502,7 @@
 |    | A# |    |    | C# |    |    | E  |    |    | G  |    |    | A# |    |    | C# |    |    | E  |    |    | G  |    |    |
 | E  |    |    | G  |    |    | A# |    |    | C# |    |    | E  |    |    | G  |    |    | A# |    |    | C# |    |    | E  |
 
-** Notes in A#5                                                :music:theory:chords:drill:
+** Tones in A#5                                                :music:theory:chords:drill:
 
    What tones are in A#5 chord?
 
@@ -5544,7 +5544,7 @@
 |    | A# |    |    |    |    |    |    | F  |    |    |    |    | A# |    |    |    |    |    |    | F  |    |    |    |    |
 |    | F  |    |    |    |    | A# |    |    |    |    |    |    | F  |    |    |    |    | A# |    |    |    |    |    |    |
 
-** Notes in A#m7                                               :music:theory:chords:drill:
+** Tones in A#m7                                               :music:theory:chords:drill:
 
    What tones are in A#m7 chord?
 
@@ -5586,7 +5586,7 @@
 |    | A# |    |    | C# |    |    |    | F  |    |    | G# |    | A# |    |    | C# |    |    |    | F  |    |    | G# |    |
 |    | F  |    |    | G# |    | A# |    |    | C# |    |    |    | F  |    |    | G# |    | A# |    |    | C# |    |    |    |
 
-** Notes in A#                                                 :music:theory:chords:drill:
+** Tones in A#                                                 :music:theory:chords:drill:
 
    What tones are in A# chord?
 
@@ -5628,7 +5628,7 @@
 |    | A# |    |    |    | D  |    |    | F  |    |    |    |    | A# |    |    |    | D  |    |    | F  |    |    |    |    |
 |    | F  |    |    |    |    | A# |    |    |    | D  |    |    | F  |    |    |    |    | A# |    |    |    | D  |    |    |
 
-** Notes in A#7                                                :music:theory:chords:drill:
+** Tones in A#7                                                :music:theory:chords:drill:
 
    What tones are in A#7 chord?
 
@@ -5670,7 +5670,7 @@
 |    | A# |    |    |    | D  |    |    | F  |    |    | G# |    | A# |    |    |    | D  |    |    | F  |    |    | G# |    |
 |    | F  |    |    | G# |    | A# |    |    |    | D  |    |    | F  |    |    | G# |    | A# |    |    |    | D  |    |    |
 
-** Notes in A#m7b5                                             :music:theory:chords:drill:
+** Tones in A#m7b5                                             :music:theory:chords:drill:
 
    What tones are in A#m7b5 chord?
 
@@ -5712,7 +5712,7 @@
 |    | A# |    |    | C# |    |    | E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |    |    |    | G# |    |
 | E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |
 
-** Notes in A#dim                                              :music:theory:chords:drill:
+** Tones in A#dim                                              :music:theory:chords:drill:
 
    What tones are in A#dim chord?
 
@@ -5754,7 +5754,7 @@
 |    | A# |    |    | C# |    |    | E  |    |    |    |    |    | A# |    |    | C# |    |    | E  |    |    |    |    |    |
 | E  |    |    |    |    |    | A# |    |    | C# |    |    | E  |    |    |    |    |    | A# |    |    | C# |    |    | E  |
 
-** Notes in A#maj7                                             :music:theory:chords:drill:
+** Tones in A#maj7                                             :music:theory:chords:drill:
 
    What tones are in A#maj7 chord?
 
@@ -5796,7 +5796,7 @@
 | A  | A# |    |    |    | D  |    |    | F  |    |    |    | A  | A# |    |    |    | D  |    |    | F  |    |    |    | A  |
 |    | F  |    |    |    | A  | A# |    |    |    | D  |    |    | F  |    |    |    | A  | A# |    |    |    | D  |    |    |
 
-** Notes in A#(maj7)b5                                         :music:theory:chords:drill:
+** Tones in A#(maj7)b5                                         :music:theory:chords:drill:
 
    What tones are in A#(maj7)b5 chord?
 
@@ -5838,7 +5838,7 @@
 | A  | A# |    |    |    | D  |    | E  |    |    |    |    | A  | A# |    |    |    | D  |    | E  |    |    |    |    | A  |
 | E  |    |    |    |    | A  | A# |    |    |    | D  |    | E  |    |    |    |    | A  | A# |    |    |    | D  |    | E  |
 
-** Notes in A#sus2                                             :music:theory:chords:drill:
+** Tones in A#sus2                                             :music:theory:chords:drill:
 
    What tones are in A#sus2 chord?
 
@@ -5880,7 +5880,7 @@
 |    | A# |    | C  |    |    |    |    | F  |    |    |    |    | A# |    | C  |    |    |    |    | F  |    |    |    |    |
 |    | F  |    |    |    |    | A# |    | C  |    |    |    |    | F  |    |    |    |    | A# |    | C  |    |    |    |    |
 
-** Notes in A#m                                                :music:theory:chords:drill:
+** Tones in A#m                                                :music:theory:chords:drill:
 
    What tones are in A#m chord?
 
@@ -5922,7 +5922,7 @@
 |    | A# |    |    | C# |    |    |    | F  |    |    |    |    | A# |    |    | C# |    |    |    | F  |    |    |    |    |
 |    | F  |    |    |    |    | A# |    |    | C# |    |    |    | F  |    |    |    |    | A# |    |    | C# |    |    |    |
 
-** Notes in A#sus2                                             :music:theory:chords:drill:
+** Tones in A#sus2                                             :music:theory:chords:drill:
 
    What tones are in A#sus2 chord?
 
@@ -5964,7 +5964,7 @@
 |    | A# |    |    |    |    | D# |    | F  |    |    |    |    | A# |    |    |    |    | D# |    | F  |    |    |    |    |
 |    | F  |    |    |    |    | A# |    |    |    |    | D# |    | F  |    |    |    |    | A# |    |    |    |    | D# |    |
 
-** Notes in A#m(maj7)                                          :music:theory:chords:drill:
+** Tones in A#m(maj7)                                          :music:theory:chords:drill:
 
    What tones are in A#m(maj7) chord?
 
@@ -6006,7 +6006,7 @@
 | A  | A# |    |    | C# |    |    |    | F  |    |    |    | A  | A# |    |    | C# |    |    |    | F  |    |    |    | A  |
 |    | F  |    |    |    | A  | A# |    |    | C# |    |    |    | F  |    |    |    | A  | A# |    |    | C# |    |    |    |
 
-** Notes in Bdim7                                              :music:theory:chords:drill:
+** Tones in Bdim7                                              :music:theory:chords:drill:
 
    What tones are in Bdim7 chord?
 
@@ -6048,7 +6048,7 @@
 |    |    | B  |    |    | D  |    |    | F  |    |    | G# |    |    | B  |    |    | D  |    |    | F  |    |    | G# |    |
 |    | F  |    |    | G# |    |    | B  |    |    | D  |    |    | F  |    |    | G# |    |    | B  |    |    | D  |    |    |
 
-** Notes in B5                                                 :music:theory:chords:drill:
+** Tones in B5                                                 :music:theory:chords:drill:
 
    What tones are in B5 chord?
 
@@ -6090,7 +6090,7 @@
 |    |    | B  |    |    |    |    |    |    | F# |    |    |    |    | B  |    |    |    |    |    |    | F# |    |    |    |
 |    |    | F# |    |    |    |    | B  |    |    |    |    |    |    | F# |    |    |    |    | B  |    |    |    |    |    |
 
-** Notes in Bm7                                                :music:theory:chords:drill:
+** Tones in Bm7                                                :music:theory:chords:drill:
 
    What tones are in Bm7 chord?
 
@@ -6132,7 +6132,7 @@
 | A  |    | B  |    |    | D  |    |    |    | F# |    |    | A  |    | B  |    |    | D  |    |    |    | F# |    |    | A  |
 |    |    | F# |    |    | A  |    | B  |    |    | D  |    |    |    | F# |    |    | A  |    | B  |    |    | D  |    |    |
 
-** Notes in B                                                  :music:theory:chords:drill:
+** Tones in B                                                  :music:theory:chords:drill:
 
    What tones are in B chord?
 
@@ -6174,7 +6174,7 @@
 |    |    | B  |    |    |    | D# |    |    | F# |    |    |    |    | B  |    |    |    | D# |    |    | F# |    |    |    |
 |    |    | F# |    |    |    |    | B  |    |    |    | D# |    |    | F# |    |    |    |    | B  |    |    |    | D# |    |
 
-** Notes in B7                                                 :music:theory:chords:drill:
+** Tones in B7                                                 :music:theory:chords:drill:
 
    What tones are in B7 chord?
 
@@ -6216,7 +6216,7 @@
 | A  |    | B  |    |    |    | D# |    |    | F# |    |    | A  |    | B  |    |    |    | D# |    |    | F# |    |    | A  |
 |    |    | F# |    |    | A  |    | B  |    |    |    | D# |    |    | F# |    |    | A  |    | B  |    |    |    | D# |    |
 
-** Notes in Bm7b5                                              :music:theory:chords:drill:
+** Tones in Bm7b5                                              :music:theory:chords:drill:
 
    What tones are in Bm7b5 chord?
 
@@ -6258,7 +6258,7 @@
 | A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |
 |    | F  |    |    |    | A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |    | B  |    |    | D  |    |    |
 
-** Notes in Bdim                                               :music:theory:chords:drill:
+** Tones in Bdim                                               :music:theory:chords:drill:
 
    What tones are in Bdim chord?
 
@@ -6300,7 +6300,7 @@
 |    |    | B  |    |    | D  |    |    | F  |    |    |    |    |    | B  |    |    | D  |    |    | F  |    |    |    |    |
 |    | F  |    |    |    |    |    | B  |    |    | D  |    |    | F  |    |    |    |    |    | B  |    |    | D  |    |    |
 
-** Notes in Bmaj7                                              :music:theory:chords:drill:
+** Tones in Bmaj7                                              :music:theory:chords:drill:
 
    What tones are in Bmaj7 chord?
 
@@ -6342,7 +6342,7 @@
 |    | A# | B  |    |    |    | D# |    |    | F# |    |    |    | A# | B  |    |    |    | D# |    |    | F# |    |    |    |
 |    |    | F# |    |    |    | A# | B  |    |    |    | D# |    |    | F# |    |    |    | A# | B  |    |    |    | D# |    |
 
-** Notes in B(maj7)b5                                          :music:theory:chords:drill:
+** Tones in B(maj7)b5                                          :music:theory:chords:drill:
 
    What tones are in B(maj7)b5 chord?
 
@@ -6384,7 +6384,7 @@
 |    | A# | B  |    |    |    | D# |    | F  |    |    |    |    | A# | B  |    |    |    | D# |    | F  |    |    |    |    |
 |    | F  |    |    |    |    | A# | B  |    |    |    | D# |    | F  |    |    |    |    | A# | B  |    |    |    | D# |    |
 
-** Notes in Bsus2                                              :music:theory:chords:drill:
+** Tones in Bsus2                                              :music:theory:chords:drill:
 
    What tones are in Bsus2 chord?
 
@@ -6426,7 +6426,7 @@
 |    |    | B  |    | C# |    |    |    |    | F# |    |    |    |    | B  |    | C# |    |    |    |    | F# |    |    |    |
 |    |    | F# |    |    |    |    | B  |    | C# |    |    |    |    | F# |    |    |    |    | B  |    | C# |    |    |    |
 
-** Notes in Bm                                                 :music:theory:chords:drill:
+** Tones in Bm                                                 :music:theory:chords:drill:
 
    What tones are in Bm chord?
 
@@ -6468,7 +6468,7 @@
 |    |    | B  |    |    | D  |    |    |    | F# |    |    |    |    | B  |    |    | D  |    |    |    | F# |    |    |    |
 |    |    | F# |    |    |    |    | B  |    |    | D  |    |    |    | F# |    |    |    |    | B  |    |    | D  |    |    |
 
-** Notes in Bsus2                                              :music:theory:chords:drill:
+** Tones in Bsus2                                              :music:theory:chords:drill:
 
    What tones are in Bsus2 chord?
 
@@ -6510,7 +6510,7 @@
 |    |    | B  |    |    |    |    | E  |    | F# |    |    |    |    | B  |    |    |    |    | E  |    | F# |    |    |    |
 | E  |    | F# |    |    |    |    | B  |    |    |    |    | E  |    | F# |    |    |    |    | B  |    |    |    |    | E  |
 
-** Notes in Bm(maj7)                                           :music:theory:chords:drill:
+** Tones in Bm(maj7)                                           :music:theory:chords:drill:
 
    What tones are in Bm(maj7) chord?
 
@@ -17262,9 +17262,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  C       Dm      Em      F       G       Am      Bdim  
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  C         Dm        Em        F         G         Am        Bdim    
+  T         SD        T         SD        D         T         D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in C major seventh                          :music:theory:harmonizations:drill:
 
@@ -17272,9 +17275,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  Cmaj7   Dm7     Em7     Fmaj7   G7      Am7     Bm7b5 
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  Cmaj7     Dm7       Em7       Fmaj7     G7        Am7       Bm7b5   
+  T         SD        T         SD        D         T         D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in C minor                                  :music:theory:harmonizations:drill:
 
@@ -17282,9 +17288,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  Cm      Ddim    D#      Fm      Gm      G#      A#    
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  Cm        Ddim      D#        Fm        Gm        G#        A#      
+  T         SD        T         SD        D         SD        D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in C minor seventh                          :music:theory:harmonizations:drill:
 
@@ -17292,9 +17301,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  Cm7     Dm7b5   D#maj7  Fm7     Gm7     G#maj7  A#7   
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  Cm7       Dm7b5     D#maj7    Fm7       Gm7       G#maj7    A#7     
+  T         SD        T         SD        D         SD        D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in C# major                                 :music:theory:harmonizations:drill:
 
@@ -17302,9 +17314,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  C#      D#m     Fm      F#      G#      A#m     Cdim  
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  C#        D#m       Fm        F#        G#        A#m       Cdim    
+  T         SD        T         SD        D         T         D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in C# major seventh                         :music:theory:harmonizations:drill:
 
@@ -17312,9 +17327,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  C#maj7  D#m7    Fm7     F#maj7  G#7     A#m7    Cm7b5 
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  C#maj7    D#m7      Fm7       F#maj7    G#7       A#m7      Cm7b5   
+  T         SD        T         SD        D         T         D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in C# minor                                 :music:theory:harmonizations:drill:
 
@@ -17322,9 +17340,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  C#m     D#dim   E       F#m     G#m     A       B     
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  C#m       D#dim     E         F#m       G#m       A         B       
+  T         SD        T         SD        D         SD        D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in C# minor seventh                         :music:theory:harmonizations:drill:
 
@@ -17332,9 +17353,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  C#m7    D#m7b5  Emaj7   F#m7    G#m7    Amaj7   B7    
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  C#m7      D#m7b5    Emaj7     F#m7      G#m7      Amaj7     B7      
+  T         SD        T         SD        D         SD        D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in D major                                  :music:theory:harmonizations:drill:
 
@@ -17342,9 +17366,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  D       Em      F#m     G       A       Bm      C#dim 
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  D         Em        F#m       G         A         Bm        C#dim   
+  T         SD        T         SD        D         T         D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in D major seventh                          :music:theory:harmonizations:drill:
 
@@ -17352,9 +17379,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  Dmaj7   Em7     F#m7    Gmaj7   A7      Bm7     C#m7b5
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  Dmaj7     Em7       F#m7      Gmaj7     A7        Bm7       C#m7b5  
+  T         SD        T         SD        D         T         D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in D minor                                  :music:theory:harmonizations:drill:
 
@@ -17362,9 +17392,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  Dm      Edim    F       Gm      Am      A#      C     
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  Dm        Edim      F         Gm        Am        A#        C       
+  T         SD        T         SD        D         SD        D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in D minor seventh                          :music:theory:harmonizations:drill:
 
@@ -17372,9 +17405,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  Dm7     Em7b5   Fmaj7   Gm7     Am7     A#maj7  C7    
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  Dm7       Em7b5     Fmaj7     Gm7       Am7       A#maj7    C7      
+  T         SD        T         SD        D         SD        D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in D# major                                 :music:theory:harmonizations:drill:
 
@@ -17382,9 +17418,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  D#      Fm      Gm      G#      A#      Cm      Ddim  
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  D#        Fm        Gm        G#        A#        Cm        Ddim    
+  T         SD        T         SD        D         T         D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in D# major seventh                         :music:theory:harmonizations:drill:
 
@@ -17392,9 +17431,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  D#maj7  Fm7     Gm7     G#maj7  A#7     Cm7     Dm7b5 
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  D#maj7    Fm7       Gm7       G#maj7    A#7       Cm7       Dm7b5   
+  T         SD        T         SD        D         T         D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in D# minor                                 :music:theory:harmonizations:drill:
 
@@ -17402,9 +17444,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  D#m     Fdim    F#      G#m     A#m     B       C#    
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  D#m       Fdim      F#        G#m       A#m       B         C#      
+  T         SD        T         SD        D         SD        D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in D# minor seventh                         :music:theory:harmonizations:drill:
 
@@ -17412,9 +17457,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  D#m7    Fm7b5   F#maj7  G#m7    A#m7    Bmaj7   C#7   
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  D#m7      Fm7b5     F#maj7    G#m7      A#m7      Bmaj7     C#7     
+  T         SD        T         SD        D         SD        D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in E major                                  :music:theory:harmonizations:drill:
 
@@ -17422,9 +17470,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  E       F#m     G#m     A       B       C#m     D#dim 
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  E         F#m       G#m       A         B         C#m       D#dim   
+  T         SD        T         SD        D         T         D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in E major seventh                          :music:theory:harmonizations:drill:
 
@@ -17432,9 +17483,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  Emaj7   F#m7    G#m7    Amaj7   B7      C#m7    D#m7b5
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  Emaj7     F#m7      G#m7      Amaj7     B7        C#m7      D#m7b5  
+  T         SD        T         SD        D         T         D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in E minor                                  :music:theory:harmonizations:drill:
 
@@ -17442,9 +17496,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  Em      F#dim   G       Am      Bm      C       D     
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  Em        F#dim     G         Am        Bm        C         D       
+  T         SD        T         SD        D         SD        D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in E minor seventh                          :music:theory:harmonizations:drill:
 
@@ -17452,9 +17509,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  Em7     F#m7b5  Gmaj7   Am7     Bm7     Cmaj7   D7    
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  Em7       F#m7b5    Gmaj7     Am7       Bm7       Cmaj7     D7      
+  T         SD        T         SD        D         SD        D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in F major                                  :music:theory:harmonizations:drill:
 
@@ -17462,9 +17522,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  F       Gm      Am      A#      C       Dm      Edim  
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  F         Gm        Am        A#        C         Dm        Edim    
+  T         SD        T         SD        D         T         D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in F major seventh                          :music:theory:harmonizations:drill:
 
@@ -17472,9 +17535,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  Fmaj7   Gm7     Am7     A#maj7  C7      Dm7     Em7b5 
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  Fmaj7     Gm7       Am7       A#maj7    C7        Dm7       Em7b5   
+  T         SD        T         SD        D         T         D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in F minor                                  :music:theory:harmonizations:drill:
 
@@ -17482,9 +17548,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  Fm      Gdim    G#      A#m     Cm      C#      D#    
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  Fm        Gdim      G#        A#m       Cm        C#        D#      
+  T         SD        T         SD        D         SD        D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in F minor seventh                          :music:theory:harmonizations:drill:
 
@@ -17492,9 +17561,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  Fm7     Gm7b5   G#maj7  A#m7    Cm7     C#maj7  D#7   
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  Fm7       Gm7b5     G#maj7    A#m7      Cm7       C#maj7    D#7     
+  T         SD        T         SD        D         SD        D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in F# major                                 :music:theory:harmonizations:drill:
 
@@ -17502,9 +17574,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  F#      G#m     A#m     B       C#      D#m     Fdim  
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  F#        G#m       A#m       B         C#        D#m       Fdim    
+  T         SD        T         SD        D         T         D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in F# major seventh                         :music:theory:harmonizations:drill:
 
@@ -17512,9 +17587,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  F#maj7  G#m7    A#m7    Bmaj7   C#7     D#m7    Fm7b5 
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  F#maj7    G#m7      A#m7      Bmaj7     C#7       D#m7      Fm7b5   
+  T         SD        T         SD        D         T         D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in F# minor                                 :music:theory:harmonizations:drill:
 
@@ -17522,9 +17600,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  F#m     G#dim   A       Bm      C#m     D       E     
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  F#m       G#dim     A         Bm        C#m       D         E       
+  T         SD        T         SD        D         SD        D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in F# minor seventh                         :music:theory:harmonizations:drill:
 
@@ -17532,9 +17613,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  F#m7    G#m7b5  Amaj7   Bm7     C#m7    Dmaj7   E7    
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  F#m7      G#m7b5    Amaj7     Bm7       C#m7      Dmaj7     E7      
+  T         SD        T         SD        D         SD        D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in G major                                  :music:theory:harmonizations:drill:
 
@@ -17542,9 +17626,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  G       Am      Bm      C       D       Em      F#dim 
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  G         Am        Bm        C         D         Em        F#dim   
+  T         SD        T         SD        D         T         D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in G major seventh                          :music:theory:harmonizations:drill:
 
@@ -17552,9 +17639,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  Gmaj7   Am7     Bm7     Cmaj7   D7      Em7     F#m7b5
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  Gmaj7     Am7       Bm7       Cmaj7     D7        Em7       F#m7b5  
+  T         SD        T         SD        D         T         D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in G minor                                  :music:theory:harmonizations:drill:
 
@@ -17562,9 +17652,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  Gm      Adim    A#      Cm      Dm      D#      F     
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  Gm        Adim      A#        Cm        Dm        D#        F       
+  T         SD        T         SD        D         SD        D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in G minor seventh                          :music:theory:harmonizations:drill:
 
@@ -17572,9 +17665,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  Gm7     Am7b5   A#maj7  Cm7     Dm7     D#maj7  F7    
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  Gm7       Am7b5     A#maj7    Cm7       Dm7       D#maj7    F7      
+  T         SD        T         SD        D         SD        D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in G# major                                 :music:theory:harmonizations:drill:
 
@@ -17582,9 +17678,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  G#      A#m     Cm      C#      D#      Fm      Gdim  
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  G#        A#m       Cm        C#        D#        Fm        Gdim    
+  T         SD        T         SD        D         T         D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in G# major seventh                         :music:theory:harmonizations:drill:
 
@@ -17592,9 +17691,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  G#maj7  A#m7    Cm7     C#maj7  D#7     Fm7     Gm7b5 
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  G#maj7    A#m7      Cm7       C#maj7    D#7       Fm7       Gm7b5   
+  T         SD        T         SD        D         T         D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in G# minor                                 :music:theory:harmonizations:drill:
 
@@ -17602,9 +17704,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  G#m     A#dim   B       C#m     D#m     E       F#    
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  G#m       A#dim     B         C#m       D#m       E         F#      
+  T         SD        T         SD        D         SD        D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in G# minor seventh                         :music:theory:harmonizations:drill:
 
@@ -17612,9 +17717,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  G#m7    A#m7b5  Bmaj7   C#m7    D#m7    Emaj7   F#7   
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  G#m7      A#m7b5    Bmaj7     C#m7      D#m7      Emaj7     F#7     
+  T         SD        T         SD        D         SD        D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in A major                                  :music:theory:harmonizations:drill:
 
@@ -17622,9 +17730,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  A       Bm      C#m     D       E       F#m     G#dim 
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  A         Bm        C#m       D         E         F#m       G#dim   
+  T         SD        T         SD        D         T         D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in A major seventh                          :music:theory:harmonizations:drill:
 
@@ -17632,9 +17743,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  Amaj7   Bm7     C#m7    Dmaj7   E7      F#m7    G#m7b5
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  Amaj7     Bm7       C#m7      Dmaj7     E7        F#m7      G#m7b5  
+  T         SD        T         SD        D         T         D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in A minor                                  :music:theory:harmonizations:drill:
 
@@ -17642,9 +17756,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  Am      Bdim    C       Dm      Em      F       G     
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  Am        Bdim      C         Dm        Em        F         G       
+  T         SD        T         SD        D         SD        D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in A minor seventh                          :music:theory:harmonizations:drill:
 
@@ -17652,9 +17769,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  Am7     Bm7b5   Cmaj7   Dm7     Em7     Fmaj7   G7    
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  Am7       Bm7b5     Cmaj7     Dm7       Em7       Fmaj7     G7      
+  T         SD        T         SD        D         SD        D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in A# major                                 :music:theory:harmonizations:drill:
 
@@ -17662,9 +17782,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  A#      Cm      Dm      D#      F       Gm      Adim  
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  A#        Cm        Dm        D#        F         Gm        Adim    
+  T         SD        T         SD        D         T         D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in A# major seventh                         :music:theory:harmonizations:drill:
 
@@ -17672,9 +17795,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  A#maj7  Cm7     Dm7     D#maj7  F7      Gm7     Am7b5 
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  A#maj7    Cm7       Dm7       D#maj7    F7        Gm7       Am7b5   
+  T         SD        T         SD        D         T         D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in A# minor                                 :music:theory:harmonizations:drill:
 
@@ -17682,9 +17808,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  A#m     Cdim    C#      D#m     Fm      F#      G#    
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  A#m       Cdim      C#        D#m       Fm        F#        G#      
+  T         SD        T         SD        D         SD        D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in A# minor seventh                         :music:theory:harmonizations:drill:
 
@@ -17692,9 +17821,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  A#m7    Cm7b5   C#maj7  D#m7    Fm7     F#maj7  G#7   
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  A#m7      Cm7b5     C#maj7    D#m7      Fm7       F#maj7    G#7     
+  T         SD        T         SD        D         SD        D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in B major                                  :music:theory:harmonizations:drill:
 
@@ -17702,9 +17834,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  B       C#m     D#m     E       F#      G#m     A#dim 
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  B         C#m       D#m       E         F#        G#m       A#dim   
+  T         SD        T         SD        D         T         D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in B major seventh                          :music:theory:harmonizations:drill:
 
@@ -17712,9 +17847,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  Bmaj7   C#m7    D#m7    Emaj7   F#7     G#m7    A#m7b5
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  Bmaj7     C#m7      D#m7      Emaj7     F#7       G#m7      A#m7b5  
+  T         SD        T         SD        D         T         D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in B minor                                  :music:theory:harmonizations:drill:
 
@@ -17722,9 +17860,12 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  Bm      C#dim   D       Em      F#m     G       A     
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  Bm        C#dim     D         Em        F#m       G         A       
+  T         SD        T         SD        D         SD        D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 
 ** Diatonic chords in B minor seventh                          :music:theory:harmonizations:drill:
 
@@ -17732,7 +17873,10 @@
 
 *** Answer 
 
-  1       2       3       4       5       6       7     
-  Bm7     C#m7b5  Dmaj7   Em7     F#m7    Gmaj7   A7    
-  I       ii      iii     IV      V       vi      vii   
+  1         2         3         4         5         6         7       
+  I         ii        iii       IV        V         vi        vii     
+  Bm7       C#m7b5    Dmaj7     Em7       F#m7      Gmaj7     A7      
+  T         SD        T         SD        D         SD        D       
+
+     T = Tonic, SD = Subdominant, D = Dominant
 

@@ -125,6 +125,12 @@
   (juxt-intervals
    [root major-second minor-third perfect-fourth perfect-fifth major-sixth major-seventh]))
 
+(comment
+  (print (fret-table-with-tones-p (natural-minor-scale-tones (find-root-p :a))))
+  (print (fret-table-with-tones-p (harmonic-minor-scale-tones (find-root-p :a))))
+  (print (fret-table-with-tones-p (melodic-minor-scale-tones (find-root-p :a))))
+  )
+
 (def minor-pentatonic-scale-tones
   "Minor pentatonic
   functions: 1, b3, 4, 5, b7"
@@ -281,8 +287,8 @@
               (let [doc  (:doc (meta v))
                     docs (str/split-lines doc)
                     kw   (-> (str k)
-                                  (str/replace "-scale-tones" "")
-                                  (keyword))]
+                             (str/replace "-scale-tones" "")
+                             (keyword))]
                 [kw
                  {:f         (symbol k)
                   :kw        kw
@@ -396,7 +402,7 @@
   "
   short:     dim
   full:      diminished fifth
-  functions: 1 b3 d5"
+  functions: 1 b3 b5"
   (juxt-intervals
    [root minor-third diminished-fifth]))
 
@@ -568,13 +574,25 @@
 
 (def harmonizations-p (partial harmonizations scales-map chords-map tones))
 
-(defn harmonization-str [xs]
+
+(defn harmonization-str [k xs]
   (str
-   (->> xs (map (comp #(format "  %-6s" %) :index)) (str/join))
+   (->> xs (map (comp #(format "  %-8s" %) :index)) (str/join))
    "\n"
-   (->> xs (map (comp #(format "  %-6s" %) :chord-name)) (str/join))
+   (->> xs (map (comp #(format "  %-8s" %) :position)) (str/join))
    "\n"
-   (->> xs (map (comp #(format "  %-6s" %) :position)) (str/join))))
+   (->> xs (map (comp #(format "  %-8s" %) :chord-name)) (str/join))
+   "\n"
+   (->> (if (= k :major)
+          ["T" "SD" "T" "SD" "D" "T" "D"]
+          ["T" "SD" "T" "SD" "D" "SD" "D"])
+        (map #(format "  %-8s" %)) (str/join))
+   "\n\n"
+   "     T = Tonic, SD = Subdominant, D = Dominant"))
+
+(print
+ (fret-table-with-tones-p
+  (major-scale-tones tones)))
 
 (comment
   (harmonizations-p :c :major seventh)
@@ -613,7 +631,7 @@
                      :doc/keys [full functions]}]
                  (str
                   (str
-                   "** " (format "%-60s:music:theory:chords:drill:" (str "Notes in " chord-name))
+                   "** " (format "%-60s:music:theory:chords:drill:" (str "Tones in " chord-name))
                    "\n\n"
                    "   What tones are in " chord-name " chord?"
                    "\n\n"
@@ -693,27 +711,28 @@
                :tone        (-> tone name str/upper-case)
                :tones-str   tones-str}))
           (map (fn [{:keys [scale-tones title fns tone tones-str]}]
-            (str
-             "** " (format "%-60s:music:theory:scales:drill:" (str "Tones in " tone " " title " scale"))
-             "\n\n"
-             "   " "What tones are in the " tone " " title " scale?"
-             "\n"
-             "   " "What functions are in the " title " scale?"
-             "\n\n"
-             "*** Answer \n\n"
-             "    " "The tones are: " tones-str
-             "\n"
-             "    " "The functions: " fns
-             "\n\n\n"
-             (fret-table-with-tones-p scale-tones)
-             "\n")))
-     (apply str))
+                 (str
+                  "** " (format "%-60s:music:theory:scales:drill:" (str "Tones in " tone " " title " scale"))
+                  "\n\n"
+                  "   " "What tones are in the " tone " " title " scale?"
+                  "\n"
+                  "   " "What functions are in the " title " scale?"
+                  "\n\n"
+                  "*** Answer \n\n"
+                  "    " "The tones are: " tones-str
+                  "\n"
+                  "    " "The functions: " fns
+                  "\n\n\n"
+                  (fret-table-with-tones-p scale-tones)
+                  "\n")))
+          (apply str))
 
      (->> (for [tone    tones
                 [k1 s1] [[:major "major"] [:minor "minor"]]
                 [k2 s2] [[:triad ""] [:seventh "seventh"]]]
             (let [harmonization      (harmonizations-p tone k1 (get harmonizations-map k2))
-                  harmonization-str' (harmonization-str harmonization)]
+                  k (-> harmonization first :scale)
+                  harmonization-str' (harmonization-str k harmonization)]
               {:tone              tone
                :tone-str          (-> tone name str/upper-case)
                :m                 s1
