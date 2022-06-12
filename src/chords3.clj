@@ -79,7 +79,13 @@
 ;; Scales
 ;; --------------------
 (def major-scale-tones
-  "Major scale
+  "Major
+  functions: 1, 2, 3, 4, 5, 6, 7"
+  (juxt-intervals
+   [root major-second major-third perfect-fourth perfect-fifth major-sixth major-seventh]))
+
+(def ionian-scale-tones
+  "Ionian
   functions: 1, 2, 3, 4, 5, 6, 7"
   (juxt-intervals
    [root major-second major-third perfect-fourth perfect-fifth major-sixth major-seventh]))
@@ -97,7 +103,10 @@
   functions: 1, 2, b3, 4, 5, b6, b7"
   natural-minor-scale-tones)
 
-(natural-minor-scale-tones tones)
+(def aeolian-scale-tones
+  "Aeolian
+  functions: 1, 2, b3, 4, 5, b6, b7"
+  natural-minor-scale-tones)
 
 (def harmonic-minor-scale-tones
   "Harmonic minor
@@ -106,13 +115,13 @@
    [root major-second minor-third perfect-fourth perfect-fifth minor-sixth major-seventh]))
 
 (def melodic-minor-scale-tones
-  "Melodic minor scale
+  "Melodic minor
   functions: 1, 2, b3, 4, 5, 6, 7"
   (juxt-intervals
    [root major-second minor-third perfect-fourth perfect-fifth major-sixth major-seventh]))
 
 (def minor-pentatonic-scale-tones
-  "Minor pentatonic scale
+  "Minor pentatonic
   functions: 1, b3, 4, 5, b7"
   (juxt-intervals
    [root minor-third perfect-fourth perfect-fifth minor-seventh]))
@@ -138,25 +147,25 @@
    [root major-second minor-third perfect-fourth perfect-fifth major-sixth minor-seventh]))
 
 (def phrygian-scale-tones
-  "Frygiska skalan
+  "Phrygian
   functions: 1, b2, b3, 4, 5, b6, b7"
   (juxt-intervals
    [root minor-second minor-third perfect-fourth perfect-fifth minor-sixth minor-seventh]))
 
 (def lydian-scale-tones
-  "Lydiska skalan
+  "Lydian
   functions: 1, 2, 3, #4, 5, 6, 7"
   (juxt-intervals
    [root major-second major-third augmented-fourth perfect-fifth major-sixth major-seventh]))
 
 (def mixolydian-scale-tones
-  "Mixolydiska skalan
+  "Mixolydian
   functions: 1, 2, 3, 4, 5, b7"
   (juxt-intervals
    [root major-second major-third perfect-fourth perfect-fifth major-sixth minor-seventh]))
 
 (def locrian-scale-tones
-  "Lokrisk skala
+  "Locrian
   functions: 1, b2, b3, 4, b5, b6, b7"
   (juxt-intervals
    [root minor-second minor-third perfect-fourth diminished-fifth, minor-sixth, minor-seventh]))
@@ -170,8 +179,14 @@
    {:f         locrian-scale-tones,
     :kw        :locrian,
     :s         "locrian-scale-tones",
-    :doc/title "Lokrisk skala",
+    :doc/title "Locrian",
     :doc/fns   "1, b2, b3, 4, b5, b6, b7"},
+   :ionian
+   {:f         ionian-scale-tones,
+    :kw        :ionian,
+    :s         "ionian-scale-tones",
+    :doc/title "Ionian",
+    :doc/fns   "1, 2, 3, 4, 5, 6, 7"},
    :natural-minor
    {:f         natural-minor-scale-tones,
     :kw        :natural-minor,
@@ -182,13 +197,13 @@
    {:f         mixolydian-scale-tones,
     :kw        :mixolydian,
     :s         "mixolydian-scale-tones",
-    :doc/title "Mixolydiska skalan",
+    :doc/title "Mixolydian",
     :doc/fns   "1, 2, 3, 4, 5, b7"},
    :melodic-minor
    {:f         melodic-minor-scale-tones,
     :kw        :melodic-minor,
     :s         "melodic-minor-scale-tones",
-    :doc/title "Melodic minor scale",
+    :doc/title "Melodic minor",
     :doc/fns   "1, 2, b3, 4, 5, 6, 7"},
    :harmonic-minor
    {:f         harmonic-minor-scale-tones,
@@ -200,19 +215,19 @@
    {:f         major-scale-tones,
     :kw        :major,
     :s         "major-scale-tones",
-    :doc/title "Major scale",
+    :doc/title "Major",
     :doc/fns   "1, 2, 3, 4, 5, 6, 7"},
    :lydian
    {:f         lydian-scale-tones,
     :kw        :lydian,
     :s         "lydian-scale-tones",
-    :doc/title "Lydiska skalan",
+    :doc/title "Lydian",
     :doc/fns   "1, 2, 3, #4, 5, 6, 7"},
    :phrygian
    {:f         phrygian-scale-tones,
     :kw        :phrygian,
     :s         "phrygian-scale-tones",
-    :doc/title "Frygiska skalan",
+    :doc/title "Phrygian",
     :doc/fns   "1, b2, b3, 4, 5, b6, b7"},
    :minor-pentatonic-blues
    {:f         minor-pentatonic-blues-scale-tones,
@@ -224,7 +239,7 @@
    {:f         minor-pentatonic-scale-tones,
     :kw        :minor-pentatonic,
     :s         "minor-pentatonic-scale-tones",
-    :doc/title "Minor pentatonic scale",
+    :doc/title "Minor pentatonic",
     :doc/fns   "1, b3, 4, 5, b7"},
    :major-pentatonic
    {:f         major-pentatonic-scale-tones,
@@ -237,6 +252,12 @@
     :kw        :minor,
     :s         "minor-scale-tones",
     :doc/title "Natural minor",
+    :doc/fns   "1, 2, b3, 4, 5, b6, b7"},
+   :aeolian
+   {:f         aeolian-scale-tones,
+    :kw        :aeolian,
+    :s         "aeolian-scale-tones",
+    :doc/title "Aeolian",
     :doc/fns   "1, 2, b3, 4, 5, b6, b7"},
    :doric
    {:f         doric-scale-tones,
@@ -528,7 +549,6 @@
 (major-scale-tones tones)  ;; => [:c :d :e :f :g :a :b]
 
 (def triad   (juxt #(nth % 0) #(nth % 2) #(nth % 4)))
-(def sus   (juxt #(nth % 0) #(nth % 3) #(nth % 4)))
 (def seventh (juxt #(nth % 0) #(nth % 2) #(nth % 4) #(nth % 6)))
 
 (def harmonizations-map
@@ -591,7 +611,7 @@
   (->> tones (map (comp str/upper-case name)) (str/join ", ")))
 
 (spit
- "/tmp/music-theory-drills.org"
+ "./music-theory-drills.org"
  (with-out-str
    (print
     (str
@@ -679,36 +699,42 @@
                (fret-table-with-tones-p [tone interval-tone])
                "\n"))))
       (apply str))
-     (->> (for [tone              tones
-           [_ {:keys [s f]}] scales-map]
-       (let [scale-tones (f (find-root tone tones))
-             tones-str   (->> scale-tones (map (comp str/upper-case name)) (str/join ", "))]
-         {:scale-tones scale-tones
-          :display     s
-          :tone        (-> tone name str/upper-case)
-          :tones-str   tones-str}))
-     (map (fn [{:keys [scale-tones display tone tones-str]}]
+     (->> (for [tone                        tones
+                [_ {:keys     [s f]
+                    :doc/keys [title fns]}] scales-map]
+            (let [scale-tones (f (find-root tone tones))
+                  tones-str   (->> scale-tones (map (comp str/upper-case name)) (str/join ", "))]
+              {:scale-tones scale-tones
+               :title       title
+               :fns         fns
+               :tone        (-> tone name str/upper-case)
+               :tones-str   tones-str}))
+          (map (fn [{:keys [scale-tones title fns tone tones-str]}]
             (str
-             "** " (format "%-60s:music:theory:scales:drill:" (str "Tones in " tone " " display " scale"))
+             "** " (format "%-60s:music:theory:scales:drill:" (str "Tones in " tone " " title " scale"))
              "\n\n"
-             "   " "What tones are in the " tone " " display " scale?"
+             "   " "What tones are in the " tone " " title " scale?"
+             "\n"
+             "   " "What functions are in the " title " scale?"
              "\n\n"
              "*** Answer \n\n"
              "    " "The tones are: " tones-str
+             "\n"
+             "    " "The functions: " fns
              "\n\n\n"
              (fret-table-with-tones-p scale-tones)
              "\n")))
      (apply str))
 
-     (->> (for [tone tones
-                [k1 s1]   [[:major "major"] [:minor "minor"]]
-                [k2 s2]   [[:triad ""] [:seventh "seventh"]]]
-            (let [harmonization (harmonizations-p tone k1 (get harmonizations-map k2))
+     (->> (for [tone    tones
+                [k1 s1] [[:major "major"] [:minor "minor"]]
+                [k2 s2] [[:triad ""] [:seventh "seventh"]]]
+            (let [harmonization      (harmonizations-p tone k1 (get harmonizations-map k2))
                   harmonization-str' (harmonization-str harmonization)]
-              {:tone tone
-               :tone-str (-> tone name str/upper-case)
-               :m s1
-               :t s2
+              {:tone              tone
+               :tone-str          (-> tone name str/upper-case)
+               :m                 s1
+               :t                 s2
                :harmonization-str harmonization-str'}))
           (map (fn [{:keys [tone tone-str m t harmonization-str]}]
                  (str
@@ -722,38 +748,9 @@
                   "\n\n")))
           (apply str))))))
 
-(spit
- "/tmp/to-jorgen.org"
- (with-out-str
-   (print
-    (str "#+OPTIONS: toc:nil\n#+OPTIONS: num:nil\n\n"
-         (->> (for [tone tones
-                    [k1 s1]   [[:major "major"] [:minor "minor"]]
-                    [k2 s2]   [[:triad "triad"] [:seventh "seventh"]]]
-                (let [harmonization (harmonizations-p tone k1 (get harmonizations-map k2))
-                      harmonization-str' (harmonization-str harmonization)]
-                  {:tone tone
-                   :tone-str (-> tone name str/upper-case)
-                   :m s1
-                   :t s2
-                   :harmonization-str harmonization-str'}))
-              (map (fn [{:keys [tone tone-str m t harmonization-str]}]
-                     (str
-                      "** " tone-str " " m " " t " diatonic chords."
-                      "\n\n"
-                      "  #+BEGIN_SRC text"
-                      "\n"
-                      harmonization-str
-                      "\n"
-                      "  #+END_SRC"
-                      "\n\n")))
-              (apply str))))))
-
-
 ;; --------------------
 ;; Org-drill
 ;; --------------------
-
 
 (print
  (fret-table-with-tones tones [:c :e :g :b]))
