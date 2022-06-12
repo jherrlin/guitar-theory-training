@@ -666,7 +666,6 @@
                "\n"
                "    " "Numer of semitones: " nr-of-semitones
                "\n\n"
-               "\n\n"
                (fret-table-with-tones-p [tone interval-tone])
                "\n")
 
