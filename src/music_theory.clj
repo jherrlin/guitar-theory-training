@@ -677,6 +677,8 @@
                "\n\n"
                "*** Answer \n\n"
                "    " interval-tone-str
+               "\n"
+               "    " interval
                "\n\n"
                (fret-table-with-tones-p [tone interval-tone])
                "\n"))))
