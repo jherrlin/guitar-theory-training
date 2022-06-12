@@ -1,4 +1,4 @@
-#+TITLE: Music thoey via Clojure and Emacs Org-drill
+#+TITLE: Music / guitar thoery with Clojure and Emacs Org-drill
 
 The code in this repo is alpha and is subject to change.
 
