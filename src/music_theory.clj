@@ -1,9 +1,9 @@
-(ns chords3
+(ns music-theory
   (:require [clojure.string :as str]
             [utils :refer [docstring->m find-chord find-root fret-table-with-tones juxt-intervals]]))
 
 (comment
-  (remove-ns 'chords3)
+  (remove-ns 'music-theory)
   )
 
 (def tones [:c :c# :d :d# :e :f :f# :g :g# :a :a# :b])
@@ -70,9 +70,11 @@
 
 (def interval-p (partial interval tones))
 
-(interval-p :c perfect-fifth)  ;; => :g
+(comment
+  (interval-p :c perfect-fifth)  ;; => :g
+  )
 ;; --------------------
-;; Intervals
+;; Intervals end
 ;; --------------------
 
 ;; --------------------
@@ -90,7 +92,10 @@
   (juxt-intervals
    [root major-second major-third perfect-fourth perfect-fifth major-sixth major-seventh]))
 
-(major-scale-tones tones)
+(comment
+  (major-scale-tones tones)            ;; => [:c :d :e :f :g :a :b]
+  (major-scale-tones (find-root-p :e)) ;; => [:e :f# :g# :a :b :c# :d#]
+  )
 
 (def natural-minor-scale-tones
   "Natural minor
@@ -138,7 +143,13 @@
   (juxt-intervals
    [root minor-third perfect-fourth diminished-fifth perfect-fifth minor-seventh]))
 
-(minor-pentatonic-blues-scale-tones (find-root :a tones))
+(comment
+  (minor-pentatonic-blues-scale-tones (find-root :e tones))  ;; => [:e :g :a :a# :b :d]
+  ;; Prints to REPL
+  (print
+   (fret-table-with-tones-p
+    (minor-pentatonic-blues-scale-tones (find-root :e tones))))
+  )
 
 (def doric-scale-tones
   "Doriska skalan
@@ -169,10 +180,6 @@
   functions: 1, b2, b3, 4, b5, b6, b7"
   (juxt-intervals
    [root minor-second minor-third perfect-fourth diminished-fifth, minor-sixth, minor-seventh]))
-
-(print
- (fret-table-with-tones-p
-  (locrian-scale-tones (find-root-p :b))))
 
 (def scales-map
   {:locrian
@@ -267,7 +274,8 @@
     :doc/fns   "1, 2, b3, 4, 5, 6, b7"}})
 
 (comment
-  (->> (ns-publics 'chords3)
+  ;; Generate scales-map
+  (->> (ns-publics 'music-theory)
        (filter (comp #(str/includes? % "-scale-tones") str first))
        (map (fn [[k v]]
               (let [doc  (:doc (meta v))
@@ -284,7 +292,7 @@
        (into {}))
   )
 ;; --------------------
-;; Scales
+;; Scales end
 ;; --------------------
 
 ;; --------------------
@@ -298,8 +306,6 @@
   (juxt-intervals
    [root major-third perfect-fifth]))
 
-(major-chord-tones tones) ;; => [:c :e :g]
-
 (def minor-chord-tones
   "
   short:     m
@@ -307,8 +313,6 @@
   functions: 1 b3 5"
   (juxt-intervals
    [root minor-third perfect-fifth]))
-
-(minor-chord-tones tones) ;; => [:c :d# :g]
 
 (def sus2-chord-tones
   "
@@ -318,8 +322,6 @@
   (juxt-intervals
    [root major-second perfect-fifth]))
 
-(sus2-chord-tones tones) ;; => [:c :d :g]
-
 (def sus4-chord-tones
   "
   short:     sus2
@@ -327,8 +329,6 @@
   functions: 1 4 5"
   (juxt-intervals
    [root perfect-fourth perfect-fifth]))
-
-(sus4-chord-tones tones)  ;; => [:c :f :g]
 
 (def major-seven-chord-tones
   "
@@ -338,7 +338,11 @@
   (juxt-intervals
    [root major-third perfect-fifth minor-seventh]))
 
-(major-seven-chord-tones tones) ;; => [:c :e :g :a#]
+(comment
+  (major-seven-chord-tones tones)            ;; => [:c :e :g :a#]
+  (major-seven-chord-tones (find-root-p :c)) ;; => [:c :e :g :a#]
+  (major-seven-chord-tones (find-root-p :d)) ;; => [:d :f# :a :c]
+  )
 
 (def minor-seven-chord-tones
   "
@@ -348,8 +352,6 @@
   (juxt-intervals
    [root minor-third perfect-fifth minor-seventh]))
 
-(minor-seven-chord-tones tones)  ;; => [:c :d# :g :a#]
-
 (def minor-maj-seven-chord-tones
   "
   short:     m(maj7)
@@ -357,8 +359,6 @@
   functions: 1 b3 5 7"
   (juxt-intervals
    [root minor-third perfect-fifth major-seventh]))
-
-(minor-maj-seven-chord-tones tones) ;; => [:c :d# :g :b]
 
 (def major-maj-seven-chord-tones
   "maj7
@@ -368,8 +368,6 @@
   (juxt-intervals
    [root major-third perfect-fifth major-seventh]))
 
-(major-maj-seven-chord-tones tones) ;; => [:c :e :g :b]
-
 (def minor-seven-flat-5-chord-tones
   "
   short:     m7b5
@@ -378,8 +376,6 @@
   (juxt-intervals
    [root minor-third diminished-fifth minor-seventh]))
 
-(minor-seven-flat-5-chord-tones tones) ;; => [:c :d# :f# :a#]
-
 (def major-seven-flat-5-chord-tones
   "
   short:     (maj7)b5
@@ -387,8 +383,6 @@
   functions: 1 b b5 7"
   (juxt-intervals
    [root major-third diminished-fifth major-seventh]))
-
-(major-seven-flat-5-chord-tones tones)
 
 (def fifth-chord-tones
   "
@@ -413,8 +407,6 @@
   functions: 1 b3 b5 b7"
   (juxt-intervals
    [root minor-third diminished-fifth diminished-seventh]))
-
-(diminished-seventh-chord-tones tones)
 
 (def chords-map
   {:diminished-seventh
@@ -512,7 +504,8 @@
 (def find-chord-p (partial find-chord chords-map tones))
 
 (comment
-  (->> (ns-publics 'chords3)
+  ;; Generate chords-map
+  (->> (ns-publics 'music-theory)
        (map (fn [[k v]]
               (let [docstring                      (:doc (meta v))
                     {:keys [short full functions]} (docstring->m docstring)
@@ -530,23 +523,20 @@
        (into {}))
   )
 
-(find-chord chords-map tones [:c :g :e]) ;; => "C"
-(find-chord chords-map tones [:b :d :f]) ;; => "Bdim"
-(find-chord chords-map tones [:e :g :b]) ;; => "Em"
-
-(find-chord-p [:e :g :b])
+(comment
+  (find-chord chords-map tones [:c :g :e]) ;; => "C"
+  (find-chord chords-map tones [:b :d :f]) ;; => "Bdim"
+  (find-chord chords-map tones [:e :g :b]) ;; => "Em"
+  (find-chord-p [:e :g :b])                ;; => "Em"
+  )
 
 ;; --------------------
-;; Chords
+;; Chords end
 ;; --------------------
 
 ;; --------------------
 ;; Harmonization
 ;; --------------------
-
-(rest [:a :b :c :d])
-
-(major-scale-tones tones)  ;; => [:c :d :e :f :g :a :b]
 
 (def triad   (juxt #(nth % 0) #(nth % 2) #(nth % 4)))
 (def seventh (juxt #(nth % 0) #(nth % 2) #(nth % 4) #(nth % 6)))
@@ -586,25 +576,17 @@
    "\n"
    (->> xs (map (comp #(format "  %-6s" %) :position)) (str/join))))
 
-
-
-((juxt #(nth % 0) #(nth % 4) #(nth % 5) #(nth % 3))
- (map (fn [i m]
-        (assoc m :id i))
-      (range 1 8)
-      (harmonizations-p :c :minor triad)))
-
-
-(harmonizations-p :c :major seventh)
-
-
+(comment
+  (harmonizations-p :c :major seventh)
+  )
 
 ;; --------------------
-;; Harmonization
+;; Harmonization end
 ;; --------------------
 
 ;; --------------------
 ;; Org-drill
+;; Generate question / answers file
 ;; --------------------
 
 (defn tones-str [tones]
@@ -749,8 +731,5 @@
           (apply str))))))
 
 ;; --------------------
-;; Org-drill
+;; Org-drill end
 ;; --------------------
-
-(print
- (fret-table-with-tones tones [:c :e :g :b]))
