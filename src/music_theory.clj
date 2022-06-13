@@ -580,15 +580,15 @@
 
 (defn harmonization-str [k xs]
   (str
-   "     T = Tonic, SD = Subdominant, D = Dominant"
+   "     T = Tonic (stable), S = Subdominant (leaving), D = Dominant (back home)"
    "\n\n"
    (->> xs (map (comp #(format "   %-8s" %) :index)) (str/join))
    "\n"
    (->> xs (map (comp #(format "   %-8s" %) :position)) (str/join))
    "\n"
    (->> (if (= k :major)
-          ["T" "SD" "T" "SD" "D" "T" "D"]
-          ["T" "SD" "T" "SD" "D" "SD" "D"])
+          ["T" "S" "T" "S" "D" "T" "D"]
+          ["T" "S" "T" "S" "D" "S" "D"])
         (map #(format "   %-8s" %)) (str/join))
    "\n"
    (->> xs (map (comp #(format "   %-8s" %) :chord-name)) (str/join))))
@@ -615,30 +615,43 @@
         (fret-table-with-tones-p))))
 
 (print
- (harmonization-output :c :major seventh))
+ (harmonization-output :c :major triad))
 
 (comment
-  (print
-   (->> (harmonizations-p :c :major triad)
-        (harmonization-str :major)))
-  (print "\n")
-  (print
-   (->> (harmonizations-p :c :major triad)
-        (map :chord-tones)
-        (apply map vector)
-        (map (fn [row]
-               (->> row
-                    (map #(->> % name str/upper-case (format "   %-8s")))
-                    (apply str))))
-        (str/join "\n")
-        (str "\n")))
-  (print "\n\n")
+  (do
+    (print "Diatonic chord harmony\n\n")
+    (print
+     (->> (harmonizations-p :c :major triad)
+          (harmonization-str :major)))
+    (print "\n")
+    (print
+     (->> (harmonizations-p :c :major triad)
+          (map :chord-tones)
+          (apply map vector)
+          (map (fn [row]
+                 (->> row
+                      (map #(->> % name str/upper-case (format "   %-8s")))
+                      (apply str))))
+          (str/join "\n")
+          (str "\n")))
+
+    (doseq [{:keys [chord-name chord-tones]} (harmonizations-p :c :major triad)]
+      (do
+        (print "\n")
+        (print chord-name)
+        (print "\n")
+        (print
+         (fret-table-with-tones-p chord-tones))
+        (print "\n")))
+
+    (print "\nAll\n")
   (print
    (->> (harmonizations-p :c :major triad)
         (map :chord-tones)
         (apply concat)
         (into #{})
-        (fret-table-with-tones-p)))
+        (fret-table-with-tones-p))))
+
   )
 
 ;; --------------------
