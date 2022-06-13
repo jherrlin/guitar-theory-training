@@ -826,11 +826,7 @@
    [nil           root            nil           major-second   nil]])
 
 
-(defn into-frets [xs]
-  (->> xs
-       ))
-
-(let [root-tone        :g
+(let [root-tone        :a
       all-tones        (find-root-p root-tone)
       mode-spec        mixolydian-mode-spec
       mode-pred-lenght (-> mixolydian-mode-spec first count)
@@ -839,20 +835,55 @@
                              (take 13)
                              (vec))
       string-tones     [:e :b :g :d :a :e]
-      fret-tones'      (mapv row string-tones)
-      combinations     (->> (mapv (comp vec (partial drop 2)) fret-tones')
+      fret-tones       (mapv row string-tones)]
+  (loop [counter 0]
+    (let [combinations (->> (mapv (comp vec (partial drop counter)) fret-tones)
                             (mapv (partial take mode-pred-lenght))
                             (apply concat)
                             (mapv
                              vector
                              (apply concat mode-spec)))
-      box-match?       (->> combinations
+          box-match?   (->> combinations
                             (remove (comp nil? first))
                             (every? (fn [[interval' tone']]
                                       (= (interval-p root-tone interval') tone'))))]
-  (when box-match?
-    (->> combinations
-     (map (fn [[interval' tone']]
-            (when (and interval' (= (interval-p root-tone interval') tone'))
-              tone')))
-     (partition mode-pred-lenght))))
+      (if box-match?
+        {:root-starts-at-fret counter
+         :fret                (->> combinations
+                    (map (fn [[interval' tone']]
+                           (when (and interval' (= (interval-p root-tone interval') tone'))
+                             tone')))
+                    (partition mode-pred-lenght))}
+        (recur (inc counter))))))
+
+(defn list-insert [lst elem index]
+  (let [[l r] (split-at index lst)]
+    (concat l [elem] r)))
+
+
+(print
+ (let [{:keys [root-starts-at-fret fret]}
+       {:root-starts-at-fret 4,
+        :fret
+        '((nil :a nil :b nil)
+          (nil :e nil :f# :g)
+          (:b nil :c# :d nil)
+          (:f# :g nil :a nil)
+          (:c# :d nil :e nil)
+          (nil :a nil :b nil))}
+       box-lenght (-> fret first count)
+       rows       (->> [(map str (range 13))
+                        (->> (concat (repeat root-starts-at-fret nil) (nth fret 5) (repeat (- 13 (+ root-starts-at-fret box-lenght)) nil)) (map #(if (nil? %) "" (-> % name str/upper-case))))
+                        (->> (concat (repeat root-starts-at-fret nil) (nth fret 4) (repeat (- 13 (+ root-starts-at-fret box-lenght)) nil)) (map #(if (nil? %) "" (-> % name str/upper-case))))
+                        (->> (concat (repeat root-starts-at-fret nil) (nth fret 3) (repeat (- 13 (+ root-starts-at-fret box-lenght)) nil)) (map #(if (nil? %) "" (-> % name str/upper-case))))
+                        (->> (concat (repeat root-starts-at-fret nil) (nth fret 2) (repeat (- 13 (+ root-starts-at-fret box-lenght)) nil)) (map #(if (nil? %) "" (-> % name str/upper-case))))
+                        (->> (concat (repeat root-starts-at-fret nil) (nth fret 1) (repeat (- 13 (+ root-starts-at-fret box-lenght)) nil)) (map #(if (nil? %) "" (-> % name str/upper-case))))
+                        (->> (concat (repeat root-starts-at-fret nil) (nth fret 0) (repeat (- 13 (+ root-starts-at-fret box-lenght)) nil)) (map #(if (nil? %) "" (-> % name str/upper-case))))]
+                       (map (fn [row]
+                              (apply str (interpose "|" (map #(format "  %-4s" %) row)))))
+                       (map (fn [row]
+                              (str "|" row "|"))))
+       row-length (-> rows first count)]
+   (->> (list-insert rows (str "|" (apply str (take (- row-length 2) (repeat "-"))) "|") 1)
+        (str/join "\n"))
+   ))
