@@ -797,27 +797,14 @@
 ;; Org-drill end
 ;; --------------------
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+;; --------------------
+;; Modes
+;; --------------------
 
 (def mixolydian-mode-spec
+  "Mixolydian scale
+  Functions: 1, 2, 3, 4, 5, 6, b7
+  Notes:     Has a major sound. Described as bluesy."
   [[nil           root            nil           major-second   nil]
    [nil           perfect-fifth   nil           major-sixth    minor-seventh]
    [major-second  nil             major-third   perfect-fourth nil]
@@ -825,65 +812,160 @@
    [major-third   perfect-fourth  nil           perfect-fifth  nil]
    [nil           root            nil           major-second   nil]])
 
+(def ionic-mode-spec
+  "Ionic (jonisk) scale
+  Functions: 1, 2, 3, 4, 5, 6, 7
+  Notes:     Same as major scale."
+  [[major-seventh root            nil           major-second]
+   [nil           perfect-fifth   nil           major-sixth]
+   [major-second  nil             major-third   perfect-fourth]
+   [major-sixth   nil             major-seventh root]
+   [major-third   perfect-fourth  nil           perfect-fifth]
+   [nil           root            nil           major-second]])
 
-(let [root-tone        :a
-      all-tones        (find-root-p root-tone)
-      mode-spec        mixolydian-mode-spec
-      mode-pred-lenght (-> mixolydian-mode-spec first count)
-      row              #(->> (find-root-p %)
-                             (cycle)
-                             (take 13)
-                             (vec))
-      string-tones     [:e :b :g :d :a :e]
-      fret-tones       (mapv row string-tones)]
-  (loop [counter 0]
-    (let [combinations (->> (mapv (comp vec (partial drop counter)) fret-tones)
-                            (mapv (partial take mode-pred-lenght))
-                            (apply concat)
-                            (mapv
-                             vector
-                             (apply concat mode-spec)))
-          box-match?   (->> combinations
-                            (remove (comp nil? first))
-                            (every? (fn [[interval' tone']]
-                                      (= (interval-p root-tone interval') tone'))))]
-      (if box-match?
-        {:root-starts-at-fret counter
-         :fret                (->> combinations
-                    (map (fn [[interval' tone']]
-                           (when (and interval' (= (interval-p root-tone interval') tone'))
-                             tone')))
-                    (partition mode-pred-lenght))}
-        (recur (inc counter))))))
+(def major-mode-spec
+  "Major scale
+  Functions: 1, 2, 3, 4, 5, 6, 7
+  Notes: Same as Ionic scale."
+  ionic-mode-spec)
+
+(def phrygian-mode-spec
+  "Phrygian (frysika) scale
+  Functions: 1, b2, b3, 4, 5, b6, b7
+  Notes:     Has a minor sound. Occurs in heavy metal."
+  [[root            minor-second   nil             minor-third]
+   [perfect-fifth   minor-sixth    nil             minor-seventh]
+   [minor-third     nil            perfect-fourth  nil]
+   [minor-seventh   nil            root            minor-second]
+   [perfect-fourth  nil            perfect-fifth   minor-sixth]
+   [root            minor-second   nil             minor-third]])
+
+(def dorian-mode-spec
+  "Dorian (Dorisk) scale.
+  Functions: 1, 2, b3, 4, 5, 6, b7
+  Notes:     Has a minor sound. Described as jazzy."
+  [[nil           root            nil  major-second    minor-third]
+   [nil           perfect-fifth   nil  major-sixth     minor-seventh]
+   [major-second  minor-third     nil  perfect-fourth  nil]
+   [major-sixth   minor-seventh   nil  root            nil]
+   [nil           perfect-fourth  nil  perfect-fifth   nil]
+   [nil           root            nil  major-second    minor-third]])
+
+(def aeolian-mode-spec
+  "Aeolian (Eolisk) scale.
+  Functions: 1, 2, b3, 4, 5, b6, b7
+  Notes:     Same as natural minor."
+  [[nil           root            nil          major-second    minor-third]
+   [nil           perfect-fifth   minor-sixth  nil             minor-seventh]
+   [major-second  minor-third     nil          perfect-fourth  nil]
+   [nil           minor-seventh   nil          root            nil]
+   [nil           perfect-fourth  nil          perfect-fifth   minor-sixth]
+   [nil           root            nil          major-second    minor-third]])
+
+(def minor-mode-spec
+  "Aeolian (Eolisk) scale.
+  Functions: 1, 2, b3, 4, 5, b6, b7
+  Notes:     Same as Aeolian."
+  aeolian-mode-spec)
+
+(def lydian-mode-spec
+  "Lydian (Lydiska) scale.
+  Funtions: 1, 2, 3, #4, 5, 6, 7
+  Notes:    Sounds major."
+  [[major-seventh     root           nil              major-second]
+   [augmented-fourth  perfect-fifth  nil              major-sixth]
+   [major-second      nil            major-third      nil]
+   [major-sixth       nil            major-seventh    root]
+   [major-third       nil            augmented-fourth perfect-fifth]
+   [nil               root           nil              major-second]])
+
+
+(defn mode [root-tone mode-spec]
+  (let [all-tones        (find-root-p root-tone)
+        mode-pred-lenght (-> mode-spec first count)
+        string-tones     [:e :b :g :d :a :e]
+        fret-tones       (->> string-tones
+                              (mapv #(->> (find-root-p %)
+                                          (cycle)
+                                          (take 25)
+                                          (vec))))]
+    (loop [counter 0]
+      (let [combinations (->> (mapv (comp vec (partial drop counter)) fret-tones)
+                              (mapv (partial take mode-pred-lenght))
+                              (apply concat)
+                              (mapv
+                               vector
+                               (apply concat mode-spec)))
+            box-match?   (->> combinations
+                              (remove (comp nil? first))
+                              (every? (fn [[interval' tone']]
+                                        (= (interval-p root-tone interval') tone'))))]
+        (if box-match?
+          {:root-starts-at-fret counter
+           :fret                (->> combinations
+                                     (map (fn [[interval' tone']]
+                                            (when (and interval' (= (interval-p root-tone interval') tone'))
+                                              tone')))
+                                     (partition mode-pred-lenght))}
+          (recur (inc counter)))))))
 
 (defn list-insert [lst elem index]
   (let [[l r] (split-at index lst)]
     (concat l [elem] r)))
 
+(defn mode-str [{:keys [root-starts-at-fret fret]}]
+  (let [fret       (reverse fret)
+        box-lenght (-> fret first count)
+        rows       (->> [(map str (range 16))
+                         (->> (concat (repeat root-starts-at-fret nil) (nth fret 5) (repeat (- 13 (+ root-starts-at-fret box-lenght)) nil)) (map #(if (nil? %) "" (-> % name str/upper-case))))
+                         (->> (concat (repeat root-starts-at-fret nil) (nth fret 4) (repeat (- 13 (+ root-starts-at-fret box-lenght)) nil)) (map #(if (nil? %) "" (-> % name str/upper-case))))
+                         (->> (concat (repeat root-starts-at-fret nil) (nth fret 3) (repeat (- 13 (+ root-starts-at-fret box-lenght)) nil)) (map #(if (nil? %) "" (-> % name str/upper-case))))
+                         (->> (concat (repeat root-starts-at-fret nil) (nth fret 2) (repeat (- 13 (+ root-starts-at-fret box-lenght)) nil)) (map #(if (nil? %) "" (-> % name str/upper-case))))
+                         (->> (concat (repeat root-starts-at-fret nil) (nth fret 1) (repeat (- 13 (+ root-starts-at-fret box-lenght)) nil)) (map #(if (nil? %) "" (-> % name str/upper-case))))
+                         (->> (concat (repeat root-starts-at-fret nil) (nth fret 0) (repeat (- 13 (+ root-starts-at-fret box-lenght)) nil)) (map #(if (nil? %) "" (-> % name str/upper-case))))]
+                        (map (fn [row]
+                               (apply str (interpose "|" (map #(format "  %-4s" %) row)))))
+                        (map (fn [row]
+                               (str "|" row "|"))))
+        row-length (-> rows first count)]
+    (->> (list-insert rows (str "|" (apply str (take (- row-length 2) (repeat "-"))) "|") 1)
+         #_(str/join "\n"))))
 
-(print
- (let [{:keys [root-starts-at-fret fret]}
-       {:root-starts-at-fret 4,
-        :fret
-        '((nil :a nil :b nil)
-          (nil :e nil :f# :g)
-          (:b nil :c# :d nil)
-          (:f# :g nil :a nil)
-          (:c# :d nil :e nil)
-          (nil :a nil :b nil))}
-       box-lenght (-> fret first count)
-       rows       (->> [(map str (range 13))
-                        (->> (concat (repeat root-starts-at-fret nil) (nth fret 5) (repeat (- 13 (+ root-starts-at-fret box-lenght)) nil)) (map #(if (nil? %) "" (-> % name str/upper-case))))
-                        (->> (concat (repeat root-starts-at-fret nil) (nth fret 4) (repeat (- 13 (+ root-starts-at-fret box-lenght)) nil)) (map #(if (nil? %) "" (-> % name str/upper-case))))
-                        (->> (concat (repeat root-starts-at-fret nil) (nth fret 3) (repeat (- 13 (+ root-starts-at-fret box-lenght)) nil)) (map #(if (nil? %) "" (-> % name str/upper-case))))
-                        (->> (concat (repeat root-starts-at-fret nil) (nth fret 2) (repeat (- 13 (+ root-starts-at-fret box-lenght)) nil)) (map #(if (nil? %) "" (-> % name str/upper-case))))
-                        (->> (concat (repeat root-starts-at-fret nil) (nth fret 1) (repeat (- 13 (+ root-starts-at-fret box-lenght)) nil)) (map #(if (nil? %) "" (-> % name str/upper-case))))
-                        (->> (concat (repeat root-starts-at-fret nil) (nth fret 0) (repeat (- 13 (+ root-starts-at-fret box-lenght)) nil)) (map #(if (nil? %) "" (-> % name str/upper-case))))]
-                       (map (fn [row]
-                              (apply str (interpose "|" (map #(format "  %-4s" %) row)))))
-                       (map (fn [row]
-                              (str "|" row "|"))))
-       row-length (-> rows first count)]
-   (->> (list-insert rows (str "|" (apply str (take (- row-length 2) (repeat "-"))) "|") 1)
-        (str/join "\n"))
-   ))
+
+(comment
+  (->> (mode :e phrygian-mode-spec)
+       mode-str)
+
+  (->> (mode :g mixolydian-mode-spec)
+       mode-str)
+
+  (->> (mode :d dorian-mode-spec)
+       mode-str)
+
+  (->> (mode :a aeolian-mode-spec)
+       mode-str)
+
+  (->> (mode :f lydian-mode-spec)
+       mode-str)
+
+  (->> (mode :c major-mode-spec)
+       mode-str)
+
+
+
+
+
+  (->> (mode :a mixolydian-mode-spec)
+       mode-str
+       #_print)
+
+
+
+
+
+
+  )
+
+;; --------------------
+;; Modes end
+;; --------------------
