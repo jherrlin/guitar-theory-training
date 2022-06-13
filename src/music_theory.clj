@@ -619,11 +619,11 @@
 
 (comment
   (print
-   (->> (harmonizations-p :c :major seventh)
+   (->> (harmonizations-p :c :major triad)
         (harmonization-str :major)))
   (print "\n")
   (print
-   (->> (harmonizations-p :c :major seventh)
+   (->> (harmonizations-p :c :major triad)
         (map :chord-tones)
         (apply map vector)
         (map (fn [row]
@@ -634,7 +634,7 @@
         (str "\n")))
   (print "\n\n")
   (print
-   (->> (harmonizations-p :c :major seventh)
+   (->> (harmonizations-p :c :major triad)
         (map :chord-tones)
         (apply concat)
         (into #{})
@@ -830,7 +830,7 @@
   ionic-mode-spec)
 
 (def phrygian-mode-spec
-  "Phrygian (frysika) scale
+  "Phrygian (frygiska) scale
   Functions: 1, b2, b3, 4, 5, b6, b7
   Notes:     Has a minor sound. Occurs in heavy metal."
   [[root            minor-second   nil             minor-third]
@@ -879,6 +879,16 @@
    [major-third       nil            augmented-fourth perfect-fifth]
    [nil               root           nil              major-second]])
 
+(def locrian-mode-spec
+  "Locrian (Lokrisk) scale.
+  Functions: 1, b2, b3, 4, b5, b6, b7
+  Notes:     "
+  [[root            minor-second      nil            minor-third]
+   [nil             minor-sixth       nil            minor-seventh]
+   [minor-third     nil               perfect-fourth diminished-fifth]
+   [minor-seventh   nil               root           minor-second]
+   [perfect-fourth  diminished-fifth  nil            minor-sixth]
+   [root            minor-second      nil            minor-third]])
 
 (defn mode [root-tone mode-spec]
   (let [all-tones        (find-root-p root-tone)
@@ -951,9 +961,13 @@
   (->> (mode :c major-mode-spec)
        mode-str)
 
+  (->> (mode :b locrian-mode-spec)
+       mode-str)
 
 
 
+  (->> (mode :c major-mode-spec)
+       mode-str)
 
   (->> (mode :a mixolydian-mode-spec)
        mode-str
