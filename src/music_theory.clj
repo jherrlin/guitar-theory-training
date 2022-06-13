@@ -31,6 +31,10 @@
 (def major-seventh      11)
 (def perfect-octave     perfect-unison)
 
+;; Swedish
+(def prim               root)
+(def dur-sekund )
+
 (def intervals-map
   {:perfect-unison     {:f        perfect-unison
                         :doc/full "perfect unison"}
@@ -574,28 +578,67 @@
 
 (def harmonizations-p (partial harmonizations scales-map chords-map tones))
 
-
 (defn harmonization-str [k xs]
   (str
-   (->> xs (map (comp #(format "  %-8s" %) :index)) (str/join))
+   "     T = Tonic, SD = Subdominant, D = Dominant"
+   "\n\n"
+   (->> xs (map (comp #(format "   %-8s" %) :index)) (str/join))
    "\n"
-   (->> xs (map (comp #(format "  %-8s" %) :position)) (str/join))
-   "\n"
-   (->> xs (map (comp #(format "  %-8s" %) :chord-name)) (str/join))
+   (->> xs (map (comp #(format "   %-8s" %) :position)) (str/join))
    "\n"
    (->> (if (= k :major)
           ["T" "SD" "T" "SD" "D" "T" "D"]
           ["T" "SD" "T" "SD" "D" "SD" "D"])
-        (map #(format "  %-8s" %)) (str/join))
+        (map #(format "   %-8s" %)) (str/join))
+   "\n"
+   (->> xs (map (comp #(format "   %-8s" %) :chord-name)) (str/join))))
+
+(defn harmonization-output [tone major-minor triad-seventh]
+  (str
+   (->> (harmonizations-p tone major-minor triad-seventh)
+        (harmonization-str major-minor))
+   "\n"
+   (->> (harmonizations-p tone major-minor triad-seventh)
+        (map :chord-tones)
+        (apply map vector)
+        (map (fn [row]
+               (->> row
+                    (map #(->> % name str/upper-case (format "   %-8s")))
+                    (apply str))))
+        (str/join "\n")
+        (str "\n"))
    "\n\n"
-   "     T = Tonic, SD = Subdominant, D = Dominant"))
+   (->> (harmonizations-p tone major-minor triad-seventh)
+        (map :chord-tones)
+        (apply concat)
+        (into #{})
+        (fret-table-with-tones-p))))
 
 (print
- (fret-table-with-tones-p
-  (major-scale-tones tones)))
+ (harmonization-output :c :major seventh))
 
 (comment
-  (harmonizations-p :c :major seventh)
+  (print
+   (->> (harmonizations-p :c :major seventh)
+        (harmonization-str :major)))
+  (print "\n")
+  (print
+   (->> (harmonizations-p :c :major seventh)
+        (map :chord-tones)
+        (apply map vector)
+        (map (fn [row]
+               (->> row
+                    (map #(->> % name str/upper-case (format "   %-8s")))
+                    (apply str))))
+        (str/join "\n")
+        (str "\n")))
+  (print "\n\n")
+  (print
+   (->> (harmonizations-p :c :major seventh)
+        (map :chord-tones)
+        (apply concat)
+        (into #{})
+        (fret-table-with-tones-p)))
   )
 
 ;; --------------------
@@ -753,3 +796,63 @@
 ;; --------------------
 ;; Org-drill end
 ;; --------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(def mixolydian-mode-spec
+  [[nil           root            nil           major-second   nil]
+   [nil           perfect-fifth   nil           major-sixth    minor-seventh]
+   [major-second  nil             major-third   perfect-fourth nil]
+   [major-sixth   minor-seventh   nil           root           nil]
+   [major-third   perfect-fourth  nil           perfect-fifth  nil]
+   [nil           root            nil           major-second   nil]])
+
+
+(defn into-frets [xs]
+  (->> xs
+       ))
+
+(let [root-tone        :g
+      all-tones        (find-root-p root-tone)
+      mode-spec        mixolydian-mode-spec
+      mode-pred-lenght (-> mixolydian-mode-spec first count)
+      row              #(->> (find-root-p %)
+                             (cycle)
+                             (take 13)
+                             (vec))
+      string-tones     [:e :b :g :d :a :e]
+      fret-tones'      (mapv row string-tones)
+      combinations     (->> (mapv (comp vec (partial drop 2)) fret-tones')
+                            (mapv (partial take mode-pred-lenght))
+                            (apply concat)
+                            (mapv
+                             vector
+                             (apply concat mode-spec)))
+      box-match?       (->> combinations
+                            (remove (comp nil? first))
+                            (every? (fn [[interval' tone']]
+                                      (= (interval-p root-tone interval') tone'))))]
+  (when box-match?
+    (->> combinations
+     (map (fn [[interval' tone']]
+            (when (and interval' (= (interval-p root-tone interval') tone'))
+              tone')))
+     (partition mode-pred-lenght))))

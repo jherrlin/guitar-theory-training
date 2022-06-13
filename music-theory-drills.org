@@ -17262,12 +17262,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  C         Dm        Em        F         G         Am        Bdim    
-  T         SD        T         SD        D         T         D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          T          D       
+   C          Dm         Em         F          G          Am         Bdim    
 
 ** Diatonic chords in C major seventh                          :music:theory:harmonizations:drill:
 
@@ -17275,12 +17275,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  Cmaj7     Dm7       Em7       Fmaj7     G7        Am7       Bm7b5   
-  T         SD        T         SD        D         T         D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          T          D       
+   Cmaj7      Dm7        Em7        Fmaj7      G7         Am7        Bm7b5   
 
 ** Diatonic chords in C minor                                  :music:theory:harmonizations:drill:
 
@@ -17288,12 +17288,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  Cm        Ddim      D#        Fm        Gm        G#        A#      
-  T         SD        T         SD        D         SD        D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          SD         D       
+   Cm         Ddim       D#         Fm         Gm         G#         A#      
 
 ** Diatonic chords in C minor seventh                          :music:theory:harmonizations:drill:
 
@@ -17301,12 +17301,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  Cm7       Dm7b5     D#maj7    Fm7       Gm7       G#maj7    A#7     
-  T         SD        T         SD        D         SD        D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          SD         D       
+   Cm7        Dm7b5      D#maj7     Fm7        Gm7        G#maj7     A#7     
 
 ** Diatonic chords in C# major                                 :music:theory:harmonizations:drill:
 
@@ -17314,12 +17314,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  C#        D#m       Fm        F#        G#        A#m       Cdim    
-  T         SD        T         SD        D         T         D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          T          D       
+   C#         D#m        Fm         F#         G#         A#m        Cdim    
 
 ** Diatonic chords in C# major seventh                         :music:theory:harmonizations:drill:
 
@@ -17327,12 +17327,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  C#maj7    D#m7      Fm7       F#maj7    G#7       A#m7      Cm7b5   
-  T         SD        T         SD        D         T         D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          T          D       
+   C#maj7     D#m7       Fm7        F#maj7     G#7        A#m7       Cm7b5   
 
 ** Diatonic chords in C# minor                                 :music:theory:harmonizations:drill:
 
@@ -17340,12 +17340,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  C#m       D#dim     E         F#m       G#m       A         B       
-  T         SD        T         SD        D         SD        D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          SD         D       
+   C#m        D#dim      E          F#m        G#m        A          B       
 
 ** Diatonic chords in C# minor seventh                         :music:theory:harmonizations:drill:
 
@@ -17353,12 +17353,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  C#m7      D#m7b5    Emaj7     F#m7      G#m7      Amaj7     B7      
-  T         SD        T         SD        D         SD        D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          SD         D       
+   C#m7       D#m7b5     Emaj7      F#m7       G#m7       Amaj7      B7      
 
 ** Diatonic chords in D major                                  :music:theory:harmonizations:drill:
 
@@ -17366,12 +17366,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  D         Em        F#m       G         A         Bm        C#dim   
-  T         SD        T         SD        D         T         D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          T          D       
+   D          Em         F#m        G          A          Bm         C#dim   
 
 ** Diatonic chords in D major seventh                          :music:theory:harmonizations:drill:
 
@@ -17379,12 +17379,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  Dmaj7     Em7       F#m7      Gmaj7     A7        Bm7       C#m7b5  
-  T         SD        T         SD        D         T         D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          T          D       
+   Dmaj7      Em7        F#m7       Gmaj7      A7         Bm7        C#m7b5  
 
 ** Diatonic chords in D minor                                  :music:theory:harmonizations:drill:
 
@@ -17392,12 +17392,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  Dm        Edim      F         Gm        Am        A#        C       
-  T         SD        T         SD        D         SD        D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          SD         D       
+   Dm         Edim       F          Gm         Am         A#         C       
 
 ** Diatonic chords in D minor seventh                          :music:theory:harmonizations:drill:
 
@@ -17405,12 +17405,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  Dm7       Em7b5     Fmaj7     Gm7       Am7       A#maj7    C7      
-  T         SD        T         SD        D         SD        D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          SD         D       
+   Dm7        Em7b5      Fmaj7      Gm7        Am7        A#maj7     C7      
 
 ** Diatonic chords in D# major                                 :music:theory:harmonizations:drill:
 
@@ -17418,12 +17418,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  D#        Fm        Gm        G#        A#        Cm        Ddim    
-  T         SD        T         SD        D         T         D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          T          D       
+   D#         Fm         Gm         G#         A#         Cm         Ddim    
 
 ** Diatonic chords in D# major seventh                         :music:theory:harmonizations:drill:
 
@@ -17431,12 +17431,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  D#maj7    Fm7       Gm7       G#maj7    A#7       Cm7       Dm7b5   
-  T         SD        T         SD        D         T         D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          T          D       
+   D#maj7     Fm7        Gm7        G#maj7     A#7        Cm7        Dm7b5   
 
 ** Diatonic chords in D# minor                                 :music:theory:harmonizations:drill:
 
@@ -17444,12 +17444,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  D#m       Fdim      F#        G#m       A#m       B         C#      
-  T         SD        T         SD        D         SD        D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          SD         D       
+   D#m        Fdim       F#         G#m        A#m        B          C#      
 
 ** Diatonic chords in D# minor seventh                         :music:theory:harmonizations:drill:
 
@@ -17457,12 +17457,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  D#m7      Fm7b5     F#maj7    G#m7      A#m7      Bmaj7     C#7     
-  T         SD        T         SD        D         SD        D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          SD         D       
+   D#m7       Fm7b5      F#maj7     G#m7       A#m7       Bmaj7      C#7     
 
 ** Diatonic chords in E major                                  :music:theory:harmonizations:drill:
 
@@ -17470,12 +17470,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  E         F#m       G#m       A         B         C#m       D#dim   
-  T         SD        T         SD        D         T         D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          T          D       
+   E          F#m        G#m        A          B          C#m        D#dim   
 
 ** Diatonic chords in E major seventh                          :music:theory:harmonizations:drill:
 
@@ -17483,12 +17483,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  Emaj7     F#m7      G#m7      Amaj7     B7        C#m7      D#m7b5  
-  T         SD        T         SD        D         T         D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          T          D       
+   Emaj7      F#m7       G#m7       Amaj7      B7         C#m7       D#m7b5  
 
 ** Diatonic chords in E minor                                  :music:theory:harmonizations:drill:
 
@@ -17496,12 +17496,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  Em        F#dim     G         Am        Bm        C         D       
-  T         SD        T         SD        D         SD        D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          SD         D       
+   Em         F#dim      G          Am         Bm         C          D       
 
 ** Diatonic chords in E minor seventh                          :music:theory:harmonizations:drill:
 
@@ -17509,12 +17509,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  Em7       F#m7b5    Gmaj7     Am7       Bm7       Cmaj7     D7      
-  T         SD        T         SD        D         SD        D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          SD         D       
+   Em7        F#m7b5     Gmaj7      Am7        Bm7        Cmaj7      D7      
 
 ** Diatonic chords in F major                                  :music:theory:harmonizations:drill:
 
@@ -17522,12 +17522,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  F         Gm        Am        A#        C         Dm        Edim    
-  T         SD        T         SD        D         T         D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          T          D       
+   F          Gm         Am         A#         C          Dm         Edim    
 
 ** Diatonic chords in F major seventh                          :music:theory:harmonizations:drill:
 
@@ -17535,12 +17535,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  Fmaj7     Gm7       Am7       A#maj7    C7        Dm7       Em7b5   
-  T         SD        T         SD        D         T         D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          T          D       
+   Fmaj7      Gm7        Am7        A#maj7     C7         Dm7        Em7b5   
 
 ** Diatonic chords in F minor                                  :music:theory:harmonizations:drill:
 
@@ -17548,12 +17548,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  Fm        Gdim      G#        A#m       Cm        C#        D#      
-  T         SD        T         SD        D         SD        D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          SD         D       
+   Fm         Gdim       G#         A#m        Cm         C#         D#      
 
 ** Diatonic chords in F minor seventh                          :music:theory:harmonizations:drill:
 
@@ -17561,12 +17561,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  Fm7       Gm7b5     G#maj7    A#m7      Cm7       C#maj7    D#7     
-  T         SD        T         SD        D         SD        D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          SD         D       
+   Fm7        Gm7b5      G#maj7     A#m7       Cm7        C#maj7     D#7     
 
 ** Diatonic chords in F# major                                 :music:theory:harmonizations:drill:
 
@@ -17574,12 +17574,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  F#        G#m       A#m       B         C#        D#m       Fdim    
-  T         SD        T         SD        D         T         D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          T          D       
+   F#         G#m        A#m        B          C#         D#m        Fdim    
 
 ** Diatonic chords in F# major seventh                         :music:theory:harmonizations:drill:
 
@@ -17587,12 +17587,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  F#maj7    G#m7      A#m7      Bmaj7     C#7       D#m7      Fm7b5   
-  T         SD        T         SD        D         T         D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          T          D       
+   F#maj7     G#m7       A#m7       Bmaj7      C#7        D#m7       Fm7b5   
 
 ** Diatonic chords in F# minor                                 :music:theory:harmonizations:drill:
 
@@ -17600,12 +17600,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  F#m       G#dim     A         Bm        C#m       D         E       
-  T         SD        T         SD        D         SD        D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          SD         D       
+   F#m        G#dim      A          Bm         C#m        D          E       
 
 ** Diatonic chords in F# minor seventh                         :music:theory:harmonizations:drill:
 
@@ -17613,12 +17613,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  F#m7      G#m7b5    Amaj7     Bm7       C#m7      Dmaj7     E7      
-  T         SD        T         SD        D         SD        D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          SD         D       
+   F#m7       G#m7b5     Amaj7      Bm7        C#m7       Dmaj7      E7      
 
 ** Diatonic chords in G major                                  :music:theory:harmonizations:drill:
 
@@ -17626,12 +17626,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  G         Am        Bm        C         D         Em        F#dim   
-  T         SD        T         SD        D         T         D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          T          D       
+   G          Am         Bm         C          D          Em         F#dim   
 
 ** Diatonic chords in G major seventh                          :music:theory:harmonizations:drill:
 
@@ -17639,12 +17639,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  Gmaj7     Am7       Bm7       Cmaj7     D7        Em7       F#m7b5  
-  T         SD        T         SD        D         T         D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          T          D       
+   Gmaj7      Am7        Bm7        Cmaj7      D7         Em7        F#m7b5  
 
 ** Diatonic chords in G minor                                  :music:theory:harmonizations:drill:
 
@@ -17652,12 +17652,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  Gm        Adim      A#        Cm        Dm        D#        F       
-  T         SD        T         SD        D         SD        D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          SD         D       
+   Gm         Adim       A#         Cm         Dm         D#         F       
 
 ** Diatonic chords in G minor seventh                          :music:theory:harmonizations:drill:
 
@@ -17665,12 +17665,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  Gm7       Am7b5     A#maj7    Cm7       Dm7       D#maj7    F7      
-  T         SD        T         SD        D         SD        D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          SD         D       
+   Gm7        Am7b5      A#maj7     Cm7        Dm7        D#maj7     F7      
 
 ** Diatonic chords in G# major                                 :music:theory:harmonizations:drill:
 
@@ -17678,12 +17678,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  G#        A#m       Cm        C#        D#        Fm        Gdim    
-  T         SD        T         SD        D         T         D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          T          D       
+   G#         A#m        Cm         C#         D#         Fm         Gdim    
 
 ** Diatonic chords in G# major seventh                         :music:theory:harmonizations:drill:
 
@@ -17691,12 +17691,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  G#maj7    A#m7      Cm7       C#maj7    D#7       Fm7       Gm7b5   
-  T         SD        T         SD        D         T         D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          T          D       
+   G#maj7     A#m7       Cm7        C#maj7     D#7        Fm7        Gm7b5   
 
 ** Diatonic chords in G# minor                                 :music:theory:harmonizations:drill:
 
@@ -17704,12 +17704,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  G#m       A#dim     B         C#m       D#m       E         F#      
-  T         SD        T         SD        D         SD        D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          SD         D       
+   G#m        A#dim      B          C#m        D#m        E          F#      
 
 ** Diatonic chords in G# minor seventh                         :music:theory:harmonizations:drill:
 
@@ -17717,12 +17717,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  G#m7      A#m7b5    Bmaj7     C#m7      D#m7      Emaj7     F#7     
-  T         SD        T         SD        D         SD        D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          SD         D       
+   G#m7       A#m7b5     Bmaj7      C#m7       D#m7       Emaj7      F#7     
 
 ** Diatonic chords in A major                                  :music:theory:harmonizations:drill:
 
@@ -17730,12 +17730,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  A         Bm        C#m       D         E         F#m       G#dim   
-  T         SD        T         SD        D         T         D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          T          D       
+   A          Bm         C#m        D          E          F#m        G#dim   
 
 ** Diatonic chords in A major seventh                          :music:theory:harmonizations:drill:
 
@@ -17743,12 +17743,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  Amaj7     Bm7       C#m7      Dmaj7     E7        F#m7      G#m7b5  
-  T         SD        T         SD        D         T         D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          T          D       
+   Amaj7      Bm7        C#m7       Dmaj7      E7         F#m7       G#m7b5  
 
 ** Diatonic chords in A minor                                  :music:theory:harmonizations:drill:
 
@@ -17756,12 +17756,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  Am        Bdim      C         Dm        Em        F         G       
-  T         SD        T         SD        D         SD        D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          SD         D       
+   Am         Bdim       C          Dm         Em         F          G       
 
 ** Diatonic chords in A minor seventh                          :music:theory:harmonizations:drill:
 
@@ -17769,12 +17769,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  Am7       Bm7b5     Cmaj7     Dm7       Em7       Fmaj7     G7      
-  T         SD        T         SD        D         SD        D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          SD         D       
+   Am7        Bm7b5      Cmaj7      Dm7        Em7        Fmaj7      G7      
 
 ** Diatonic chords in A# major                                 :music:theory:harmonizations:drill:
 
@@ -17782,12 +17782,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  A#        Cm        Dm        D#        F         Gm        Adim    
-  T         SD        T         SD        D         T         D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          T          D       
+   A#         Cm         Dm         D#         F          Gm         Adim    
 
 ** Diatonic chords in A# major seventh                         :music:theory:harmonizations:drill:
 
@@ -17795,12 +17795,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  A#maj7    Cm7       Dm7       D#maj7    F7        Gm7       Am7b5   
-  T         SD        T         SD        D         T         D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          T          D       
+   A#maj7     Cm7        Dm7        D#maj7     F7         Gm7        Am7b5   
 
 ** Diatonic chords in A# minor                                 :music:theory:harmonizations:drill:
 
@@ -17808,12 +17808,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  A#m       Cdim      C#        D#m       Fm        F#        G#      
-  T         SD        T         SD        D         SD        D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          SD         D       
+   A#m        Cdim       C#         D#m        Fm         F#         G#      
 
 ** Diatonic chords in A# minor seventh                         :music:theory:harmonizations:drill:
 
@@ -17821,12 +17821,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  A#m7      Cm7b5     C#maj7    D#m7      Fm7       F#maj7    G#7     
-  T         SD        T         SD        D         SD        D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          SD         D       
+   A#m7       Cm7b5      C#maj7     D#m7       Fm7        F#maj7     G#7     
 
 ** Diatonic chords in B major                                  :music:theory:harmonizations:drill:
 
@@ -17834,12 +17834,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  B         C#m       D#m       E         F#        G#m       A#dim   
-  T         SD        T         SD        D         T         D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          T          D       
+   B          C#m        D#m        E          F#         G#m        A#dim   
 
 ** Diatonic chords in B major seventh                          :music:theory:harmonizations:drill:
 
@@ -17847,12 +17847,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  Bmaj7     C#m7      D#m7      Emaj7     F#7       G#m7      A#m7b5  
-  T         SD        T         SD        D         T         D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          T          D       
+   Bmaj7      C#m7       D#m7       Emaj7      F#7        G#m7       A#m7b5  
 
 ** Diatonic chords in B minor                                  :music:theory:harmonizations:drill:
 
@@ -17860,12 +17860,12 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  Bm        C#dim     D         Em        F#m       G         A       
-  T         SD        T         SD        D         SD        D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          SD         D       
+   Bm         C#dim      D          Em         F#m        G          A       
 
 ** Diatonic chords in B minor seventh                          :music:theory:harmonizations:drill:
 
@@ -17873,10 +17873,10 @@
 
 *** Answer 
 
-  1         2         3         4         5         6         7       
-  I         ii        iii       IV        V         vi        vii     
-  Bm7       C#m7b5    Dmaj7     Em7       F#m7      Gmaj7     A7      
-  T         SD        T         SD        D         SD        D       
-
      T = Tonic, SD = Subdominant, D = Dominant
+
+   1          2          3          4          5          6          7       
+   I          ii         iii        IV         V          vi         vii     
+   T          SD         T          SD         D          SD         D       
+   Bm7        C#m7b5     Dmaj7      Em7        F#m7       Gmaj7      A7      
 
