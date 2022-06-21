@@ -1,6 +1,8 @@
 (ns music-theory
-  (:require [clojure.string :as str]
-            [utils :refer [docstring->m find-chord find-root fret-table-with-tones juxt-intervals]]))
+  (:require
+   [chords :refer [chords defchord]]
+   [clojure.string :as str]
+   [utils :refer [docstring->m find-chord find-root fret-table-with-tones juxt-intervals]]))
 
 (comment
   (remove-ns 'music-theory)
@@ -426,7 +428,7 @@
    {:f             dominant-seven-chord-tones,
     :id            :dominant-seven,
     :doc/short     "7",
-    :doc/full      nil,
+    :doc/full      "dominant (major) seven",
     :doc/functions "1 3 5 b7",
     :s             "dominant-seven-chord-tones"},
    :fifth

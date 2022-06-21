@@ -1,5 +1,6 @@
-(ns utils
+(ns se.jherrlin.music-theory.utils
   (:require [clojure.string :as str]))
+
 
 (defn find-root
   [tone tones]
