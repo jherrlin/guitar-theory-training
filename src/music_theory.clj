@@ -336,18 +336,18 @@
   (juxt-intervals
    [root perfect-fourth perfect-fifth]))
 
-(def major-seven-chord-tones
+(def dominant-seven-chord-tones
   "
   short:     7
-  full:      major seven
+  full:      dominant (major) seven
   functions: 1 3 5 b7"
   (juxt-intervals
    [root major-third perfect-fifth minor-seventh]))
 
 (comment
-  (major-seven-chord-tones tones)            ;; => [:c :e :g :a#]
-  (major-seven-chord-tones (find-root-p :c)) ;; => [:c :e :g :a#]
-  (major-seven-chord-tones (find-root-p :d)) ;; => [:d :f# :a :c]
+  (dominant-seven-chord-tones tones)            ;; => [:c :e :g :a#]
+  (dominant-seven-chord-tones (find-root-p :c)) ;; => [:c :e :g :a#]
+  (dominant-seven-chord-tones (find-root-p :d)) ;; => [:d :f# :a :c]
   )
 
 (def minor-seven-chord-tones
@@ -422,6 +422,13 @@
     :doc/full      "diminished seventh",
     :doc/functions "1 b3 b5 bb7",
     :s             "diminished-seventh-chord-tones"},
+   :dominant-seven
+   {:f             dominant-seven-chord-tones,
+    :id            :dominant-seven,
+    :doc/short     "7",
+    :doc/full      nil,
+    :doc/functions "1 3 5 b7",
+    :s             "dominant-seven-chord-tones"},
    :fifth
    {:f             fifth-chord-tones,
     :id            :fifth,
@@ -443,13 +450,6 @@
     :doc/full      "major",
     :doc/functions "1 3 5",
     :s             "major-chord-tones"},
-   :major-seven
-   {:f             major-seven-chord-tones,
-    :id            :major-seven,
-    :doc/short     "7",
-    :doc/full      "major seven",
-    :doc/functions "1 3 5 b7",
-    :s             "major-seven-chord-tones"},
    :diminished-fifth
    {:f             diminished-fifth-chord-tones,
     :id            :diminished-fifth,
@@ -464,13 +464,6 @@
     :doc/full      "minor sevent flat 5",
     :doc/functions "1 b3 b5 b7",
     :s             "minor-seven-flat-5-chord-tones"},
-   :diminished-triad
-   {:f             diminished-triad-chord-tones,
-    :id            :diminished-triad,
-    :doc/short     "dim",
-    :doc/full      "diminished fifth",
-    :doc/functions "1 b3 b5",
-    :s             "diminished-triad-chord-tones"},
    :major-maj-seven
    {:f             major-maj-seven-chord-tones,
     :id            :major-maj-seven,
@@ -1005,6 +998,13 @@
     :doc/title "Locrian (Lokrisk) scale.",
     :doc/fns   "1, b2, b3, 4, b5, b6, b7",
     :doc/notes "Sinister feeling to it."},
+   :ionian
+   {:f         ionian-mode-spec,
+    :kw        :ionian,
+    :s         "ionian-mode-spec",
+    :doc/title "Ionian (jonisk) scale",
+    :doc/fns   "1, 2, 3, 4, 5, 6, 7",
+    :doc/notes "Same as major scale."},
    :dorian
    {:f         dorian-mode-spec,
     :kw        :dorian,
@@ -1040,18 +1040,11 @@
     :doc/title "Phrygian (frygiska) scale",
     :doc/fns   "1, b2, b3, 4, 5, b6, b7",
     :doc/notes "Has a minor sound. Occurs in heavy metal."},
-   :ionian
-   {:f         ionic-mode-spec,
-    :kw        :ionian
-    :s         "ionic-mode-spec",
-    :doc/title "Ionic (jonisk) scale",
-    :doc/fns   "1, 2, 3, 4, 5, 6, 7",
-    :doc/notes "Same as major scale."},
    :minor
    {:f         minor-mode-spec,
     :kw        :minor,
     :s         "minor-mode-spec",
-    :doc/title "Aeolian (Eolisk) scale.",
+    :doc/title "Minor scale.",
     :doc/fns   "1, 2, b3, 4, 5, b6, b7",
     :doc/notes "Same as Aeolian."},
    :aeolian
