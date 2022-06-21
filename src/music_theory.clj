@@ -330,7 +330,7 @@
 
 (def sus4-chord-tones
   "
-  short:     sus2
+  short:     sus4
   full:      suspended 4
   functions: 1 4 5"
   (juxt-intervals
@@ -420,7 +420,7 @@
     :id            :diminished-seventh,
     :doc/short     "dim7",
     :doc/full      "diminished seventh",
-    :doc/functions "1 b3 d5 b7",
+    :doc/functions "1 b3 b5 bb7",
     :s             "diminished-seventh-chord-tones"},
    :fifth
    {:f             fifth-chord-tones,
@@ -450,20 +450,27 @@
     :doc/full      "major seven",
     :doc/functions "1 3 5 b7",
     :s             "major-seven-chord-tones"},
+   :diminished-fifth
+   {:f             diminished-fifth-chord-tones,
+    :id            :diminished-fifth,
+    :doc/short     "dim",
+    :doc/full      "diminished fifth",
+    :doc/functions "1 b3 b5",
+    :s             "diminished-fifth-chord-tones"},
    :minor-seven-flat-5
    {:f             minor-seven-flat-5-chord-tones,
     :id            :minor-seven-flat-5,
     :doc/short     "m7b5",
     :doc/full      "minor sevent flat 5",
-    :doc/functions "1 b3 d5 b7",
+    :doc/functions "1 b3 b5 b7",
     :s             "minor-seven-flat-5-chord-tones"},
    :diminished-triad
-   {:f             diminished-fifth-chord-tones,
+   {:f             diminished-triad-chord-tones,
     :id            :diminished-triad,
     :doc/short     "dim",
     :doc/full      "diminished fifth",
-    :doc/functions "1 b3 d5",
-    :s             "diminished-fifth-chord-tones"},
+    :doc/functions "1 b3 b5",
+    :s             "diminished-triad-chord-tones"},
    :major-maj-seven
    {:f             major-maj-seven-chord-tones,
     :id            :major-maj-seven,
@@ -476,7 +483,7 @@
     :id            :major-seven-flat-5,
     :doc/short     "(maj7)b5",
     :doc/full      "major major sevent flat 5",
-    :doc/functions "1 b d5 7",
+    :doc/functions "1 3 b5 7",
     :s             "major-seven-flat-5-chord-tones"},
    :sus2
    {:f             sus2-chord-tones,
@@ -495,7 +502,7 @@
    :sus4
    {:f             sus4-chord-tones,
     :id            :sus4,
-    :doc/short     "sus2",
+    :doc/short     "sus4",
     :doc/full      "suspended 4",
     :doc/functions "1 4 5",
     :s             "sus4-chord-tones"},

@@ -8,7 +8,7 @@
 
     C, D#, F#, A
 
-    Functions:   1 b3 d5 b7
+    Functions:   1 b3 b5 bb7
     Description: C diminished seventh
 
 
@@ -29,7 +29,7 @@
 
     Cdim7
 
-    Functions:   1 b3 d5 b7
+    Functions:   1 b3 b5 bb7
     Description: C diminished seventh
 
 
@@ -210,48 +210,6 @@
 |    | A# |    | C  |    |    |    | E  |    |    | G  |    |    | A# |    | C  |    |    |    | E  |    |    | G  |    |    |
 | E  |    |    | G  |    |    | A# |    | C  |    |    |    | E  |    |    | G  |    |    | A# |    | C  |    |    |    | E  |
 
-** Tones in Cm7b5                                              :music:theory:chords:drill:
-
-   What tones are in Cm7b5 chord?
-
-*** Answer 
-
-    C, D#, F#, A#
-
-    Functions:   1 b3 d5 b7
-    Description: C minor sevent flat 5
-
-
-| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
-|----------------------------------------------------------------------------------------------------------------------------|
-|    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |
-|    | C  |    |    | D# |    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |    | F# |    |    |    | A# |    |
-|    |    |    | A# |    | C  |    |    | D# |    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |    | F# |    |
-|    | D# |    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |    | F# |    |    |    | A# |    | C  |    |    |
-|    | A# |    | C  |    |    | D# |    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |    | F# |    |    |    |
-|    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |
-
-** Name the chord: C, D#, F#, A#                               :music:theory:chords:drill:
-
-   Name the chord with the following tones: C, D#, F#, A#
-
-*** Answer 
-
-    Cm7b5
-
-    Functions:   1 b3 d5 b7
-    Description: C minor sevent flat 5
-
-
-| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
-|----------------------------------------------------------------------------------------------------------------------------|
-|    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |
-|    | C  |    |    | D# |    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |    | F# |    |    |    | A# |    |
-|    |    |    | A# |    | C  |    |    | D# |    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |    | F# |    |
-|    | D# |    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |    | F# |    |    |    | A# |    | C  |    |    |
-|    | A# |    | C  |    |    | D# |    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |    | F# |    |    |    |
-|    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |
-
 ** Tones in Cdim                                               :music:theory:chords:drill:
 
    What tones are in Cdim chord?
@@ -260,7 +218,7 @@
 
     C, D#, F#
 
-    Functions:   1 b3 d5
+    Functions:   1 b3 b5
     Description: C diminished fifth
 
 
@@ -281,7 +239,91 @@
 
     Cdim
 
-    Functions:   1 b3 d5
+    Functions:   1 b3 b5
+    Description: C diminished fifth
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    |    | F# |    |    |    |    |    | C  |    |    | D# |    |    | F# |    |    |    |    |    | C  |    |    | D# |    |
+|    | C  |    |    | D# |    |    | F# |    |    |    |    |    | C  |    |    | D# |    |    | F# |    |    |    |    |    |
+|    |    |    |    |    | C  |    |    | D# |    |    | F# |    |    |    |    |    | C  |    |    | D# |    |    | F# |    |
+|    | D# |    |    | F# |    |    |    |    |    | C  |    |    | D# |    |    | F# |    |    |    |    |    | C  |    |    |
+|    |    |    | C  |    |    | D# |    |    | F# |    |    |    |    |    | C  |    |    | D# |    |    | F# |    |    |    |
+|    |    | F# |    |    |    |    |    | C  |    |    | D# |    |    | F# |    |    |    |    |    | C  |    |    | D# |    |
+
+** Tones in Cm7b5                                              :music:theory:chords:drill:
+
+   What tones are in Cm7b5 chord?
+
+*** Answer 
+
+    C, D#, F#, A#
+
+    Functions:   1 b3 b5 b7
+    Description: C minor sevent flat 5
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |
+|    | C  |    |    | D# |    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |    | F# |    |    |    | A# |    |
+|    |    |    | A# |    | C  |    |    | D# |    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |    | F# |    |
+|    | D# |    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |    | F# |    |    |    | A# |    | C  |    |    |
+|    | A# |    | C  |    |    | D# |    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |    | F# |    |    |    |
+|    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |
+
+** Name the chord: C, D#, F#, A#                               :music:theory:chords:drill:
+
+   Name the chord with the following tones: C, D#, F#, A#
+
+*** Answer 
+
+    Cm7b5
+
+    Functions:   1 b3 b5 b7
+    Description: C minor sevent flat 5
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |
+|    | C  |    |    | D# |    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |    | F# |    |    |    | A# |    |
+|    |    |    | A# |    | C  |    |    | D# |    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |    | F# |    |
+|    | D# |    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |    | F# |    |    |    | A# |    | C  |    |    |
+|    | A# |    | C  |    |    | D# |    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |    | F# |    |    |    |
+|    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |    | F# |    |    |    | A# |    | C  |    |    | D# |    |
+
+** Tones in Cdim                                               :music:theory:chords:drill:
+
+   What tones are in Cdim chord?
+
+*** Answer 
+
+    C, D#, F#
+
+    Functions:   1 b3 b5
+    Description: C diminished fifth
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    |    | F# |    |    |    |    |    | C  |    |    | D# |    |    | F# |    |    |    |    |    | C  |    |    | D# |    |
+|    | C  |    |    | D# |    |    | F# |    |    |    |    |    | C  |    |    | D# |    |    | F# |    |    |    |    |    |
+|    |    |    |    |    | C  |    |    | D# |    |    | F# |    |    |    |    |    | C  |    |    | D# |    |    | F# |    |
+|    | D# |    |    | F# |    |    |    |    |    | C  |    |    | D# |    |    | F# |    |    |    |    |    | C  |    |    |
+|    |    |    | C  |    |    | D# |    |    | F# |    |    |    |    |    | C  |    |    | D# |    |    | F# |    |    |    |
+|    |    | F# |    |    |    |    |    | C  |    |    | D# |    |    | F# |    |    |    |    |    | C  |    |    | D# |    |
+
+** Name the chord: C, D#, F#                                   :music:theory:chords:drill:
+
+   Name the chord with the following tones: C, D#, F#
+
+*** Answer 
+
+    Cdim
+
+    Functions:   1 b3 b5
     Description: C diminished fifth
 
 
@@ -344,7 +386,7 @@
 
     C, E, F#, B
 
-    Functions:   1 b d5 7
+    Functions:   1 3 b5 7
     Description: C major major sevent flat 5
 
 
@@ -365,7 +407,7 @@
 
     C(maj7)b5
 
-    Functions:   1 b d5 7
+    Functions:   1 3 b5 7
     Description: C major major sevent flat 5
 
 
@@ -462,9 +504,9 @@
 |    |    |    | C  |    |    | D# |    |    |    | G  |    |    |    |    | C  |    |    | D# |    |    |    | G  |    |    |
 |    |    |    | G  |    |    |    |    | C  |    |    | D# |    |    |    | G  |    |    |    |    | C  |    |    | D# |    |
 
-** Tones in Csus2                                              :music:theory:chords:drill:
+** Tones in Csus4                                              :music:theory:chords:drill:
 
-   What tones are in Csus2 chord?
+   What tones are in Csus4 chord?
 
 *** Answer 
 
@@ -489,7 +531,7 @@
 
 *** Answer 
 
-    Csus2
+    Csus4
 
     Functions:   1 4 5
     Description: C suspended 4
@@ -554,7 +596,7 @@
 
     C#, E, G, A#
 
-    Functions:   1 b3 d5 b7
+    Functions:   1 b3 b5 bb7
     Description: C# diminished seventh
 
 
@@ -575,7 +617,7 @@
 
     C#dim7
 
-    Functions:   1 b3 d5 b7
+    Functions:   1 b3 b5 bb7
     Description: C# diminished seventh
 
 
@@ -756,48 +798,6 @@
 |    |    | B  |    | C# |    |    |    | F  |    |    | G# |    |    | B  |    | C# |    |    |    | F  |    |    | G# |    |
 |    | F  |    |    | G# |    |    | B  |    | C# |    |    |    | F  |    |    | G# |    |    | B  |    | C# |    |    |    |
 
-** Tones in C#m7b5                                             :music:theory:chords:drill:
-
-   What tones are in C#m7b5 chord?
-
-*** Answer 
-
-    C#, E, G, B
-
-    Functions:   1 b3 d5 b7
-    Description: C# minor sevent flat 5
-
-
-| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
-|----------------------------------------------------------------------------------------------------------------------------|
-| E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |
-| B  |    | C# |    |    | E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |    | B  |
-| G  |    |    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |    |    | G  |
-|    |    | E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |    | B  |    | C# |    |
-|    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |
-| E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |
-
-** Name the chord: C#, E, G, B                                 :music:theory:chords:drill:
-
-   Name the chord with the following tones: C#, E, G, B
-
-*** Answer 
-
-    C#m7b5
-
-    Functions:   1 b3 d5 b7
-    Description: C# minor sevent flat 5
-
-
-| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
-|----------------------------------------------------------------------------------------------------------------------------|
-| E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |
-| B  |    | C# |    |    | E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |    | B  |
-| G  |    |    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |    |    | G  |
-|    |    | E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |    | B  |    | C# |    |
-|    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |
-| E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |
-
 ** Tones in C#dim                                              :music:theory:chords:drill:
 
    What tones are in C#dim chord?
@@ -806,7 +806,7 @@
 
     C#, E, G
 
-    Functions:   1 b3 d5
+    Functions:   1 b3 b5
     Description: C# diminished fifth
 
 
@@ -827,7 +827,91 @@
 
     C#dim
 
-    Functions:   1 b3 d5
+    Functions:   1 b3 b5
+    Description: C# diminished fifth
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+| E  |    |    | G  |    |    |    |    |    | C# |    |    | E  |    |    | G  |    |    |    |    |    | C# |    |    | E  |
+|    |    | C# |    |    | E  |    |    | G  |    |    |    |    |    | C# |    |    | E  |    |    | G  |    |    |    |    |
+| G  |    |    |    |    |    | C# |    |    | E  |    |    | G  |    |    |    |    |    | C# |    |    | E  |    |    | G  |
+|    |    | E  |    |    | G  |    |    |    |    |    | C# |    |    | E  |    |    | G  |    |    |    |    |    | C# |    |
+|    |    |    |    | C# |    |    | E  |    |    | G  |    |    |    |    |    | C# |    |    | E  |    |    | G  |    |    |
+| E  |    |    | G  |    |    |    |    |    | C# |    |    | E  |    |    | G  |    |    |    |    |    | C# |    |    | E  |
+
+** Tones in C#m7b5                                             :music:theory:chords:drill:
+
+   What tones are in C#m7b5 chord?
+
+*** Answer 
+
+    C#, E, G, B
+
+    Functions:   1 b3 b5 b7
+    Description: C# minor sevent flat 5
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+| E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |
+| B  |    | C# |    |    | E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |    | B  |
+| G  |    |    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |    |    | G  |
+|    |    | E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |    | B  |    | C# |    |
+|    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |
+| E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |
+
+** Name the chord: C#, E, G, B                                 :music:theory:chords:drill:
+
+   Name the chord with the following tones: C#, E, G, B
+
+*** Answer 
+
+    C#m7b5
+
+    Functions:   1 b3 b5 b7
+    Description: C# minor sevent flat 5
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+| E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |
+| B  |    | C# |    |    | E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |    | B  |
+| G  |    |    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |    |    | G  |
+|    |    | E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |    | B  |    | C# |    |
+|    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |
+| E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |    |    | G  |    |    |    | B  |    | C# |    |    | E  |
+
+** Tones in C#dim                                              :music:theory:chords:drill:
+
+   What tones are in C#dim chord?
+
+*** Answer 
+
+    C#, E, G
+
+    Functions:   1 b3 b5
+    Description: C# diminished fifth
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+| E  |    |    | G  |    |    |    |    |    | C# |    |    | E  |    |    | G  |    |    |    |    |    | C# |    |    | E  |
+|    |    | C# |    |    | E  |    |    | G  |    |    |    |    |    | C# |    |    | E  |    |    | G  |    |    |    |    |
+| G  |    |    |    |    |    | C# |    |    | E  |    |    | G  |    |    |    |    |    | C# |    |    | E  |    |    | G  |
+|    |    | E  |    |    | G  |    |    |    |    |    | C# |    |    | E  |    |    | G  |    |    |    |    |    | C# |    |
+|    |    |    |    | C# |    |    | E  |    |    | G  |    |    |    |    |    | C# |    |    | E  |    |    | G  |    |    |
+| E  |    |    | G  |    |    |    |    |    | C# |    |    | E  |    |    | G  |    |    |    |    |    | C# |    |    | E  |
+
+** Name the chord: C#, E, G                                    :music:theory:chords:drill:
+
+   Name the chord with the following tones: C#, E, G
+
+*** Answer 
+
+    C#dim
+
+    Functions:   1 b3 b5
     Description: C# diminished fifth
 
 
@@ -890,7 +974,7 @@
 
     C#, F, G, C
 
-    Functions:   1 b d5 7
+    Functions:   1 3 b5 7
     Description: C# major major sevent flat 5
 
 
@@ -911,7 +995,7 @@
 
     C#(maj7)b5
 
-    Functions:   1 b d5 7
+    Functions:   1 3 b5 7
     Description: C# major major sevent flat 5
 
 
@@ -1008,9 +1092,9 @@
 |    |    |    |    | C# |    |    | E  |    |    |    | G# |    |    |    |    | C# |    |    | E  |    |    |    | G# |    |
 | E  |    |    |    | G# |    |    |    |    | C# |    |    | E  |    |    |    | G# |    |    |    |    | C# |    |    | E  |
 
-** Tones in C#sus2                                             :music:theory:chords:drill:
+** Tones in C#sus4                                             :music:theory:chords:drill:
 
-   What tones are in C#sus2 chord?
+   What tones are in C#sus4 chord?
 
 *** Answer 
 
@@ -1035,7 +1119,7 @@
 
 *** Answer 
 
-    C#sus2
+    C#sus4
 
     Functions:   1 4 5
     Description: C# suspended 4
@@ -1100,7 +1184,7 @@
 
     D, F, G#, B
 
-    Functions:   1 b3 d5 b7
+    Functions:   1 b3 b5 bb7
     Description: D diminished seventh
 
 
@@ -1121,7 +1205,7 @@
 
     Ddim7
 
-    Functions:   1 b3 d5 b7
+    Functions:   1 b3 b5 bb7
     Description: D diminished seventh
 
 
@@ -1302,48 +1386,6 @@
 | A  |    |    | C  |    | D  |    |    |    | F# |    |    | A  |    |    | C  |    | D  |    |    |    | F# |    |    | A  |
 |    |    | F# |    |    | A  |    |    | C  |    | D  |    |    |    | F# |    |    | A  |    |    | C  |    | D  |    |    |
 
-** Tones in Dm7b5                                              :music:theory:chords:drill:
-
-   What tones are in Dm7b5 chord?
-
-*** Answer 
-
-    D, F, G#, C
-
-    Functions:   1 b3 d5 b7
-    Description: D minor sevent flat 5
-
-
-| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
-|----------------------------------------------------------------------------------------------------------------------------|
-|    | F  |    |    | G# |    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |    |    | C  |    | D  |    |    |
-|    | C  |    | D  |    |    | F  |    |    | G# |    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |    |    |
-|    | G# |    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |    |    | C  |    | D  |    |    | F  |    |    |
-| D  |    |    | F  |    |    | G# |    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |    |    | C  |    | D  |
-|    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |
-|    | F  |    |    | G# |    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |    |    | C  |    | D  |    |    |
-
-** Name the chord: D, F, G#, C                                 :music:theory:chords:drill:
-
-   Name the chord with the following tones: D, F, G#, C
-
-*** Answer 
-
-    Dm7b5
-
-    Functions:   1 b3 d5 b7
-    Description: D minor sevent flat 5
-
-
-| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
-|----------------------------------------------------------------------------------------------------------------------------|
-|    | F  |    |    | G# |    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |    |    | C  |    | D  |    |    |
-|    | C  |    | D  |    |    | F  |    |    | G# |    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |    |    |
-|    | G# |    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |    |    | C  |    | D  |    |    | F  |    |    |
-| D  |    |    | F  |    |    | G# |    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |    |    | C  |    | D  |
-|    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |
-|    | F  |    |    | G# |    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |    |    | C  |    | D  |    |    |
-
 ** Tones in Ddim                                               :music:theory:chords:drill:
 
    What tones are in Ddim chord?
@@ -1352,7 +1394,7 @@
 
     D, F, G#
 
-    Functions:   1 b3 d5
+    Functions:   1 b3 b5
     Description: D diminished fifth
 
 
@@ -1373,7 +1415,91 @@
 
     Ddim
 
-    Functions:   1 b3 d5
+    Functions:   1 b3 b5
+    Description: D diminished fifth
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    | F  |    |    | G# |    |    |    |    |    | D  |    |    | F  |    |    | G# |    |    |    |    |    | D  |    |    |
+|    |    |    | D  |    |    | F  |    |    | G# |    |    |    |    |    | D  |    |    | F  |    |    | G# |    |    |    |
+|    | G# |    |    |    |    |    | D  |    |    | F  |    |    | G# |    |    |    |    |    | D  |    |    | F  |    |    |
+| D  |    |    | F  |    |    | G# |    |    |    |    |    | D  |    |    | F  |    |    | G# |    |    |    |    |    | D  |
+|    |    |    |    |    | D  |    |    | F  |    |    | G# |    |    |    |    |    | D  |    |    | F  |    |    | G# |    |
+|    | F  |    |    | G# |    |    |    |    |    | D  |    |    | F  |    |    | G# |    |    |    |    |    | D  |    |    |
+
+** Tones in Dm7b5                                              :music:theory:chords:drill:
+
+   What tones are in Dm7b5 chord?
+
+*** Answer 
+
+    D, F, G#, C
+
+    Functions:   1 b3 b5 b7
+    Description: D minor sevent flat 5
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    | F  |    |    | G# |    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |    |    | C  |    | D  |    |    |
+|    | C  |    | D  |    |    | F  |    |    | G# |    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |    |    |
+|    | G# |    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |    |    | C  |    | D  |    |    | F  |    |    |
+| D  |    |    | F  |    |    | G# |    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |    |    | C  |    | D  |
+|    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |
+|    | F  |    |    | G# |    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |    |    | C  |    | D  |    |    |
+
+** Name the chord: D, F, G#, C                                 :music:theory:chords:drill:
+
+   Name the chord with the following tones: D, F, G#, C
+
+*** Answer 
+
+    Dm7b5
+
+    Functions:   1 b3 b5 b7
+    Description: D minor sevent flat 5
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    | F  |    |    | G# |    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |    |    | C  |    | D  |    |    |
+|    | C  |    | D  |    |    | F  |    |    | G# |    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |    |    |
+|    | G# |    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |    |    | C  |    | D  |    |    | F  |    |    |
+| D  |    |    | F  |    |    | G# |    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |    |    | C  |    | D  |
+|    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |
+|    | F  |    |    | G# |    |    |    | C  |    | D  |    |    | F  |    |    | G# |    |    |    | C  |    | D  |    |    |
+
+** Tones in Ddim                                               :music:theory:chords:drill:
+
+   What tones are in Ddim chord?
+
+*** Answer 
+
+    D, F, G#
+
+    Functions:   1 b3 b5
+    Description: D diminished fifth
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    | F  |    |    | G# |    |    |    |    |    | D  |    |    | F  |    |    | G# |    |    |    |    |    | D  |    |    |
+|    |    |    | D  |    |    | F  |    |    | G# |    |    |    |    |    | D  |    |    | F  |    |    | G# |    |    |    |
+|    | G# |    |    |    |    |    | D  |    |    | F  |    |    | G# |    |    |    |    |    | D  |    |    | F  |    |    |
+| D  |    |    | F  |    |    | G# |    |    |    |    |    | D  |    |    | F  |    |    | G# |    |    |    |    |    | D  |
+|    |    |    |    |    | D  |    |    | F  |    |    | G# |    |    |    |    |    | D  |    |    | F  |    |    | G# |    |
+|    | F  |    |    | G# |    |    |    |    |    | D  |    |    | F  |    |    | G# |    |    |    |    |    | D  |    |    |
+
+** Name the chord: D, F, G#                                    :music:theory:chords:drill:
+
+   Name the chord with the following tones: D, F, G#
+
+*** Answer 
+
+    Ddim
+
+    Functions:   1 b3 b5
     Description: D diminished fifth
 
 
@@ -1436,7 +1562,7 @@
 
     D, F#, G#, C#
 
-    Functions:   1 b d5 7
+    Functions:   1 3 b5 7
     Description: D major major sevent flat 5
 
 
@@ -1457,7 +1583,7 @@
 
     D(maj7)b5
 
-    Functions:   1 b d5 7
+    Functions:   1 3 b5 7
     Description: D major major sevent flat 5
 
 
@@ -1554,9 +1680,9 @@
 | A  |    |    |    |    | D  |    |    | F  |    |    |    | A  |    |    |    |    | D  |    |    | F  |    |    |    | A  |
 |    | F  |    |    |    | A  |    |    |    |    | D  |    |    | F  |    |    |    | A  |    |    |    |    | D  |    |    |
 
-** Tones in Dsus2                                              :music:theory:chords:drill:
+** Tones in Dsus4                                              :music:theory:chords:drill:
 
-   What tones are in Dsus2 chord?
+   What tones are in Dsus4 chord?
 
 *** Answer 
 
@@ -1581,7 +1707,7 @@
 
 *** Answer 
 
-    Dsus2
+    Dsus4
 
     Functions:   1 4 5
     Description: D suspended 4
@@ -1646,7 +1772,7 @@
 
     D#, F#, A, C
 
-    Functions:   1 b3 d5 b7
+    Functions:   1 b3 b5 bb7
     Description: D# diminished seventh
 
 
@@ -1667,7 +1793,7 @@
 
     D#dim7
 
-    Functions:   1 b3 d5 b7
+    Functions:   1 b3 b5 bb7
     Description: D# diminished seventh
 
 
@@ -1848,48 +1974,6 @@
 |    | A# |    |    | C# |    | D# |    |    |    | G  |    |    | A# |    |    | C# |    | D# |    |    |    | G  |    |    |
 |    |    |    | G  |    |    | A# |    |    | C# |    | D# |    |    |    | G  |    |    | A# |    |    | C# |    | D# |    |
 
-** Tones in D#m7b5                                             :music:theory:chords:drill:
-
-   What tones are in D#m7b5 chord?
-
-*** Answer 
-
-    D#, F#, A, C#
-
-    Functions:   1 b3 d5 b7
-    Description: D# minor sevent flat 5
-
-
-| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
-|----------------------------------------------------------------------------------------------------------------------------|
-|    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |
-|    |    | C# |    | D# |    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |    |    |
-|    |    | A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |    | F# |    |
-|    | D# |    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |    |    |    | C# |    |
-| A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |
-|    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |
-
-** Name the chord: D#, F#, A, C#                               :music:theory:chords:drill:
-
-   Name the chord with the following tones: D#, F#, A, C#
-
-*** Answer 
-
-    D#m7b5
-
-    Functions:   1 b3 d5 b7
-    Description: D# minor sevent flat 5
-
-
-| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
-|----------------------------------------------------------------------------------------------------------------------------|
-|    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |
-|    |    | C# |    | D# |    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |    |    |
-|    |    | A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |    | F# |    |
-|    | D# |    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |    |    |    | C# |    |
-| A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |
-|    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |
-
 ** Tones in D#dim                                              :music:theory:chords:drill:
 
    What tones are in D#dim chord?
@@ -1898,7 +1982,7 @@
 
     D#, F#, A
 
-    Functions:   1 b3 d5
+    Functions:   1 b3 b5
     Description: D# diminished fifth
 
 
@@ -1919,7 +2003,91 @@
 
     D#dim
 
-    Functions:   1 b3 d5
+    Functions:   1 b3 b5
+    Description: D# diminished fifth
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    |    | F# |    |    | A  |    |    |    |    |    | D# |    |    | F# |    |    | A  |    |    |    |    |    | D# |    |
+|    |    |    |    | D# |    |    | F# |    |    | A  |    |    |    |    |    | D# |    |    | F# |    |    | A  |    |    |
+|    |    | A  |    |    |    |    |    | D# |    |    | F# |    |    | A  |    |    |    |    |    | D# |    |    | F# |    |
+|    | D# |    |    | F# |    |    | A  |    |    |    |    |    | D# |    |    | F# |    |    | A  |    |    |    |    |    |
+| A  |    |    |    |    |    | D# |    |    | F# |    |    | A  |    |    |    |    |    | D# |    |    | F# |    |    | A  |
+|    |    | F# |    |    | A  |    |    |    |    |    | D# |    |    | F# |    |    | A  |    |    |    |    |    | D# |    |
+
+** Tones in D#m7b5                                             :music:theory:chords:drill:
+
+   What tones are in D#m7b5 chord?
+
+*** Answer 
+
+    D#, F#, A, C#
+
+    Functions:   1 b3 b5 b7
+    Description: D# minor sevent flat 5
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |
+|    |    | C# |    | D# |    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |    |    |
+|    |    | A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |    | F# |    |
+|    | D# |    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |    |    |    | C# |    |
+| A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |
+|    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |
+
+** Name the chord: D#, F#, A, C#                               :music:theory:chords:drill:
+
+   Name the chord with the following tones: D#, F#, A, C#
+
+*** Answer 
+
+    D#m7b5
+
+    Functions:   1 b3 b5 b7
+    Description: D# minor sevent flat 5
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |
+|    |    | C# |    | D# |    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |    |    |
+|    |    | A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |    | F# |    |
+|    | D# |    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |    |    |    | C# |    |
+| A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |
+|    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |    | F# |    |    | A  |    |    |    | C# |    | D# |    |
+
+** Tones in D#dim                                              :music:theory:chords:drill:
+
+   What tones are in D#dim chord?
+
+*** Answer 
+
+    D#, F#, A
+
+    Functions:   1 b3 b5
+    Description: D# diminished fifth
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    |    | F# |    |    | A  |    |    |    |    |    | D# |    |    | F# |    |    | A  |    |    |    |    |    | D# |    |
+|    |    |    |    | D# |    |    | F# |    |    | A  |    |    |    |    |    | D# |    |    | F# |    |    | A  |    |    |
+|    |    | A  |    |    |    |    |    | D# |    |    | F# |    |    | A  |    |    |    |    |    | D# |    |    | F# |    |
+|    | D# |    |    | F# |    |    | A  |    |    |    |    |    | D# |    |    | F# |    |    | A  |    |    |    |    |    |
+| A  |    |    |    |    |    | D# |    |    | F# |    |    | A  |    |    |    |    |    | D# |    |    | F# |    |    | A  |
+|    |    | F# |    |    | A  |    |    |    |    |    | D# |    |    | F# |    |    | A  |    |    |    |    |    | D# |    |
+
+** Name the chord: D#, F#, A                                   :music:theory:chords:drill:
+
+   Name the chord with the following tones: D#, F#, A
+
+*** Answer 
+
+    D#dim
+
+    Functions:   1 b3 b5
     Description: D# diminished fifth
 
 
@@ -1982,7 +2150,7 @@
 
     D#, G, A, D
 
-    Functions:   1 b d5 7
+    Functions:   1 3 b5 7
     Description: D# major major sevent flat 5
 
 
@@ -2003,7 +2171,7 @@
 
     D#(maj7)b5
 
-    Functions:   1 b d5 7
+    Functions:   1 3 b5 7
     Description: D# major major sevent flat 5
 
 
@@ -2100,9 +2268,9 @@
 |    | A# |    |    |    |    | D# |    |    | F# |    |    |    | A# |    |    |    |    | D# |    |    | F# |    |    |    |
 |    |    | F# |    |    |    | A# |    |    |    |    | D# |    |    | F# |    |    |    | A# |    |    |    |    | D# |    |
 
-** Tones in D#sus2                                             :music:theory:chords:drill:
+** Tones in D#sus4                                             :music:theory:chords:drill:
 
-   What tones are in D#sus2 chord?
+   What tones are in D#sus4 chord?
 
 *** Answer 
 
@@ -2127,7 +2295,7 @@
 
 *** Answer 
 
-    D#sus2
+    D#sus4
 
     Functions:   1 4 5
     Description: D# suspended 4
@@ -2192,7 +2360,7 @@
 
     E, G, A#, C#
 
-    Functions:   1 b3 d5 b7
+    Functions:   1 b3 b5 bb7
     Description: E diminished seventh
 
 
@@ -2213,7 +2381,7 @@
 
     Edim7
 
-    Functions:   1 b3 d5 b7
+    Functions:   1 b3 b5 bb7
     Description: E diminished seventh
 
 
@@ -2394,48 +2562,6 @@
 |    |    | B  |    |    | D  |    | E  |    |    |    | G# |    |    | B  |    |    | D  |    | E  |    |    |    | G# |    |
 | E  |    |    |    | G# |    |    | B  |    |    | D  |    | E  |    |    |    | G# |    |    | B  |    |    | D  |    | E  |
 
-** Tones in Em7b5                                              :music:theory:chords:drill:
-
-   What tones are in Em7b5 chord?
-
-*** Answer 
-
-    E, G, A#, D
-
-    Functions:   1 b3 d5 b7
-    Description: E minor sevent flat 5
-
-
-| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
-|----------------------------------------------------------------------------------------------------------------------------|
-| E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |
-|    |    |    | D  |    | E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |    |    | G  |    |    | A# |    |
-| G  |    |    | A# |    |    |    | D  |    | E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |    |    | G  |
-| D  |    | E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |    |    | G  |    |    | A# |    |    |    | D  |
-|    | A# |    |    |    | D  |    | E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |    |    | G  |    |    |
-| E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |
-
-** Name the chord: E, G, A#, D                                 :music:theory:chords:drill:
-
-   Name the chord with the following tones: E, G, A#, D
-
-*** Answer 
-
-    Em7b5
-
-    Functions:   1 b3 d5 b7
-    Description: E minor sevent flat 5
-
-
-| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
-|----------------------------------------------------------------------------------------------------------------------------|
-| E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |
-|    |    |    | D  |    | E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |    |    | G  |    |    | A# |    |
-| G  |    |    | A# |    |    |    | D  |    | E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |    |    | G  |
-| D  |    | E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |    |    | G  |    |    | A# |    |    |    | D  |
-|    | A# |    |    |    | D  |    | E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |    |    | G  |    |    |
-| E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |
-
 ** Tones in Edim                                               :music:theory:chords:drill:
 
    What tones are in Edim chord?
@@ -2444,7 +2570,7 @@
 
     E, G, A#
 
-    Functions:   1 b3 d5
+    Functions:   1 b3 b5
     Description: E diminished fifth
 
 
@@ -2465,7 +2591,91 @@
 
     Edim
 
-    Functions:   1 b3 d5
+    Functions:   1 b3 b5
+    Description: E diminished fifth
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+| E  |    |    | G  |    |    | A# |    |    |    |    |    | E  |    |    | G  |    |    | A# |    |    |    |    |    | E  |
+|    |    |    |    |    | E  |    |    | G  |    |    | A# |    |    |    |    |    | E  |    |    | G  |    |    | A# |    |
+| G  |    |    | A# |    |    |    |    |    | E  |    |    | G  |    |    | A# |    |    |    |    |    | E  |    |    | G  |
+|    |    | E  |    |    | G  |    |    | A# |    |    |    |    |    | E  |    |    | G  |    |    | A# |    |    |    |    |
+|    | A# |    |    |    |    |    | E  |    |    | G  |    |    | A# |    |    |    |    |    | E  |    |    | G  |    |    |
+| E  |    |    | G  |    |    | A# |    |    |    |    |    | E  |    |    | G  |    |    | A# |    |    |    |    |    | E  |
+
+** Tones in Em7b5                                              :music:theory:chords:drill:
+
+   What tones are in Em7b5 chord?
+
+*** Answer 
+
+    E, G, A#, D
+
+    Functions:   1 b3 b5 b7
+    Description: E minor sevent flat 5
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+| E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |
+|    |    |    | D  |    | E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |    |    | G  |    |    | A# |    |
+| G  |    |    | A# |    |    |    | D  |    | E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |    |    | G  |
+| D  |    | E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |    |    | G  |    |    | A# |    |    |    | D  |
+|    | A# |    |    |    | D  |    | E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |    |    | G  |    |    |
+| E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |
+
+** Name the chord: E, G, A#, D                                 :music:theory:chords:drill:
+
+   Name the chord with the following tones: E, G, A#, D
+
+*** Answer 
+
+    Em7b5
+
+    Functions:   1 b3 b5 b7
+    Description: E minor sevent flat 5
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+| E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |
+|    |    |    | D  |    | E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |    |    | G  |    |    | A# |    |
+| G  |    |    | A# |    |    |    | D  |    | E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |    |    | G  |
+| D  |    | E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |    |    | G  |    |    | A# |    |    |    | D  |
+|    | A# |    |    |    | D  |    | E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |    |    | G  |    |    |
+| E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |    |    | G  |    |    | A# |    |    |    | D  |    | E  |
+
+** Tones in Edim                                               :music:theory:chords:drill:
+
+   What tones are in Edim chord?
+
+*** Answer 
+
+    E, G, A#
+
+    Functions:   1 b3 b5
+    Description: E diminished fifth
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+| E  |    |    | G  |    |    | A# |    |    |    |    |    | E  |    |    | G  |    |    | A# |    |    |    |    |    | E  |
+|    |    |    |    |    | E  |    |    | G  |    |    | A# |    |    |    |    |    | E  |    |    | G  |    |    | A# |    |
+| G  |    |    | A# |    |    |    |    |    | E  |    |    | G  |    |    | A# |    |    |    |    |    | E  |    |    | G  |
+|    |    | E  |    |    | G  |    |    | A# |    |    |    |    |    | E  |    |    | G  |    |    | A# |    |    |    |    |
+|    | A# |    |    |    |    |    | E  |    |    | G  |    |    | A# |    |    |    |    |    | E  |    |    | G  |    |    |
+| E  |    |    | G  |    |    | A# |    |    |    |    |    | E  |    |    | G  |    |    | A# |    |    |    |    |    | E  |
+
+** Name the chord: E, G, A#                                    :music:theory:chords:drill:
+
+   Name the chord with the following tones: E, G, A#
+
+*** Answer 
+
+    Edim
+
+    Functions:   1 b3 b5
     Description: E diminished fifth
 
 
@@ -2528,7 +2738,7 @@
 
     E, G#, A#, D#
 
-    Functions:   1 b d5 7
+    Functions:   1 3 b5 7
     Description: E major major sevent flat 5
 
 
@@ -2549,7 +2759,7 @@
 
     E(maj7)b5
 
-    Functions:   1 b d5 7
+    Functions:   1 3 b5 7
     Description: E major major sevent flat 5
 
 
@@ -2646,9 +2856,9 @@
 |    |    | B  |    |    |    |    | E  |    |    | G  |    |    |    | B  |    |    |    |    | E  |    |    | G  |    |    |
 | E  |    |    | G  |    |    |    | B  |    |    |    |    | E  |    |    | G  |    |    |    | B  |    |    |    |    | E  |
 
-** Tones in Esus2                                              :music:theory:chords:drill:
+** Tones in Esus4                                              :music:theory:chords:drill:
 
-   What tones are in Esus2 chord?
+   What tones are in Esus4 chord?
 
 *** Answer 
 
@@ -2673,7 +2883,7 @@
 
 *** Answer 
 
-    Esus2
+    Esus4
 
     Functions:   1 4 5
     Description: E suspended 4
@@ -2738,7 +2948,7 @@
 
     F, G#, B, D
 
-    Functions:   1 b3 d5 b7
+    Functions:   1 b3 b5 bb7
     Description: F diminished seventh
 
 
@@ -2759,7 +2969,7 @@
 
     Fdim7
 
-    Functions:   1 b3 d5 b7
+    Functions:   1 b3 b5 bb7
     Description: F diminished seventh
 
 
@@ -2940,48 +3150,6 @@
 | A  |    |    | C  |    |    | D# |    | F  |    |    |    | A  |    |    | C  |    |    | D# |    | F  |    |    |    | A  |
 |    | F  |    |    |    | A  |    |    | C  |    |    | D# |    | F  |    |    |    | A  |    |    | C  |    |    | D# |    |
 
-** Tones in Fm7b5                                              :music:theory:chords:drill:
-
-   What tones are in Fm7b5 chord?
-
-*** Answer 
-
-    F, G#, B, D#
-
-    Functions:   1 b3 d5 b7
-    Description: F minor sevent flat 5
-
-
-| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
-|----------------------------------------------------------------------------------------------------------------------------|
-|    | F  |    |    | G# |    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |    | B  |    |    |    | D# |    |
-| B  |    |    |    | D# |    | F  |    |    | G# |    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |    | B  |
-|    | G# |    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |    | B  |    |    |    | D# |    | F  |    |    |
-|    | D# |    | F  |    |    | G# |    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |    | B  |    |    |    |
-|    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |
-|    | F  |    |    | G# |    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |    | B  |    |    |    | D# |    |
-
-** Name the chord: F, G#, B, D#                                :music:theory:chords:drill:
-
-   Name the chord with the following tones: F, G#, B, D#
-
-*** Answer 
-
-    Fm7b5
-
-    Functions:   1 b3 d5 b7
-    Description: F minor sevent flat 5
-
-
-| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
-|----------------------------------------------------------------------------------------------------------------------------|
-|    | F  |    |    | G# |    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |    | B  |    |    |    | D# |    |
-| B  |    |    |    | D# |    | F  |    |    | G# |    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |    | B  |
-|    | G# |    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |    | B  |    |    |    | D# |    | F  |    |    |
-|    | D# |    | F  |    |    | G# |    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |    | B  |    |    |    |
-|    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |
-|    | F  |    |    | G# |    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |    | B  |    |    |    | D# |    |
-
 ** Tones in Fdim                                               :music:theory:chords:drill:
 
    What tones are in Fdim chord?
@@ -2990,7 +3158,7 @@
 
     F, G#, B
 
-    Functions:   1 b3 d5
+    Functions:   1 b3 b5
     Description: F diminished fifth
 
 
@@ -3011,7 +3179,91 @@
 
     Fdim
 
-    Functions:   1 b3 d5
+    Functions:   1 b3 b5
+    Description: F diminished fifth
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    | F  |    |    | G# |    |    | B  |    |    |    |    |    | F  |    |    | G# |    |    | B  |    |    |    |    |    |
+| B  |    |    |    |    |    | F  |    |    | G# |    |    | B  |    |    |    |    |    | F  |    |    | G# |    |    | B  |
+|    | G# |    |    | B  |    |    |    |    |    | F  |    |    | G# |    |    | B  |    |    |    |    |    | F  |    |    |
+|    |    |    | F  |    |    | G# |    |    | B  |    |    |    |    |    | F  |    |    | G# |    |    | B  |    |    |    |
+|    |    | B  |    |    |    |    |    | F  |    |    | G# |    |    | B  |    |    |    |    |    | F  |    |    | G# |    |
+|    | F  |    |    | G# |    |    | B  |    |    |    |    |    | F  |    |    | G# |    |    | B  |    |    |    |    |    |
+
+** Tones in Fm7b5                                              :music:theory:chords:drill:
+
+   What tones are in Fm7b5 chord?
+
+*** Answer 
+
+    F, G#, B, D#
+
+    Functions:   1 b3 b5 b7
+    Description: F minor sevent flat 5
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    | F  |    |    | G# |    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |    | B  |    |    |    | D# |    |
+| B  |    |    |    | D# |    | F  |    |    | G# |    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |    | B  |
+|    | G# |    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |    | B  |    |    |    | D# |    | F  |    |    |
+|    | D# |    | F  |    |    | G# |    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |    | B  |    |    |    |
+|    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |
+|    | F  |    |    | G# |    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |    | B  |    |    |    | D# |    |
+
+** Name the chord: F, G#, B, D#                                :music:theory:chords:drill:
+
+   Name the chord with the following tones: F, G#, B, D#
+
+*** Answer 
+
+    Fm7b5
+
+    Functions:   1 b3 b5 b7
+    Description: F minor sevent flat 5
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    | F  |    |    | G# |    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |    | B  |    |    |    | D# |    |
+| B  |    |    |    | D# |    | F  |    |    | G# |    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |    | B  |
+|    | G# |    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |    | B  |    |    |    | D# |    | F  |    |    |
+|    | D# |    | F  |    |    | G# |    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |    | B  |    |    |    |
+|    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |
+|    | F  |    |    | G# |    |    | B  |    |    |    | D# |    | F  |    |    | G# |    |    | B  |    |    |    | D# |    |
+
+** Tones in Fdim                                               :music:theory:chords:drill:
+
+   What tones are in Fdim chord?
+
+*** Answer 
+
+    F, G#, B
+
+    Functions:   1 b3 b5
+    Description: F diminished fifth
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    | F  |    |    | G# |    |    | B  |    |    |    |    |    | F  |    |    | G# |    |    | B  |    |    |    |    |    |
+| B  |    |    |    |    |    | F  |    |    | G# |    |    | B  |    |    |    |    |    | F  |    |    | G# |    |    | B  |
+|    | G# |    |    | B  |    |    |    |    |    | F  |    |    | G# |    |    | B  |    |    |    |    |    | F  |    |    |
+|    |    |    | F  |    |    | G# |    |    | B  |    |    |    |    |    | F  |    |    | G# |    |    | B  |    |    |    |
+|    |    | B  |    |    |    |    |    | F  |    |    | G# |    |    | B  |    |    |    |    |    | F  |    |    | G# |    |
+|    | F  |    |    | G# |    |    | B  |    |    |    |    |    | F  |    |    | G# |    |    | B  |    |    |    |    |    |
+
+** Name the chord: F, G#, B                                    :music:theory:chords:drill:
+
+   Name the chord with the following tones: F, G#, B
+
+*** Answer 
+
+    Fdim
+
+    Functions:   1 b3 b5
     Description: F diminished fifth
 
 
@@ -3074,7 +3326,7 @@
 
     F, A, B, E
 
-    Functions:   1 b d5 7
+    Functions:   1 3 b5 7
     Description: F major major sevent flat 5
 
 
@@ -3095,7 +3347,7 @@
 
     F(maj7)b5
 
-    Functions:   1 b d5 7
+    Functions:   1 3 b5 7
     Description: F major major sevent flat 5
 
 
@@ -3192,9 +3444,9 @@
 |    |    |    | C  |    |    |    |    | F  |    |    | G# |    |    |    | C  |    |    |    |    | F  |    |    | G# |    |
 |    | F  |    |    | G# |    |    |    | C  |    |    |    |    | F  |    |    | G# |    |    |    | C  |    |    |    |    |
 
-** Tones in Fsus2                                              :music:theory:chords:drill:
+** Tones in Fsus4                                              :music:theory:chords:drill:
 
-   What tones are in Fsus2 chord?
+   What tones are in Fsus4 chord?
 
 *** Answer 
 
@@ -3219,7 +3471,7 @@
 
 *** Answer 
 
-    Fsus2
+    Fsus4
 
     Functions:   1 4 5
     Description: F suspended 4
@@ -3284,7 +3536,7 @@
 
     F#, A, C, D#
 
-    Functions:   1 b3 d5 b7
+    Functions:   1 b3 b5 bb7
     Description: F# diminished seventh
 
 
@@ -3305,7 +3557,7 @@
 
     F#dim7
 
-    Functions:   1 b3 d5 b7
+    Functions:   1 b3 b5 bb7
     Description: F# diminished seventh
 
 
@@ -3486,48 +3738,6 @@
 |    | A# |    |    | C# |    |    | E  |    | F# |    |    |    | A# |    |    | C# |    |    | E  |    | F# |    |    |    |
 | E  |    | F# |    |    |    | A# |    |    | C# |    |    | E  |    | F# |    |    |    | A# |    |    | C# |    |    | E  |
 
-** Tones in F#m7b5                                             :music:theory:chords:drill:
-
-   What tones are in F#m7b5 chord?
-
-*** Answer 
-
-    F#, A, C, E
-
-    Functions:   1 b3 d5 b7
-    Description: F# minor sevent flat 5
-
-
-| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
-|----------------------------------------------------------------------------------------------------------------------------|
-| E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |
-|    | C  |    |    |    | E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |    |    |
-|    |    | A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |    | F# |    |
-|    |    | E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |    |    | C  |    |    |
-| A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |
-| E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |
-
-** Name the chord: F#, A, C, E                                 :music:theory:chords:drill:
-
-   Name the chord with the following tones: F#, A, C, E
-
-*** Answer 
-
-    F#m7b5
-
-    Functions:   1 b3 d5 b7
-    Description: F# minor sevent flat 5
-
-
-| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
-|----------------------------------------------------------------------------------------------------------------------------|
-| E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |
-|    | C  |    |    |    | E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |    |    |
-|    |    | A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |    | F# |    |
-|    |    | E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |    |    | C  |    |    |
-| A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |
-| E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |
-
 ** Tones in F#dim                                              :music:theory:chords:drill:
 
    What tones are in F#dim chord?
@@ -3536,7 +3746,7 @@
 
     F#, A, C
 
-    Functions:   1 b3 d5
+    Functions:   1 b3 b5
     Description: F# diminished fifth
 
 
@@ -3557,7 +3767,91 @@
 
     F#dim
 
-    Functions:   1 b3 d5
+    Functions:   1 b3 b5
+    Description: F# diminished fifth
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    |    | F# |    |    | A  |    |    | C  |    |    |    |    |    | F# |    |    | A  |    |    | C  |    |    |    |    |
+|    | C  |    |    |    |    |    | F# |    |    | A  |    |    | C  |    |    |    |    |    | F# |    |    | A  |    |    |
+|    |    | A  |    |    | C  |    |    |    |    |    | F# |    |    | A  |    |    | C  |    |    |    |    |    | F# |    |
+|    |    |    |    | F# |    |    | A  |    |    | C  |    |    |    |    |    | F# |    |    | A  |    |    | C  |    |    |
+| A  |    |    | C  |    |    |    |    |    | F# |    |    | A  |    |    | C  |    |    |    |    |    | F# |    |    | A  |
+|    |    | F# |    |    | A  |    |    | C  |    |    |    |    |    | F# |    |    | A  |    |    | C  |    |    |    |    |
+
+** Tones in F#m7b5                                             :music:theory:chords:drill:
+
+   What tones are in F#m7b5 chord?
+
+*** Answer 
+
+    F#, A, C, E
+
+    Functions:   1 b3 b5 b7
+    Description: F# minor sevent flat 5
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+| E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |
+|    | C  |    |    |    | E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |    |    |
+|    |    | A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |    | F# |    |
+|    |    | E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |    |    | C  |    |    |
+| A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |
+| E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |
+
+** Name the chord: F#, A, C, E                                 :music:theory:chords:drill:
+
+   Name the chord with the following tones: F#, A, C, E
+
+*** Answer 
+
+    F#m7b5
+
+    Functions:   1 b3 b5 b7
+    Description: F# minor sevent flat 5
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+| E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |
+|    | C  |    |    |    | E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |    |    |
+|    |    | A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |    | F# |    |
+|    |    | E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |    |    | C  |    |    |
+| A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |
+| E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |    | F# |    |    | A  |    |    | C  |    |    |    | E  |
+
+** Tones in F#dim                                              :music:theory:chords:drill:
+
+   What tones are in F#dim chord?
+
+*** Answer 
+
+    F#, A, C
+
+    Functions:   1 b3 b5
+    Description: F# diminished fifth
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    |    | F# |    |    | A  |    |    | C  |    |    |    |    |    | F# |    |    | A  |    |    | C  |    |    |    |    |
+|    | C  |    |    |    |    |    | F# |    |    | A  |    |    | C  |    |    |    |    |    | F# |    |    | A  |    |    |
+|    |    | A  |    |    | C  |    |    |    |    |    | F# |    |    | A  |    |    | C  |    |    |    |    |    | F# |    |
+|    |    |    |    | F# |    |    | A  |    |    | C  |    |    |    |    |    | F# |    |    | A  |    |    | C  |    |    |
+| A  |    |    | C  |    |    |    |    |    | F# |    |    | A  |    |    | C  |    |    |    |    |    | F# |    |    | A  |
+|    |    | F# |    |    | A  |    |    | C  |    |    |    |    |    | F# |    |    | A  |    |    | C  |    |    |    |    |
+
+** Name the chord: F#, A, C                                    :music:theory:chords:drill:
+
+   Name the chord with the following tones: F#, A, C
+
+*** Answer 
+
+    F#dim
+
+    Functions:   1 b3 b5
     Description: F# diminished fifth
 
 
@@ -3620,7 +3914,7 @@
 
     F#, A#, C, F
 
-    Functions:   1 b d5 7
+    Functions:   1 3 b5 7
     Description: F# major major sevent flat 5
 
 
@@ -3641,7 +3935,7 @@
 
     F#(maj7)b5
 
-    Functions:   1 b d5 7
+    Functions:   1 3 b5 7
     Description: F# major major sevent flat 5
 
 
@@ -3738,9 +4032,9 @@
 | A  |    |    |    | C# |    |    |    |    | F# |    |    | A  |    |    |    | C# |    |    |    |    | F# |    |    | A  |
 |    |    | F# |    |    | A  |    |    |    | C# |    |    |    |    | F# |    |    | A  |    |    |    | C# |    |    |    |
 
-** Tones in F#sus2                                             :music:theory:chords:drill:
+** Tones in F#sus4                                             :music:theory:chords:drill:
 
-   What tones are in F#sus2 chord?
+   What tones are in F#sus4 chord?
 
 *** Answer 
 
@@ -3765,7 +4059,7 @@
 
 *** Answer 
 
-    F#sus2
+    F#sus4
 
     Functions:   1 4 5
     Description: F# suspended 4
@@ -3830,7 +4124,7 @@
 
     G, A#, C#, E
 
-    Functions:   1 b3 d5 b7
+    Functions:   1 b3 b5 bb7
     Description: G diminished seventh
 
 
@@ -3851,7 +4145,7 @@
 
     Gdim7
 
-    Functions:   1 b3 d5 b7
+    Functions:   1 b3 b5 bb7
     Description: G diminished seventh
 
 
@@ -4032,48 +4326,6 @@
 |    |    | B  |    |    | D  |    |    | F  |    | G  |    |    |    | B  |    |    | D  |    |    | F  |    | G  |    |    |
 |    | F  |    | G  |    |    |    | B  |    |    | D  |    |    | F  |    | G  |    |    |    | B  |    |    | D  |    |    |
 
-** Tones in Gm7b5                                              :music:theory:chords:drill:
-
-   What tones are in Gm7b5 chord?
-
-*** Answer 
-
-    G, A#, C#, F
-
-    Functions:   1 b3 d5 b7
-    Description: G minor sevent flat 5
-
-
-| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
-|----------------------------------------------------------------------------------------------------------------------------|
-|    | F  |    | G  |    |    | A# |    |    | C# |    |    |    | F  |    | G  |    |    | A# |    |    | C# |    |    |    |
-|    |    | C# |    |    |    | F  |    | G  |    |    | A# |    |    | C# |    |    |    | F  |    | G  |    |    | A# |    |
-| G  |    |    | A# |    |    | C# |    |    |    | F  |    | G  |    |    | A# |    |    | C# |    |    |    | F  |    | G  |
-|    |    |    | F  |    | G  |    |    | A# |    |    | C# |    |    |    | F  |    | G  |    |    | A# |    |    | C# |    |
-|    | A# |    |    | C# |    |    |    | F  |    | G  |    |    | A# |    |    | C# |    |    |    | F  |    | G  |    |    |
-|    | F  |    | G  |    |    | A# |    |    | C# |    |    |    | F  |    | G  |    |    | A# |    |    | C# |    |    |    |
-
-** Name the chord: G, A#, C#, F                                :music:theory:chords:drill:
-
-   Name the chord with the following tones: G, A#, C#, F
-
-*** Answer 
-
-    Gm7b5
-
-    Functions:   1 b3 d5 b7
-    Description: G minor sevent flat 5
-
-
-| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
-|----------------------------------------------------------------------------------------------------------------------------|
-|    | F  |    | G  |    |    | A# |    |    | C# |    |    |    | F  |    | G  |    |    | A# |    |    | C# |    |    |    |
-|    |    | C# |    |    |    | F  |    | G  |    |    | A# |    |    | C# |    |    |    | F  |    | G  |    |    | A# |    |
-| G  |    |    | A# |    |    | C# |    |    |    | F  |    | G  |    |    | A# |    |    | C# |    |    |    | F  |    | G  |
-|    |    |    | F  |    | G  |    |    | A# |    |    | C# |    |    |    | F  |    | G  |    |    | A# |    |    | C# |    |
-|    | A# |    |    | C# |    |    |    | F  |    | G  |    |    | A# |    |    | C# |    |    |    | F  |    | G  |    |    |
-|    | F  |    | G  |    |    | A# |    |    | C# |    |    |    | F  |    | G  |    |    | A# |    |    | C# |    |    |    |
-
 ** Tones in Gdim                                               :music:theory:chords:drill:
 
    What tones are in Gdim chord?
@@ -4082,7 +4334,7 @@
 
     G, A#, C#
 
-    Functions:   1 b3 d5
+    Functions:   1 b3 b5
     Description: G diminished fifth
 
 
@@ -4103,7 +4355,91 @@
 
     Gdim
 
-    Functions:   1 b3 d5
+    Functions:   1 b3 b5
+    Description: G diminished fifth
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    |    |    | G  |    |    | A# |    |    | C# |    |    |    |    |    | G  |    |    | A# |    |    | C# |    |    |    |
+|    |    | C# |    |    |    |    |    | G  |    |    | A# |    |    | C# |    |    |    |    |    | G  |    |    | A# |    |
+| G  |    |    | A# |    |    | C# |    |    |    |    |    | G  |    |    | A# |    |    | C# |    |    |    |    |    | G  |
+|    |    |    |    |    | G  |    |    | A# |    |    | C# |    |    |    |    |    | G  |    |    | A# |    |    | C# |    |
+|    | A# |    |    | C# |    |    |    |    |    | G  |    |    | A# |    |    | C# |    |    |    |    |    | G  |    |    |
+|    |    |    | G  |    |    | A# |    |    | C# |    |    |    |    |    | G  |    |    | A# |    |    | C# |    |    |    |
+
+** Tones in Gm7b5                                              :music:theory:chords:drill:
+
+   What tones are in Gm7b5 chord?
+
+*** Answer 
+
+    G, A#, C#, F
+
+    Functions:   1 b3 b5 b7
+    Description: G minor sevent flat 5
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    | F  |    | G  |    |    | A# |    |    | C# |    |    |    | F  |    | G  |    |    | A# |    |    | C# |    |    |    |
+|    |    | C# |    |    |    | F  |    | G  |    |    | A# |    |    | C# |    |    |    | F  |    | G  |    |    | A# |    |
+| G  |    |    | A# |    |    | C# |    |    |    | F  |    | G  |    |    | A# |    |    | C# |    |    |    | F  |    | G  |
+|    |    |    | F  |    | G  |    |    | A# |    |    | C# |    |    |    | F  |    | G  |    |    | A# |    |    | C# |    |
+|    | A# |    |    | C# |    |    |    | F  |    | G  |    |    | A# |    |    | C# |    |    |    | F  |    | G  |    |    |
+|    | F  |    | G  |    |    | A# |    |    | C# |    |    |    | F  |    | G  |    |    | A# |    |    | C# |    |    |    |
+
+** Name the chord: G, A#, C#, F                                :music:theory:chords:drill:
+
+   Name the chord with the following tones: G, A#, C#, F
+
+*** Answer 
+
+    Gm7b5
+
+    Functions:   1 b3 b5 b7
+    Description: G minor sevent flat 5
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    | F  |    | G  |    |    | A# |    |    | C# |    |    |    | F  |    | G  |    |    | A# |    |    | C# |    |    |    |
+|    |    | C# |    |    |    | F  |    | G  |    |    | A# |    |    | C# |    |    |    | F  |    | G  |    |    | A# |    |
+| G  |    |    | A# |    |    | C# |    |    |    | F  |    | G  |    |    | A# |    |    | C# |    |    |    | F  |    | G  |
+|    |    |    | F  |    | G  |    |    | A# |    |    | C# |    |    |    | F  |    | G  |    |    | A# |    |    | C# |    |
+|    | A# |    |    | C# |    |    |    | F  |    | G  |    |    | A# |    |    | C# |    |    |    | F  |    | G  |    |    |
+|    | F  |    | G  |    |    | A# |    |    | C# |    |    |    | F  |    | G  |    |    | A# |    |    | C# |    |    |    |
+
+** Tones in Gdim                                               :music:theory:chords:drill:
+
+   What tones are in Gdim chord?
+
+*** Answer 
+
+    G, A#, C#
+
+    Functions:   1 b3 b5
+    Description: G diminished fifth
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    |    |    | G  |    |    | A# |    |    | C# |    |    |    |    |    | G  |    |    | A# |    |    | C# |    |    |    |
+|    |    | C# |    |    |    |    |    | G  |    |    | A# |    |    | C# |    |    |    |    |    | G  |    |    | A# |    |
+| G  |    |    | A# |    |    | C# |    |    |    |    |    | G  |    |    | A# |    |    | C# |    |    |    |    |    | G  |
+|    |    |    |    |    | G  |    |    | A# |    |    | C# |    |    |    |    |    | G  |    |    | A# |    |    | C# |    |
+|    | A# |    |    | C# |    |    |    |    |    | G  |    |    | A# |    |    | C# |    |    |    |    |    | G  |    |    |
+|    |    |    | G  |    |    | A# |    |    | C# |    |    |    |    |    | G  |    |    | A# |    |    | C# |    |    |    |
+
+** Name the chord: G, A#, C#                                   :music:theory:chords:drill:
+
+   Name the chord with the following tones: G, A#, C#
+
+*** Answer 
+
+    Gdim
+
+    Functions:   1 b3 b5
     Description: G diminished fifth
 
 
@@ -4166,7 +4502,7 @@
 
     G, B, C#, F#
 
-    Functions:   1 b d5 7
+    Functions:   1 3 b5 7
     Description: G major major sevent flat 5
 
 
@@ -4187,7 +4523,7 @@
 
     G(maj7)b5
 
-    Functions:   1 b d5 7
+    Functions:   1 3 b5 7
     Description: G major major sevent flat 5
 
 
@@ -4284,9 +4620,9 @@
 |    | A# |    |    |    | D  |    |    |    |    | G  |    |    | A# |    |    |    | D  |    |    |    |    | G  |    |    |
 |    |    |    | G  |    |    | A# |    |    |    | D  |    |    |    |    | G  |    |    | A# |    |    |    | D  |    |    |
 
-** Tones in Gsus2                                              :music:theory:chords:drill:
+** Tones in Gsus4                                              :music:theory:chords:drill:
 
-   What tones are in Gsus2 chord?
+   What tones are in Gsus4 chord?
 
 *** Answer 
 
@@ -4311,7 +4647,7 @@
 
 *** Answer 
 
-    Gsus2
+    Gsus4
 
     Functions:   1 4 5
     Description: G suspended 4
@@ -4376,7 +4712,7 @@
 
     G#, B, D, F
 
-    Functions:   1 b3 d5 b7
+    Functions:   1 b3 b5 bb7
     Description: G# diminished seventh
 
 
@@ -4397,7 +4733,7 @@
 
     G#dim7
 
-    Functions:   1 b3 d5 b7
+    Functions:   1 b3 b5 bb7
     Description: G# diminished seventh
 
 
@@ -4578,48 +4914,6 @@
 |    |    |    | C  |    |    | D# |    |    | F# |    | G# |    |    |    | C  |    |    | D# |    |    | F# |    | G# |    |
 |    |    | F# |    | G# |    |    |    | C  |    |    | D# |    |    | F# |    | G# |    |    |    | C  |    |    | D# |    |
 
-** Tones in G#m7b5                                             :music:theory:chords:drill:
-
-   What tones are in G#m7b5 chord?
-
-*** Answer 
-
-    G#, B, D, F#
-
-    Functions:   1 b3 d5 b7
-    Description: G# minor sevent flat 5
-
-
-| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
-|----------------------------------------------------------------------------------------------------------------------------|
-|    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |
-| B  |    |    | D  |    |    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |    | B  |
-|    | G# |    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |    | F# |    |
-| D  |    |    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |    | B  |    |    | D  |
-|    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |
-|    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |
-
-** Name the chord: G#, B, D, F#                                :music:theory:chords:drill:
-
-   Name the chord with the following tones: G#, B, D, F#
-
-*** Answer 
-
-    G#m7b5
-
-    Functions:   1 b3 d5 b7
-    Description: G# minor sevent flat 5
-
-
-| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
-|----------------------------------------------------------------------------------------------------------------------------|
-|    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |
-| B  |    |    | D  |    |    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |    | B  |
-|    | G# |    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |    | F# |    |
-| D  |    |    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |    | B  |    |    | D  |
-|    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |
-|    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |
-
 ** Tones in G#dim                                              :music:theory:chords:drill:
 
    What tones are in G#dim chord?
@@ -4628,7 +4922,7 @@
 
     G#, B, D
 
-    Functions:   1 b3 d5
+    Functions:   1 b3 b5
     Description: G# diminished fifth
 
 
@@ -4649,7 +4943,91 @@
 
     G#dim
 
-    Functions:   1 b3 d5
+    Functions:   1 b3 b5
+    Description: G# diminished fifth
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    |    |    |    | G# |    |    | B  |    |    | D  |    |    |    |    |    | G# |    |    | B  |    |    | D  |    |    |
+| B  |    |    | D  |    |    |    |    |    | G# |    |    | B  |    |    | D  |    |    |    |    |    | G# |    |    | B  |
+|    | G# |    |    | B  |    |    | D  |    |    |    |    |    | G# |    |    | B  |    |    | D  |    |    |    |    |    |
+| D  |    |    |    |    |    | G# |    |    | B  |    |    | D  |    |    |    |    |    | G# |    |    | B  |    |    | D  |
+|    |    | B  |    |    | D  |    |    |    |    |    | G# |    |    | B  |    |    | D  |    |    |    |    |    | G# |    |
+|    |    |    |    | G# |    |    | B  |    |    | D  |    |    |    |    |    | G# |    |    | B  |    |    | D  |    |    |
+
+** Tones in G#m7b5                                             :music:theory:chords:drill:
+
+   What tones are in G#m7b5 chord?
+
+*** Answer 
+
+    G#, B, D, F#
+
+    Functions:   1 b3 b5 b7
+    Description: G# minor sevent flat 5
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |
+| B  |    |    | D  |    |    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |    | B  |
+|    | G# |    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |    | F# |    |
+| D  |    |    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |    | B  |    |    | D  |
+|    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |
+|    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |
+
+** Name the chord: G#, B, D, F#                                :music:theory:chords:drill:
+
+   Name the chord with the following tones: G#, B, D, F#
+
+*** Answer 
+
+    G#m7b5
+
+    Functions:   1 b3 b5 b7
+    Description: G# minor sevent flat 5
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |
+| B  |    |    | D  |    |    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |    | B  |
+|    | G# |    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |    | F# |    |
+| D  |    |    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |    | B  |    |    | D  |
+|    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |
+|    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |    | F# |    | G# |    |    | B  |    |    | D  |    |    |
+
+** Tones in G#dim                                              :music:theory:chords:drill:
+
+   What tones are in G#dim chord?
+
+*** Answer 
+
+    G#, B, D
+
+    Functions:   1 b3 b5
+    Description: G# diminished fifth
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    |    |    |    | G# |    |    | B  |    |    | D  |    |    |    |    |    | G# |    |    | B  |    |    | D  |    |    |
+| B  |    |    | D  |    |    |    |    |    | G# |    |    | B  |    |    | D  |    |    |    |    |    | G# |    |    | B  |
+|    | G# |    |    | B  |    |    | D  |    |    |    |    |    | G# |    |    | B  |    |    | D  |    |    |    |    |    |
+| D  |    |    |    |    |    | G# |    |    | B  |    |    | D  |    |    |    |    |    | G# |    |    | B  |    |    | D  |
+|    |    | B  |    |    | D  |    |    |    |    |    | G# |    |    | B  |    |    | D  |    |    |    |    |    | G# |    |
+|    |    |    |    | G# |    |    | B  |    |    | D  |    |    |    |    |    | G# |    |    | B  |    |    | D  |    |    |
+
+** Name the chord: G#, B, D                                    :music:theory:chords:drill:
+
+   Name the chord with the following tones: G#, B, D
+
+*** Answer 
+
+    G#dim
+
+    Functions:   1 b3 b5
     Description: G# diminished fifth
 
 
@@ -4712,7 +5090,7 @@
 
     G#, C, D, G
 
-    Functions:   1 b d5 7
+    Functions:   1 3 b5 7
     Description: G# major major sevent flat 5
 
 
@@ -4733,7 +5111,7 @@
 
     G#(maj7)b5
 
-    Functions:   1 b d5 7
+    Functions:   1 3 b5 7
     Description: G# major major sevent flat 5
 
 
@@ -4830,9 +5208,9 @@
 |    |    | B  |    |    |    | D# |    |    |    |    | G# |    |    | B  |    |    |    | D# |    |    |    |    | G# |    |
 |    |    |    |    | G# |    |    | B  |    |    |    | D# |    |    |    |    | G# |    |    | B  |    |    |    | D# |    |
 
-** Tones in G#sus2                                             :music:theory:chords:drill:
+** Tones in G#sus4                                             :music:theory:chords:drill:
 
-   What tones are in G#sus2 chord?
+   What tones are in G#sus4 chord?
 
 *** Answer 
 
@@ -4857,7 +5235,7 @@
 
 *** Answer 
 
-    G#sus2
+    G#sus4
 
     Functions:   1 4 5
     Description: G# suspended 4
@@ -4922,7 +5300,7 @@
 
     A, C, D#, F#
 
-    Functions:   1 b3 d5 b7
+    Functions:   1 b3 b5 bb7
     Description: A diminished seventh
 
 
@@ -4943,7 +5321,7 @@
 
     Adim7
 
-    Functions:   1 b3 d5 b7
+    Functions:   1 b3 b5 bb7
     Description: A diminished seventh
 
 
@@ -5124,48 +5502,6 @@
 | A  |    |    |    | C# |    |    | E  |    |    | G  |    | A  |    |    |    | C# |    |    | E  |    |    | G  |    | A  |
 | E  |    |    | G  |    | A  |    |    |    | C# |    |    | E  |    |    | G  |    | A  |    |    |    | C# |    |    | E  |
 
-** Tones in Am7b5                                              :music:theory:chords:drill:
-
-   What tones are in Am7b5 chord?
-
-*** Answer 
-
-    A, C, D#, G
-
-    Functions:   1 b3 d5 b7
-    Description: A minor sevent flat 5
-
-
-| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
-|----------------------------------------------------------------------------------------------------------------------------|
-|    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |
-|    | C  |    |    | D# |    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |    |    |
-| G  |    | A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |    |    | G  |
-|    | D# |    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |    |    | C  |    |    |
-| A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |
-|    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |
-
-** Name the chord: A, C, D#, G                                 :music:theory:chords:drill:
-
-   Name the chord with the following tones: A, C, D#, G
-
-*** Answer 
-
-    Am7b5
-
-    Functions:   1 b3 d5 b7
-    Description: A minor sevent flat 5
-
-
-| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
-|----------------------------------------------------------------------------------------------------------------------------|
-|    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |
-|    | C  |    |    | D# |    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |    |    |
-| G  |    | A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |    |    | G  |
-|    | D# |    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |    |    | C  |    |    |
-| A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |
-|    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |
-
 ** Tones in Adim                                               :music:theory:chords:drill:
 
    What tones are in Adim chord?
@@ -5174,7 +5510,7 @@
 
     A, C, D#
 
-    Functions:   1 b3 d5
+    Functions:   1 b3 b5
     Description: A diminished fifth
 
 
@@ -5195,7 +5531,91 @@
 
     Adim
 
-    Functions:   1 b3 d5
+    Functions:   1 b3 b5
+    Description: A diminished fifth
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    |    |    |    |    | A  |    |    | C  |    |    | D# |    |    |    |    |    | A  |    |    | C  |    |    | D# |    |
+|    | C  |    |    | D# |    |    |    |    |    | A  |    |    | C  |    |    | D# |    |    |    |    |    | A  |    |    |
+|    |    | A  |    |    | C  |    |    | D# |    |    |    |    |    | A  |    |    | C  |    |    | D# |    |    |    |    |
+|    | D# |    |    |    |    |    | A  |    |    | C  |    |    | D# |    |    |    |    |    | A  |    |    | C  |    |    |
+| A  |    |    | C  |    |    | D# |    |    |    |    |    | A  |    |    | C  |    |    | D# |    |    |    |    |    | A  |
+|    |    |    |    |    | A  |    |    | C  |    |    | D# |    |    |    |    |    | A  |    |    | C  |    |    | D# |    |
+
+** Tones in Am7b5                                              :music:theory:chords:drill:
+
+   What tones are in Am7b5 chord?
+
+*** Answer 
+
+    A, C, D#, G
+
+    Functions:   1 b3 b5 b7
+    Description: A minor sevent flat 5
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |
+|    | C  |    |    | D# |    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |    |    |
+| G  |    | A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |    |    | G  |
+|    | D# |    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |    |    | C  |    |    |
+| A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |
+|    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |
+
+** Name the chord: A, C, D#, G                                 :music:theory:chords:drill:
+
+   Name the chord with the following tones: A, C, D#, G
+
+*** Answer 
+
+    Am7b5
+
+    Functions:   1 b3 b5 b7
+    Description: A minor sevent flat 5
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |
+|    | C  |    |    | D# |    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |    |    |
+| G  |    | A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |    |    | G  |
+|    | D# |    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |    |    | C  |    |    |
+| A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |
+|    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |    |    | G  |    | A  |    |    | C  |    |    | D# |    |
+
+** Tones in Adim                                               :music:theory:chords:drill:
+
+   What tones are in Adim chord?
+
+*** Answer 
+
+    A, C, D#
+
+    Functions:   1 b3 b5
+    Description: A diminished fifth
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    |    |    |    |    | A  |    |    | C  |    |    | D# |    |    |    |    |    | A  |    |    | C  |    |    | D# |    |
+|    | C  |    |    | D# |    |    |    |    |    | A  |    |    | C  |    |    | D# |    |    |    |    |    | A  |    |    |
+|    |    | A  |    |    | C  |    |    | D# |    |    |    |    |    | A  |    |    | C  |    |    | D# |    |    |    |    |
+|    | D# |    |    |    |    |    | A  |    |    | C  |    |    | D# |    |    |    |    |    | A  |    |    | C  |    |    |
+| A  |    |    | C  |    |    | D# |    |    |    |    |    | A  |    |    | C  |    |    | D# |    |    |    |    |    | A  |
+|    |    |    |    |    | A  |    |    | C  |    |    | D# |    |    |    |    |    | A  |    |    | C  |    |    | D# |    |
+
+** Name the chord: A, C, D#                                    :music:theory:chords:drill:
+
+   Name the chord with the following tones: A, C, D#
+
+*** Answer 
+
+    Adim
+
+    Functions:   1 b3 b5
     Description: A diminished fifth
 
 
@@ -5258,7 +5678,7 @@
 
     A, C#, D#, G#
 
-    Functions:   1 b d5 7
+    Functions:   1 3 b5 7
     Description: A major major sevent flat 5
 
 
@@ -5279,7 +5699,7 @@
 
     A(maj7)b5
 
-    Functions:   1 b d5 7
+    Functions:   1 3 b5 7
     Description: A major major sevent flat 5
 
 
@@ -5376,9 +5796,9 @@
 | A  |    |    | C  |    |    |    | E  |    |    |    |    | A  |    |    | C  |    |    |    | E  |    |    |    |    | A  |
 | E  |    |    |    |    | A  |    |    | C  |    |    |    | E  |    |    |    |    | A  |    |    | C  |    |    |    | E  |
 
-** Tones in Asus2                                              :music:theory:chords:drill:
+** Tones in Asus4                                              :music:theory:chords:drill:
 
-   What tones are in Asus2 chord?
+   What tones are in Asus4 chord?
 
 *** Answer 
 
@@ -5403,7 +5823,7 @@
 
 *** Answer 
 
-    Asus2
+    Asus4
 
     Functions:   1 4 5
     Description: A suspended 4
@@ -5468,7 +5888,7 @@
 
     A#, C#, E, G
 
-    Functions:   1 b3 d5 b7
+    Functions:   1 b3 b5 bb7
     Description: A# diminished seventh
 
 
@@ -5489,7 +5909,7 @@
 
     A#dim7
 
-    Functions:   1 b3 d5 b7
+    Functions:   1 b3 b5 bb7
     Description: A# diminished seventh
 
 
@@ -5670,48 +6090,6 @@
 |    | A# |    |    |    | D  |    |    | F  |    |    | G# |    | A# |    |    |    | D  |    |    | F  |    |    | G# |    |
 |    | F  |    |    | G# |    | A# |    |    |    | D  |    |    | F  |    |    | G# |    | A# |    |    |    | D  |    |    |
 
-** Tones in A#m7b5                                             :music:theory:chords:drill:
-
-   What tones are in A#m7b5 chord?
-
-*** Answer 
-
-    A#, C#, E, G#
-
-    Functions:   1 b3 d5 b7
-    Description: A# minor sevent flat 5
-
-
-| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
-|----------------------------------------------------------------------------------------------------------------------------|
-| E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |
-|    |    | C# |    |    | E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |    |    |    | G# |    | A# |    |
-|    | G# |    | A# |    |    | C# |    |    | E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |    |    |    |
-|    |    | E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |    |    |    | G# |    | A# |    |    | C# |    |
-|    | A# |    |    | C# |    |    | E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |    |    |    | G# |    |
-| E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |
-
-** Name the chord: A#, C#, E, G#                               :music:theory:chords:drill:
-
-   Name the chord with the following tones: A#, C#, E, G#
-
-*** Answer 
-
-    A#m7b5
-
-    Functions:   1 b3 d5 b7
-    Description: A# minor sevent flat 5
-
-
-| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
-|----------------------------------------------------------------------------------------------------------------------------|
-| E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |
-|    |    | C# |    |    | E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |    |    |    | G# |    | A# |    |
-|    | G# |    | A# |    |    | C# |    |    | E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |    |    |    |
-|    |    | E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |    |    |    | G# |    | A# |    |    | C# |    |
-|    | A# |    |    | C# |    |    | E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |    |    |    | G# |    |
-| E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |
-
 ** Tones in A#dim                                              :music:theory:chords:drill:
 
    What tones are in A#dim chord?
@@ -5720,7 +6098,7 @@
 
     A#, C#, E
 
-    Functions:   1 b3 d5
+    Functions:   1 b3 b5
     Description: A# diminished fifth
 
 
@@ -5741,7 +6119,91 @@
 
     A#dim
 
-    Functions:   1 b3 d5
+    Functions:   1 b3 b5
+    Description: A# diminished fifth
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+| E  |    |    |    |    |    | A# |    |    | C# |    |    | E  |    |    |    |    |    | A# |    |    | C# |    |    | E  |
+|    |    | C# |    |    | E  |    |    |    |    |    | A# |    |    | C# |    |    | E  |    |    |    |    |    | A# |    |
+|    |    |    | A# |    |    | C# |    |    | E  |    |    |    |    |    | A# |    |    | C# |    |    | E  |    |    |    |
+|    |    | E  |    |    |    |    |    | A# |    |    | C# |    |    | E  |    |    |    |    |    | A# |    |    | C# |    |
+|    | A# |    |    | C# |    |    | E  |    |    |    |    |    | A# |    |    | C# |    |    | E  |    |    |    |    |    |
+| E  |    |    |    |    |    | A# |    |    | C# |    |    | E  |    |    |    |    |    | A# |    |    | C# |    |    | E  |
+
+** Tones in A#m7b5                                             :music:theory:chords:drill:
+
+   What tones are in A#m7b5 chord?
+
+*** Answer 
+
+    A#, C#, E, G#
+
+    Functions:   1 b3 b5 b7
+    Description: A# minor sevent flat 5
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+| E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |
+|    |    | C# |    |    | E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |    |    |    | G# |    | A# |    |
+|    | G# |    | A# |    |    | C# |    |    | E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |    |    |    |
+|    |    | E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |    |    |    | G# |    | A# |    |    | C# |    |
+|    | A# |    |    | C# |    |    | E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |    |    |    | G# |    |
+| E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |
+
+** Name the chord: A#, C#, E, G#                               :music:theory:chords:drill:
+
+   Name the chord with the following tones: A#, C#, E, G#
+
+*** Answer 
+
+    A#m7b5
+
+    Functions:   1 b3 b5 b7
+    Description: A# minor sevent flat 5
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+| E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |
+|    |    | C# |    |    | E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |    |    |    | G# |    | A# |    |
+|    | G# |    | A# |    |    | C# |    |    | E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |    |    |    |
+|    |    | E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |    |    |    | G# |    | A# |    |    | C# |    |
+|    | A# |    |    | C# |    |    | E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |    |    |    | G# |    |
+| E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |    |    |    | G# |    | A# |    |    | C# |    |    | E  |
+
+** Tones in A#dim                                              :music:theory:chords:drill:
+
+   What tones are in A#dim chord?
+
+*** Answer 
+
+    A#, C#, E
+
+    Functions:   1 b3 b5
+    Description: A# diminished fifth
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+| E  |    |    |    |    |    | A# |    |    | C# |    |    | E  |    |    |    |    |    | A# |    |    | C# |    |    | E  |
+|    |    | C# |    |    | E  |    |    |    |    |    | A# |    |    | C# |    |    | E  |    |    |    |    |    | A# |    |
+|    |    |    | A# |    |    | C# |    |    | E  |    |    |    |    |    | A# |    |    | C# |    |    | E  |    |    |    |
+|    |    | E  |    |    |    |    |    | A# |    |    | C# |    |    | E  |    |    |    |    |    | A# |    |    | C# |    |
+|    | A# |    |    | C# |    |    | E  |    |    |    |    |    | A# |    |    | C# |    |    | E  |    |    |    |    |    |
+| E  |    |    |    |    |    | A# |    |    | C# |    |    | E  |    |    |    |    |    | A# |    |    | C# |    |    | E  |
+
+** Name the chord: A#, C#, E                                   :music:theory:chords:drill:
+
+   Name the chord with the following tones: A#, C#, E
+
+*** Answer 
+
+    A#dim
+
+    Functions:   1 b3 b5
     Description: A# diminished fifth
 
 
@@ -5804,7 +6266,7 @@
 
     A#, D, E, A
 
-    Functions:   1 b d5 7
+    Functions:   1 3 b5 7
     Description: A# major major sevent flat 5
 
 
@@ -5825,7 +6287,7 @@
 
     A#(maj7)b5
 
-    Functions:   1 b d5 7
+    Functions:   1 3 b5 7
     Description: A# major major sevent flat 5
 
 
@@ -5922,9 +6384,9 @@
 |    | A# |    |    | C# |    |    |    | F  |    |    |    |    | A# |    |    | C# |    |    |    | F  |    |    |    |    |
 |    | F  |    |    |    |    | A# |    |    | C# |    |    |    | F  |    |    |    |    | A# |    |    | C# |    |    |    |
 
-** Tones in A#sus2                                             :music:theory:chords:drill:
+** Tones in A#sus4                                             :music:theory:chords:drill:
 
-   What tones are in A#sus2 chord?
+   What tones are in A#sus4 chord?
 
 *** Answer 
 
@@ -5949,7 +6411,7 @@
 
 *** Answer 
 
-    A#sus2
+    A#sus4
 
     Functions:   1 4 5
     Description: A# suspended 4
@@ -6014,7 +6476,7 @@
 
     B, D, F, G#
 
-    Functions:   1 b3 d5 b7
+    Functions:   1 b3 b5 bb7
     Description: B diminished seventh
 
 
@@ -6035,7 +6497,7 @@
 
     Bdim7
 
-    Functions:   1 b3 d5 b7
+    Functions:   1 b3 b5 bb7
     Description: B diminished seventh
 
 
@@ -6216,48 +6678,6 @@
 | A  |    | B  |    |    |    | D# |    |    | F# |    |    | A  |    | B  |    |    |    | D# |    |    | F# |    |    | A  |
 |    |    | F# |    |    | A  |    | B  |    |    |    | D# |    |    | F# |    |    | A  |    | B  |    |    |    | D# |    |
 
-** Tones in Bm7b5                                              :music:theory:chords:drill:
-
-   What tones are in Bm7b5 chord?
-
-*** Answer 
-
-    B, D, F, A
-
-    Functions:   1 b3 d5 b7
-    Description: B minor sevent flat 5
-
-
-| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
-|----------------------------------------------------------------------------------------------------------------------------|
-|    | F  |    |    |    | A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |    | B  |    |    | D  |    |    |
-| B  |    |    | D  |    |    | F  |    |    |    | A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |    | B  |
-|    |    | A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |    | B  |    |    | D  |    |    | F  |    |    |
-| D  |    |    | F  |    |    |    | A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |    | B  |    |    | D  |
-| A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |
-|    | F  |    |    |    | A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |    | B  |    |    | D  |    |    |
-
-** Name the chord: B, D, F, A                                  :music:theory:chords:drill:
-
-   Name the chord with the following tones: B, D, F, A
-
-*** Answer 
-
-    Bm7b5
-
-    Functions:   1 b3 d5 b7
-    Description: B minor sevent flat 5
-
-
-| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
-|----------------------------------------------------------------------------------------------------------------------------|
-|    | F  |    |    |    | A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |    | B  |    |    | D  |    |    |
-| B  |    |    | D  |    |    | F  |    |    |    | A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |    | B  |
-|    |    | A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |    | B  |    |    | D  |    |    | F  |    |    |
-| D  |    |    | F  |    |    |    | A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |    | B  |    |    | D  |
-| A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |
-|    | F  |    |    |    | A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |    | B  |    |    | D  |    |    |
-
 ** Tones in Bdim                                               :music:theory:chords:drill:
 
    What tones are in Bdim chord?
@@ -6266,7 +6686,7 @@
 
     B, D, F
 
-    Functions:   1 b3 d5
+    Functions:   1 b3 b5
     Description: B diminished fifth
 
 
@@ -6287,7 +6707,91 @@
 
     Bdim
 
-    Functions:   1 b3 d5
+    Functions:   1 b3 b5
+    Description: B diminished fifth
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    | F  |    |    |    |    |    | B  |    |    | D  |    |    | F  |    |    |    |    |    | B  |    |    | D  |    |    |
+| B  |    |    | D  |    |    | F  |    |    |    |    |    | B  |    |    | D  |    |    | F  |    |    |    |    |    | B  |
+|    |    |    |    | B  |    |    | D  |    |    | F  |    |    |    |    |    | B  |    |    | D  |    |    | F  |    |    |
+| D  |    |    | F  |    |    |    |    |    | B  |    |    | D  |    |    | F  |    |    |    |    |    | B  |    |    | D  |
+|    |    | B  |    |    | D  |    |    | F  |    |    |    |    |    | B  |    |    | D  |    |    | F  |    |    |    |    |
+|    | F  |    |    |    |    |    | B  |    |    | D  |    |    | F  |    |    |    |    |    | B  |    |    | D  |    |    |
+
+** Tones in Bm7b5                                              :music:theory:chords:drill:
+
+   What tones are in Bm7b5 chord?
+
+*** Answer 
+
+    B, D, F, A
+
+    Functions:   1 b3 b5 b7
+    Description: B minor sevent flat 5
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    | F  |    |    |    | A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |    | B  |    |    | D  |    |    |
+| B  |    |    | D  |    |    | F  |    |    |    | A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |    | B  |
+|    |    | A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |    | B  |    |    | D  |    |    | F  |    |    |
+| D  |    |    | F  |    |    |    | A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |    | B  |    |    | D  |
+| A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |
+|    | F  |    |    |    | A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |    | B  |    |    | D  |    |    |
+
+** Name the chord: B, D, F, A                                  :music:theory:chords:drill:
+
+   Name the chord with the following tones: B, D, F, A
+
+*** Answer 
+
+    Bm7b5
+
+    Functions:   1 b3 b5 b7
+    Description: B minor sevent flat 5
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    | F  |    |    |    | A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |    | B  |    |    | D  |    |    |
+| B  |    |    | D  |    |    | F  |    |    |    | A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |    | B  |
+|    |    | A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |    | B  |    |    | D  |    |    | F  |    |    |
+| D  |    |    | F  |    |    |    | A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |    | B  |    |    | D  |
+| A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |
+|    | F  |    |    |    | A  |    | B  |    |    | D  |    |    | F  |    |    |    | A  |    | B  |    |    | D  |    |    |
+
+** Tones in Bdim                                               :music:theory:chords:drill:
+
+   What tones are in Bdim chord?
+
+*** Answer 
+
+    B, D, F
+
+    Functions:   1 b3 b5
+    Description: B diminished fifth
+
+
+| 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
+|----------------------------------------------------------------------------------------------------------------------------|
+|    | F  |    |    |    |    |    | B  |    |    | D  |    |    | F  |    |    |    |    |    | B  |    |    | D  |    |    |
+| B  |    |    | D  |    |    | F  |    |    |    |    |    | B  |    |    | D  |    |    | F  |    |    |    |    |    | B  |
+|    |    |    |    | B  |    |    | D  |    |    | F  |    |    |    |    |    | B  |    |    | D  |    |    | F  |    |    |
+| D  |    |    | F  |    |    |    |    |    | B  |    |    | D  |    |    | F  |    |    |    |    |    | B  |    |    | D  |
+|    |    | B  |    |    | D  |    |    | F  |    |    |    |    |    | B  |    |    | D  |    |    | F  |    |    |    |    |
+|    | F  |    |    |    |    |    | B  |    |    | D  |    |    | F  |    |    |    |    |    | B  |    |    | D  |    |    |
+
+** Name the chord: B, D, F                                     :music:theory:chords:drill:
+
+   Name the chord with the following tones: B, D, F
+
+*** Answer 
+
+    Bdim
+
+    Functions:   1 b3 b5
     Description: B diminished fifth
 
 
@@ -6350,7 +6854,7 @@
 
     B, D#, F, A#
 
-    Functions:   1 b d5 7
+    Functions:   1 3 b5 7
     Description: B major major sevent flat 5
 
 
@@ -6371,7 +6875,7 @@
 
     B(maj7)b5
 
-    Functions:   1 b d5 7
+    Functions:   1 3 b5 7
     Description: B major major sevent flat 5
 
 
@@ -6468,9 +6972,9 @@
 |    |    | B  |    |    | D  |    |    |    | F# |    |    |    |    | B  |    |    | D  |    |    |    | F# |    |    |    |
 |    |    | F# |    |    |    |    | B  |    |    | D  |    |    |    | F# |    |    |    |    | B  |    |    | D  |    |    |
 
-** Tones in Bsus2                                              :music:theory:chords:drill:
+** Tones in Bsus4                                              :music:theory:chords:drill:
 
-   What tones are in Bsus2 chord?
+   What tones are in Bsus4 chord?
 
 *** Answer 
 
@@ -6495,7 +6999,7 @@
 
 *** Answer 
 
-    Bsus2
+    Bsus4
 
     Functions:   1 4 5
     Description: B suspended 4
