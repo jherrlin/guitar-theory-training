@@ -31,10 +31,6 @@
 (def major-seventh      11)
 (def perfect-octave     perfect-unison)
 
-;; Swedish
-(def prim               root)
-(def dur-sekund )
-
 (def intervals-map
   {:perfect-unison     {:f        perfect-unison
                         :doc/full "perfect unison"}
@@ -390,7 +386,7 @@
   "
   short:     (maj7)b5
   full:      major major sevent flat 5
-  functions: 1 b b5 7"
+  functions: 1 3 b5 7"
   (juxt-intervals
    [root major-third diminished-fifth major-seventh]))
 
@@ -402,7 +398,7 @@
   (juxt-intervals
    [root perfect-fifth]))
 
-(def diminished-triad-chord-tones
+(def diminished-fifth-chord-tones
   "
   short:     dim
   full:      diminished fifth
@@ -414,7 +410,7 @@
   "dim7
   short:     dim7
   full:      diminished seventh
-  functions: 1 b3 b5 b7"
+  functions: 1 b3 b5 bb7"
   (juxt-intervals
    [root minor-third diminished-fifth diminished-seventh]))
 
@@ -462,12 +458,12 @@
     :doc/functions "1 b3 d5 b7",
     :s             "minor-seven-flat-5-chord-tones"},
    :diminished-triad
-   {:f             diminished-triad-chord-tones,
+   {:f             diminished-fifth-chord-tones,
     :id            :diminished-triad,
     :doc/short     "dim",
     :doc/full      "diminished fifth",
     :doc/functions "1 b3 d5",
-    :s             "diminished-triad-chord-tones"},
+    :s             "diminished-fifth-chord-tones"},
    :major-maj-seven
    {:f             major-maj-seven-chord-tones,
     :id            :major-maj-seven,
@@ -559,6 +555,7 @@
 (find-root :d tones)
 
 (defn harmonizations [scales-map chords-map all-tones tone scale f]
+  {:pre [(keyword? tone) (keyword? scale)]}
   (let [scale-tones ((get-in scales-map [scale :f]) (find-root tone all-tones))]
     (->> scale-tones
          (reduce
@@ -571,27 +568,49 @@
                        :chord-tones chord-tones})))
           [])
          (mapv
-          (fn [i p m]
-            (assoc m :position p :index i))
+          (fn [i p mode mode-str chord-family m]
+            (assoc m
+                   :position p :index i :mode mode :mode-str mode-str
+                   :chord-family chord-family))
           (range 1 100)
-          ["I" "ii" "iii" "IV" "V" "vi" "vii"]))))
+          (if (= scale :major)
+            ["I" "ii" "iii" "IV" "V" "vi" "vii"]
+            ["i" "ii" "III" "iv" "v" "VI" "VII"])
+          (if (= scale :major)
+            [:ionian  :dorian  :phrygian :lydian :mixolydian :aeolian :locrian]
+            [:aeolian :locrian :ionian   :dorian :phrygian   :lydian  :mixolydian])
+          (if (= scale :major)
+            ["Ionian"  "Dorian"  "Phrygian" "Lydian" "Mixolydian" "Aeolian" "Locrian"]
+            ["Aeolian" "Locrian" "Ionian"   "Dorian" "Phrygian"   "Lydian"  "Mixolydian"])
+          (if (= scale :major)
+            [:tonic :subdominant :tonic :subdominant :dominant :tonic :dominant]
+            [:tonic :subdominant :tonic :subdominant :dominant :subdominant :dominant])))))
 
 (def harmonizations-p (partial harmonizations scales-map chords-map tones))
+
+(comment
+  (harmonizations-p :c :major triad)
+  (harmonizations-p :c :minor triad)
+  (harmonizations-p :c :major seventh)
+  (harmonizations-p :e :minor seventh)
+  )
 
 (defn harmonization-str [k xs]
   (str
    "     T = Tonic (stable), S = Subdominant (leaving), D = Dominant (back home)"
    "\n\n"
-   (->> xs (map (comp #(format "   %-8s" %) :index)) (str/join))
+   (->> xs (map (comp #(format "   %-10s" %) :index)) (str/join))
    "\n"
-   (->> xs (map (comp #(format "   %-8s" %) :position)) (str/join))
+   (->> xs (map (comp #(format "   %-10s" %) :position)) (str/join))
+   "\n"
+   (->> xs (map (comp #(format "   %-10s" %) :mode-str)) (str/join))
    "\n"
    (->> (if (= k :major)
           ["T" "S" "T" "S" "D" "T" "D"]
           ["T" "S" "T" "S" "D" "S" "D"])
-        (map #(format "   %-8s" %)) (str/join))
+        (map #(format "   %-10s" %)) (str/join))
    "\n"
-   (->> xs (map (comp #(format "   %-8s" %) :chord-name)) (str/join))))
+   (->> xs (map (comp #(format "   %-10s" %) :chord-name)) (str/join))))
 
 (defn harmonization-output [tone major-minor triad-seventh]
   (str
@@ -603,7 +622,7 @@
         (apply map vector)
         (map (fn [row]
                (->> row
-                    (map #(->> % name str/upper-case (format "   %-8s")))
+                    (map #(->> % name str/upper-case (format "   %-10s")))
                     (apply str))))
         (str/join "\n")
         (str "\n"))
@@ -617,40 +636,13 @@
 (print
  (harmonization-output :c :major triad))
 
+(->> (harmonizations-p :c :major triad)
+     (map (comp keyword str/lower-case :mode))
+
+     )
+
 (comment
-  (do
-    (print "Diatonic chord harmony\n\n")
-    (print
-     (->> (harmonizations-p :c :major triad)
-          (harmonization-str :major)))
-    (print "\n")
-    (print
-     (->> (harmonizations-p :c :major triad)
-          (map :chord-tones)
-          (apply map vector)
-          (map (fn [row]
-                 (->> row
-                      (map #(->> % name str/upper-case (format "   %-8s")))
-                      (apply str))))
-          (str/join "\n")
-          (str "\n")))
 
-    (doseq [{:keys [chord-name chord-tones]} (harmonizations-p :c :major triad)]
-      (do
-        (print "\n")
-        (print chord-name)
-        (print "\n")
-        (print
-         (fret-table-with-tones-p chord-tones))
-        (print "\n")))
-
-    (print "\nAll\n")
-  (print
-   (->> (harmonizations-p :c :major triad)
-        (map :chord-tones)
-        (apply concat)
-        (into #{})
-        (fret-table-with-tones-p))))
 
   )
 
@@ -825,8 +817,8 @@
    [major-third   perfect-fourth  nil           perfect-fifth  nil]
    [nil           root            nil           major-second   nil]])
 
-(def ionic-mode-spec
-  "Ionic (jonisk) scale
+(def ionian-mode-spec
+  "Ionian (jonisk) scale
   Functions: 1, 2, 3, 4, 5, 6, 7
   Notes:     Same as major scale."
   [[major-seventh root            nil           major-second]
@@ -840,7 +832,7 @@
   "Major scale
   Functions: 1, 2, 3, 4, 5, 6, 7
   Notes: Same as Ionic scale."
-  ionic-mode-spec)
+  ionian-mode-spec)
 
 (def phrygian-mode-spec
   "Phrygian (frygiska) scale
@@ -876,15 +868,15 @@
    [nil           root            nil          major-second    minor-third]])
 
 (def minor-mode-spec
-  "Aeolian (Eolisk) scale.
+  "Minor scale.
   Functions: 1, 2, b3, 4, 5, b6, b7
   Notes:     Same as Aeolian."
   aeolian-mode-spec)
 
 (def lydian-mode-spec
   "Lydian (Lydiska) scale.
-  Funtions: 1, 2, 3, #4, 5, 6, 7
-  Notes:    Sounds major."
+  Functions: 1, 2, 3, #4, 5, 6, 7
+  Notes:     Sounds major."
   [[major-seventh     root           nil              major-second]
    [augmented-fourth  perfect-fifth  nil              major-sixth]
    [major-second      nil            major-third      nil]
@@ -895,7 +887,7 @@
 (def locrian-mode-spec
   "Locrian (Lokrisk) scale.
   Functions: 1, b2, b3, 4, b5, b6, b7
-  Notes:     "
+  Notes:     Sinister feeling to it."
   [[root            minor-second      nil            minor-third]
    [nil             minor-sixth       nil            minor-seventh]
    [minor-third     nil               perfect-fourth diminished-fifth]
@@ -952,21 +944,32 @@
                                (str "|" row "|"))))
         row-length (-> rows first count)]
     (->> (list-insert rows (str "|" (apply str (take (- row-length 2) (repeat "-"))) "|") 1)
-         #_(str/join "\n"))))
+         (str/join "\n"))))
 
 
 (comment
-  (->> (mode :e phrygian-mode-spec)
-       mode-str)
+
+  (->> (mode :c ionic-mode-spec)
+       (mode-str)
+       print)
+
+  (->> (mode :d phrygian-mode-spec)
+       mode-str
+       print)
 
   (->> (mode :g mixolydian-mode-spec)
-       mode-str)
-
-  (->> (mode :d dorian-mode-spec)
-       mode-str)
+       mode-str
+       print)
 
   (->> (mode :a aeolian-mode-spec)
-       mode-str)
+       mode-str
+       print)
+
+  (->> (mode :f lydian-mode-spec)
+       mode-str
+       print)
+
+
 
   (->> (mode :f lydian-mode-spec)
        mode-str)
@@ -985,14 +988,156 @@
   (->> (mode :a mixolydian-mode-spec)
        mode-str
        #_print)
+  )
 
+(def modes-map
+  {:locrian
+   {:f         locrian-mode-spec,
+    :kw        :locrian,
+    :s         "locrian-mode-spec",
+    :doc/title "Locrian (Lokrisk) scale.",
+    :doc/fns   "1, b2, b3, 4, b5, b6, b7",
+    :doc/notes "Sinister feeling to it."},
+   :dorian
+   {:f         dorian-mode-spec,
+    :kw        :dorian,
+    :s         "dorian-mode-spec",
+    :doc/title "Dorian (Dorisk) scale.",
+    :doc/fns   "1, 2, b3, 4, 5, 6, b7",
+    :doc/notes "Has a minor sound. Described as jazzy."},
+   :mixolydian
+   {:f         mixolydian-mode-spec,
+    :kw        :mixolydian,
+    :s         "mixolydian-mode-spec",
+    :doc/title "Mixolydian scale",
+    :doc/fns   "1, 2, 3, 4, 5, 6, b7",
+    :doc/notes "Has a major sound. Described as bluesy."},
+   :major
+   {:f         major-mode-spec,
+    :kw        :major,
+    :s         "major-mode-spec",
+    :doc/title "Major scale",
+    :doc/fns   "1, 2, 3, 4, 5, 6, 7",
+    :doc/notes "Same as Ionic scale."},
+   :lydian
+   {:f         lydian-mode-spec,
+    :kw        :lydian,
+    :s         "lydian-mode-spec",
+    :doc/title "Lydian (Lydiska) scale.",
+    :doc/fns   "1, 2, 3, #4, 5, 6, 7",
+    :doc/notes "Sounds major."},
+   :phrygian
+   {:f         phrygian-mode-spec,
+    :kw        :phrygian,
+    :s         "phrygian-mode-spec",
+    :doc/title "Phrygian (frygiska) scale",
+    :doc/fns   "1, b2, b3, 4, 5, b6, b7",
+    :doc/notes "Has a minor sound. Occurs in heavy metal."},
+   :ionian
+   {:f         ionic-mode-spec,
+    :kw        :ionian
+    :s         "ionic-mode-spec",
+    :doc/title "Ionic (jonisk) scale",
+    :doc/fns   "1, 2, 3, 4, 5, 6, 7",
+    :doc/notes "Same as major scale."},
+   :minor
+   {:f         minor-mode-spec,
+    :kw        :minor,
+    :s         "minor-mode-spec",
+    :doc/title "Aeolian (Eolisk) scale.",
+    :doc/fns   "1, 2, b3, 4, 5, b6, b7",
+    :doc/notes "Same as Aeolian."},
+   :aeolian
+   {:f         aeolian-mode-spec,
+    :kw        :aeolian,
+    :s         "aeolian-mode-spec",
+    :doc/title "Aeolian (Eolisk) scale.",
+    :doc/fns   "1, 2, b3, 4, 5, b6, b7",
+    :doc/notes "Same as natural minor."}})
 
+(->> modes-map
+     (vals)
+     (map (fn [{:doc/keys [title fns]}]
+            (str (format "%-30s" title) " " fns)))
+     (str/join "\n")
+     (print))
 
+(comment
+  (->> (ns-publics 'music-theory)
+       (filter (comp #(str/includes? % "-mode-spec") str first))
+       (map (fn [[k v]]
+              (let [doc  (:doc (meta v))
+                    docs (str/split-lines doc)
+                    kw   (-> (str k)
+                             (str/replace "-mode-spec" "")
+                             (keyword))]
+                [kw
+                 {:f         (symbol k)
+                  :kw        kw
+                  :s         (str k)
+                  :doc/title (-> docs first str/trim)
+                  :doc/fns   (-> docs second (str/replace "Functions:" "") str/trim)
+                  :doc/notes (-> docs (nth 2) (str/replace "Notes:" "") str/trim)
+                  }])))
+       (into {}))
+  )
 
-
-
+(comment
   )
 
 ;; --------------------
 ;; Modes end
 ;; --------------------
+
+
+
+
+(do
+  (print "Diatonic chord progressions\n\n")
+  (print
+   (->> (harmonizations-p :c :major triad)
+        (harmonization-str :major)))
+  (print "\n")
+  (print
+   (->> (harmonizations-p :c :major triad)
+        (map :chord-tones)
+        (apply map vector)
+        (map (fn [row]
+               (->> row
+                    (map #(->> % name str/upper-case (format "   %-10s")))
+                    (apply str))))
+        (str/join "\n")
+        (str "\n")))
+
+  (doseq [{:keys [chord-name chord-tones]} (harmonizations-p :c :major triad)]
+    (do
+      (print "\n")
+      (print chord-name)
+      (print "\n")
+      (print
+       (fret-table-with-tones-p chord-tones))
+      (print "\n")))
+
+  (print "\nAll\n")
+  (print
+   (->> (harmonizations-p :c :major triad)
+        (map :chord-tones)
+        (apply concat)
+        (into #{})
+        (fret-table-with-tones-p)))
+  (doseq [{:keys      [chord-tones chord-name]
+         mode-kw    :mode
+         mode-str-1 :mode-str} (harmonizations-p :c :major triad)]
+  (do
+    (print "\n")
+    (print (-> chord-tones first name str/upper-case) mode-str-1)
+    (print "\n")
+    (->> (mode (first chord-tones) (get-in modes-map [mode-kw :f]))
+         mode-str
+         print)
+    (print "\n"))))
+
+(comment
+  (print
+   (fret-table-with-tones-p [:e :a :b]))
+  )
