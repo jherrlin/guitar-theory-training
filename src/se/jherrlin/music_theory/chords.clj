@@ -19,24 +19,33 @@
   ([chord-name meta-data interval]
    {:pre [(symbol? chord-name) (map? meta-data)]}
    (let [intervals'  (if (string? interval)
-                      (->> interval
-                           (re-seq #"b{0,2}#{0,2}\d")
-                           (map #(get-in intervals/intervals-map-by-function [% :semitones])))
-                      (seq interval))
+                       (->> interval
+                            (re-seq #"b{0,2}#{0,2}\d")
+                            (mapv #(get-in intervals/intervals-map-by-function [% :semitones])))
+                       interval)
          chord-name' (-> chord-name
                          str
                          (str/replace "-chord" ""))
          docstring   (if (string? interval)
                        interval
-                       "")]
+                       "")
+         f           (utils/juxt-intervals intervals')]
      (swap! chords assoc (keyword chord-name')
             (merge
-             {:intervals intervals'
+             {:id        (keyword chord-name')
+              :indexes   intervals'
               :functions interval
-              :name      chord-name'}
+              :name      chord-name'
+              :f         f
+              :tags      (cond-> #{}
+                           (contains? (set intervals') 3) (conj :minor)
+                           (contains? (set intervals') 4) (conj :major)
+                           (str/includes? interval "bb7") (conj :diminished)
+                           (str/includes? interval "7")   (conj :seventh))}
              meta-data))
      `(defn ~chord-name ~docstring [~'args]
-        ((utils/juxt-intervals '~intervals') ~'args)))))
+        ((utils/juxt-intervals ~intervals') ~'args)))))
+
 
 (comment
   (defchord major
@@ -52,6 +61,7 @@
 
   @chords
   (macroexpand '(defchord major "hejsan" "1 3 5"))
+  ((get-in @chords [:major :f]) [:c :c# :d :d# :e :f :f# :g :g# :a :a# :b])
   (major [:c :c# :d :d# :e :f :f# :g :g# :a :a# :b])
   (minor [:c :c# :d :d# :e :f :f# :g :g# :a :a# :b])
   (minor-seven [:c :c# :d :d# :e :f :f# :g :g# :a :a# :b])

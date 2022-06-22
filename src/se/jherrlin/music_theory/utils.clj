@@ -47,7 +47,7 @@
          vals
          (filter (fn [{:keys [f] :as m}]
                    (= (set chord-tones) (set (f tones)))))
-         (map (fn [{s :doc/short
+         (map (fn [{s :sufix
                     :as m}]
                 (assoc m :chord-name (str (-> root-tone name str/upper-case)
                                           s))))
