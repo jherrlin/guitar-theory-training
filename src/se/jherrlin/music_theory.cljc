@@ -153,7 +153,7 @@
   "1, 2, 3, 4, 5, 6, 7")
 
 (define-scale :minor
-  "1, 2, b3, 4, 5, b6, 7")
+  "1, 2, b3, 4, 5, b6, b7")
 
 (define-scale :harmonic-minor
   "1, 2, b3, 4, 5, b6, 7")
@@ -259,6 +259,9 @@
 (diatonic-chord-progressions-p :c :minor :triad)
 (diatonic-chord-progressions-p :e :major :seventh)
 (diatonic-chord-progressions-p :e :minor :seventh)
+
+(->> (diatonic-chord-progressions-p :c :major :triad)
+     (map :chord-name))
 
 (->> (diatonic-chord-progressions-p :c :minor :triad)
      (map :chord-tones)
