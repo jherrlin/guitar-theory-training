@@ -5,11 +5,12 @@
    #?(:cljs [goog.string :as gstring])))
 
 #?(:cljs
-   (defn format
+   (defn fformat
      "Formats a string using goog.string.format.
    e.g: (format \"Cost: %.2f\" 10.0234)"
      [fmt & args]
-     (apply gstring/format fmt args)))
+     (apply gstring/format fmt args))
+   :clj (def fformat format))
 
 (defn find-root
   [tone tones]
@@ -29,10 +30,10 @@
 (defn fret-table-with-tones [tones chord-tones]
   (let [in-chord?   #(contains? (set chord-tones) %)
         show        #(if (in-chord? %)
-                       (->> % name str/upper-case (format " %-3s"))
-                       (format "%4s" ""))]
+                       (->> % name str/upper-case (fformat " %-3s"))
+                       (fformat "%4s" ""))]
     (str
-     (str "|" (str/join "|" (map #(format " %-3s" %) (range 0 25))) "|")
+     (str "|" (str/join "|" (map #(fformat " %-3s" (str %)) (range 0 25))) "|")
      "\n"
      (str "|" (str/join "" (take 124 (repeat "-"))) "|")
      "\n"

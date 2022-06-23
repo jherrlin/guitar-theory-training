@@ -607,10 +607,7 @@
    "\n"
    (->> xs (map (comp #(format "   %-10s" %) :mode-str)) (str/join))
    "\n"
-   (->> (if (= k :major)
-          ["T" "S" "T" "S" "D" "T" "D"]
-          ["T" "S" "T" "S" "D" "S" "D"])
-        (map #(format "   %-10s" %)) (str/join))
+   (->> xs (map (comp #(format "   %-10s" %) :mode-str)) (str/join))
    "\n"
    (->> xs (map (comp #(format "   %-10s" %) :chord-name)) (str/join))))
 
