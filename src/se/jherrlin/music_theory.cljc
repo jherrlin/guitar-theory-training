@@ -1,8 +1,10 @@
 (ns se.jherrlin.music-theory
   (:require
-   [se.jherrlin.music-theory.scales :refer [scales defscale]]
-   [se.jherrlin.music-theory.chords :refer [chords defchord]]
-   [se.jherrlin.music-theory.utils :refer [docstring->m find-chord find-root fret-table-with-tones juxt-intervals]]
+   #?(:clj  [se.jherrlin.music-theory.scales :refer [scales defscale]]
+      :cljs [se.jherrlin.music-theory.scales :refer [scales] :refer-macros [defscale]])
+   #?(:clj  [se.jherrlin.music-theory.chords :refer [chords defchord]]
+      :cljs [se.jherrlin.music-theory.chords :refer [chords] :refer-macros [defchord]])
+   [se.jherrlin.music-theory.utils :refer [docstring->m find-chord-name find-root fret-table-with-tones juxt-intervals find-chord]]
    [clojure.set :as set]))
 
 (comment
@@ -11,8 +13,19 @@
 
 (def tones [:c :c# :d :d# :e :f :f# :g :g# :a :a# :b])
 
+;; ---------------
+;; Partially applied functions.
+;; Presets arguments that can be predefined.
+;; ---------------
 (def find-root-p #(find-root % tones))
 (def fret-table-with-tones-p (partial fret-table-with-tones tones))
+(defn find-chord-name-p [chord-tones]
+  (find-chord-name @chords tones chord-tones))
+(defn find-chord-p [chord-tones]
+  (find-chord @chords tones chord-tones))
+;; ---------------
+;; Partial functions end.
+;; ---------------
 
 ;; ---------------
 ;; Chords
@@ -88,8 +101,8 @@
 
   @chords
 
-  (find-chord @chords tones [:c :e :g])
-  (find-chord @chords tones [:c :d# :g])
+  (find-chord-name @chords tones [:c :e :g])
+  (find-chord-name @chords tones [:c :d# :g])
   )
 ;; ---------------
 ;; Chords end
@@ -101,8 +114,16 @@
 (defscale major-scale
   "1, 2, 3, 4, 5, 6, 7")
 
+(defscale minor-scale
+  "1, 2, b3, 4, 5, b6, 7")
+
 (defscale harmonic-minor-scale
   "1, 2, b3, 4, 5, b6, 7")
+
+(print
+ (fret-table-with-tones-p
+  (harmonic-minor-scale
+   (find-root-p :e))))
 
 (defscale melodic-minor-scale
   "1, 2, b3, 4, 5, 6, 7")
@@ -155,12 +176,63 @@
 
   (diminished-scale
    (find-root-p :e))
+
+  (print
+   (fret-table-with-tones-p
+    (mixolydian-scale
+     (find-root-p :g))))
   )
 ;; ---------------
 ;; Scales end
 ;; ---------------
 
 
+;; --------------------
+;; Harmonization
+;; --------------------
+(def triad   (juxt #(nth % 0) #(nth % 2) #(nth % 4)))
+(def seventh (juxt #(nth % 0) #(nth % 2) #(nth % 4) #(nth % 6)))
+
+(def harmonizations-map
+  {:triad   triad
+   :seventh seventh})
+
+(defn harmonizations [scales-map chords-map all-tones tone scale f]
+  {:pre [(keyword? tone) (keyword? scale)]}
+  (let [scale-tones ((get-in scales-map [scale :f]) (find-root tone all-tones))]
+    (->> scale-tones
+         (reduce
+          (fn [m t]
+            (let [chord-tones (f (find-root t scale-tones))
+                  chord-name  (find-chord-name chords-map all-tones chord-tones)]
+              (conj m {:root        tone
+                       :scale       scale
+                       :chord-name  chord-name
+                       :chord-tones chord-tones})))
+          [])
+         (mapv
+          #(assoc %2 :index %1)
+          (range 1 100)))))
+
+(defn harmonizations-p [tone scale f]
+  (harmonizations @scales @chords tones tone scale f))
+
+(harmonizations @scales @chords tones :c :major triad)
+(harmonizations-p :c :major triad)
+(harmonizations-p :c :minor triad)
+
+
+
+
+
+;; --------------------
+;; Harmonization end
+;; --------------------
+
+
+
+
+;; mode to chord
 (for [scale (vals @scales)
       chord (vals @chords)
       :when (set/subset? (set (:indexes chord)) (set (:indexes scale)))]

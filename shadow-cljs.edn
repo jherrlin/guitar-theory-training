@@ -1,0 +1,11 @@
+{:deps     true
+ :http     {:port 8081}
+ :dev-http {8080 "resources/public"}
+ :builds
+ {:frontend
+  {:target            :browser
+   :asset-path        "/js"
+   :output-dir        "resources/public/js"
+   :devtools          {:preloads [devtools.preload]}
+   :module-hash-names true
+   :modules           {:main {:init-fn se.jherrlin.music-theory.webapp.main/init}}}}}

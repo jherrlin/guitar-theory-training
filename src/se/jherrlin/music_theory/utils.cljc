@@ -1,6 +1,15 @@
 (ns se.jherrlin.music-theory.utils
-  (:require [clojure.string :as str]))
+  (:require
+   [clojure.string :as str]
+   #?(:cljs [goog.string.format])
+   #?(:cljs [goog.string :as gstring])))
 
+#?(:cljs
+   (defn format
+     "Formats a string using goog.string.format.
+   e.g: (format \"Cost: %.2f\" 10.0234)"
+     [fmt & args]
+     (apply gstring/format fmt args)))
 
 (defn find-root
   [tone tones]
@@ -40,7 +49,7 @@
      (str "|" (str/join "|" (map show (->> (find-root :e tones) (cycle) (take 25)))) "|")
      "\n")))
 
-(defn find-chord [chords-map all-tones chord-tones]
+(defn find-chord-name [chords-map all-tones chord-tones]
   (let [[root-tone & _] chord-tones
         tones           (find-root root-tone all-tones)]
     (->> chords-map
@@ -53,6 +62,14 @@
                                           s))))
          (map :chord-name)
          first)))
+
+(defn find-chord [chords-map all-tones chord-tones]
+  (let [[root-tone & _] chord-tones
+        tones           (find-root root-tone all-tones)]
+    (->> (vals chords-map)
+         (filter (fn [{:keys [f] :as m}]
+                   (= chord-tones (f tones))))
+         (first))))
 
 (defn pred [x xs]
   {:pre [((set xs) x)]}
