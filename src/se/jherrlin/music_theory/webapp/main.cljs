@@ -158,7 +158,17 @@
             [:div {:style {:margin-left "10px"}}
              [:a {:href (rfe/href ::harmonization {:tone tone :major-or-minor major-or-minor :triad-or-seventh triad-or-seventh})} title]])]
 
+       [:div {:style {:display "flex"}}
+        [:div {:style {:margin-left "10px"}}
+         [:a {:href (rfe/href ::harmonization {:tone tone :major-or-minor :major :triad-or-seventh triad-or-seventh})} "major"]]
+        [:div {:style {:margin-left "10px"}}
+         [:a {:href (rfe/href ::harmonization {:tone tone :major-or-minor :minor :triad-or-seventh triad-or-seventh})} "minor"]]]
 
+       [:div {:style {:display "flex"}}
+        [:div {:style {:margin-left "10px"}}
+         [:a {:href (rfe/href ::harmonization {:tone tone :major-or-minor major-or-minor :triad-or-seventh :triad})} "triad"]]
+        [:div {:style {:margin-left "10px"}}
+         [:a {:href (rfe/href ::harmonization {:tone tone :major-or-minor major-or-minor :triad-or-seventh :seventh})} "seventh"]]]
 
        [:code
         [:pre
