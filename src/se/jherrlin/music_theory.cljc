@@ -1,6 +1,14 @@
 (ns se.jherrlin.music-theory
   (:require
-   [se.jherrlin.music-theory.intervals :as intervals]
+   [se.jherrlin.music-theory.intervals
+    :refer [perfect-unison root minor-second major-second
+            augmented-second minor-third major-third
+            augmented-third diminished-fourth perfect-fourth
+            augmented-fourth diminished-fifth perfect-fifth
+            augmented-fifth minor-sixth major-sixth augmented-sixth
+            diminished-seventh minor-seventh major-seventh
+            octave perfect-octave]
+    :as intervals]
    [se.jherrlin.music-theory.utils
     :refer [fformat find-chord find-chord-name  find-root
             fret-table-with-tones match-chord-with-scales]
@@ -32,7 +40,9 @@
   (find-chord @chords-atom tones chord-tones))
 (defn match-chord-with-scales-p [chord-indexes]
   (match-chord-with-scales @scales-atom chord-indexes))
-
+(defn interval [tones tone i]
+  (nth (find-root tone tones) i))
+(def interval-p (partial interval tones))
 
 
 ;; ---------------
@@ -277,6 +287,107 @@
 ;; --------------------
 
 
+;; --------------------
+;; Modes
+;; --------------------
+(def modes-atom (atom {}))
+
+(defn define-mode [pattern-name meta-data pattern]
+  (swap! modes-atom assoc-in [pattern-name :pattern] pattern)
+  )
+
+(define-mode :ionian-6
+  {:scale :ionian
+   :fret  6}
+  [[nil          nil             nil            nil]
+   [nil          nil             nil            nil]
+   [nil          nil             nil            nil]
+   [major-sixth  nil             major-seventh  root]
+   [major-third  perfect-fourth  nil            perfect-fifth]
+   [nil          root            nil            major-second]])
+
+(define-mode :ionian-5
+  {:scale :ionian
+   :fret  5}
+  [[nil          nil             nil            nil]
+   [nil          nil             nil            nil]
+   [major-sixth  nil             major-seventh  root]
+   [major-third  perfect-fourth  nil            perfect-fifth]
+   [nil          root            nil            major-second]
+   [nil          nil             nil            nil]])
+
+(defn fret-tones [string-tones]
+  (->> string-tones
+       (mapv #(->> (find-root-p %)
+                   (cycle)
+                   (take 25)
+                   (vec)))))
+
+(defn mode [root-tone mode-spec]
+  (let [mode-pred-lenght (-> mode-spec first count)
+        string-tones     [:e :b :g :d :a :e]
+        fret-tones'      (fret-tones string-tones)]
+    (loop [counter 0]
+      (let [combinations
+            (->>  fret-tones'
+                  (mapv (comp vec (partial take mode-pred-lenght) (partial drop counter)))
+                  (apply concat)
+                  (mapv vector (apply concat mode-spec)))
+            box-match? (->> combinations
+                            (remove (comp nil? first))
+                            (every? (fn [[interval' tone']]
+                                      (= (interval-p root-tone interval') tone'))))]
+        (if box-match?
+          {:root-starts-at-fret counter
+           :fret                (->> combinations
+                                     (mapv (fn [[interval' tone']]
+                                             (when (and interval' (= (interval-p root-tone interval') tone'))
+                                               tone')))
+                                     (partition mode-pred-lenght))}
+          (recur (inc counter)))))))
+
+
+(defn list-insert [lst elem index]
+  (let [[l r] (split-at index lst)]
+    (concat l [elem] r)))
+
+(defn mode-str [{:keys [root-starts-at-fret fret]}]
+  (let [fret       (reverse fret)
+        box-lenght (-> fret first count)
+        rows       (->> [(map str (range 16))
+                         (->> (concat (repeat root-starts-at-fret nil) (nth fret 5) (repeat (- 13 (+ root-starts-at-fret box-lenght)) nil)) (map #(if (nil? %) "" (-> % name str/upper-case))))
+                         (->> (concat (repeat root-starts-at-fret nil) (nth fret 4) (repeat (- 13 (+ root-starts-at-fret box-lenght)) nil)) (map #(if (nil? %) "" (-> % name str/upper-case))))
+                         (->> (concat (repeat root-starts-at-fret nil) (nth fret 3) (repeat (- 13 (+ root-starts-at-fret box-lenght)) nil)) (map #(if (nil? %) "" (-> % name str/upper-case))))
+                         (->> (concat (repeat root-starts-at-fret nil) (nth fret 2) (repeat (- 13 (+ root-starts-at-fret box-lenght)) nil)) (map #(if (nil? %) "" (-> % name str/upper-case))))
+                         (->> (concat (repeat root-starts-at-fret nil) (nth fret 1) (repeat (- 13 (+ root-starts-at-fret box-lenght)) nil)) (map #(if (nil? %) "" (-> % name str/upper-case))))
+                         (->> (concat (repeat root-starts-at-fret nil) (nth fret 0) (repeat (- 13 (+ root-starts-at-fret box-lenght)) nil)) (map #(if (nil? %) "" (-> % name str/upper-case))))]
+                        (map (fn [row]
+                               (apply str (interpose "|" (map #(format "  %-4s" %) row)))))
+                        (map (fn [row]
+                               (str "|" row "|"))))
+        row-length (-> rows first count)]
+    (->> (list-insert rows (str "|" (apply str (take (- row-length 2) (repeat "-"))) "|") 1)
+         (str/join "\n"))))
+
+(println
+ (mode-str
+  (->> @modes-atom :ionian-6 :pattern (mode :c))))
+
+(let [{:keys [root-starts-at-fret fret]}
+      (->> @modes-atom :ionian-6 :pattern (mode :c))]
+  (->> fret
+       (mapv (fn [row]
+               (let [row-with-prefix        (concat (take root-starts-at-fret (repeat nil)) row)
+                     row-with-prefix-length (count row-with-prefix)]
+                 (vec (concat row-with-prefix (take (- 16 row-with-prefix-length) (repeat nil)))))))
+
+       )
+  )
+
+
+;; --------------------
+;; Modes end
+;; --------------------
 
 
 ;; mode to chord
