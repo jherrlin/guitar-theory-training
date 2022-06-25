@@ -1,6 +1,5 @@
 (ns music-theory
   (:require
-   [chords :refer [chords defchord]]
    [clojure.string :as str]
    [utils :refer [docstring->m find-chord find-root fret-table-with-tones juxt-intervals]]))
 
@@ -895,8 +894,7 @@
    [root            minor-second      nil            minor-third]])
 
 (defn mode [root-tone mode-spec]
-  (let [all-tones        (find-root-p root-tone)
-        mode-pred-lenght (-> mode-spec first count)
+  (let [mode-pred-lenght (-> mode-spec first count)
         string-tones     [:e :b :g :d :a :e]
         fret-tones       (->> string-tones
                               (mapv #(->> (find-root-p %)
@@ -948,9 +946,9 @@
 
 (comment
 
-  (->> (mode :c ionic-mode-spec)
+  (->> (mode :c ionian-mode-spec)
        (mode-str)
-       print)
+       #_print)
 
   (->> (mode :d phrygian-mode-spec)
        mode-str
