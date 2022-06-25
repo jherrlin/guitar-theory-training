@@ -4,7 +4,7 @@
    [se.jherrlin.music-theory.utils
     :refer [docstring->m find-chord-name find-root
             fret-table-with-tones juxt-intervals
-            find-chord fformat]
+            find-chord fformat match-chord-with-scales]
     :as utils]
    [clojure.string :as str]
    [clojure.set :as set]))
@@ -31,7 +31,8 @@
   (find-chord-name @chords-atom tones chord-tones))
 (defn find-chord-p [chord-tones]
   (find-chord @chords-atom tones chord-tones))
-
+(defn match-chord-with-scales-p [chord-indexes]
+  (match-chord-with-scales @scales-atom chord-indexes))
 
 
 
@@ -144,7 +145,6 @@
 ;; ---------------
 ;; Chords end
 ;; ---------------
-
 
 ;; ---------------
 ;; Scales
@@ -285,8 +285,6 @@
    (->> xs (map (comp #(fformat "   %-10s" %) str :family-str)) (str/join))
    "\n"
    (->> xs (map (comp #(fformat "   %-10s" %) str :chord-name)) (str/join))))
-
-
 ;; --------------------
 ;; Diatonic chord progressions end
 ;; --------------------
@@ -300,3 +298,5 @@
       :when (set/subset? (set (:indexes chord)) (set (:indexes scale)))]
   {:chord chord
    :scale scale})
+
+(match-chord-with-scales-p [0 4 7])

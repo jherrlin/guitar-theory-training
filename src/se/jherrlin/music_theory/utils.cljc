@@ -1,6 +1,7 @@
 (ns se.jherrlin.music-theory.utils
   (:require
    [clojure.string :as str]
+   [clojure.set :as set]
    #?(:cljs [goog.string.format])
    #?(:cljs [goog.string :as gstring])))
 
@@ -95,3 +96,10 @@
       {:short     short
        :full      full
        :functions functions})))
+
+(defn match-chord-with-scales [scales-map chord-indexes]
+  (->> scales-map
+       (vals)
+       (filter (fn [scale]
+                 (let [scale-indexes (get scale :indexes)]
+                   (set/subset? (set chord-indexes) (set scale-indexes)))))))
