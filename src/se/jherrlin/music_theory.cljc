@@ -503,6 +503,67 @@
 ;; Modes end
 ;; --------------------
 
+;; --------------------
+;; Chord patterns
+;; --------------------
+(def chord-patterns-atom (atom {}))
+
+@chord-patterns-atom
+
+(defn define-chord-pattern
+  ([pattern-name pattern]
+   (define-chord-pattern pattern-name {} pattern))
+  ([pattern-name meta-data pattern]
+   (let [meta-data (->> meta-data
+                        (map (fn [[k v]]
+                               [(->> k name (str "chord-pattern/") keyword) v]))
+                        (into {}))]
+     (swap! chord-patterns-atom assoc pattern-name
+            (assoc meta-data
+                   :chord/pattern pattern
+                   :chord/pattern-id pattern-name
+                   :chord/pattern-title (name pattern-name))))))
+
+(define-chord-pattern :major-1
+  [[major-third   nil   nil          nil]
+   [nil           root  nil          nil]
+   [perfect-fifth nil   nil          nil]
+   [nil           nil   major-third  nil]
+   [nil           nil   nil          root]
+   [nil           nil   nil          nil]])
+
+(define-chord-pattern :major-2
+  [[perfect-fifth nil nil]
+   [nil nil major-third]
+   [nil nil root]
+   [nil nil perfect-fifth]
+   [root nil nil]
+   [nil nil nil]])
+
+(define-chord-pattern :major-3
+  [[root nil nil]
+   [perfect-fifth nil nil]
+   [nil major-third nil]
+   [nil nil root]
+   [nil nil perfect-fifth]
+   [root nil nil]])
+
+
+(defn mode-pattern-str-1 [modes-atom mode-pattern tone]
+  (->> modes-atom mode-pattern :chord/pattern (mode tone)
+       prepair-mode
+       mode-str))
+
+(->> @chord-patterns-atom :major-1 :chord/pattern (mode :c))
+
+(print
+ (mode-pattern-str-1 @chord-patterns-atom :major-3 :c))
+
+;; --------------------
+;; Chord patterns end
+;; --------------------
+
+
 
 ;; mode to chord
 (for [scale (vals @scales-atom)
