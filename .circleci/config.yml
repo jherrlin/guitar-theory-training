@@ -17,7 +17,7 @@ jobs:
       - run: sudo npm install -g shadow-cljs
       - run: npm install
       - run: shadow-cljs release frontend
-      - run: mkdir js
+      - run: mkdir -p js
       - run: mv resources/public/js/main.js js/
       - run: mv resources/public/index.html .
       - run:
