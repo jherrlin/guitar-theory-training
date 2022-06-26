@@ -85,9 +85,13 @@
        "Scales"]
       [:> semantic-ui/Menu.Item
        {:as   "a"
-        :href (rfe/href ::harmonization {:tone :c :major-or-minor :major :triad-or-seventh :triad})
-        }
-       "Harmonizations"]]]))
+        :href (rfe/href ::harmonization {:tone :c :major-or-minor :major :triad-or-seventh :triad})}
+       "Harmonizations"]
+
+      [:> semantic-ui/Menu.Item
+       {:as   "a"
+        :href (rfe/href ::mode {:scale :ionian :key :c})}
+       "Modes"]]]))
 
 (some->> @(re-frame/subscribe [:current-route])
          :data :view)
@@ -290,6 +294,58 @@
 
 
 
+(defn mode-view []
+  (let [scale @(re-frame/subscribe [::scale])
+        key   @(re-frame/subscribe [::key])]
+    (when (and scale key)
+      [:div
+
+       [:div {:style {:display "flex"}}
+        (for [{:keys [tone url-name title]}
+              (->> (music-theory/find-root-p :a)
+                   (map (fn [x] {:tone     x
+                                 :url-name (-> x name str/lower-case (str/replace "#" "sharp"))
+                                 :title    (-> x name str/upper-case)})))]
+          ^{:key url-name}
+          [:div {:style {:margin-left "10px"}}
+           [:a {:href (rfe/href ::mode {:scale scale :key tone})} title]])]
+
+
+       [:div {:style {:display "flex"}}
+        (for [{:keys [title scale]}
+              (->> @music-theory/modes-atom
+                   vals
+                   (map (fn [{:mode/keys [scale] :as m}]
+                          (merge m (get @music-theory/scales-atom scale))))
+                   (map (fn [{scale :mode/scale title :scale/title}]
+                          {:scale scale
+                           :title title}))
+                   (set)
+                   (sort-by :title))]
+          ^{:key (str title "-mode-select")}
+          [:div {:style {:margin-left "10px"}}
+           [:a {:href (rfe/href ::mode {:scale scale :key key})} title]])]
+
+       [:h2 (str (name key) " / " (name scale))]
+
+       [:div
+        (for [{mode-title   :mode/title
+               mode-pattern :mode/pattern
+               mode-id      :mode/id
+               scale-title  :scale/title}
+              (->> @music-theory/modes-atom
+                   vals
+                   (map (fn [{:mode/keys [scale] :as m}]
+                          (merge m (get @music-theory/scales-atom scale))))
+                   (filter (comp #{scale} :mode/scale)))]
+          ^{:key (str mode-title "-mode")}
+          [:div
+           [:p mode-title]
+           [:code
+            [:pre
+             (music-theory/mode-pattern-str-p mode-id key)]]])]])))
+
+
 (def routes
   ["/"
    [""
@@ -324,6 +380,8 @@
                        (re-frame/dispatch [::chord (keyword chord-name)])))
        :stop       (fn [& params] (js/console.log "Leaving..."))}]}]
 
+
+
    ["scale"
     {:name      ::scale-redirect
      :controllers
@@ -344,6 +402,21 @@
                        (re-frame/dispatch [::scale scale'])
                        (re-frame/dispatch [::key key'])))
        :stop       (fn [& params] (js/console.log "Leaving scale"))}]}]
+
+
+   ["mode/:scale/:key"
+    {:name      ::mode
+     :view      [mode-view]
+     :link-text "mode"
+     :controllers
+     [{:parameters {:path [:scale :key]}
+       :start      (fn [{{:keys [scale key]} :path}]
+                     (let [scale' (keyword scale)
+                           key'   (keyword key)]
+                       (js/console.log "Entering mode:" scale key)
+                       (re-frame/dispatch [::scale scale'])
+                       (re-frame/dispatch [::key key'])))
+       :stop       (fn [& params] (js/console.log "Leaving mode"))}]}]
 
    ["harmonization/:tone/:major-or-minor/:triad-or-seventh"
     {:name      ::harmonization

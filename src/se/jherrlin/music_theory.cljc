@@ -292,9 +292,21 @@
 ;; --------------------
 (def modes-atom (atom {}))
 
-(defn define-mode [pattern-name meta-data pattern]
-  (swap! modes-atom assoc-in [pattern-name :pattern] pattern)
-  )
+@modes-atom
+
+(defn define-mode
+  ([pattern-name pattern]
+   (define-mode pattern-name {} pattern))
+  ([pattern-name meta-data pattern]
+   (let [meta-data (->> meta-data
+                        (map (fn [[k v]]
+                               [(->> k name (str "mode/") keyword) v]))
+                        (into {}))]
+     (swap! modes-atom assoc pattern-name
+            (assoc meta-data
+                   :mode/pattern pattern
+                   :mode/id pattern-name
+                   :mode/title (name pattern-name))))))
 
 (define-mode :ionian-6
   {:scale :ionian
@@ -336,7 +348,6 @@
    [nil          nil             nil            nil]
    [nil          nil             nil            nil]])
 
-
 (define-mode :mixolydian-6
   {:scale :mixolydian
    :string  6}
@@ -376,8 +387,6 @@
    [nil          nil             nil            nil]
    [nil          nil             nil            nil]
    [nil          nil             nil            nil]])
-
-
 
 (define-mode :aeolian-6
   {:scale  :aeolian
@@ -427,8 +436,7 @@
            :fret                (->> combinations
                                      (mapv (fn [[interval' tone']]
                                              (when (and interval' (= (interval-p root-tone interval') tone'))
-                                               tone'
-                                               #_{:interval interval'
+                                               {:interval interval'
                                                 :tone tone'})))
                                      (partition mode-pred-lenght))}
           (recur (inc counter)))))))
@@ -438,38 +446,57 @@
   (let [[l r] (split-at index lst)]
     (concat l [elem] r)))
 
-(defn mode-str [{:keys [root-starts-at-fret fret]}]
-  (let [fret       (reverse fret)
-        box-lenght (-> fret first count)
+(defn mode-str [fret]
+  (let [fret (reverse fret)
+        get-string (fn [n] (map (comp #(if (nil? %) "" (-> % name str/upper-case)) :tone) (nth fret n)))
         rows       (->> [(map str (range 16))
-                         (->> (concat (repeat root-starts-at-fret nil) (nth fret 5) (repeat (- 13 (+ root-starts-at-fret box-lenght)) nil)) (map #(if (nil? %) "" (-> % name str/upper-case))))
-                         (->> (concat (repeat root-starts-at-fret nil) (nth fret 4) (repeat (- 13 (+ root-starts-at-fret box-lenght)) nil)) (map #(if (nil? %) "" (-> % name str/upper-case))))
-                         (->> (concat (repeat root-starts-at-fret nil) (nth fret 3) (repeat (- 13 (+ root-starts-at-fret box-lenght)) nil)) (map #(if (nil? %) "" (-> % name str/upper-case))))
-                         (->> (concat (repeat root-starts-at-fret nil) (nth fret 2) (repeat (- 13 (+ root-starts-at-fret box-lenght)) nil)) (map #(if (nil? %) "" (-> % name str/upper-case))))
-                         (->> (concat (repeat root-starts-at-fret nil) (nth fret 1) (repeat (- 13 (+ root-starts-at-fret box-lenght)) nil)) (map #(if (nil? %) "" (-> % name str/upper-case))))
-                         (->> (concat (repeat root-starts-at-fret nil) (nth fret 0) (repeat (- 13 (+ root-starts-at-fret box-lenght)) nil)) (map #(if (nil? %) "" (-> % name str/upper-case))))]
+                         (get-string 5)
+                         (get-string 4)
+                         (get-string 3)
+                         (get-string 2)
+                         (get-string 1)
+                         (get-string 0)]
                         (map (fn [row]
-                               (apply str (interpose "|" (map #(format "  %-4s" %) row)))))
+                               (apply str (interpose "|" (map #(fformat "  %-4s" %) row)))))
                         (map (fn [row]
                                (str "|" row "|"))))
         row-length (-> rows first count)]
     (->> (list-insert rows (str "|" (apply str (take (- row-length 2) (repeat "-"))) "|") 1)
          (str/join "\n"))))
 
-(println
- (mode-str
-  (->> @modes-atom :aeolian-5 :pattern (mode :a))))
-
-(let [{:keys [root-starts-at-fret fret]}
-      (->> @modes-atom :ionian-6 :pattern (mode :c))]
+(defn prepair-mode [{:keys [root-starts-at-fret fret]}]
   (->> fret
        (mapv (fn [row]
                (let [row-with-prefix        (concat (take root-starts-at-fret (repeat nil)) row)
                      row-with-prefix-length (count row-with-prefix)]
-                 (vec (concat row-with-prefix (take (- 16 row-with-prefix-length) (repeat nil)))))))
+                 (vec (concat row-with-prefix (take (- 16 row-with-prefix-length) (repeat nil)))))))))
 
-       )
-  )
+(defn mode-pattern-str [modes-atom mode-pattern tone]
+  (->> modes-atom mode-pattern :mode/pattern (mode tone)
+       prepair-mode
+       mode-str))
+
+
+(defn mode-pattern-str-p [mode-pattern tone]
+  (mode-pattern-str @modes-atom mode-pattern tone))
+
+
+(print
+ (mode-pattern-str @modes-atom :mixolydian-6 :g))
+
+
+(->> @modes-atom
+     vals
+     (map (fn [{:mode/keys [scale] :as m}]
+            (merge m (get @scales-atom scale))))
+     (map (fn [{scale :mode/scale title :scale/title}]
+            {:scale scale
+             :title title}))
+     (set)
+     (sort-by :title)
+     )
+
+
 
 
 ;; --------------------
