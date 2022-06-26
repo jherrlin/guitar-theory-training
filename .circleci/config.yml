@@ -10,19 +10,24 @@ jobs:
       TZ: "Europe/Stockholm"
 
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "6a:34:9d:06:d9:29:cb:ca:f7:37:49:09:6b:df:29:0a"
       - checkout
       - run: sudo npm install -g shadow-cljs
       - run: npm install
       - run: shadow-cljs release frontend
-      - run: cp
+      - run: mkdir js
+      - run: mv resources/public/js/main.js js/
+      - run: mv resources/public/index.html .
       - run:
           name: Commit to GitHub
           command: |
             git config user.email "jherrlin@gmail.com"
             git config user.name "CircleCI Job"
-            git checkout master
+            git add js/ index.html
             git commit --allow-empty -am "Automatic commit from CircleCI [skip ci]"
-            git push origin master
+            git push -f origin gh-pages
 
 workflows:
   version: 2
