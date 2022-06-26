@@ -298,7 +298,7 @@
 
 (define-mode :ionian-6
   {:scale :ionian
-   :fret  6}
+   :string  6}
   [[nil          nil             nil            nil]
    [nil          nil             nil            nil]
    [nil          nil             nil            nil]
@@ -308,13 +308,98 @@
 
 (define-mode :ionian-5
   {:scale :ionian
-   :fret  5}
+   :string  5}
   [[nil          nil             nil            nil]
    [nil          nil             nil            nil]
    [major-sixth  nil             major-seventh  root]
    [major-third  perfect-fourth  nil            perfect-fifth]
    [nil          root            nil            major-second]
    [nil          nil             nil            nil]])
+
+(define-mode :ionian-4
+  {:scale :ionian
+   :string  4}
+  [[nil          nil             nil            nil            nil]
+   [nil          major-sixth     nil            major-seventh  root]
+   [major-third  perfect-fourth  nil            perfect-fifth  nil]
+   [nil          root            nil            major-second   nil]
+   [nil          nil             nil            nil            nil]
+   [nil          nil             nil            nil            nil]])
+
+(define-mode :ionian-3
+  {:scale :ionian
+   :string  3}
+  [[major-sixth  nil             major-seventh  root]
+   [major-third  perfect-fourth  nil            perfect-fifth]
+   [root         nil             major-second   nil]
+   [nil          nil             nil            nil]
+   [nil          nil             nil            nil]
+   [nil          nil             nil            nil]])
+
+
+(define-mode :mixolydian-6
+  {:scale :mixolydian
+   :string  6}
+  [[nil          nil             nil            nil]
+   [nil          nil             nil            nil]
+   [nil          nil             nil            nil]
+   [major-sixth  minor-seventh   nil            root]
+   [major-third  perfect-fourth  nil            perfect-fifth]
+   [nil          root            nil            major-second]])
+
+(define-mode :mixolydian-5
+  {:scale :mixolydian
+   :string  5}
+  [[nil          nil             nil            nil]
+   [nil          nil             nil            nil]
+   [major-sixth  minor-seventh   nil            root]
+   [major-third  perfect-fourth  nil            perfect-fifth]
+   [nil          root            nil            major-second]
+   [nil          nil             nil            nil]])
+
+(define-mode :mixolydian-4
+  {:scale :mixolydian
+   :string  4}
+  [[nil          nil             nil            nil            nil]
+   [nil          major-sixth     minor-seventh  nil            root]
+   [major-third  perfect-fourth  nil            perfect-fifth  nil]
+   [nil          root            nil            major-second   nil]
+   [nil          nil             nil            nil            nil]
+   [nil          nil             nil            nil            nil]])
+
+(define-mode :mixolydian-3
+  {:scale  :mixolydian
+   :string 3}
+  [[major-sixth  minor-seventh   nil            root]
+   [major-third  perfect-fourth  nil            perfect-fifth]
+   [root         nil             major-second   nil]
+   [nil          nil             nil            nil]
+   [nil          nil             nil            nil]
+   [nil          nil             nil            nil]])
+
+
+
+(define-mode :aeolian-6
+  {:scale  :aeolian
+   :string 6}
+  [[nil            nil             nil            nil]
+   [nil            nil             nil            nil]
+   [nil            nil             nil            nil]
+   [minor-seventh  nil             root           nil]
+   [perfect-fourth nil             perfect-fifth  minor-sixth]
+   [root           nil             major-second   minor-third]])
+
+(define-mode :aeolian-5
+  {:scale  :aeolian
+   :string 5}
+  [[nil            nil             nil            nil]
+   [nil            nil             nil            nil]
+   [minor-seventh  nil             root           nil]
+   [perfect-fourth nil             perfect-fifth  minor-sixth]
+   [root           nil             major-second   minor-third]
+   [nil            nil             nil            nil]])
+
+
 
 (defn fret-tones [string-tones]
   (->> string-tones
@@ -342,7 +427,9 @@
            :fret                (->> combinations
                                      (mapv (fn [[interval' tone']]
                                              (when (and interval' (= (interval-p root-tone interval') tone'))
-                                               tone')))
+                                               tone'
+                                               #_{:interval interval'
+                                                :tone tone'})))
                                      (partition mode-pred-lenght))}
           (recur (inc counter)))))))
 
@@ -371,7 +458,7 @@
 
 (println
  (mode-str
-  (->> @modes-atom :ionian-6 :pattern (mode :c))))
+  (->> @modes-atom :aeolian-5 :pattern (mode :a))))
 
 (let [{:keys [root-starts-at-fret fret]}
       (->> @modes-atom :ionian-6 :pattern (mode :c))]
