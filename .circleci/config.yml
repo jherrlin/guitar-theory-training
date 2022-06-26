@@ -18,8 +18,8 @@ jobs:
       - run: npm install
       - run: shadow-cljs release frontend
       - run: mkdir -p js
-      - run: mv resources/public/js/main.js js/
-      - run: mv resources/public/index.html .
+      - run: mv -f resources/public/js/main.js js/
+      - run: mv -f resources/public/index.html .
       - run:
           name: Commit to GitHub
           command: |
