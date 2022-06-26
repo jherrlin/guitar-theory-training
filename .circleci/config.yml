@@ -28,6 +28,7 @@ jobs:
             git config user.name "CircleCI Job"
             git fetch --all
             git checkout gh-pages
+            rm -f package-lock.json
             git add js/main.js index.html
             git commit --allow-empty -am "Automatic commit from CircleCI [skip ci]"
             git push -f origin gh-pages
