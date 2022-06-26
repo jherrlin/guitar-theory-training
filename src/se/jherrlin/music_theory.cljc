@@ -457,7 +457,7 @@
                          (get-string 1)
                          (get-string 0)]
                         (map (fn [row]
-                               (apply str (interpose "|" (map #(fformat "  %-4s" %) row)))))
+                               (apply str (interpose "|" (map #(fformat " %-3s" %) row)))))
                         (map (fn [row]
                                (str "|" row "|"))))
         row-length (-> rows first count)]
@@ -525,6 +525,7 @@
                    :chord/pattern-title (name pattern-name))))))
 
 (define-chord-pattern :major-1
+  {:name :major}
   [[major-third   nil   nil          nil]
    [nil           root  nil          nil]
    [perfect-fifth nil   nil          nil]
@@ -533,6 +534,7 @@
    [nil           nil   nil          nil]])
 
 (define-chord-pattern :major-2
+  {:name :major}
   [[perfect-fifth nil nil]
    [nil nil major-third]
    [nil nil root]
@@ -541,13 +543,48 @@
    [nil nil nil]])
 
 (define-chord-pattern :major-3
-  [[root nil nil]
-   [perfect-fifth nil nil]
-   [nil major-third nil]
-   [nil nil root]
-   [nil nil perfect-fifth]
-   [root nil nil]])
+  {:name :major}
+  [[root          nil         nil]
+   [perfect-fifth nil         nil]
+   [nil           major-third nil]
+   [nil           nil         root]
+   [nil           nil         perfect-fifth]
+   [root          nil         nil]])
 
+(define-chord-pattern :minor-1
+  {:name :minor}
+  [[root          nil nil]
+   [perfect-fifth nil nil]
+   [minor-third   nil nil]
+   [nil           nil root]
+   [nil           nil perfect-fifth]
+   [root          nil nil]])
+
+(define-chord-pattern :minor-2
+  {:name :minor}
+  [[perfect-fifth  nil          nil]
+   [nil            minor-third  nil]
+   [nil            nil          root]
+   [nil            nil          perfect-fifth]
+   [root           nil          nil]
+   [nil            nil          nil]])
+
+(define-chord-pattern :minor-3
+  {:name :minor}
+  [[nil            minor-third  nil            nil]
+   [nil            nil          nil            root]
+   [nil            nil          perfect-fifth  nil]
+   [root           nil          nil            nil]
+   [nil            nil          nil            nil]
+   [nil            nil          nil            nil]])
+
+
+(define-chord-pattern :dominant-seven-1
+  {:name :dominant-seven}
+  [])
+
+
+@chords-atom
 
 (defn mode-pattern-str-1 [modes-atom mode-pattern tone]
   (->> modes-atom mode-pattern :chord/pattern (mode tone)
@@ -557,7 +594,13 @@
 (->> @chord-patterns-atom :major-1 :chord/pattern (mode :c))
 
 (print
- (mode-pattern-str-1 @chord-patterns-atom :major-3 :c))
+ (mode-pattern-str-1 @chord-patterns-atom :minor-3 :e))
+
+(let [chord :major]
+  (->> @chord-patterns-atom
+       vals
+       (filter (comp #{chord} :chord-pattern/name))))
+:chord/pattern-id
 
 ;; --------------------
 ;; Chord patterns end

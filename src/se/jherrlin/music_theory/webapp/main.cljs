@@ -249,7 +249,19 @@
           [:pre
            (music-theory/fret-table-with-tones-p
             ((get-in @music-theory/chords-atom [@(re-frame/subscribe [::chord]) :chord/f])
-             (music-theory/find-root-p @(re-frame/subscribe [::tone]))))]]]))))
+             (music-theory/find-root-p @(re-frame/subscribe [::tone]))))]]
+
+         [:div
+          (for [{id :chord/pattern-id}
+                (->> @music-theory/chord-patterns-atom
+                     vals
+                     (filter (comp #{chord} :chord-pattern/name)))]
+            ^{:key (-> id name)}
+            [:pre
+             (music-theory/mode-pattern-str-1 @music-theory/chord-patterns-atom id tone)]
+            )
+          ]
+         ]))))
 
 
 
