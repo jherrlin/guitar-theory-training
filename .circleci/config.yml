@@ -20,6 +20,7 @@ jobs:
       - run: mkdir -p js
       - run: mv -f resources/public/js/main.js js/
       - run: mv -f resources/public/index.html .
+      - run: ls -lha
       - run:
           name: Commit to GitHub
           command: |
@@ -27,9 +28,9 @@ jobs:
             git config user.name "CircleCI Job"
             git fetch --all
             git checkout gh-pages
-            git add js/ index.html
+            git add js/main.js index.html
             git commit --allow-empty -am "Automatic commit from CircleCI [skip ci]"
-            git push -f origin gh-pages
+            git push -f gh-pages
 
 workflows:
   version: 2
