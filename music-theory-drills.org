@@ -51,7 +51,7 @@
     C, E, G, A#
 
     Functions:   1 3 5 b7
-    Description: C 
+    Description: C dominant (major) seven
 
 
 | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
@@ -72,7 +72,7 @@
     C7
 
     Functions:   1 3 5 b7
-    Description: C 
+    Description: C dominant (major) seven
 
 
 | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
@@ -597,7 +597,7 @@
     C#, F, G#, B
 
     Functions:   1 3 5 b7
-    Description: C# 
+    Description: C# dominant (major) seven
 
 
 | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
@@ -618,7 +618,7 @@
     C#7
 
     Functions:   1 3 5 b7
-    Description: C# 
+    Description: C# dominant (major) seven
 
 
 | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
@@ -1143,7 +1143,7 @@
     D, F#, A, C
 
     Functions:   1 3 5 b7
-    Description: D 
+    Description: D dominant (major) seven
 
 
 | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
@@ -1164,7 +1164,7 @@
     D7
 
     Functions:   1 3 5 b7
-    Description: D 
+    Description: D dominant (major) seven
 
 
 | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
@@ -1689,7 +1689,7 @@
     D#, G, A#, C#
 
     Functions:   1 3 5 b7
-    Description: D# 
+    Description: D# dominant (major) seven
 
 
 | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
@@ -1710,7 +1710,7 @@
     D#7
 
     Functions:   1 3 5 b7
-    Description: D# 
+    Description: D# dominant (major) seven
 
 
 | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
@@ -2235,7 +2235,7 @@
     E, G#, B, D
 
     Functions:   1 3 5 b7
-    Description: E 
+    Description: E dominant (major) seven
 
 
 | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
@@ -2256,7 +2256,7 @@
     E7
 
     Functions:   1 3 5 b7
-    Description: E 
+    Description: E dominant (major) seven
 
 
 | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
@@ -2781,7 +2781,7 @@
     F, A, C, D#
 
     Functions:   1 3 5 b7
-    Description: F 
+    Description: F dominant (major) seven
 
 
 | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
@@ -2802,7 +2802,7 @@
     F7
 
     Functions:   1 3 5 b7
-    Description: F 
+    Description: F dominant (major) seven
 
 
 | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
@@ -3327,7 +3327,7 @@
     F#, A#, C#, E
 
     Functions:   1 3 5 b7
-    Description: F# 
+    Description: F# dominant (major) seven
 
 
 | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
@@ -3348,7 +3348,7 @@
     F#7
 
     Functions:   1 3 5 b7
-    Description: F# 
+    Description: F# dominant (major) seven
 
 
 | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
@@ -3873,7 +3873,7 @@
     G, B, D, F
 
     Functions:   1 3 5 b7
-    Description: G 
+    Description: G dominant (major) seven
 
 
 | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
@@ -3894,7 +3894,7 @@
     G7
 
     Functions:   1 3 5 b7
-    Description: G 
+    Description: G dominant (major) seven
 
 
 | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
@@ -4419,7 +4419,7 @@
     G#, C, D#, F#
 
     Functions:   1 3 5 b7
-    Description: G# 
+    Description: G# dominant (major) seven
 
 
 | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
@@ -4440,7 +4440,7 @@
     G#7
 
     Functions:   1 3 5 b7
-    Description: G# 
+    Description: G# dominant (major) seven
 
 
 | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
@@ -4965,7 +4965,7 @@
     A, C#, E, G
 
     Functions:   1 3 5 b7
-    Description: A 
+    Description: A dominant (major) seven
 
 
 | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
@@ -4986,7 +4986,7 @@
     A7
 
     Functions:   1 3 5 b7
-    Description: A 
+    Description: A dominant (major) seven
 
 
 | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
@@ -5511,7 +5511,7 @@
     A#, D, F, G#
 
     Functions:   1 3 5 b7
-    Description: A# 
+    Description: A# dominant (major) seven
 
 
 | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
@@ -5532,7 +5532,7 @@
     A#7
 
     Functions:   1 3 5 b7
-    Description: A# 
+    Description: A# dominant (major) seven
 
 
 | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
@@ -6057,7 +6057,7 @@
     B, D#, F#, A
 
     Functions:   1 3 5 b7
-    Description: B 
+    Description: B dominant (major) seven
 
 
 | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
@@ -6078,7 +6078,7 @@
     B7
 
     Functions:   1 3 5 b7
-    Description: B 
+    Description: B dominant (major) seven
 
 
 | 0  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 |
@@ -17267,7 +17267,7 @@
    1            2            3            4            5            6            7         
    I            ii           iii          IV           V            vi           vii       
    Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
-   T            S            T            S            D            T            D         
+   Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
    C            Dm           Em           F            G            Am           Bdim      
 
 ** Diatonic chords in C major seventh                          :music:theory:harmonizations:drill:
@@ -17281,7 +17281,7 @@
    1            2            3            4            5            6            7         
    I            ii           iii          IV           V            vi           vii       
    Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
-   T            S            T            S            D            T            D         
+   Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
    Cmaj7        Dm7          Em7          Fmaj7        G7           Am7          Bm7b5     
 
 ** Diatonic chords in C minor                                  :music:theory:harmonizations:drill:
@@ -17295,7 +17295,7 @@
    1            2            3            4            5            6            7         
    i            ii           III          iv           v            VI           VII       
    Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
-   T            S            T            S            D            S            D         
+   Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
    Cm           Ddim         D#           Fm           Gm           G#           A#        
 
 ** Diatonic chords in C minor seventh                          :music:theory:harmonizations:drill:
@@ -17309,7 +17309,7 @@
    1            2            3            4            5            6            7         
    i            ii           III          iv           v            VI           VII       
    Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
-   T            S            T            S            D            S            D         
+   Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
    Cm7          Dm7b5        D#maj7       Fm7          Gm7          G#maj7       A#7       
 
 ** Diatonic chords in C# major                                 :music:theory:harmonizations:drill:
@@ -17323,7 +17323,7 @@
    1            2            3            4            5            6            7         
    I            ii           iii          IV           V            vi           vii       
    Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
-   T            S            T            S            D            T            D         
+   Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
    C#           D#m          Fm           F#           G#           A#m          Cdim      
 
 ** Diatonic chords in C# major seventh                         :music:theory:harmonizations:drill:
@@ -17337,7 +17337,7 @@
    1            2            3            4            5            6            7         
    I            ii           iii          IV           V            vi           vii       
    Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
-   T            S            T            S            D            T            D         
+   Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
    C#maj7       D#m7         Fm7          F#maj7       G#7          A#m7         Cm7b5     
 
 ** Diatonic chords in C# minor                                 :music:theory:harmonizations:drill:
@@ -17351,7 +17351,7 @@
    1            2            3            4            5            6            7         
    i            ii           III          iv           v            VI           VII       
    Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
-   T            S            T            S            D            S            D         
+   Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
    C#m          D#dim        E            F#m          G#m          A            B         
 
 ** Diatonic chords in C# minor seventh                         :music:theory:harmonizations:drill:
@@ -17365,7 +17365,7 @@
    1            2            3            4            5            6            7         
    i            ii           III          iv           v            VI           VII       
    Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
-   T            S            T            S            D            S            D         
+   Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
    C#m7         D#m7b5       Emaj7        F#m7         G#m7         Amaj7        B7        
 
 ** Diatonic chords in D major                                  :music:theory:harmonizations:drill:
@@ -17379,7 +17379,7 @@
    1            2            3            4            5            6            7         
    I            ii           iii          IV           V            vi           vii       
    Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
-   T            S            T            S            D            T            D         
+   Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
    D            Em           F#m          G            A            Bm           C#dim     
 
 ** Diatonic chords in D major seventh                          :music:theory:harmonizations:drill:
@@ -17393,7 +17393,7 @@
    1            2            3            4            5            6            7         
    I            ii           iii          IV           V            vi           vii       
    Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
-   T            S            T            S            D            T            D         
+   Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
    Dmaj7        Em7          F#m7         Gmaj7        A7           Bm7          C#m7b5    
 
 ** Diatonic chords in D minor                                  :music:theory:harmonizations:drill:
@@ -17407,7 +17407,7 @@
    1            2            3            4            5            6            7         
    i            ii           III          iv           v            VI           VII       
    Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
-   T            S            T            S            D            S            D         
+   Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
    Dm           Edim         F            Gm           Am           A#           C         
 
 ** Diatonic chords in D minor seventh                          :music:theory:harmonizations:drill:
@@ -17421,7 +17421,7 @@
    1            2            3            4            5            6            7         
    i            ii           III          iv           v            VI           VII       
    Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
-   T            S            T            S            D            S            D         
+   Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
    Dm7          Em7b5        Fmaj7        Gm7          Am7          A#maj7       C7        
 
 ** Diatonic chords in D# major                                 :music:theory:harmonizations:drill:
@@ -17435,7 +17435,7 @@
    1            2            3            4            5            6            7         
    I            ii           iii          IV           V            vi           vii       
    Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
-   T            S            T            S            D            T            D         
+   Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
    D#           Fm           Gm           G#           A#           Cm           Ddim      
 
 ** Diatonic chords in D# major seventh                         :music:theory:harmonizations:drill:
@@ -17449,7 +17449,7 @@
    1            2            3            4            5            6            7         
    I            ii           iii          IV           V            vi           vii       
    Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
-   T            S            T            S            D            T            D         
+   Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
    D#maj7       Fm7          Gm7          G#maj7       A#7          Cm7          Dm7b5     
 
 ** Diatonic chords in D# minor                                 :music:theory:harmonizations:drill:
@@ -17463,7 +17463,7 @@
    1            2            3            4            5            6            7         
    i            ii           III          iv           v            VI           VII       
    Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
-   T            S            T            S            D            S            D         
+   Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
    D#m          Fdim         F#           G#m          A#m          B            C#        
 
 ** Diatonic chords in D# minor seventh                         :music:theory:harmonizations:drill:
@@ -17477,7 +17477,7 @@
    1            2            3            4            5            6            7         
    i            ii           III          iv           v            VI           VII       
    Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
-   T            S            T            S            D            S            D         
+   Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
    D#m7         Fm7b5        F#maj7       G#m7         A#m7         Bmaj7        C#7       
 
 ** Diatonic chords in E major                                  :music:theory:harmonizations:drill:
@@ -17491,7 +17491,7 @@
    1            2            3            4            5            6            7         
    I            ii           iii          IV           V            vi           vii       
    Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
-   T            S            T            S            D            T            D         
+   Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
    E            F#m          G#m          A            B            C#m          D#dim     
 
 ** Diatonic chords in E major seventh                          :music:theory:harmonizations:drill:
@@ -17505,7 +17505,7 @@
    1            2            3            4            5            6            7         
    I            ii           iii          IV           V            vi           vii       
    Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
-   T            S            T            S            D            T            D         
+   Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
    Emaj7        F#m7         G#m7         Amaj7        B7           C#m7         D#m7b5    
 
 ** Diatonic chords in E minor                                  :music:theory:harmonizations:drill:
@@ -17519,7 +17519,7 @@
    1            2            3            4            5            6            7         
    i            ii           III          iv           v            VI           VII       
    Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
-   T            S            T            S            D            S            D         
+   Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
    Em           F#dim        G            Am           Bm           C            D         
 
 ** Diatonic chords in E minor seventh                          :music:theory:harmonizations:drill:
@@ -17533,7 +17533,7 @@
    1            2            3            4            5            6            7         
    i            ii           III          iv           v            VI           VII       
    Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
-   T            S            T            S            D            S            D         
+   Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
    Em7          F#m7b5       Gmaj7        Am7          Bm7          Cmaj7        D7        
 
 ** Diatonic chords in F major                                  :music:theory:harmonizations:drill:
@@ -17547,7 +17547,7 @@
    1            2            3            4            5            6            7         
    I            ii           iii          IV           V            vi           vii       
    Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
-   T            S            T            S            D            T            D         
+   Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
    F            Gm           Am           A#           C            Dm           Edim      
 
 ** Diatonic chords in F major seventh                          :music:theory:harmonizations:drill:
@@ -17561,7 +17561,7 @@
    1            2            3            4            5            6            7         
    I            ii           iii          IV           V            vi           vii       
    Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
-   T            S            T            S            D            T            D         
+   Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
    Fmaj7        Gm7          Am7          A#maj7       C7           Dm7          Em7b5     
 
 ** Diatonic chords in F minor                                  :music:theory:harmonizations:drill:
@@ -17575,7 +17575,7 @@
    1            2            3            4            5            6            7         
    i            ii           III          iv           v            VI           VII       
    Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
-   T            S            T            S            D            S            D         
+   Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
    Fm           Gdim         G#           A#m          Cm           C#           D#        
 
 ** Diatonic chords in F minor seventh                          :music:theory:harmonizations:drill:
@@ -17589,7 +17589,7 @@
    1            2            3            4            5            6            7         
    i            ii           III          iv           v            VI           VII       
    Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
-   T            S            T            S            D            S            D         
+   Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
    Fm7          Gm7b5        G#maj7       A#m7         Cm7          C#maj7       D#7       
 
 ** Diatonic chords in F# major                                 :music:theory:harmonizations:drill:
@@ -17603,7 +17603,7 @@
    1            2            3            4            5            6            7         
    I            ii           iii          IV           V            vi           vii       
    Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
-   T            S            T            S            D            T            D         
+   Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
    F#           G#m          A#m          B            C#           D#m          Fdim      
 
 ** Diatonic chords in F# major seventh                         :music:theory:harmonizations:drill:
@@ -17617,7 +17617,7 @@
    1            2            3            4            5            6            7         
    I            ii           iii          IV           V            vi           vii       
    Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
-   T            S            T            S            D            T            D         
+   Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
    F#maj7       G#m7         A#m7         Bmaj7        C#7          D#m7         Fm7b5     
 
 ** Diatonic chords in F# minor                                 :music:theory:harmonizations:drill:
@@ -17631,7 +17631,7 @@
    1            2            3            4            5            6            7         
    i            ii           III          iv           v            VI           VII       
    Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
-   T            S            T            S            D            S            D         
+   Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
    F#m          G#dim        A            Bm           C#m          D            E         
 
 ** Diatonic chords in F# minor seventh                         :music:theory:harmonizations:drill:
@@ -17645,7 +17645,7 @@
    1            2            3            4            5            6            7         
    i            ii           III          iv           v            VI           VII       
    Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
-   T            S            T            S            D            S            D         
+   Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
    F#m7         G#m7b5       Amaj7        Bm7          C#m7         Dmaj7        E7        
 
 ** Diatonic chords in G major                                  :music:theory:harmonizations:drill:
@@ -17659,7 +17659,7 @@
    1            2            3            4            5            6            7         
    I            ii           iii          IV           V            vi           vii       
    Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
-   T            S            T            S            D            T            D         
+   Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
    G            Am           Bm           C            D            Em           F#dim     
 
 ** Diatonic chords in G major seventh                          :music:theory:harmonizations:drill:
@@ -17673,7 +17673,7 @@
    1            2            3            4            5            6            7         
    I            ii           iii          IV           V            vi           vii       
    Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
-   T            S            T            S            D            T            D         
+   Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
    Gmaj7        Am7          Bm7          Cmaj7        D7           Em7          F#m7b5    
 
 ** Diatonic chords in G minor                                  :music:theory:harmonizations:drill:
@@ -17687,7 +17687,7 @@
    1            2            3            4            5            6            7         
    i            ii           III          iv           v            VI           VII       
    Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
-   T            S            T            S            D            S            D         
+   Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
    Gm           Adim         A#           Cm           Dm           D#           F         
 
 ** Diatonic chords in G minor seventh                          :music:theory:harmonizations:drill:
@@ -17701,7 +17701,7 @@
    1            2            3            4            5            6            7         
    i            ii           III          iv           v            VI           VII       
    Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
-   T            S            T            S            D            S            D         
+   Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
    Gm7          Am7b5        A#maj7       Cm7          Dm7          D#maj7       F7        
 
 ** Diatonic chords in G# major                                 :music:theory:harmonizations:drill:
@@ -17715,7 +17715,7 @@
    1            2            3            4            5            6            7         
    I            ii           iii          IV           V            vi           vii       
    Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
-   T            S            T            S            D            T            D         
+   Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
    G#           A#m          Cm           C#           D#           Fm           Gdim      
 
 ** Diatonic chords in G# major seventh                         :music:theory:harmonizations:drill:
@@ -17729,7 +17729,7 @@
    1            2            3            4            5            6            7         
    I            ii           iii          IV           V            vi           vii       
    Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
-   T            S            T            S            D            T            D         
+   Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
    G#maj7       A#m7         Cm7          C#maj7       D#7          Fm7          Gm7b5     
 
 ** Diatonic chords in G# minor                                 :music:theory:harmonizations:drill:
@@ -17743,7 +17743,7 @@
    1            2            3            4            5            6            7         
    i            ii           III          iv           v            VI           VII       
    Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
-   T            S            T            S            D            S            D         
+   Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
    G#m          A#dim        B            C#m          D#m          E            F#        
 
 ** Diatonic chords in G# minor seventh                         :music:theory:harmonizations:drill:
@@ -17757,7 +17757,7 @@
    1            2            3            4            5            6            7         
    i            ii           III          iv           v            VI           VII       
    Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
-   T            S            T            S            D            S            D         
+   Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
    G#m7         A#m7b5       Bmaj7        C#m7         D#m7         Emaj7        F#7       
 
 ** Diatonic chords in A major                                  :music:theory:harmonizations:drill:
@@ -17771,7 +17771,7 @@
    1            2            3            4            5            6            7         
    I            ii           iii          IV           V            vi           vii       
    Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
-   T            S            T            S            D            T            D         
+   Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
    A            Bm           C#m          D            E            F#m          G#dim     
 
 ** Diatonic chords in A major seventh                          :music:theory:harmonizations:drill:
@@ -17785,7 +17785,7 @@
    1            2            3            4            5            6            7         
    I            ii           iii          IV           V            vi           vii       
    Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
-   T            S            T            S            D            T            D         
+   Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
    Amaj7        Bm7          C#m7         Dmaj7        E7           F#m7         G#m7b5    
 
 ** Diatonic chords in A minor                                  :music:theory:harmonizations:drill:
@@ -17799,7 +17799,7 @@
    1            2            3            4            5            6            7         
    i            ii           III          iv           v            VI           VII       
    Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
-   T            S            T            S            D            S            D         
+   Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
    Am           Bdim         C            Dm           Em           F            G         
 
 ** Diatonic chords in A minor seventh                          :music:theory:harmonizations:drill:
@@ -17813,7 +17813,7 @@
    1            2            3            4            5            6            7         
    i            ii           III          iv           v            VI           VII       
    Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
-   T            S            T            S            D            S            D         
+   Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
    Am7          Bm7b5        Cmaj7        Dm7          Em7          Fmaj7        G7        
 
 ** Diatonic chords in A# major                                 :music:theory:harmonizations:drill:
@@ -17827,7 +17827,7 @@
    1            2            3            4            5            6            7         
    I            ii           iii          IV           V            vi           vii       
    Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
-   T            S            T            S            D            T            D         
+   Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
    A#           Cm           Dm           D#           F            Gm           Adim      
 
 ** Diatonic chords in A# major seventh                         :music:theory:harmonizations:drill:
@@ -17841,7 +17841,7 @@
    1            2            3            4            5            6            7         
    I            ii           iii          IV           V            vi           vii       
    Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
-   T            S            T            S            D            T            D         
+   Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
    A#maj7       Cm7          Dm7          D#maj7       F7           Gm7          Am7b5     
 
 ** Diatonic chords in A# minor                                 :music:theory:harmonizations:drill:
@@ -17855,7 +17855,7 @@
    1            2            3            4            5            6            7         
    i            ii           III          iv           v            VI           VII       
    Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
-   T            S            T            S            D            S            D         
+   Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
    A#m          Cdim         C#           D#m          Fm           F#           G#        
 
 ** Diatonic chords in A# minor seventh                         :music:theory:harmonizations:drill:
@@ -17869,7 +17869,7 @@
    1            2            3            4            5            6            7         
    i            ii           III          iv           v            VI           VII       
    Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
-   T            S            T            S            D            S            D         
+   Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
    A#m7         Cm7b5        C#maj7       D#m7         Fm7          F#maj7       G#7       
 
 ** Diatonic chords in B major                                  :music:theory:harmonizations:drill:
@@ -17883,7 +17883,7 @@
    1            2            3            4            5            6            7         
    I            ii           iii          IV           V            vi           vii       
    Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
-   T            S            T            S            D            T            D         
+   Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
    B            C#m          D#m          E            F#           G#m          A#dim     
 
 ** Diatonic chords in B major seventh                          :music:theory:harmonizations:drill:
@@ -17897,7 +17897,7 @@
    1            2            3            4            5            6            7         
    I            ii           iii          IV           V            vi           vii       
    Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
-   T            S            T            S            D            T            D         
+   Ionian       Dorian       Phrygian     Lydian       Mixolydian   Aeolian      Locrian   
    Bmaj7        C#m7         D#m7         Emaj7        F#7          G#m7         A#m7b5    
 
 ** Diatonic chords in B minor                                  :music:theory:harmonizations:drill:
@@ -17911,7 +17911,7 @@
    1            2            3            4            5            6            7         
    i            ii           III          iv           v            VI           VII       
    Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
-   T            S            T            S            D            S            D         
+   Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
    Bm           C#dim        D            Em           F#m          G            A         
 
 ** Diatonic chords in B minor seventh                          :music:theory:harmonizations:drill:
@@ -17925,6 +17925,6 @@
    1            2            3            4            5            6            7         
    i            ii           III          iv           v            VI           VII       
    Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
-   T            S            T            S            D            S            D         
+   Aeolian      Locrian      Ionian       Dorian       Phrygian     Lydian       Mixolydian
    Bm7          C#m7b5       Dmaj7        Em7          F#m7         Gmaj7        A7        
 
