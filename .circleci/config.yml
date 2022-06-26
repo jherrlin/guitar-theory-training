@@ -25,6 +25,8 @@ jobs:
           command: |
             git config user.email "jherrlin@gmail.com"
             git config user.name "CircleCI Job"
+            git fetch --all
+            git checkout gh-pages
             git add js/ index.html
             git commit --allow-empty -am "Automatic commit from CircleCI [skip ci]"
             git push -f origin gh-pages
