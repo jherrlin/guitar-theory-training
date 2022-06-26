@@ -17,6 +17,8 @@ jobs:
       - run: sudo npm install -g shadow-cljs
       - run: npm install
       - run: shadow-cljs release frontend
+      - run: mv -f resources/public/js/main.js main.js.bak
+      - run: mv -f resources/public/index.html index.html.bak
       - run:
           name: Commit to GitHub
           command: |
@@ -26,8 +28,8 @@ jobs:
             rm -f package-lock.json
             git checkout gh-pages
             mkdir -p js
-            mv -f resources/public/js/main.js js/
-            mv -f resources/public/index.html .
+            mv -f main.js.bak js/main.js
+            mv -f index.html.bak index.html
             git add js/main.js index.html
             git commit --allow-empty -am "Automatic commit from CircleCI [skip ci]"
             git push -f origin gh-pages
