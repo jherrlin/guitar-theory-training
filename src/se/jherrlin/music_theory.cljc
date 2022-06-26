@@ -579,9 +579,9 @@
    [nil            nil          nil            nil]])
 
 
-(define-chord-pattern :dominant-seven-1
-  {:name :dominant-seven}
-  [])
+;; (define-chord-pattern :dominant-seven-1
+;;   {:name :dominant-seven}
+;;   [])
 
 
 @chords-atom

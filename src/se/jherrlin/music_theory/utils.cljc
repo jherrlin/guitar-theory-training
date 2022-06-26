@@ -110,6 +110,7 @@
                                [(->> k name (str "chord/") keyword) v]))
                         (into {}))
                    :chord/id name'
+                   :chord/intervals-xs (vec (re-seq #"b{0,2}#{0,2}\d" intervals))
                    :chord/intervals intervals
                    :chord/indexes indexes
                    :chord/title (-> name'
@@ -134,6 +135,7 @@
                                [(->> k name (str "scale/") keyword) v]))
                         (into {}))
                    :scale/id name'
+                   :scale/intervals-xs (vec (re-seq #"b{0,2}#{0,2}\d" intervals))
                    :scale/intervals intervals
                    :scale/indexes indexes
                    :scale/title (-> name'

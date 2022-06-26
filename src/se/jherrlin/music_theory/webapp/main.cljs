@@ -1,5 +1,8 @@
 (ns se.jherrlin.music-theory.webapp.main
   (:require
+   [se.jherrlin.music-theory.utils
+    :refer [fformat]
+    :as utils]
    ["semantic-ui-react" :as semantic-ui]
    [se.jherrlin.music-theory :as music-theory]
    [reagent.dom :as rd]
@@ -220,8 +223,10 @@
   (let [chord @(re-frame/subscribe [::chord])
         tone  @(re-frame/subscribe [::tone])]
     (when (and chord tone)
-      (let [{intervals :chord/intervals
-             sufix     :chord/sufix}
+      (let [{intervals    :chord/intervals
+             intervals-xs :chord/intervals-xs
+             sufix        :chord/sufix
+}
             (get-in @music-theory/chords-atom [@(re-frame/subscribe [::chord])])]
         [:div
          [:div {:style {:display "flex"}}
@@ -235,8 +240,8 @@
              [:a {:href (rfe/href ::chord-tones {:tone tone :chord-name chord})} title]])]
 
          [:div {:style {:display "flex"}}
-          (for [{id    :chord/id
-                 sufix :chord/sufix
+          (for [{id          :chord/id
+                 sufix       :chord/sufix
                  explanation :chord/explanation}
                 (->> @music-theory/chords-atom vals)]
             ^{:key (str sufix "-chord")}
@@ -245,6 +250,17 @@
 
          [:p intervals]
          [:p (str (-> tone name str/upper-case) sufix)]
+
+         [:pre
+          (->> (map
+                   (fn [i x]
+                     (str (fformat "%3s" i) " -> " (name x)))
+                   intervals-xs
+                   ((get-in @music-theory/chords-atom [@(re-frame/subscribe [::chord]) :chord/f])
+                    (music-theory/find-root-p @(re-frame/subscribe [::tone]))))
+                  (str/join "\n")
+                  (apply str))]
+
          [:code
           [:pre
            (music-theory/fret-table-with-tones-p
@@ -255,13 +271,10 @@
           (for [{id :chord/pattern-id}
                 (->> @music-theory/chord-patterns-atom
                      vals
-                     (filter (comp #{chord} :chord-pattern/name)))]
+                     (filter (comp #{@(re-frame/subscribe [::chord])} :chord-pattern/name)))]
             ^{:key (-> id name)}
             [:pre
-             (music-theory/mode-pattern-str-1 @music-theory/chord-patterns-atom id tone)]
-            )
-          ]
-         ]))))
+             (music-theory/mode-pattern-str-1 @music-theory/chord-patterns-atom id tone)])]]))))
 
 
 
