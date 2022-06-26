@@ -30,7 +30,7 @@ jobs:
             git checkout gh-pages
             git add js/main.js index.html
             git commit --allow-empty -am "Automatic commit from CircleCI [skip ci]"
-            git push -f gh-pages
+            git push -f origin gh-pages
 
 workflows:
   version: 2
