@@ -55,7 +55,7 @@
    [:button
     ;; Dispatch navigate event that triggers a (side)effect.
     {:on-click #(re-frame/dispatch [::push-state ::harmonization])}
-    "Go to sub-page 2"]])
+    "Welcome to my home page!"]])
 
 (def events-
   [{:n ::tone}
