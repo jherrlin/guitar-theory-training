@@ -201,12 +201,7 @@
            [:p chord-name " | " chord-intervals]
            [:code
             [:pre
-             (music-theory/fret-table-with-tones-p chord-tones)]]])]
-
-       [:div
-        [:code
-         [:pre
-          (with-out-str (cljs.pprint/pprint (music-theory/diatonic-chord-progressions-p tone major-or-minor triad-or-seventh)))]]]])))
+             (music-theory/fret-table-with-tones-p chord-tones)]]])]])))
 
 ;;; Routes ;;;
 
