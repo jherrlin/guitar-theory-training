@@ -1,5 +1,6 @@
 (ns se.jherrlin.music-theory.webapp.main
   (:require
+   [se.jherrlin.drills :as drills]
    [se.jherrlin.music-theory.utils
     :refer [fformat]
     :as utils]
@@ -51,11 +52,28 @@
 
 (defn home-page []
   [:div
-   [:h1 "This is home page"]
-   [:button
-    ;; Dispatch navigate event that triggers a (side)effect.
-    {:on-click #(re-frame/dispatch [::push-state ::harmonization])}
-    "Welcome to my home page!!!"]])
+   [:h1 "Guitar theory"]
+   [:div
+    "In the summer of 2022 I decided to learn a bit of music / guitar theory. "
+    "As a " [:a {:href "https://www.gnu.org/software/emacs/" :target "_blank"} "Emacs"]
+    " user I decided to use my favorite tool to help me out. Ive been using (1) "
+    [:a {:href "https://orgmode.org/worg/org-contrib/org-drill.html" :target "_blank"} "org-drill"]
+    " a couple of times when trying to learn new stuff and I really like it. This
+project started out as a tool that could generate org-drill questions and
+anwsers into a plain text file with "
+    [:a {:href "https://orgmode.org/" :target "_blank"} "org mode"]
+    " structure. The org-drill setup was very useful but I needed to quickly get an
+overview of scales, chords and modes. So I made a small frontend. The source
+code lives on "
+    [:a {:href "https://github.com/jherrlin/guitar-theory-training" :target "_blank"} "GitHub"]
+    " and you are more than welcome to improve the project. Please send a pull
+request."]
+   [:br]
+   [:div "In the webapp you can browse guitar chords, scales, modes and more. And yoy can
+generate org-drill text files that you can use in Emacs to help you learn."]
+   [:br] [:br]
+   [:div "1. org-drill is a Emacs mode where you specify questions and answers in a
+specific text format and a spaced repetition algorithm selects questions."]])
 
 (def events-
   [{:n ::tone}
@@ -94,7 +112,13 @@
       [:> semantic-ui/Menu.Item
        {:as   "a"
         :href (rfe/href ::mode {:scale :ionian :key :c})}
-       "Modes"]]]))
+       "Modes"]
+
+
+      [:> semantic-ui/Menu.Item
+       {:as   "a"
+        :href (rfe/href ::drills)}
+       "Drills"]]]))
 
 (some->> @(re-frame/subscribe [:current-route])
          :data :view)
@@ -366,6 +390,53 @@
              (music-theory/mode-pattern-str-p mode-id key)]]])]])))
 
 
+(def drill-events-
+  [{:n ::tones-in-chord}
+   {:n ::name-the-chord}])
+
+(doseq [{:keys [n s e]} drill-events-]
+  (re-frame/reg-sub n (or s (fn [db _] (get db n))))
+  (re-frame/reg-event-db n (or e (fn [db [_ e]] (assoc db n e)))))
+
+
+(defn download-object [export-name value]
+  (let [data-blob (js/Blob. #js [value] #js {:type "plain/text"})
+        link (.createElement js/document "a")]
+    (set! (.-href link) (.createObjectURL js/URL data-blob))
+    (.setAttribute link "download" export-name)
+    (.appendChild (.-body js/document) link)
+    (.click link)
+    (.removeChild (.-body js/document) link)))
+
+(defn drills-view []
+  (let [tones-in-chord? @(re-frame/subscribe [::tones-in-chord])
+        name-the-chord? @(re-frame/subscribe [::name-the-chord])]
+    [:div
+     [:p "Select questions:"]
+     [:label "tones-in-chord:"]
+     [:input {:type "checkbox" :on-click #(re-frame/dispatch [::tones-in-chord (not tones-in-chord?)])}]
+     [:br]
+     [:label "name-the-chord:"]
+     [:input {:type "checkbox" :on-click #(re-frame/dispatch [::name-the-chord (not name-the-chord?)])}]
+     [:br]
+     [:br]
+     [:button
+      {:on-click
+       (fn [_]
+         (let [tones-in-chord-p
+               (fn []
+                 (drills/tones-in-chord music-theory/find-root-p music-theory/tones @music-theory/chords-atom))
+               name-the-chord-p
+               (fn []
+                 (drills/name-the-chord music-theory/find-root-p music-theory/tones @music-theory/chords-atom))]
+           (download-object
+            "music-theory-drills.org"
+            (str
+             "#+STARTUP: overview\n\n"
+             (when tones-in-chord? (tones-in-chord-p))
+             (when name-the-chord? (name-the-chord-p))))))}
+      "Download questions / answers"]]))
+
 (def routes
   ["/"
    [""
@@ -401,6 +472,10 @@
        :stop       (fn [& params] (js/console.log "Leaving..."))}]}]
 
 
+   ["drills"
+    {:name      ::drills
+     :view      [drills-view]
+     :link-text "drills-view"}]
 
    ["scale"
     {:name      ::scale-redirect
