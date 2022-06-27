@@ -135,9 +135,8 @@
   "1 b3 5 b7")
 
 (define-chord :minor-maj-seven
-  {:sufix        "(maj7)"
-   :explanation  "minor maj 7th"
-   :display-text "maj7"}
+  {:sufix        "m(maj7)"
+   :explanation  "minor maj 7th"}
   "1 b3 5 7")
 
 (define-chord :major-maj-seven
