@@ -148,9 +148,9 @@ specific text format and a spaced repetition algorithm selects questions."]])
     [:<>
      (when current-route
        [:div
-        {:style {:height         "100%"
-                 ;; :display        "flex"
-                 ;; :flex-direction "column"
+        #_{:style {:height         "100%"
+                 :display        "flex"
+                 :flex-direction "column"
                  }}
 
         [header-menu router]
@@ -229,13 +229,13 @@ specific text format and a spaced repetition algorithm selects questions."]])
 
        [:br]
        [:code
-        [:pre {:style {:overflow-x "scroll"}}
+        [:pre {:style {:overflow-x "auto"}}
          (music-theory/diatonic-chord-progressions-str
           (music-theory/diatonic-chord-progressions-p tone major-or-minor triad-or-seventh))]]
        [:div
         [:h3 "All tones"]
         [:code
-         [:pre {:style {:overflow-x "scroll"}}
+         [:pre {:style {:overflow-x "auto"}}
           (music-theory/fret-table-with-tones-p
            (->> (music-theory/diatonic-chord-progressions-p tone major-or-minor triad-or-seventh)
                 (map :chord/tones)
@@ -253,7 +253,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
            [:h3 chord-name]
            [:p "Functions: "chord-intervals]
            [:code
-            [:pre {:style {:overflow-x "scroll"}}
+            [:pre {:style {:overflow-x "auto"}}
              (music-theory/fret-table-with-tones-p chord-tones 16)]]])]])))
 
 ;;; Routes ;;;
@@ -300,7 +300,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
 
          [:h2 (str (-> tone name str/upper-case) sufix)]
 
-         [:pre {:style {:overflow-x "scroll"}}
+         [:pre {:style {:overflow-x "auto"}}
           (->> (map
                 (fn [i x]
                   (str (fformat "%8s" i) " -> " (name x)))
@@ -312,7 +312,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
                (str "Interval -> Tone\n"))]
 
          [:h3 "All tone positions in the chord"]
-         [:pre {:style {:overflow-x "scroll"}}
+         [:pre {:style {:overflow-x "auto"}}
            (music-theory/fret-table-with-tones-p
             ((get-in @music-theory/chords-atom [@(re-frame/subscribe [::chord]) :chord/f])
              (music-theory/find-root-p @(re-frame/subscribe [::tone])))
@@ -326,7 +326,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
                      vals
                      (filter (comp #{@(re-frame/subscribe [::chord])} :chord-pattern/name)))]
             ^{:key (-> id name)}
-            [:pre {:style {:overflow-x "scroll"}}
+            [:pre {:style {:overflow-x "auto"}}
              (music-theory/mode-pattern-str-1 @music-theory/chord-patterns-atom id tone)])]]))))
 
 
@@ -371,7 +371,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
            [:div
             [:h3 (str (-> key name str/upper-case) " - " (-> title str/capitalize))]])
 
-         [:pre {:style {:overflow-x "scroll"}}
+         [:pre {:style {:overflow-x "auto"}}
           (->> (map
                 (fn [i x]
                   (str (fformat "%8s" i) " -> " (name x)))
@@ -383,7 +383,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
                (str "Interval -> Tone\n"))]
 
          [:code
-          [:pre {:style {:overflow-x "scroll"}}
+          [:pre {:style {:overflow-x "auto"}}
            (music-theory/fret-table-with-tones-p
             ((get-in @music-theory/scales-atom [@(re-frame/subscribe [::scale]) :scale/f])
              (music-theory/find-root-p @(re-frame/subscribe [::key])))
@@ -432,7 +432,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
 
          [:h2 (str (-> key name str/upper-case) " - " (-> scale name str/capitalize))]
 
-         [:pre {:style {:overflow-x "scroll"}}
+         [:pre {:style {:overflow-x "auto"}}
           (->> (map
                 (fn [i x]
                   (str (fformat "%8s" i) " -> " (name x)))
@@ -447,7 +447,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
 
          [:h3 "* All tones in scale"]
          [:code
-          [:pre {:style {:overflow-x "scroll"}}
+          [:pre {:style {:overflow-x "auto"}}
            (music-theory/fret-table-with-tones-p
             ((get-in @music-theory/scales-atom [@(re-frame/subscribe [::scale]) :scale/f])
              (music-theory/find-root-p @(re-frame/subscribe [::key])))
@@ -468,7 +468,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
             ^{:key (str mode-title "-mode")}
             [:div
              [:code
-              [:pre {:style {:overflow-x "scroll"}}
+              [:pre {:style {:overflow-x "auto"}}
                (music-theory/mode-pattern-str-p mode-id key)]]])]]))))
 
 (def drill-events-
@@ -494,7 +494,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
    [:h2 "Guitar neck with all tones in standard tuning."]
    [:br]
    [:code
-    [:pre {:style {:overflow-x "scroll"}}
+    [:pre {:style {:overflow-x "auto"}}
      (music-theory/fret-table-with-tones-p music-theory/tones 13)]]])
 
 (defn drills-view []
