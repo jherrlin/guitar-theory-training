@@ -161,3 +161,17 @@
                    :chord/pattern pattern
                    :chord/pattern-id pattern-name
                    :chord/pattern-title (name pattern-name))))))
+
+(defn define-mode
+  ([modes-atom pattern-name pattern]
+   (define-mode modes-atom pattern-name {} pattern))
+  ([modes-atom pattern-name meta-data pattern]
+   (let [meta-data (->> meta-data
+                        (map (fn [[k v]]
+                               [(->> k name (str "mode/") keyword) v]))
+                        (into {}))]
+     (swap! modes-atom assoc pattern-name
+            (assoc meta-data
+                   :mode/pattern pattern
+                   :mode/id pattern-name
+                   :mode/title (name pattern-name))))))

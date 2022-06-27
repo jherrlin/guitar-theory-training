@@ -24,36 +24,48 @@
 
 (def tones [:c :c# :d :d# :e :f :f# :g :g# :a :a# :b])
 
+
+;; ---------------
+;; State / data
+;; ---------------
+(def chords-atom (atom {}))
+@chords-atom
+
+(def scales-atom (atom {}))
+@scales-atom
+
+(def chord-patterns-atom (atom {}))
+@chord-patterns-atom
+
+(def modes-atom (atom {}))
+@modes-atom
+;; ---------------
+;; State / data end
+;; ---------------
+
+
 ;; ---------------
 ;; Partially applied functions.
 ;; Presets arguments that can be predefined.
 ;; ---------------
-(def chords-atom (atom {}))
-@chords-atom
-(def scales-atom (atom {}))
-@scales-atom
-(def chord-patterns-atom (atom {}))
-@chord-patterns-atom
-
-
-
 (def find-root-p #(find-root % tones))
+
 (def fret-table-with-tones-p (partial fret-table-with-tones tones))
+
 (defn find-chord-name-p [chord-tones]
   (find-chord-name @chords-atom tones chord-tones))
+
 (defn find-chord-p [chord-tones]
   (find-chord @chords-atom tones chord-tones))
+
 (defn match-chord-with-scales-p [chord-indexes]
   (match-chord-with-scales @scales-atom chord-indexes))
+
 (defn interval [tones tone i]
   (nth (find-root tone tones) i))
+
 (def interval-p (partial interval tones))
 
-
-
-;; ---------------
-;; Partial functions end.
-;; ---------------
 (def define-chord
   (partial utils/define-chord
            intervals/intervals-map-by-function chords-atom))
@@ -62,8 +74,15 @@
            intervals/intervals-map-by-function scales-atom))
 
 (def define-chord-pattern
-  (partial
-   utils/define-chord-pattern chord-patterns-atom))
+  (partial utils/define-chord-pattern
+           chord-patterns-atom))
+
+(def define-mode
+  (partial utils/define-mode
+           modes-atom))
+;; ---------------
+;; Partial functions end.
+;; ---------------
 
 ;; ---------------
 ;; Chords
@@ -305,33 +324,16 @@
 ;; --------------------
 ;; Modes
 ;; --------------------
-(def modes-atom (atom {}))
-
-@modes-atom
-
-(defn define-mode
-  ([pattern-name pattern]
-   (define-mode pattern-name {} pattern))
-  ([pattern-name meta-data pattern]
-   (let [meta-data (->> meta-data
-                        (map (fn [[k v]]
-                               [(->> k name (str "mode/") keyword) v]))
-                        (into {}))]
-     (swap! modes-atom assoc pattern-name
-            (assoc meta-data
-                   :mode/pattern pattern
-                   :mode/id pattern-name
-                   :mode/title (name pattern-name))))))
 
 (define-mode :ionian-6
   {:scale :ionian
    :string  6}
-  [[nil          nil             nil            nil]
-   [nil          nil             nil            nil]
-   [nil          nil             nil            nil]
-   [major-sixth  nil             major-seventh  root]
-   [major-third  perfect-fourth  nil            perfect-fifth]
-   [nil          root            nil            major-second]])
+  [[nil          nil             nil            nil]              ;; high E
+   [nil          nil             nil            nil]              ;; B
+   [nil          nil             nil            nil]              ;; G
+   [major-sixth  nil             major-seventh  root]             ;; D
+   [major-third  perfect-fourth  nil            perfect-fifth]    ;; A
+   [nil          root            nil            major-second]])   ;; E
 
 (define-mode :ionian-5
   {:scale :ionian
