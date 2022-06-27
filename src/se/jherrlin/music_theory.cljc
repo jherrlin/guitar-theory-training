@@ -456,15 +456,19 @@
 
 ;; --------------------
 ;; Chord patterns
+;;
+;; Matrixes specifies patterns on how chords looks like and where each interval
+;; is located in the matrix. This corresponds to how the chord looks like on the
+;; fret board.
 ;; --------------------
 (define-chord-pattern :major-1
   {:name :major}
-  [[major-third   nil   nil          nil]
-   [nil           root  nil          nil]
-   [perfect-fifth nil   nil          nil]
-   [nil           nil   major-third  nil]
-   [nil           nil   nil          root]
-   [nil           nil   nil          nil]])
+  [[major-third   nil   nil          nil]     ;; E string
+   [nil           root  nil          nil]     ;; B string
+   [perfect-fifth nil   nil          nil]     ;; G string
+   [nil           nil   major-third  nil]     ;; D string
+   [nil           nil   nil          root]    ;; A string
+   [nil           nil   nil          nil]])   ;; E string
 
 (define-chord-pattern :major-2
   {:name :major}
@@ -554,8 +558,6 @@
   (->> @chord-patterns-atom
        vals
        (filter (comp #{chord} :chord-pattern/name))))
-
-
 ;; --------------------
 ;; Chord patterns end
 ;; --------------------
