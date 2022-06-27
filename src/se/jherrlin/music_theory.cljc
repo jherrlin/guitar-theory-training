@@ -579,9 +579,32 @@
    [nil            nil          nil            nil]])
 
 
-;; (define-chord-pattern :dominant-seven-1
-;;   {:name :dominant-seven}
-;;   [])
+(define-chord-pattern :dominant-seven-1
+  {:name :dominant-seven}
+  [[root           nil          nil]
+   [perfect-fifth  nil          nil]
+   [nil            major-third  nil]
+   [minor-seventh  nil          nil]
+   [nil            nil          perfect-fifth]
+   [root           nil          nil]])
+
+(define-chord-pattern :dominant-seven-2
+  {:name :dominant-seven}
+  [[nil     nil            major-third]
+   [nil     minor-seventh  nil]
+   [nil     nil            perfect-fifth]
+   [root    nil            nil]
+   [nil     nil            nil]
+   [nil     nil            nil]])
+
+(define-chord-pattern :dominant-seven-3
+  {:name :dominant-seven}
+  [[perfect-fifth  nil            nil]
+   [nil            nil            major-third]
+   [minor-seventh  nil            nil]
+   [nil            nil            perfect-fifth]
+   [root           nil            nil]
+   [nil            nil            nil]])
 
 
 @chords-atom
@@ -594,7 +617,7 @@
 (->> @chord-patterns-atom :major-1 :chord/pattern (mode :c))
 
 (print
- (mode-pattern-str-1 @chord-patterns-atom :minor-3 :e))
+ (mode-pattern-str-1 @chord-patterns-atom :dominant-seven-1 :e))
 
 (let [chord :major]
   (->> @chord-patterns-atom

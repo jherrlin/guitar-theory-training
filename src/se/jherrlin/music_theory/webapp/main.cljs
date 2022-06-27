@@ -69,6 +69,10 @@ code lives on "
     " and you are more than welcome to improve the project. Please send a pull
 request."]
    [:br]
+   [:br]
+   [:div "! Everything is using sharps (#) and never flats (b). This may break some
+general rules but it's how it's implemented here. Feel free to improve!"]
+   [:br]
    [:div "In the webapp you can browse guitar chords, scales, modes and more. And yoy can
 generate org-drill text files that you can use in Emacs to help you learn."]
    [:br] [:br]
@@ -90,19 +94,27 @@ specific text format and a spaced repetition algorithm selects questions."]])
 
 
 (defn ^:dev/after-load header-menu [router]
-  (let [current-route      @(re-frame/subscribe [:current-route])
-        current-route-url  (get current-route :template "")]
+  (let [current-route     @(re-frame/subscribe [:current-route])
+        current-route-url (get current-route :template "")]
     [:div {:style {:flex "1"}}
      [:> semantic-ui/Menu {:size       "small"
                            :borderless true
                            :style      {:background "#FFFFFF"}}
+
+
+
+      [:> semantic-ui/Menu.Item
+       {:as   "a"
+        :href (rfe/href ::the-neck)}
+       "Neck"]
+
       [:> semantic-ui/Menu.Item
        {:as   "a"
         :href (rfe/href ::chord-tones-redirect)}
        "Chords"]
       [:> semantic-ui/Menu.Item
-         {:as   "a"
-          :href (rfe/href ::scale-redirect)}
+       {:as   "a"
+        :href (rfe/href ::scale-redirect)}
        "Scales"]
       [:> semantic-ui/Menu.Item
        {:as   "a"
@@ -114,11 +126,17 @@ specific text format and a spaced repetition algorithm selects questions."]])
         :href (rfe/href ::mode {:scale :ionian :key :c})}
        "Modes"]
 
-
       [:> semantic-ui/Menu.Item
        {:as   "a"
         :href (rfe/href ::drills)}
-       "Drills"]]]))
+       "Drills"]
+
+      [:> semantic-ui/Menu.Menu {:position "right"}
+       [:> semantic-ui/Menu.Item
+        {:as     "a"
+         :href   "https://github.com/jherrlin/guitar-theory-training"
+         :target "_blank"}
+       "Source code"]]]]))
 
 (some->> @(re-frame/subscribe [:current-route])
          :data :view)
@@ -408,15 +426,25 @@ specific text format and a spaced repetition algorithm selects questions."]])
     (.click link)
     (.removeChild (.-body js/document) link)))
 
+(defn the-neck-view []
+  [:div
+   [:code
+    [:pre
+     (music-theory/fret-table-with-tones-p music-theory/tones)]]])
+
 (defn drills-view []
   (let [tones-in-chord? @(re-frame/subscribe [::tones-in-chord])
         name-the-chord? @(re-frame/subscribe [::name-the-chord])]
     [:div
+     [:div "Here you can generate and download music and guitar theory questions and
+answers in an Org-drill format. Select the type of questions that interests you
+and click on the download button. Open the downloaded file in Emacs and active
+the org-drill mode."]
      [:p "Select questions:"]
-     [:label "tones-in-chord:"]
+     [:label "Tones in chord:"]
      [:input {:type "checkbox" :on-click #(re-frame/dispatch [::tones-in-chord (not tones-in-chord?)])}]
      [:br]
-     [:label "name-the-chord:"]
+     [:label "Name the chord:"]
      [:input {:type "checkbox" :on-click #(re-frame/dispatch [::name-the-chord (not name-the-chord?)])}]
      [:br]
      [:br]
@@ -449,6 +477,12 @@ specific text format and a spaced repetition algorithm selects questions."]])
        :start (fn [& params](js/console.log "Entering home page"))
        ;; Teardown can be done here.
        :stop  (fn [& params] (js/console.log "Leaving home page"))}]}]
+
+   ["the-neck"
+    {:name ::the-neck
+     :view [the-neck-view]}
+    ]
+
    ["chord"
     {:name      ::chord-tones-redirect
      :controllers
