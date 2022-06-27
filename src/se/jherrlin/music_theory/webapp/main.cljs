@@ -226,12 +226,13 @@ specific text format and a spaced repetition algorithm selects questions."]])
          [:button
           [:a {:href (rfe/href ::harmonization {:tone tone :major-or-minor major-or-minor :triad-or-seventh :seventh})} "seventh"]]]]
 
+       [:br]
        [:code
         [:pre
          (music-theory/diatonic-chord-progressions-str
           (music-theory/diatonic-chord-progressions-p tone major-or-minor triad-or-seventh))]]
        [:div
-        [:p "All tones"]
+        [:h3 "All tones"]
         [:code
          [:pre
           (music-theory/fret-table-with-tones-p
@@ -248,7 +249,8 @@ specific text format and a spaced repetition algorithm selects questions."]])
               (music-theory/diatonic-chord-progressions-p tone major-or-minor triad-or-seventh)]
           ^{:key (str chord-name)}
           [:div
-           [:p chord-name " | " chord-intervals]
+           [:h3 chord-name]
+           [:p "Functions: "chord-intervals]
            [:code
             [:pre
              (music-theory/fret-table-with-tones-p chord-tones 16)]]])]])))
