@@ -147,3 +147,17 @@
                               (str/replace "-" " "))
                    :scale/tags tags
                    :scale/f (juxt-intervals indexes))))))
+
+(defn define-chord-pattern
+  ([chord-patterns-atom pattern-name pattern]
+   (define-chord-pattern chord-patterns-atom pattern-name {} pattern))
+  ([chord-patterns-atom pattern-name meta-data pattern]
+   (let [meta-data (->> meta-data
+                        (map (fn [[k v]]
+                               [(->> k name (str "chord-pattern/") keyword) v]))
+                        (into {}))]
+     (swap! chord-patterns-atom assoc pattern-name
+            (assoc meta-data
+                   :chord/pattern pattern
+                   :chord/pattern-id pattern-name
+                   :chord/pattern-title (name pattern-name))))))

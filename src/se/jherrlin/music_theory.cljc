@@ -13,6 +13,7 @@
     :refer [fformat find-chord find-chord-name  find-root
             fret-table-with-tones match-chord-with-scales]
     :as utils]
+
    [clojure.string :as str]
    [clojure.set :as set]))
 
@@ -31,6 +32,10 @@
 @chords-atom
 (def scales-atom (atom {}))
 @scales-atom
+(def chord-patterns-atom (atom {}))
+@chord-patterns-atom
+
+
 
 (def find-root-p #(find-root % tones))
 (def fret-table-with-tones-p (partial fret-table-with-tones tones))
@@ -45,6 +50,7 @@
 (def interval-p (partial interval tones))
 
 
+
 ;; ---------------
 ;; Partial functions end.
 ;; ---------------
@@ -54,6 +60,10 @@
 (def define-scale
   (partial utils/define-scale
            intervals/intervals-map-by-function scales-atom))
+
+(def define-chord-pattern
+  (partial
+   utils/define-chord-pattern chord-patterns-atom))
 
 ;; ---------------
 ;; Chords
@@ -530,24 +540,6 @@
 ;; --------------------
 ;; Chord patterns
 ;; --------------------
-(def chord-patterns-atom (atom {}))
-
-@chord-patterns-atom
-
-(defn define-chord-pattern
-  ([pattern-name pattern]
-   (define-chord-pattern pattern-name {} pattern))
-  ([pattern-name meta-data pattern]
-   (let [meta-data (->> meta-data
-                        (map (fn [[k v]]
-                               [(->> k name (str "chord-pattern/") keyword) v]))
-                        (into {}))]
-     (swap! chord-patterns-atom assoc pattern-name
-            (assoc meta-data
-                   :chord/pattern pattern
-                   :chord/pattern-id pattern-name
-                   :chord/pattern-title (name pattern-name))))))
-
 (define-chord-pattern :major-1
   {:name :major}
   [[major-third   nil   nil          nil]
