@@ -20,33 +20,34 @@
 
 ;; Triggering navigation from events.
 
-(re-frame/reg-fx :push-state
-  (fn [route]
-    (apply rfe/push-state route)))
+(re-frame/reg-fx
+ :push-state
+ (fn [route]
+   (apply rfe/push-state route)))
 
 ;;; Events ;;;
 
 (re-frame/reg-event-db ::initialize-db
-  (fn [db _]
-    (if db
-      db
-      {:current-route nil})))
+                       (fn [db _]
+                         (if db
+                           db
+                           {:current-route nil})))
 
 (re-frame/reg-event-fx ::push-state
-  (fn [_ [_ & route]]
-    {:push-state route}))
+                       (fn [_ [_ & route]]
+                         {:push-state route}))
 
 (re-frame/reg-event-db ::navigated
-  (fn [db [_ new-match]]
-    (let [old-match   (:current-route db)
-          controllers (rfc/apply-controllers (:controllers old-match) new-match)]
-      (assoc db :current-route (assoc new-match :controllers controllers)))))
+                       (fn [db [_ new-match]]
+                         (let [old-match   (:current-route db)
+                               controllers (rfc/apply-controllers (:controllers old-match) new-match)]
+                           (assoc db :current-route (assoc new-match :controllers controllers)))))
 
 ;;; Subscriptions ;;;
 
 (re-frame/reg-sub :current-route
-  (fn [db]
-    (:current-route db)))
+                  (fn [db]
+                    (:current-route db)))
 
 ;;; Views ;;;
 
@@ -136,7 +137,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
         {:as     "a"
          :href   "https://github.com/jherrlin/guitar-theory-training"
          :target "_blank"}
-       "Source code"]]]]))
+        "Source code"]]]]))
 
 (some->> @(re-frame/subscribe [:current-route])
          :data :view)
@@ -154,9 +155,9 @@ specific text format and a spaced repetition algorithm selects questions."]])
         [header-menu router]
 
         #_(when sub-menu
-          [:div
-           [:> semantic-ui/Menu {:secondary true}
-            [sub-menu router]]])
+            [:div
+             [:> semantic-ui/Menu {:secondary true}
+              [sub-menu router]]])
 
         [:div {:style {:height     "100%"
                        :overflow-y "auto"
@@ -176,10 +177,10 @@ specific text format and a spaced repetition algorithm selects questions."]])
             (-> current-route :data :view))]]
 
         #_[:div
-         [:> semantic-ui/Menu {:size "small"}
-          [:> semantic-ui/Popup
-           {:position "top right"
-            :content  "Notifications history."}]]]])]))
+           [:> semantic-ui/Menu {:size "small"}
+            [:> semantic-ui/Popup
+             {:position "top right"
+              :content  "Notifications history."}]]]])]))
 
 
 
@@ -197,27 +198,33 @@ specific text format and a spaced repetition algorithm selects questions."]])
     (when (and tone major-or-minor triad-or-seventh)
       [:div
 
-       [:div {:style {:display "flex"}}
-          (for [{:keys [tone url-name title]}
-                (->> (music-theory/find-root-p :a)
-                     (map (fn [x] {:tone     x
-                                   :url-name (-> x name str/lower-case (str/replace "#" "sharp"))
-                                   :title    (-> x name str/upper-case)})))]
-            ^{:key url-name}
-            [:div {:style {:margin-left "10px"}}
-             [:a {:href (rfe/href ::harmonization {:tone tone :major-or-minor major-or-minor :triad-or-seventh triad-or-seventh})} title]])]
+       [:div
+        (for [{:keys [tone url-name title]}
+              (->> (music-theory/find-root-p :a)
+                   (map (fn [x] {:tone     x
+                                 :url-name (-> x name str/lower-case (str/replace "#" "sharp"))
+                                 :title    (-> x name str/upper-case)})))]
+          ^{:key url-name}
+          [:div {:style {:margin-left "10px" :display "inline"}}
+           [:button
+            [:a {:href (rfe/href ::harmonization {:tone tone :major-or-minor major-or-minor :triad-or-seventh triad-or-seventh})} title]]])]
 
+       [:br]
        [:div {:style {:display "flex"}}
         [:div {:style {:margin-left "10px"}}
-         [:a {:href (rfe/href ::harmonization {:tone tone :major-or-minor :major :triad-or-seventh triad-or-seventh})} "major"]]
+         [:button
+          [:a {:href (rfe/href ::harmonization {:tone tone :major-or-minor :major :triad-or-seventh triad-or-seventh})} "major"]]]
         [:div {:style {:margin-left "10px"}}
-         [:a {:href (rfe/href ::harmonization {:tone tone :major-or-minor :minor :triad-or-seventh triad-or-seventh})} "minor"]]]
-
+         [:button
+          [:a {:href (rfe/href ::harmonization {:tone tone :major-or-minor :minor :triad-or-seventh triad-or-seventh})} "minor"]]]]
+       [:br]
        [:div {:style {:display "flex"}}
         [:div {:style {:margin-left "10px"}}
-         [:a {:href (rfe/href ::harmonization {:tone tone :major-or-minor major-or-minor :triad-or-seventh :triad})} "triad"]]
+         [:button
+          [:a {:href (rfe/href ::harmonization {:tone tone :major-or-minor major-or-minor :triad-or-seventh :triad})} "triad"]]]
         [:div {:style {:margin-left "10px"}}
-         [:a {:href (rfe/href ::harmonization {:tone tone :major-or-minor major-or-minor :triad-or-seventh :seventh})} "seventh"]]]
+         [:button
+          [:a {:href (rfe/href ::harmonization {:tone tone :major-or-minor major-or-minor :triad-or-seventh :seventh})} "seventh"]]]]
 
        [:code
         [:pre
@@ -263,7 +270,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
       (let [{intervals    :chord/intervals
              intervals-xs :chord/intervals-xs
              sufix        :chord/sufix
-}
+             }
             (get-in @music-theory/chords-atom [@(re-frame/subscribe [::chord])])]
         [:div
          [:div {:style {:display "flex"}}
@@ -274,29 +281,32 @@ specific text format and a spaced repetition algorithm selects questions."]])
                                    :title    (-> x name str/upper-case)})))]
             ^{:key url-name}
             [:div {:style {:margin-left "10px"}}
-             [:a {:href (rfe/href ::chord-tones {:tone tone :chord-name chord})} title]])]
-
-         [:div {:style {:display "flex"}}
-          (for [{id          :chord/id
-                 sufix       :chord/sufix
-                 explanation :chord/explanation}
+             [:button
+              [:a {:href (rfe/href ::chord-tones {:tone tone :chord-name chord})} title]]])]
+         [:br]
+         [:div {:style {:display "flex" :max-width "100%"}}
+          (for [{id           :chord/id
+                 sufix        :chord/sufix
+                 explanation  :chord/explanation
+                 display-text :chord/display-text}
                 (->> @music-theory/chords-atom vals)]
             ^{:key (str sufix "-chord")}
             [:div {:style {:margin-left "10px"}}
-             [:a {:href (rfe/href ::chord-tones {:tone tone :chord-name id})} (str sufix " (" explanation ")")]])]
+             [:button
+              [:a {:href (rfe/href ::chord-tones {:tone tone :chord-name id})} (str (or display-text sufix))]]])]
 
          [:p intervals]
          [:p (str (-> tone name str/upper-case) sufix)]
 
          [:pre
           (->> (map
-                   (fn [i x]
-                     (str (fformat "%3s" i) " -> " (name x)))
-                   intervals-xs
-                   ((get-in @music-theory/chords-atom [@(re-frame/subscribe [::chord]) :chord/f])
-                    (music-theory/find-root-p @(re-frame/subscribe [::tone]))))
-                  (str/join "\n")
-                  (apply str))]
+                (fn [i x]
+                  (str (fformat "%3s" i) " -> " (name x)))
+                intervals-xs
+                ((get-in @music-theory/chords-atom [@(re-frame/subscribe [::chord]) :chord/f])
+                 (music-theory/find-root-p @(re-frame/subscribe [::tone]))))
+               (str/join "\n")
+               (apply str))]
 
          [:code
           [:pre
@@ -321,25 +331,27 @@ specific text format and a spaced repetition algorithm selects questions."]])
     (when (and scale key)
       [:div
 
-       [:div {:style {:display "flex"}}
+       [:div
         (for [{:keys [tone url-name title]}
               (->> (music-theory/find-root-p :a)
                    (map (fn [x] {:tone     x
                                  :url-name (-> x name str/lower-case (str/replace "#" "sharp"))
                                  :title    (-> x name str/upper-case)})))]
           ^{:key url-name}
-          [:div {:style {:margin-left "10px"}}
-           [:a {:href (rfe/href ::scale {:scale scale :key tone})} title]])]
+          [:div {:style {:margin-left "10px" :display "inline"}}
+           [:button
+            [:a {:href (rfe/href ::scale {:scale scale :key tone})} title]]])]
 
-
-       [:div {:style {:display "flex"}}
+       [:br]
+       [:div
         (for [{intervals :scale/intervals
                title     :scale/title
                id        :scale/id}
               (->> @music-theory/scales-atom vals)]
           ^{:key (str title "-scale")}
-          [:div {:style {:margin-left "10px"}}
-           [:a {:href (rfe/href ::scale {:scale id :key key})} title]])]
+          [:div {:style {:margin-left "10px" :display "inline"}}
+           [:button
+            [:a {:href (rfe/href ::scale {:scale id :key key})} title]]])]
 
        (let [{intervals :scale/intervals
               title :scale/title }
@@ -362,18 +374,19 @@ specific text format and a spaced repetition algorithm selects questions."]])
     (when (and scale key)
       [:div
 
-       [:div {:style {:display "flex"}}
+       [:div
         (for [{:keys [tone url-name title]}
               (->> (music-theory/find-root-p :a)
                    (map (fn [x] {:tone     x
                                  :url-name (-> x name str/lower-case (str/replace "#" "sharp"))
                                  :title    (-> x name str/upper-case)})))]
           ^{:key url-name}
-          [:div {:style {:margin-left "10px"}}
-           [:a {:href (rfe/href ::mode {:scale scale :key tone})} title]])]
+          [:div {:style {:margin-left "10px" :display "inline"}}
+           [:button
+            [:a {:href (rfe/href ::mode {:scale scale :key tone})} title]]])]
 
-
-       [:div {:style {:display "flex"}}
+       [:br]
+       [:div
         (for [{:keys [title scale]}
               (->> @music-theory/modes-atom
                    vals
@@ -385,8 +398,9 @@ specific text format and a spaced repetition algorithm selects questions."]])
                    (set)
                    (sort-by :title))]
           ^{:key (str title "-mode-select")}
-          [:div {:style {:margin-left "10px"}}
-           [:a {:href (rfe/href ::mode {:scale scale :key key})} title]])]
+          [:div {:style {:margin-left "10px" :display "inline"}}
+           [:button
+            [:a {:href (rfe/href ::mode {:scale scale :key key})} title]]])]
 
        [:h2 (str (name key) " / " (name scale))]
 
@@ -569,15 +583,15 @@ the org-drill mode."]
 
 (def router
   (rf/router
-    routes
-    {:data {:coercion rss/coercion}}))
+   routes
+   {:data {:coercion rss/coercion}}))
 
 (defn init-routes! []
   (js/console.log "initializing routes")
   (rfe/start!
-    router
-    on-navigate
-    {:use-fragment true}))
+   router
+   on-navigate
+   {:use-fragment true}))
 
 (defn nav [{:keys [router current-route]}]
   [:ul

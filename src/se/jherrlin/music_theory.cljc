@@ -59,13 +59,15 @@
 ;; Chords
 ;; ---------------
 (define-chord :major
-  {:sufix       ""
-   :explanation "major"}
+  {:sufix        ""
+   :explanation  "major"
+   :display-text "Major"}
   "1 3 5")
 
 (define-chord :minor
-  {:sufix       "m"
-   :explanation "minor"}
+  {:sufix        "m"
+   :explanation  "minor"
+   :display-text "Minor"}
   "1 b3 5")
 
 (define-chord :sus2
@@ -94,8 +96,9 @@
   "1 b3 5 b7")
 
 (define-chord :minor-maj-seven
-  {:sufix       "(maj7)"
-   :explanation "minor maj 7th"}
+  {:sufix        "(maj7)"
+   :explanation  "minor maj 7th"
+   :display-text "maj7"}
   "1 b3 5 7")
 
 (define-chord :major-maj-seven
@@ -109,13 +112,15 @@
   "1 b3 b5 b7")
 
 (define-chord :major-seven-flat-5
-  {:sufix       "(maj7)b5"
-   :explanation "major major sevent flat 5"}
+  {:sufix        "(maj7)b5"
+   :explanation  "major major sevent flat 5"
+   :display-text "maj7b5"}
   "1 3 b5 7")
 
 (define-chord :major-seven-sharp-5
-  {:sufix       "(maj7)#5"
-   :explanation "major major sevent sharp 5"}
+  {:sufix        "(maj7)#5"
+   :explanation  "major major sevent sharp 5"
+   :display-text "maj7#5"}
   "1 3 #5 7")
 
 (define-chord :fifth
