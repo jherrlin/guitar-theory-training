@@ -175,3 +175,58 @@
                    :mode/pattern pattern
                    :mode/id pattern-name
                    :mode/title (name pattern-name))))))
+
+(def triad   (juxt #(nth % 0) #(nth % 2) #(nth % 4)))
+(def seventh (juxt #(nth % 0) #(nth % 2) #(nth % 4) #(nth % 6)))
+
+
+(defn diatonic-chord-progressions [triad-or-seven-map scales-map chords-map all-tones tone kind triad-or-seven]
+  {:pre [(keyword? tone) (keyword? kind)]}
+  (let [scale-tones ((get-in scales-map [kind :scale/f]) (find-root tone all-tones))]
+    (->> scale-tones
+         (reduce
+          (fn [m t]
+            (let [chord-tones ((get triad-or-seven-map triad-or-seven) (find-root t scale-tones))
+                  chord-name  (find-chord-name chords-map all-tones chord-tones)]
+              (conj m {:harmonization/key-of tone
+                       :harmonization/kind   kind
+                       :chord/name           chord-name
+                       :chord/tones          chord-tones})))
+          [])
+         (mapv
+          #(assoc %7
+                  :harmonization/index %1 :harmonization/position %2 :harmonization/mode %3 :harmonization/mode-str %4 :harmonization/family %5 :harmonization/family-str %6)
+          (range 1 100)
+          (if (= kind :major)
+            ["I" "ii" "iii" "IV" "V" "vi" "vii"]
+            ["i" "ii" "III" "iv" "v" "VI" "VII"])
+          (if (= kind :major)
+            [:ionian  :dorian  :phrygian :lydian :mixolydian :aeolian :locrian]
+            [:aeolian :locrian :ionian   :dorian :phrygian   :lydian  :mixolydian])
+          (if (= kind :major)
+            ["Ionian"  "Dorian"  "Phrygian" "Lydian" "Mixolydian" "Aeolian" "Locrian"]
+            ["Aeolian" "Locrian" "Ionian"   "Dorian" "Phrygian"   "Lydian"  "Mixolydian"])
+          (if (= kind :major)
+            [:tonic :subdominant :tonic :subdominant :dominant :tonic :dominant]
+            [:tonic :subdominant :tonic :subdominant :dominant :subdominant :dominant])
+          (if (= kind :major)
+            ["T" "S" "T" "S" "D" "T" "D"]
+            ["T" "S" "T" "S" "D" "S" "D"]))
+         (mapv (fn [{:chord/keys [tones] :as m}]
+                 (merge m (find-chord chords-map all-tones tones))))
+         (mapv (fn [{:chord/keys [indexes] :as m}]
+                 (assoc m :matching-scales (match-chord-with-scales scales-map indexes)))))))
+
+(defn diatonic-chord-progressions-str [xs]
+  (str
+   "     T = Tonic (stable), S = Subdominant (leaving), D = Dominant (back home)"
+   "\n\n"
+   (->> xs (map (comp #(fformat "   %-10s" %) str :harmonization/index)) (str/join))
+   "\n"
+   (->> xs (map (comp #(fformat "   %-10s" %) str :harmonization/position)) (str/join))
+   "\n"
+   (->> xs (map (comp #(fformat "   %-10s" %) str :harmonization/mode-str)) (str/join))
+   "\n"
+   (->> xs (map (comp #(fformat "   %-10s" %) str :harmonization/family-str)) (str/join))
+   "\n"
+   (->> xs (map (comp #(fformat "   %-10s" %) str :chord/name)) (str/join))))

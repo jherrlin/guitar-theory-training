@@ -48,6 +48,9 @@
 ;; Partially applied functions.
 ;; Presets arguments that can be predefined.
 ;; ---------------
+
+(def diatonic-chord-progressions-str utils/diatonic-chord-progressions-str)
+
 (def find-root-p #(find-root % tones))
 
 (def fret-table-with-tones-p (partial fret-table-with-tones tones))
@@ -65,6 +68,13 @@
   (nth (find-root tone tones) i))
 
 (def interval-p (partial interval tones))
+
+(def triad-or-seven-map
+  {:triad   utils/triad
+   :seventh utils/seventh})
+
+(defn diatonic-chord-progressions-p [tone scale f]
+  (utils/diatonic-chord-progressions triad-or-seven-map @scales-atom @chords-atom tones tone scale f))
 
 (def define-chord
   (partial utils/define-chord
@@ -230,101 +240,9 @@
 ;; Scales end
 ;; ---------------
 
-
-;; --------------------
-;; Diatonic-Chord-Progressions
-;; --------------------
-(def triad   (juxt #(nth % 0) #(nth % 2) #(nth % 4)))
-(def seventh (juxt #(nth % 0) #(nth % 2) #(nth % 4) #(nth % 6)))
-
-(def triad-or-seven-map
-  {:triad   triad
-   :seventh seventh})
-
-(defn diatonic-chord-progressions [triad-or-seven-map scales-map chords-map all-tones tone kind triad-or-seven]
-  {:pre [(keyword? tone) (keyword? kind)]}
-  (let [scale-tones ((get-in scales-map [kind :scale/f]) (find-root tone all-tones))]
-    (->> scale-tones
-         (reduce
-          (fn [m t]
-            (let [chord-tones ((get triad-or-seven-map triad-or-seven) (find-root t scale-tones))
-                  chord-name  (find-chord-name chords-map all-tones chord-tones)]
-              (conj m {:harmonization/key-of tone
-                       :harmonization/kind   kind
-                       :chord/name           chord-name
-                       :chord/tones          chord-tones})))
-          [])
-         (mapv
-          #(assoc %7
-                  :harmonization/index %1 :harmonization/position %2 :harmonization/mode %3 :harmonization/mode-str %4 :harmonization/family %5 :harmonization/family-str %6)
-          (range 1 100)
-          (if (= kind :major)
-            ["I" "ii" "iii" "IV" "V" "vi" "vii"]
-            ["i" "ii" "III" "iv" "v" "VI" "VII"])
-          (if (= kind :major)
-            [:ionian  :dorian  :phrygian :lydian :mixolydian :aeolian :locrian]
-            [:aeolian :locrian :ionian   :dorian :phrygian   :lydian  :mixolydian])
-          (if (= kind :major)
-            ["Ionian"  "Dorian"  "Phrygian" "Lydian" "Mixolydian" "Aeolian" "Locrian"]
-            ["Aeolian" "Locrian" "Ionian"   "Dorian" "Phrygian"   "Lydian"  "Mixolydian"])
-          (if (= kind :major)
-            [:tonic :subdominant :tonic :subdominant :dominant :tonic :dominant]
-            [:tonic :subdominant :tonic :subdominant :dominant :subdominant :dominant])
-          (if (= kind :major)
-            ["T" "S" "T" "S" "D" "T" "D"]
-            ["T" "S" "T" "S" "D" "S" "D"]))
-         (mapv (fn [{:chord/keys [tones] :as m}]
-                 (merge m (find-chord-p tones))))
-         (mapv (fn [{:chord/keys [indexes] :as m}]
-                 (assoc m :matching-scales (match-chord-with-scales-p indexes)))))))
-
-(defn diatonic-chord-progressions-p [tone scale f]
-  (diatonic-chord-progressions triad-or-seven-map @scales-atom @chords-atom tones tone scale f))
-
-(diatonic-chord-progressions triad-or-seven-map @scales-atom @chords-atom tones :c :major :triad)
-(diatonic-chord-progressions-p :c :major :triad)
-(diatonic-chord-progressions-p :c :minor :triad)
-(diatonic-chord-progressions-p :e :major :seventh)
-(diatonic-chord-progressions-p :e :minor :seventh)
-
-(->> (diatonic-chord-progressions-p :c :major :triad)
-     (map :chord-name))
-
-(->> (diatonic-chord-progressions-p :c :minor :triad)
-     (map :chord-tones)
-     (apply concat)
-     (set)
-     (vec))
-
-(find-chord-p [:g :b :d# :f#])
-
-
-(defn diatonic-chord-progressions-str [xs]
-  (str
-   "     T = Tonic (stable), S = Subdominant (leaving), D = Dominant (back home)"
-   "\n\n"
-   (->> xs (map (comp #(fformat "   %-10s" %) str :harmonization/index)) (str/join))
-   "\n"
-   (->> xs (map (comp #(fformat "   %-10s" %) str :harmonization/position)) (str/join))
-   "\n"
-   (->> xs (map (comp #(fformat "   %-10s" %) str :harmonization/mode-str)) (str/join))
-   "\n"
-   (->> xs (map (comp #(fformat "   %-10s" %) str :harmonization/family-str)) (str/join))
-   "\n"
-   (->> xs (map (comp #(fformat "   %-10s" %) str :chord/name)) (str/join))))
-
-(print
- (diatonic-chord-progressions-str
-  (diatonic-chord-progressions-p :c :major :triad)))
-;; --------------------
-;; Diatonic chord progressions end
-;; --------------------
-
-
 ;; --------------------
 ;; Modes
 ;; --------------------
-
 (define-mode :ionian-6
   {:scale :ionian
    :string  6}
@@ -532,9 +450,6 @@
      (sort-by :title)
      )
 
-
-
-
 ;; --------------------
 ;; Modes end
 ;; --------------------
@@ -625,8 +540,6 @@
    [nil            nil            nil]])
 
 
-@chords-atom
-
 (defn mode-pattern-str-1 [modes-atom mode-pattern tone]
   (->> modes-atom mode-pattern :chord/pattern (mode tone)
        prepair-mode
@@ -641,18 +554,43 @@
   (->> @chord-patterns-atom
        vals
        (filter (comp #{chord} :chord-pattern/name))))
-:chord/pattern-id
+
 
 ;; --------------------
 ;; Chord patterns end
 ;; --------------------
 
+;; --------------------
+;; Comment and useful stuff
+;; --------------------
+(comment
+  (diatonic-chord-progressions-p :c :major :triad)
+  (diatonic-chord-progressions-p :c :minor :triad)
+  (diatonic-chord-progressions-p :e :major :seventh)
+  (diatonic-chord-progressions-p :e :minor :seventh)
+
+  (->> (diatonic-chord-progressions-p :c :major :triad)
+       (map :chord-name))
+
+  (->> (diatonic-chord-progressions-p :c :minor :triad)
+       (map :chord-tones)
+       (apply concat)
+       (set)
+       (vec))
+
+  (find-chord-p [:g :b :d# :f#])
+
+  (print
+   (diatonic-chord-progressions-str
+    (diatonic-chord-progressions-p :c :major :triad)))
 
 
-;; mode to chord
-(for [scale (vals @scales-atom)
-      chord (vals @chords-atom)
-      :when (set/subset? (set (:chord/indexes chord)) (set (:scale/indexes scale)))]
-  (merge chord scale))
+  ;; mode to chord
+  (for [scale (vals @scales-atom)
+        chord (vals @chords-atom)
+        :when (set/subset? (set (:chord/indexes chord)) (set (:scale/indexes scale)))]
+    (merge chord scale))
 
-(match-chord-with-scales-p [0 4 7])
+  (match-chord-with-scales-p [0 4 7])
+
+  )
