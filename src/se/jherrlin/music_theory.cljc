@@ -242,6 +242,16 @@
 ;; --------------------
 ;; Modes
 ;; --------------------
+
+(define-mode :ionian
+  {:scale :ionian}
+  [[major-seventh root            nil           major-second]
+   [nil           perfect-fifth   nil           major-sixth]
+   [major-second  nil             major-third   perfect-fourth]
+   [major-sixth   nil             major-seventh root]
+   [major-third   perfect-fourth  nil           perfect-fifth]
+   [nil           root            nil           major-second]])
+
 (define-mode :ionian-6
   {:scale :ionian
    :string  6}
@@ -281,6 +291,15 @@
    [nil          nil             nil            nil]
    [nil          nil             nil            nil]
    [nil          nil             nil            nil]])
+
+(define-mode :mixolydian
+  {:scale  :mixolydian}
+  [[nil           root            nil           major-second   nil]
+   [nil           perfect-fifth   nil           major-sixth    minor-seventh]
+   [major-second  nil             major-third   perfect-fourth nil]
+   [major-sixth   minor-seventh   nil           root           nil]
+   [major-third   perfect-fourth  nil           perfect-fifth  nil]
+   [nil           root            nil           major-second   nil]])
 
 (define-mode :mixolydian-6
   {:scale :mixolydian
@@ -322,6 +341,15 @@
    [nil          nil             nil            nil]
    [nil          nil             nil            nil]])
 
+(define-mode :aeolian
+  {:scale  :aeolian}
+  [[nil           root            nil          major-second    minor-third]
+   [nil           perfect-fifth   minor-sixth  nil             minor-seventh]
+   [major-second  minor-third     nil          perfect-fourth  nil]
+   [nil           minor-seventh   nil          root            nil]
+   [nil           perfect-fourth  nil          perfect-fifth   minor-sixth]
+   [nil           root            nil          major-second    minor-third]])
+
 (define-mode :aeolian-6
   {:scale  :aeolian
    :string 6}
@@ -361,6 +389,42 @@
    [nil             nil             nil            nil            nil]
    [nil             nil             nil            nil            nil]
    [nil             nil             nil            nil            nil]])
+
+(define-mode :dorian
+  {:scale  :dorian}
+  [[nil           root            nil  major-second    minor-third]
+   [nil           perfect-fifth   nil  major-sixth     minor-seventh]
+   [major-second  minor-third     nil  perfect-fourth  nil]
+   [major-sixth   minor-seventh   nil  root            nil]
+   [nil           perfect-fourth  nil  perfect-fifth   nil]
+   [nil           root            nil  major-second    minor-third]])
+
+(define-mode :phrygian
+  {:scale  :phrygian}
+  [[root            minor-second   nil             minor-third]
+   [perfect-fifth   minor-sixth    nil             minor-seventh]
+   [minor-third     nil            perfect-fourth  nil]
+   [minor-seventh   nil            root            minor-second]
+   [perfect-fourth  nil            perfect-fifth   minor-sixth]
+   [root            minor-second   nil             minor-third]])
+
+(define-mode :lydian
+  {:scale  :lydian}
+  [[major-seventh     root           nil              major-second]
+   [augmented-fourth  perfect-fifth  nil              major-sixth]
+   [major-second      nil            major-third      nil]
+   [major-sixth       nil            major-seventh    root]
+   [major-third       nil            augmented-fourth perfect-fifth]
+   [nil               root           nil              major-second]])
+
+(define-mode :locrian
+  {:scale  :locrian}
+  [[root            minor-second      nil            minor-third]
+   [nil             minor-sixth       nil            minor-seventh]
+   [minor-third     nil               perfect-fourth diminished-fifth]
+   [minor-seventh   nil               root           minor-second]
+   [perfect-fourth  diminished-fifth  nil            minor-sixth]
+   [root            minor-second      nil            minor-third]])
 
 
 (defn fret-tones [string-tones]
