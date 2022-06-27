@@ -455,10 +455,11 @@ specific text format and a spaced repetition algorithm selects questions."]])
 
          [:h3 "* Mode patterns"]
          [:div
-          (for [{mode-title   :mode/title
-                 mode-pattern :mode/pattern
-                 mode-id      :mode/id
-                 scale-title  :scale/title}
+          (for [{mode-title     :mode/title
+                 mode-pattern   :mode/pattern
+                 root-on-string :mode/string
+                 mode-id        :mode/id
+                 scale-title    :scale/title}
                 (->> @music-theory/modes-atom
                      vals
                      (sort-by :mode/string)
@@ -467,6 +468,8 @@ specific text format and a spaced repetition algorithm selects questions."]])
                      (filter (comp #{scale} :mode/scale)))]
             ^{:key (str mode-title "-mode")}
             [:div
+             (if root-on-string
+               [:p (str "Root on string: " root-on-string)])
              [:code
               [:pre {:style {:overflow-x "auto"}}
                (music-theory/mode-pattern-str-p mode-id key)]]])]]))))
