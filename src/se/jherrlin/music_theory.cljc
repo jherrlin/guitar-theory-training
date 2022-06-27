@@ -413,6 +413,25 @@
    [root           nil             major-second   minor-third]
    [nil            nil             nil            nil]])
 
+(define-mode :aeolian-4
+  {:scale  :aeolian
+   :string 4}
+  [[nil             nil             nil            nil]
+   [nil             minor-seventh   nil            root]
+   [perfect-fourth  nil             perfect-fifth  minor-sixth]
+   [root            nil             major-second   minor-third]
+   [nil             nil             nil            nil]
+   [nil             nil             nil            nil]])
+
+(define-mode :aeolian-3
+  {:scale  :aeolian
+   :string 3}
+  [[nil             minor-seventh   nil            root           nil]
+   [nil             perfect-fourth  nil            perfect-fifth  minor-sixth]
+   [root            nil             major-second   minor-third    nil]
+   [nil             nil             nil            nil            nil]
+   [nil             nil             nil            nil            nil]
+   [nil             nil             nil            nil            nil]])
 
 
 (defn fret-tones [string-tones]

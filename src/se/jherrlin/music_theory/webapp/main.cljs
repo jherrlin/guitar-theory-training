@@ -239,7 +239,8 @@ specific text format and a spaced repetition algorithm selects questions."]])
                 (map :chord/tones)
                 (apply concat)
                 (set)
-                (vec)))]]]
+                (vec))
+           16)]]]
        [:div
         (for [{chord-tones :chord/tones
                chord-name  :chord/name
@@ -250,7 +251,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
            [:p chord-name " | " chord-intervals]
            [:code
             [:pre
-             (music-theory/fret-table-with-tones-p chord-tones)]]])]])))
+             (music-theory/fret-table-with-tones-p chord-tones 16)]]])]])))
 
 ;;; Routes ;;;
 
@@ -269,8 +270,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
     (when (and chord tone)
       (let [{intervals    :chord/intervals
              intervals-xs :chord/intervals-xs
-             sufix        :chord/sufix
-             }
+             sufix        :chord/sufix}
             (get-in @music-theory/chords-atom [@(re-frame/subscribe [::chord])])]
         [:div
          [:div {:style {:display "flex"}}
@@ -295,25 +295,28 @@ specific text format and a spaced repetition algorithm selects questions."]])
              [:button
               [:a {:href (rfe/href ::chord-tones {:tone tone :chord-name id})} (str (or display-text sufix))]]])]
 
-         [:p intervals]
-         [:p (str (-> tone name str/upper-case) sufix)]
+         [:h2 (str (-> tone name str/upper-case) sufix)]
 
          [:pre
           (->> (map
                 (fn [i x]
-                  (str (fformat "%3s" i) " -> " (name x)))
+                  (str (fformat "%8s" i) " -> " (name x)))
                 intervals-xs
                 ((get-in @music-theory/chords-atom [@(re-frame/subscribe [::chord]) :chord/f])
                  (music-theory/find-root-p @(re-frame/subscribe [::tone]))))
                (str/join "\n")
-               (apply str))]
+               (apply str)
+               (str "Interval -> Tone\n"))]
 
+         [:h3 "All tone positions in the chord"]
          [:code
           [:pre
            (music-theory/fret-table-with-tones-p
             ((get-in @music-theory/chords-atom [@(re-frame/subscribe [::chord]) :chord/f])
-             (music-theory/find-root-p @(re-frame/subscribe [::tone]))))]]
+             (music-theory/find-root-p @(re-frame/subscribe [::tone])))
+            16)]]
 
+         [:h3 "Chord patterns"]
          [:div
           (for [{id :chord/pattern-id}
                 (->> @music-theory/chord-patterns-atom
@@ -329,42 +332,59 @@ specific text format and a spaced repetition algorithm selects questions."]])
   (let [scale @(re-frame/subscribe [::scale])
         key   @(re-frame/subscribe [::key])]
     (when (and scale key)
-      [:div
+      (let [{intervals    :scale/intervals
+             intervals-xs :scale/intervals-xs
+             sufix        :scale/sufix}
+            (get-in @music-theory/scales-atom [@(re-frame/subscribe [::scale])])]
+        [:div
 
-       [:div
-        (for [{:keys [tone url-name title]}
-              (->> (music-theory/find-root-p :a)
-                   (map (fn [x] {:tone     x
-                                 :url-name (-> x name str/lower-case (str/replace "#" "sharp"))
-                                 :title    (-> x name str/upper-case)})))]
-          ^{:key url-name}
-          [:div {:style {:margin-left "10px" :display "inline"}}
-           [:button
-            [:a {:href (rfe/href ::scale {:scale scale :key tone})} title]]])]
-
-       [:br]
-       [:div
-        (for [{intervals :scale/intervals
-               title     :scale/title
-               id        :scale/id}
-              (->> @music-theory/scales-atom vals)]
-          ^{:key (str title "-scale")}
-          [:div {:style {:margin-left "10px" :display "inline"}}
-           [:button
-            [:a {:href (rfe/href ::scale {:scale id :key key})} title]]])]
-
-       (let [{intervals :scale/intervals
-              title :scale/title }
-             (get-in @music-theory/scales-atom [@(re-frame/subscribe [::scale])])]
          [:div
-          [:h3 title]
-          [:h5 intervals]])
+          (for [{:keys [tone url-name title]}
+                (->> (music-theory/find-root-p :a)
+                     (map (fn [x] {:tone     x
+                                   :url-name (-> x name str/lower-case (str/replace "#" "sharp"))
+                                   :title    (-> x name str/upper-case)})))]
+            ^{:key url-name}
+            [:div {:style {:margin-left "10px" :display "inline"}}
+             [:button
+              [:a {:href (rfe/href ::scale {:scale scale :key tone})} title]]])]
 
-       [:code
-        [:pre
-         (music-theory/fret-table-with-tones-p
-          ((get-in @music-theory/scales-atom [@(re-frame/subscribe [::scale]) :scale/f])
-           (music-theory/find-root-p @(re-frame/subscribe [::key]))))]]])))
+         [:br]
+         [:div
+          (for [{intervals :scale/intervals
+                 title     :scale/title
+                 id        :scale/id}
+                (->> @music-theory/scales-atom vals)]
+            ^{:key (str title "-scale")}
+            [:div {:style {:margin-left "10px" :display "inline"}}
+             [:button
+              [:a {:href (rfe/href ::scale {:scale id :key key})} title]]])]
+
+         [:br]
+
+         (let [{intervals :scale/intervals
+                title     :scale/title }
+               (get-in @music-theory/scales-atom [@(re-frame/subscribe [::scale])])]
+           [:div
+            [:h3 (str (-> key name str/upper-case) " - " (-> title str/capitalize))]])
+
+         [:pre
+          (->> (map
+                (fn [i x]
+                  (str (fformat "%8s" i) " -> " (name x)))
+                intervals-xs
+                ((get-in @music-theory/scales-atom [@(re-frame/subscribe [::scale]) :scale/f])
+                 (music-theory/find-root-p @(re-frame/subscribe [::key]))))
+               (str/join "\n")
+               (apply str)
+               (str "Interval -> Tone\n"))]
+
+         [:code
+          [:pre
+           (music-theory/fret-table-with-tones-p
+            ((get-in @music-theory/scales-atom [@(re-frame/subscribe [::scale]) :scale/f])
+             (music-theory/find-root-p @(re-frame/subscribe [::key])))
+            16)]]]))))
 
 
 
@@ -372,55 +392,81 @@ specific text format and a spaced repetition algorithm selects questions."]])
   (let [scale @(re-frame/subscribe [::scale])
         key   @(re-frame/subscribe [::key])]
     (when (and scale key)
-      [:div
+      (let [{intervals    :scale/intervals
+             intervals-xs :scale/intervals-xs
+             sufix        :scale/sufix}
+            (get-in @music-theory/scales-atom [@(re-frame/subscribe [::scale])])]
+        [:div
 
-       [:div
-        (for [{:keys [tone url-name title]}
-              (->> (music-theory/find-root-p :a)
-                   (map (fn [x] {:tone     x
-                                 :url-name (-> x name str/lower-case (str/replace "#" "sharp"))
-                                 :title    (-> x name str/upper-case)})))]
-          ^{:key url-name}
-          [:div {:style {:margin-left "10px" :display "inline"}}
-           [:button
-            [:a {:href (rfe/href ::mode {:scale scale :key tone})} title]]])]
+         [:div
+          (for [{:keys [tone url-name title]}
+                (->> (music-theory/find-root-p :a)
+                     (map (fn [x] {:tone     x
+                                   :url-name (-> x name str/lower-case (str/replace "#" "sharp"))
+                                   :title    (-> x name str/upper-case)})))]
+            ^{:key url-name}
+            [:div {:style {:margin-left "10px" :display "inline"}}
+             [:button
+              [:a {:href (rfe/href ::mode {:scale scale :key tone})} title]]])]
 
-       [:br]
-       [:div
-        (for [{:keys [title scale]}
-              (->> @music-theory/modes-atom
-                   vals
-                   (map (fn [{:mode/keys [scale] :as m}]
-                          (merge m (get @music-theory/scales-atom scale))))
-                   (map (fn [{scale :mode/scale title :scale/title}]
-                          {:scale scale
-                           :title title}))
-                   (set)
-                   (sort-by :title))]
-          ^{:key (str title "-mode-select")}
-          [:div {:style {:margin-left "10px" :display "inline"}}
-           [:button
-            [:a {:href (rfe/href ::mode {:scale scale :key key})} title]]])]
+         [:br]
+         [:div
+          (for [{:keys [title scale]}
+                (->> @music-theory/modes-atom
+                     vals
+                     (map (fn [{:mode/keys [scale] :as m}]
+                            (merge m (get @music-theory/scales-atom scale))))
+                     (map (fn [{scale :mode/scale title :scale/title}]
+                            {:scale scale
+                             :title title}))
+                     (set)
+                     (sort-by :title))]
+            ^{:key (str title "-mode-select")}
+            [:div {:style {:margin-left "10px" :display "inline"}}
+             [:button
+              [:a {:href (rfe/href ::mode {:scale scale :key key})} title]]])]
 
-       [:h2 (str (name key) " / " (name scale))]
 
-       [:div
-        (for [{mode-title   :mode/title
-               mode-pattern :mode/pattern
-               mode-id      :mode/id
-               scale-title  :scale/title}
-              (->> @music-theory/modes-atom
-                   vals
-                   (map (fn [{:mode/keys [scale] :as m}]
-                          (merge m (get @music-theory/scales-atom scale))))
-                   (filter (comp #{scale} :mode/scale)))]
-          ^{:key (str mode-title "-mode")}
-          [:div
-           [:p mode-title]
-           [:code
-            [:pre
-             (music-theory/mode-pattern-str-p mode-id key)]]])]])))
+         [:h2 (str (-> key name str/upper-case) " - " (-> scale name str/capitalize))]
 
+         [:pre
+          (->> (map
+                (fn [i x]
+                  (str (fformat "%8s" i) " -> " (name x)))
+                intervals-xs
+                ((get-in @music-theory/scales-atom [@(re-frame/subscribe [::scale]) :scale/f])
+                 (music-theory/find-root-p @(re-frame/subscribe [::key]))))
+               (str/join "\n")
+               (apply str)
+               (str "Interval -> Tone\n"))]
+
+
+
+         [:h3 "* All tones in scale"]
+         [:code
+          [:pre
+           (music-theory/fret-table-with-tones-p
+            ((get-in @music-theory/scales-atom [@(re-frame/subscribe [::scale]) :scale/f])
+             (music-theory/find-root-p @(re-frame/subscribe [::key])))
+            16)]]
+
+         [:h3 "* Mode patterns"]
+         [:div
+          (for [{mode-title   :mode/title
+                 mode-pattern :mode/pattern
+                 mode-id      :mode/id
+                 scale-title  :scale/title}
+                (->> @music-theory/modes-atom
+                     vals
+                     (sort-by :mode/string)
+                     (map (fn [{:mode/keys [scale] :as m}]
+                            (merge m (get @music-theory/scales-atom scale))))
+                     (filter (comp #{scale} :mode/scale)))]
+            ^{:key (str mode-title "-mode")}
+            [:div
+             [:code
+              [:pre
+               (music-theory/mode-pattern-str-p mode-id key)]]])]]))))
 
 (def drill-events-
   [{:n ::tones-in-chord}
@@ -442,9 +488,11 @@ specific text format and a spaced repetition algorithm selects questions."]])
 
 (defn the-neck-view []
   [:div
+   [:h2 "Guitar neck with all tones in standard tuning."]
+   [:br]
    [:code
     [:pre
-     (music-theory/fret-table-with-tones-p music-theory/tones)]]])
+     (music-theory/fret-table-with-tones-p music-theory/tones 13)]]])
 
 (defn drills-view []
   (let [tones-in-chord? @(re-frame/subscribe [::tones-in-chord])

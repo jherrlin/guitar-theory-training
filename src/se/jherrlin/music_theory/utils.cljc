@@ -28,28 +28,32 @@
           (fn [interval] (fn [tones] (nth tones interval)))
           intervals)))
 
-(defn fret-table-with-tones [tones chord-tones]
-  (let [in-chord?   #(contains? (set chord-tones) %)
-        show        #(if (in-chord? %)
-                       (->> % name str/upper-case (fformat " %-3s"))
-                       (fformat "%4s" ""))]
-    (str
-     (str "|" (str/join "|" (map #(fformat " %-3s" (str %)) (range 0 25))) "|")
-     "\n"
-     (str "|" (str/join "" (take 124 (repeat "-"))) "|")
-     "\n"
-     (str "|" (str/join "|" (map show (->> (find-root :e tones) (cycle) (take 25)))) "|")
-     "\n"
-     (str "|" (str/join "|" (map show (->> (find-root :b tones) (cycle) (take 25)))) "|")
-     "\n"
-     (str "|" (str/join "|" (map show (->> (find-root :g tones) (cycle) (take 25)))) "|")
-     "\n"
-     (str "|" (str/join "|" (map show (->> (find-root :d tones) (cycle) (take 25)))) "|")
-     "\n"
-     (str "|" (str/join "|" (map show (->> (find-root :a tones) (cycle) (take 25)))) "|")
-     "\n"
-     (str "|" (str/join "|" (map show (->> (find-root :e tones) (cycle) (take 25)))) "|")
-     "\n")))
+(defn fret-table-with-tones
+  ([tones chord-tones]
+   (fret-table-with-tones tones chord-tones 25))
+  ([tones chord-tones nr-of-frets]
+   (let [in-chord?   #(contains? (set chord-tones) %)
+         show        #(if (in-chord? %)
+                        (->> % name str/upper-case (fformat " %-3s"))
+                        (fformat "%4s" ""))
+         top-row (str "|" (str/join "|" (map #(fformat " %-3s" (str %)) (range 0 nr-of-frets))) "|")]
+     (str
+      top-row
+      "\n"
+      (str "|" (str/join "" (take (- (count top-row) 2) (repeat "-"))) "|")
+      "\n"
+      (str "|" (str/join "|" (map show (->> (find-root :e tones) (cycle) (take nr-of-frets)))) "|")
+      "\n"
+      (str "|" (str/join "|" (map show (->> (find-root :b tones) (cycle) (take nr-of-frets)))) "|")
+      "\n"
+      (str "|" (str/join "|" (map show (->> (find-root :g tones) (cycle) (take nr-of-frets)))) "|")
+      "\n"
+      (str "|" (str/join "|" (map show (->> (find-root :d tones) (cycle) (take nr-of-frets)))) "|")
+      "\n"
+      (str "|" (str/join "|" (map show (->> (find-root :a tones) (cycle) (take nr-of-frets)))) "|")
+      "\n"
+      (str "|" (str/join "|" (map show (->> (find-root :e tones) (cycle) (take nr-of-frets)))) "|")
+      "\n"))))
 
 (defn find-chord-name [chords-map all-tones chord-tones]
   (let [[root-tone & _] chord-tones
