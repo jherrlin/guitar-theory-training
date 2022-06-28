@@ -118,8 +118,8 @@
                    :chord/intervals intervals
                    :chord/indexes indexes
                    :chord/title (-> name'
-                              name
-                              (str/replace "-" " "))
+                                    name
+                                    (str/replace "-" " "))
                    :chord/tags tags
                    :chord/f (juxt-intervals indexes))))))
 
@@ -143,8 +143,8 @@
                    :scale/intervals intervals
                    :scale/indexes indexes
                    :scale/title (-> name'
-                              name
-                              (str/replace "-" " "))
+                                    name
+                                    (str/replace "-" " "))
                    :scale/tags tags
                    :scale/f (juxt-intervals indexes))))))
 
@@ -234,3 +234,56 @@
 (defn list-insert [lst elem index]
   (let [[l r] (split-at index lst)]
     (concat l [elem] r)))
+
+(defn locate-pattern-on-fret
+  [find-root-f interval-f string-tunings root-tone mode-spec]
+  (let [mode-pred-lenght (-> mode-spec first count)
+        fret-tones'      (->> string-tunings
+                              (mapv #(->> (find-root-f %)
+                                          (cycle)
+                                          (take 25)
+                                          (vec))))]
+    (loop [counter 0]
+      (let [combinations
+            (->>  fret-tones'
+                  (mapv (comp vec (partial take mode-pred-lenght) (partial drop counter)))
+                  (apply concat)
+                  (mapv vector (apply concat mode-spec)))
+            box-match? (->> combinations
+                            (remove (comp nil? first))
+                            (every? (fn [[interval' tone']]
+                                      (= (interval-f root-tone interval') tone'))))]
+        (if box-match?
+          {:root-starts-at-fret counter
+           :fret                (->> combinations
+                                     (mapv (fn [[interval' tone']]
+                                             (when (and interval' (= (interval-f root-tone interval') tone'))
+                                               {:interval interval'
+                                                :tone     tone'})))
+                                     (partition mode-pred-lenght))}
+          (recur (inc counter)))))))
+
+(defn padding-fret-pattern [{:keys [root-starts-at-fret fret]}]
+  (->> fret
+       (mapv (fn [row]
+               (let [row-with-prefix        (concat (take root-starts-at-fret (repeat nil)) row)
+                     row-with-prefix-length (count row-with-prefix)]
+                 (vec (concat row-with-prefix (take (- 16 row-with-prefix-length) (repeat nil)))))))))
+
+(defn fret-pattern-to-str [fret]
+  (let [fret (reverse fret)
+        get-string (fn [n] (map (comp #(if (nil? %) "" (-> % name str/upper-case)) :tone) (nth fret n)))
+        rows       (->> [(map str (range 16))
+                         (get-string 5)
+                         (get-string 4)
+                         (get-string 3)
+                         (get-string 2)
+                         (get-string 1)
+                         (get-string 0)]
+                        (map (fn [row]
+                               (apply str (interpose "|" (map #(fformat " %-3s" %) row)))))
+                        (map (fn [row]
+                               (str "|" row "|"))))
+        row-length (-> rows first count)]
+    (->> (list-insert rows (str "|" (apply str (take (- row-length 2) (repeat "-"))) "|") 1)
+         (str/join "\n"))))

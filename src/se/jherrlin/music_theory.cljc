@@ -14,8 +14,6 @@
             fret-table-with-tones match-chord-with-scales
             list-insert]
     :as utils]
-
-   [clojure.string :as str]
    [clojure.set :as set]))
 
 
@@ -24,7 +22,6 @@
   )
 
 (def tones [:c :c# :d :d# :e :f :f# :g :g# :a :a# :b])
-
 
 ;; ---------------
 ;; State / data
@@ -91,6 +88,40 @@
 (def define-mode
   (partial utils/define-mode
            modes-atom))
+
+(defn locate-pattern-on-fret [root-tone mode-spec]
+  (utils/locate-pattern-on-fret find-root-p interval-p [:e :b :g :d :a :e] root-tone mode-spec))
+
+(comment
+  (locate-pattern-on-fret
+   :c
+   (-> @modes-atom :ionian :mode/pattern))
+  )
+
+(defn chord-pattern-str [modes-atom mode-pattern tone]
+  (->> modes-atom mode-pattern :chord/pattern (locate-pattern-on-fret tone)
+       utils/padding-fret-pattern
+       utils/fret-pattern-to-str))
+(comment
+  (->> @chord-patterns-atom :major-1 :chord/pattern (locate-pattern-on-fret :c))
+
+  (print
+   (chord-pattern-str @chord-patterns-atom :dominant-seven-1 :e))
+
+  )
+
+(defn mode-pattern-str [modes-atom mode-pattern tone]
+  (->> modes-atom mode-pattern :mode/pattern (locate-pattern-on-fret tone)
+       utils/padding-fret-pattern
+       utils/fret-pattern-to-str))
+
+(defn mode-pattern-str-p [mode-pattern tone]
+  (mode-pattern-str @modes-atom mode-pattern tone))
+
+(comment
+  (print
+   (mode-pattern-str @modes-atom :mixolydian-6 :g))
+  )
 ;; ---------------
 ;; Partial functions end.
 ;; ---------------
@@ -243,7 +274,6 @@
 ;; --------------------
 ;; Modes
 ;; --------------------
-
 (define-mode :ionian
   {:scale :ionian}
   [[major-seventh root            nil           major-second]    ;; high E
@@ -426,89 +456,6 @@
    [minor-seventh   nil               root           minor-second]
    [perfect-fourth  diminished-fifth  nil            minor-sixth]
    [root            minor-second      nil            minor-third]])
-
-
-(defn fret-board-string-and-tones-matrix [string-tones nr-of-frets]
-  (->> string-tones
-       (mapv #(->> (find-root-p %)
-                   (cycle)
-                   (take nr-of-frets)
-                   (vec)))))
-
-(defn mode [root-tone mode-spec]
-  (let [mode-pred-lenght (-> mode-spec first count)
-        string-tones     [:e :b :g :d :a :e]
-        fret-tones'      (fret-board-string-and-tones-matrix string-tones 25)]
-    (loop [counter 0]
-      (let [combinations
-            (->>  fret-tones'
-                  (mapv (comp vec (partial take mode-pred-lenght) (partial drop counter)))
-                  (apply concat)
-                  (mapv vector (apply concat mode-spec)))
-            box-match? (->> combinations
-                            (remove (comp nil? first))
-                            (every? (fn [[interval' tone']]
-                                      (= (interval-p root-tone interval') tone'))))]
-        (if box-match?
-          {:root-starts-at-fret counter
-           :fret                (->> combinations
-                                     (mapv (fn [[interval' tone']]
-                                             (when (and interval' (= (interval-p root-tone interval') tone'))
-                                               {:interval interval'
-                                                :tone tone'})))
-                                     (partition mode-pred-lenght))}
-          (recur (inc counter)))))))
-
-(defn mode-str [fret]
-  (let [fret (reverse fret)
-        get-string (fn [n] (map (comp #(if (nil? %) "" (-> % name str/upper-case)) :tone) (nth fret n)))
-        rows       (->> [(map str (range 16))
-                         (get-string 5)
-                         (get-string 4)
-                         (get-string 3)
-                         (get-string 2)
-                         (get-string 1)
-                         (get-string 0)]
-                        (map (fn [row]
-                               (apply str (interpose "|" (map #(fformat " %-3s" %) row)))))
-                        (map (fn [row]
-                               (str "|" row "|"))))
-        row-length (-> rows first count)]
-    (->> (list-insert rows (str "|" (apply str (take (- row-length 2) (repeat "-"))) "|") 1)
-         (str/join "\n"))))
-
-(defn prepair-mode [{:keys [root-starts-at-fret fret]}]
-  (->> fret
-       (mapv (fn [row]
-               (let [row-with-prefix        (concat (take root-starts-at-fret (repeat nil)) row)
-                     row-with-prefix-length (count row-with-prefix)]
-                 (vec (concat row-with-prefix (take (- 16 row-with-prefix-length) (repeat nil)))))))))
-
-(defn mode-pattern-str [modes-atom mode-pattern tone]
-  (->> modes-atom mode-pattern :mode/pattern (mode tone)
-       prepair-mode
-       mode-str))
-
-
-(defn mode-pattern-str-p [mode-pattern tone]
-  (mode-pattern-str @modes-atom mode-pattern tone))
-
-
-(print
- (mode-pattern-str @modes-atom :mixolydian-6 :g))
-
-
-(->> @modes-atom
-     vals
-     (map (fn [{:mode/keys [scale] :as m}]
-            (merge m (get @scales-atom scale))))
-     (map (fn [{scale :mode/scale title :scale/title}]
-            {:scale scale
-             :title title}))
-     (set)
-     (sort-by :title)
-     )
-
 ;; --------------------
 ;; Modes end
 ;; --------------------
@@ -574,7 +521,6 @@
    [nil            nil          nil            nil]
    [nil            nil          nil            nil]])
 
-
 (define-chord-pattern :dominant-seven-1
   {:name :dominant-seven}
   [[root           nil          nil]
@@ -601,22 +547,6 @@
    [nil            nil            perfect-fifth]
    [root           nil            nil]
    [nil            nil            nil]])
-
-
-(defn mode-pattern-str-1 [modes-atom mode-pattern tone]
-  (->> modes-atom mode-pattern :chord/pattern (mode tone)
-       prepair-mode
-       mode-str))
-
-(->> @chord-patterns-atom :major-1 :chord/pattern (mode :c))
-
-(print
- (mode-pattern-str-1 @chord-patterns-atom :dominant-seven-1 :e))
-
-(let [chord :major]
-  (->> @chord-patterns-atom
-       vals
-       (filter (comp #{chord} :chord-pattern/name))))
 ;; --------------------
 ;; Chord patterns end
 ;; --------------------

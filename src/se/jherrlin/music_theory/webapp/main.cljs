@@ -329,7 +329,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
             ^{:key (-> id name)}
             [:div {:style {:margin-top "2em"}}
              [:pre {:style {:overflow-x "auto"}}
-              (music-theory/mode-pattern-str-1 @music-theory/chord-patterns-atom id tone)]])]
+              (music-theory/chord-pattern-str @music-theory/chord-patterns-atom id tone)]])]
 
          [:h3 "Scales to chord"]
          (for [{scale-title :scale/title
