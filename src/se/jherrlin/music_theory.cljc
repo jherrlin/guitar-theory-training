@@ -652,6 +652,19 @@
         :when (set/subset? (set (:chord/indexes chord)) (set (:scale/indexes scale)))]
     (merge chord scale))
 
+
+  (for [scale (vals @scales-atom)
+        chord (vals @chords-atom)
+        :when (set/subset? (set (:chord/indexes chord)) (set (:scale/indexes scale)))]
+    (merge chord scale))
+
   (match-chord-with-scales-p [0 4 7])
+
+
+  (let [chord-indexes [0 4 7]]
+    (->> (vals @scales-atom)
+         (filter (fn [{:scale/keys [indexes]}]
+                   (set/subset? (set chord-indexes) (set indexes))))))
+
 
   )

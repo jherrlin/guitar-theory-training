@@ -13,7 +13,8 @@
    [reitit.frontend :as rf]
    [reitit.frontend.controllers :as rfc]
    [reitit.frontend.easy :as rfe]
-   [clojure.string :as str]))
+   [clojure.string :as str]
+   [clojure.set :as set]))
 
 
 ;;; Effects ;;;
@@ -271,9 +272,10 @@ specific text format and a spaced repetition algorithm selects questions."]])
   (let [chord @(re-frame/subscribe [::chord])
         tone  @(re-frame/subscribe [::tone])]
     (when (and chord tone)
-      (let [{intervals    :chord/intervals
-             intervals-xs :chord/intervals-xs
-             sufix        :chord/sufix}
+      (let [{chord-indexes :chord/indexes
+             intervals     :chord/intervals
+             intervals-xs  :chord/intervals-xs
+             sufix         :chord/sufix}
             (get-in @music-theory/chords-atom [@(re-frame/subscribe [::chord])])]
         [:div
          [:div
@@ -318,7 +320,6 @@ specific text format and a spaced repetition algorithm selects questions."]])
              (music-theory/find-root-p @(re-frame/subscribe [::tone])))
             16)]
 
-
          [:h3 "Chord patterns"]
          [:div
           (for [{id :chord/pattern-id}
@@ -327,8 +328,20 @@ specific text format and a spaced repetition algorithm selects questions."]])
                      (filter (comp #{@(re-frame/subscribe [::chord])} :chord-pattern/name)))]
             ^{:key (-> id name)}
             [:pre {:style {:overflow-x "auto"}}
-             (music-theory/mode-pattern-str-1 @music-theory/chord-patterns-atom id tone)])]]))))
+             (music-theory/mode-pattern-str-1 @music-theory/chord-patterns-atom id tone)])]
 
+         [:h3 "Scales to chord"]
+         (for [{scale-title :scale/title
+                scale-id    :scale/id}
+               (let [{chord-indexes :chord/indexes}
+                     (get-in @music-theory/chords-atom [@(re-frame/subscribe [::chord])])]
+                 (->> (vals @music-theory/scales-atom)
+                      (filter (fn [{:scale/keys [indexes]}]
+                                (set/subset? (set chord-indexes) (set indexes))))))]
+           ^{:key scale-title}
+           [:div {:style {:margin-right "10px" :display "inline"}}
+            [:a {:href (rfe/href ::scale {:scale scale-id :key tone})}
+             [:button scale-title]]])]))))
 
 
 (defn scale-in-key-view []
