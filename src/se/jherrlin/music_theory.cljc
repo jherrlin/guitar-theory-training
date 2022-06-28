@@ -11,7 +11,8 @@
     :as intervals]
    [se.jherrlin.music-theory.utils
     :refer [fformat find-chord find-chord-name  find-root
-            fret-table-with-tones match-chord-with-scales]
+            fret-table-with-tones match-chord-with-scales
+            list-insert]
     :as utils]
 
    [clojure.string :as str]
@@ -245,22 +246,22 @@
 
 (define-mode :ionian
   {:scale :ionian}
-  [[major-seventh root            nil           major-second]
-   [nil           perfect-fifth   nil           major-sixth]
-   [major-second  nil             major-third   perfect-fourth]
-   [major-sixth   nil             major-seventh root]
-   [major-third   perfect-fourth  nil           perfect-fifth]
-   [nil           root            nil           major-second]])
+  [[major-seventh root            nil           major-second]    ;; high E
+   [nil           perfect-fifth   nil           major-sixth]     ;; B
+   [major-second  nil             major-third   perfect-fourth]  ;; G
+   [major-sixth   nil             major-seventh root]            ;; D
+   [major-third   perfect-fourth  nil           perfect-fifth]   ;; A
+   [nil           root            nil           major-second]])  ;; E
 
 (define-mode :ionian-6
   {:scale :ionian
    :string  6}
-  [[nil          nil             nil            nil]              ;; high E
-   [nil          nil             nil            nil]              ;; B
-   [nil          nil             nil            nil]              ;; G
-   [major-sixth  nil             major-seventh  root]             ;; D
-   [major-third  perfect-fourth  nil            perfect-fifth]    ;; A
-   [nil          root            nil            major-second]])   ;; E
+  [[nil          nil             nil            nil]
+   [nil          nil             nil            nil]
+   [nil          nil             nil            nil]
+   [major-sixth  nil             major-seventh  root]
+   [major-third  perfect-fourth  nil            perfect-fifth]
+   [nil          root            nil            major-second]])
 
 (define-mode :ionian-5
   {:scale :ionian
@@ -427,17 +428,17 @@
    [root            minor-second      nil            minor-third]])
 
 
-(defn fret-tones [string-tones]
+(defn fret-board-string-and-tones-matrix [string-tones nr-of-frets]
   (->> string-tones
        (mapv #(->> (find-root-p %)
                    (cycle)
-                   (take 25)
+                   (take nr-of-frets)
                    (vec)))))
 
 (defn mode [root-tone mode-spec]
   (let [mode-pred-lenght (-> mode-spec first count)
         string-tones     [:e :b :g :d :a :e]
-        fret-tones'      (fret-tones string-tones)]
+        fret-tones'      (fret-board-string-and-tones-matrix string-tones 25)]
     (loop [counter 0]
       (let [combinations
             (->>  fret-tones'
@@ -457,11 +458,6 @@
                                                 :tone tone'})))
                                      (partition mode-pred-lenght))}
           (recur (inc counter)))))))
-
-
-(defn list-insert [lst elem index]
-  (let [[l r] (split-at index lst)]
-    (concat l [elem] r)))
 
 (defn mode-str [fret]
   (let [fret (reverse fret)

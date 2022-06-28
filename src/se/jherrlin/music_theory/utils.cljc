@@ -230,3 +230,7 @@
    (->> xs (map (comp #(fformat "   %-10s" %) str :harmonization/family-str)) (str/join))
    "\n"
    (->> xs (map (comp #(fformat "   %-10s" %) str :chord/name)) (str/join))))
+
+(defn list-insert [lst elem index]
+  (let [[l r] (split-at index lst)]
+    (concat l [elem] r)))

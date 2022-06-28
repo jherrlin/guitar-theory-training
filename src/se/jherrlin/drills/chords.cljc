@@ -92,3 +92,27 @@
           se.jherrlin.music-theory/tones
           @se.jherrlin.music-theory/chords-atom))))
      ))
+
+
+(defn intervals-in-chord [find-root-f all-tones chords-map]
+  (let [
+        ;; find-root-f        se.jherrlin.music-theory/find-root-p
+        ;; all-tones          se.jherrlin.music-theory/tones
+        ;; chords-map         @se.jherrlin.music-theory/chords-atom
+        ]
+    (->> (for [chord (vals chords-map)
+               tone  all-tones]
+           (assoc chord :tone tone))
+         (map (fn [{:chord/keys [f sufix intervals]
+                    tone        :tone}]
+                (let [chord-name      (str (-> tone name str/upper-case) sufix)
+                      chord-tones     (f (find-root-f tone))
+                      chord-tones-str (->> chord-tones (map (comp str/upper-case name)) (str/join ", "))]
+                  (str
+                   "** " (fformat "%-60s:music:theory:chords:drill:" (str "Intervals in " chord-name))
+                   "\n\n"
+                   "   What intervals are in the " chord-name " chord?"
+                   "\n\n"
+                   "*** Answer \n\n    " intervals
+                   "\n\n"))))
+         (apply str))))
