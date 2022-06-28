@@ -244,7 +244,6 @@ specific text format and a spaced repetition algorithm selects questions."]])
                 {:tone (-> chord-tones first name)
                  :chord-name (-> chord-id name)}])}
             chord-name]
-           [:p "Functions: " chord-intervals]
            [:code
             [:pre {:style {:overflow-x "auto"}}
              (music-theory/fret-table-with-tones-p chord-tones 16)]]])]])))
@@ -472,8 +471,6 @@ specific text format and a spaced repetition algorithm selects questions."]])
                (str/join "\n")
                (apply str)
                (str "Interval -> Tone\n"))]
-
-
 
          [:h3 "All tones in scale"]
          [:code
