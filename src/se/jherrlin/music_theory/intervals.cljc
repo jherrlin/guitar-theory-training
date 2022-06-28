@@ -23,7 +23,7 @@
 (def octave             perfect-unison)
 (def perfect-octave     perfect-unison)
 
-(defn- intervals []
+(defn intervals []
   [{:semitones perfect-unison
     :function  "1"
     :name      "Perfect unison"}

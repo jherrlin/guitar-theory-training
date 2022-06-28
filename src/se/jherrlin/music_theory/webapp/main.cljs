@@ -474,7 +474,9 @@ specific text format and a spaced repetition algorithm selects questions."]])
 (def drill-events-
   [{:n ::tones-in-chord}
    {:n ::name-the-chord}
-   {:n ::intervals-in-chord}])
+   {:n ::intervals-in-chord}
+   {:n ::name-the-interval}
+   {:n ::tone-in-interval}])
 
 (doseq [{:keys [n s e]} drill-events-]
   (re-frame/reg-sub n (or s (fn [db _] (get db n))))
@@ -500,7 +502,10 @@ specific text format and a spaced repetition algorithm selects questions."]])
 (defn drills-view []
   (let [tones-in-chord? @(re-frame/subscribe [::tones-in-chord])
         name-the-chord? @(re-frame/subscribe [::name-the-chord])
-        intervals-in-chord? @(re-frame/subscribe [::intervals-in-chord])]
+        intervals-in-chord? @(re-frame/subscribe [::intervals-in-chord])
+
+        name-the-interval? @(re-frame/subscribe [::name-the-interval])
+        tone-in-interval? @(re-frame/subscribe [::tone-in-interval])]
     [:div
      [:div "Here you can generate and download music and guitar theory questions and
 answers in an Org-drill format. Select the type of questions that interests you
@@ -516,6 +521,12 @@ the org-drill mode."]
      [:label "Intervals in chord:"]
      [:input {:type "checkbox" :on-click #(re-frame/dispatch [::intervals-in-chord (not intervals-in-chord?)])}]
      [:br]
+     [:label "Name the interval:"]
+     [:input {:type "checkbox" :on-click #(re-frame/dispatch [::name-the-interval (not name-the-interval?)])}]
+     [:br]
+     [:label "Tone in interval:"]
+     [:input {:type "checkbox" :on-click #(re-frame/dispatch [::tone-in-interval (not tone-in-interval?)])}]
+     [:br]
      [:br]
      [:button
       {:on-click
@@ -529,14 +540,21 @@ the org-drill mode."]
                intervals-in-chord-p
                (fn []
                  (drills/intervals-in-chord music-theory/find-root-p music-theory/tones @music-theory/chords-atom))
-               ]
+               name-the-interval-p
+               (fn []
+                 (drills/name-the-interval music-theory/interval-p music-theory/find-root-p music-theory/tones @music-theory/chords-atom))
+               tone-in-interval-p
+               (fn []
+                 (drills/tone-in-interval music-theory/interval-p music-theory/find-root-p music-theory/tones @music-theory/chords-atom))]
            (download-object
             "music-theory-drills.org"
             (str
              "#+STARTUP: overview\n\n"
-             (when tones-in-chord? (tones-in-chord-p))
-             (when name-the-chord? (name-the-chord-p))
-             (when intervals-in-chord? (intervals-in-chord-p))))))}
+             (when tones-in-chord?     (tones-in-chord-p))
+             (when name-the-chord?     (name-the-chord-p))
+             (when intervals-in-chord? (intervals-in-chord-p))
+             (when name-the-interval?  (name-the-interval-p))
+             (when tone-in-interval?   (tone-in-interval-p))))))}
       "Download questions / answers"]]))
 
 (def routes

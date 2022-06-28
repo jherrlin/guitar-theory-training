@@ -22,7 +22,7 @@
                 (let [chord-name      (str (-> tone name str/upper-case) sufix)
                       chord-tones     (f (find-root-f tone))
                       chord-tones-str (->> chord-tones (map (comp str/upper-case name)) (str/join ", "))]
-                (str
+                  (str
                  "** " (fformat "%-60s:music:theory:chords:drill:" (str "Tones in " chord-name " chord"))
                  "\n\n"
                  "   What tones are in the " chord-name " chord?"
