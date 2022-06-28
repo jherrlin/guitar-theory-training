@@ -17,40 +17,34 @@
    [clojure.set :as set]))
 
 
-;;; Effects ;;;
-
-;; Triggering navigation from events.
-
 (re-frame/reg-fx
  :push-state
  (fn [route]
    (apply rfe/push-state route)))
 
-;;; Events ;;;
+(re-frame/reg-event-db
+ ::initialize-db
+ (fn [db _]
+   (if db
+     db
+     {:current-route nil})))
 
-(re-frame/reg-event-db ::initialize-db
-                       (fn [db _]
-                         (if db
-                           db
-                           {:current-route nil})))
+(re-frame/reg-event-fx
+ ::push-state
+ (fn [_ [_ & route]]
+   {:push-state route}))
 
-(re-frame/reg-event-fx ::push-state
-                       (fn [_ [_ & route]]
-                         {:push-state route}))
+(re-frame/reg-event-db
+ ::navigated
+ (fn [db [_ new-match]]
+   (let [old-match   (:current-route db)
+         controllers (rfc/apply-controllers (:controllers old-match) new-match)]
+     (assoc db :current-route (assoc new-match :controllers controllers)))))
 
-(re-frame/reg-event-db ::navigated
-                       (fn [db [_ new-match]]
-                         (let [old-match   (:current-route db)
-                               controllers (rfc/apply-controllers (:controllers old-match) new-match)]
-                           (assoc db :current-route (assoc new-match :controllers controllers)))))
-
-;;; Subscriptions ;;;
-
-(re-frame/reg-sub :current-route
-                  (fn [db]
-                    (:current-route db)))
-
-;;; Views ;;;
+(re-frame/reg-sub
+ :current-route
+ (fn [db]
+   (:current-route db)))
 
 (defn home-page []
   [:div
@@ -94,17 +88,12 @@ specific text format and a spaced repetition algorithm selects questions."]])
   (re-frame/reg-sub n (or s (fn [db _] (get db n))))
   (re-frame/reg-event-db n (or e (fn [db [_ e]] (assoc db n e)))))
 
-
 (defn ^:dev/after-load header-menu [router]
-  (let [current-route     @(re-frame/subscribe [:current-route])
-        current-route-url (get current-route :template "")]
+  (let [current-route @(re-frame/subscribe [:current-route])]
     [:div {:style {:flex "1"}}
      [:> semantic-ui/Menu {:size       "small"
                            :borderless true
                            :style      {:background "#FFFFFF"}}
-
-
-
       [:> semantic-ui/Menu.Item
        {:as   "a"
         :href (rfe/href ::the-neck)}
@@ -140,26 +129,12 @@ specific text format and a spaced repetition algorithm selects questions."]])
          :target "_blank"}
         "Source code"]]]]))
 
-(some->> @(re-frame/subscribe [:current-route])
-         :data :view)
-
 (defn ^:dev/after-load main [router]
-  (let [current-route @(re-frame/subscribe [:current-route])
-        sub-menu      (some-> current-route :data :sub-menu)]
+  (let [current-route @(re-frame/subscribe [:current-route])]
     [:<>
      (when current-route
        [:div
-        #_{:style {:height         "100%"
-                 :display        "flex"
-                 :flex-direction "column"
-                 }}
-
         [header-menu router]
-
-        #_(when sub-menu
-            [:div
-             [:> semantic-ui/Menu {:secondary true}
-              [sub-menu router]]])
 
         [:div {:style {:height     "100%"
                        :overflow-y "auto"
@@ -176,22 +151,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
 
           ;; This is the main location on the page.
           (when current-route
-            (-> current-route :data :view))]]
-
-        #_[:div
-           [:> semantic-ui/Menu {:size "small"}
-            [:> semantic-ui/Popup
-             {:position "top right"
-              :content  "Notifications history."}]]]])]))
-
-
-
-(->> @music-theory/chords-atom vals (map :chord/sufix))
-
-(->> @music-theory/scales-atom vals)
-
-(map :scale/title)
-
+            (-> current-route :data :view))]]])]))
 
 (defn harmonization-view []
   (let [tone             @(re-frame/subscribe [:harmonization/tone])
@@ -257,8 +217,6 @@ specific text format and a spaced repetition algorithm selects questions."]])
             [:pre {:style {:overflow-x "auto"}}
              (music-theory/fret-table-with-tones-p chord-tones 16)]]])]])))
 
-;;; Routes ;;;
-
 (defn href
   "Return relative url for given route. Url can be used in HTML links."
   ([k]
@@ -315,10 +273,10 @@ specific text format and a spaced repetition algorithm selects questions."]])
 
          [:h3 "All tone positions in the chord"]
          [:pre {:style {:overflow-x "auto"}}
-           (music-theory/fret-table-with-tones-p
-            ((get-in @music-theory/chords-atom [@(re-frame/subscribe [::chord]) :chord/f])
-             (music-theory/find-root-p @(re-frame/subscribe [::tone])))
-            16)]
+          (music-theory/fret-table-with-tones-p
+           ((get-in @music-theory/chords-atom [@(re-frame/subscribe [::chord]) :chord/f])
+            (music-theory/find-root-p @(re-frame/subscribe [::tone])))
+           16)]
 
          [:h3 "Chord patterns"]
          [:div
@@ -343,7 +301,6 @@ specific text format and a spaced repetition algorithm selects questions."]])
            [:div {:style {:margin-right "10px" :display "inline"}}
             [:a {:href (rfe/href ::scale {:scale scale-id :key tone})}
              [:button scale-title]]])]))))
-
 
 (defn scale-in-key-view []
   (let [scale @(re-frame/subscribe [::scale])
@@ -417,7 +374,6 @@ specific text format and a spaced repetition algorithm selects questions."]])
            [:div {:style {:margin-right "10px" :display "inline"}}
             [:a {:href (rfe/href ::chord-tones {:chord-name chord-id :tone key})}
              [:button chord-title]]])]))))
-
 
 (defn mode-view []
   (let [scale @(re-frame/subscribe [::scale])
@@ -524,7 +480,6 @@ specific text format and a spaced repetition algorithm selects questions."]])
   (re-frame/reg-sub n (or s (fn [db _] (get db n))))
   (re-frame/reg-event-db n (or e (fn [db [_ e]] (assoc db n e)))))
 
-
 (defn download-object [export-name value]
   (let [data-blob (js/Blob. #js [value] #js {:type "plain/text"})
         link (.createElement js/document "a")]
@@ -589,19 +544,10 @@ the org-drill mode."]
    [""
     {:name      ::home
      :view      [home-page]
-     :link-text "Home"
-     :controllers
-     [{;; Do whatever initialization needed for home page
-       ;; I.e (re-frame/dispatch [::events/load-something-with-ajax])
-       :start (fn [& params](js/console.log "Entering home page"))
-       ;; Teardown can be done here.
-       :stop  (fn [& params] (js/console.log "Leaving home page"))}]}]
-
+     :link-text "Home"}]
    ["the-neck"
     {:name ::the-neck
-     :view [the-neck-view]}
-    ]
-
+     :view [the-neck-view]}]
    ["chord"
     {:name      ::chord-tones-redirect
      :controllers
@@ -623,13 +569,10 @@ the org-drill mode."]
                        (re-frame/dispatch [::tone (keyword tone)])
                        (re-frame/dispatch [::chord (keyword chord-name)])))
        :stop       (fn [& params] (js/console.log "Leaving..."))}]}]
-
-
    ["drills"
     {:name      ::drills
      :view      [drills-view]
      :link-text "drills-view"}]
-
    ["scale"
     {:name      ::scale-redirect
      :controllers
@@ -650,8 +593,6 @@ the org-drill mode."]
                        (re-frame/dispatch [::scale scale'])
                        (re-frame/dispatch [::key key'])))
        :stop       (fn [& params] (js/console.log "Leaving scale"))}]}]
-
-
    ["mode/:scale/:key"
     {:name      ::mode
      :view      [mode-view]
@@ -665,7 +606,6 @@ the org-drill mode."]
                        (re-frame/dispatch [::scale scale'])
                        (re-frame/dispatch [::key key'])))
        :stop       (fn [& params] (js/console.log "Leaving mode"))}]}]
-
    ["harmonization/:tone/:major-or-minor/:triad-or-seventh"
     {:name      ::harmonization
      :view      [harmonization-view]
@@ -698,26 +638,6 @@ the org-drill mode."]
    on-navigate
    {:use-fragment true}))
 
-(defn nav [{:keys [router current-route]}]
-  [:ul
-   (for [route-name (r/route-names router)
-         :let       [route (r/match-by-name router route-name)
-                     text (-> route :data :link-text)]]
-     [:li {:key route-name}
-      (when (= route-name (-> current-route :data :name))
-        "> ")
-      ;; Create a normal links that user can click
-      [:a {:href (href route-name)} text]])])
-
-(defn router-component [{:keys [router]}]
-  (let [current-route @(re-frame/subscribe [:current-route])]
-    [:div
-     [nav {:router router :current-route current-route}]
-     (when current-route
-       [(-> current-route :data :view)])]))
-
-;;; Setup ;;;
-
 (def debug? ^boolean goog.DEBUG)
 
 (defn dev-setup []
@@ -728,11 +648,8 @@ the org-drill mode."]
 (defn ^:dev/after-load mount-root []
   (re-frame/clear-subscription-cache!)
   (rd/render
-   ;; [router-component {:router router}]
    [main router]
    (.getElementById js/document "app")))
-
-
 
 (defn ^:dev/after-load init []
   (println "starting...")
@@ -740,5 +657,4 @@ the org-drill mode."]
   (re-frame/dispatch-sync [::initialize-db])
   (dev-setup)
   (init-routes!) ;; Reset routes on figwheel reload
-  (mount-root)
-  )
+  (mount-root))
