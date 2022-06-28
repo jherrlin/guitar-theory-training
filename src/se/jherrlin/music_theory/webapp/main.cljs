@@ -183,7 +183,6 @@ specific text format and a spaced repetition algorithm selects questions."]])
             [:button
              {:disabled (= tone tone')}
              title]]])]
-
        [:br]
        [:div {:style {:display "flex"}}
         [:div {:style {:margin-right "10px"}}
@@ -208,6 +207,8 @@ specific text format and a spaced repetition algorithm selects questions."]])
           [:button
            {:disabled (= triad-or-seventh :seventh)}
            "seventh"]]]]
+
+       [:h2 (str (-> tone name str/upper-case) " - " (-> major-or-minor name) " - " (-> triad-or-seventh name))]
 
        [:br]
        [:code
@@ -234,20 +235,19 @@ specific text format and a spaced repetition algorithm selects questions."]])
                :as             m}
               (music-theory/diatonic-chord-progressions-p tone major-or-minor triad-or-seventh)]
           ^{:key (str chord-name)}
-          (do (def m m)
-              [:div
-               [:h3
-                {:on-click
-                 #(re-frame/dispatch
-                   [::push-state
-                    ::chord-tones
-                    {:tone (-> chord-tones first name)
-                     :chord-name (-> chord-id name)}])}
-                chord-name]
-               [:p "Functions: " chord-intervals]
-               [:code
-                [:pre {:style {:overflow-x "auto"}}
-                 (music-theory/fret-table-with-tones-p chord-tones 16)]]]))]])))
+          [:div
+           [:h3
+            {:on-click
+             #(re-frame/dispatch
+               [::push-state
+                ::chord-tones
+                {:tone (-> chord-tones first name)
+                 :chord-name (-> chord-id name)}])}
+            chord-name]
+           [:p "Functions: " chord-intervals]
+           [:code
+            [:pre {:style {:overflow-x "auto"}}
+             (music-theory/fret-table-with-tones-p chord-tones 16)]]])]])))
 
 (defn href
   "Return relative url for given route. Url can be used in HTML links."
@@ -383,7 +383,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
                 title     :scale/title }
                (get-in @music-theory/scales-atom [@(re-frame/subscribe [::scale])])]
            [:div
-            [:h3 (str (-> key name str/upper-case) " - " (-> title str/capitalize))]])
+            [:h2 (str (-> key name str/upper-case) " - " (-> title str/capitalize))]])
 
          [:pre {:style {:overflow-x "auto"}}
           (->> (map
