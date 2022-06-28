@@ -327,8 +327,9 @@ specific text format and a spaced repetition algorithm selects questions."]])
                      vals
                      (filter (comp #{@(re-frame/subscribe [::chord])} :chord-pattern/name)))]
             ^{:key (-> id name)}
-            [:pre {:style {:overflow-x "auto"}}
-             (music-theory/mode-pattern-str-1 @music-theory/chord-patterns-atom id tone)])]
+            [:div {:style {:margin-top "2em"}}
+             [:pre {:style {:overflow-x "auto"}}
+              (music-theory/mode-pattern-str-1 @music-theory/chord-patterns-atom id tone)]])]
 
          [:h3 "Scales to chord"]
          (for [{scale-title :scale/title
@@ -349,6 +350,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
         key   @(re-frame/subscribe [::key])]
     (when (and scale key)
       (let [{intervals    :scale/intervals
+             indexes      :scale/indexes
              intervals-xs :scale/intervals-xs
              sufix        :scale/sufix}
             (get-in @music-theory/scales-atom [@(re-frame/subscribe [::scale])])]
@@ -400,8 +402,21 @@ specific text format and a spaced repetition algorithm selects questions."]])
            (music-theory/fret-table-with-tones-p
             ((get-in @music-theory/scales-atom [@(re-frame/subscribe [::scale]) :scale/f])
              (music-theory/find-root-p @(re-frame/subscribe [::key])))
-            16)]]]))))
+            16)]]
 
+
+         [:h3 "Chords to scale"]
+         (for [{chord-title :chord/title
+                chord-id    :chord/id}
+               (let [{scale-indexes :scale/indexes}
+                     (get-in @music-theory/scales-atom [@(re-frame/subscribe [::scale])])]
+                 (->> (vals @music-theory/chords-atom)
+                      (filter (fn [{:chord/keys [indexes]}]
+                                (set/subset? (set indexes) (set scale-indexes))))))]
+           ^{:key chord-title}
+           [:div {:style {:margin-right "10px" :display "inline"}}
+            [:a {:href (rfe/href ::chord-tones {:chord-name chord-id :tone key})}
+             [:button chord-title]]])]))))
 
 
 (defn mode-view []
@@ -444,7 +459,6 @@ specific text format and a spaced repetition algorithm selects questions."]])
 
 
          [:h2 (str (-> key name str/upper-case) " - " (-> scale name str/capitalize))]
-
          [:pre {:style {:overflow-x "auto"}}
           (->> (map
                 (fn [i x]
