@@ -522,6 +522,36 @@
    [nil            nil            perfect-fifth]
    [root           nil            nil]
    [nil            nil            nil]])
+
+
+(define-chord-pattern :minor-seven-1
+  {:name :minor-seven}
+  [[perfect-fifth  nil            nil]
+   [nil            minor-third    nil]
+   [minor-seventh  nil            nil]
+   [nil            nil            perfect-fifth]
+   [root           nil            nil]
+   [nil            nil            nil]])
+
+(define-chord-pattern :minor-seven-2
+  {:name :minor-seven}
+  [[root             nil            nil]
+   [perfect-fifth    nil            nil]
+   [minor-third      nil            nil]
+   [minor-seventh    nil            nil]
+   [nil              nil            perfect-fifth]
+   [root             nil            nil]])
+
+(define-chord-pattern :minor-seven-3
+  {:name :minor-seven}
+  [[nil             minor-third    nil]
+   [nil             minor-seventh  nil]
+   [nil             nil            perfect-fifth]
+   [root            nil            nil]
+   [nil             nil            nil]
+   [nil             nil            nil]])
+
+
 ;; --------------------
 ;; Chord patterns end
 ;; --------------------
@@ -564,7 +594,6 @@
     (merge chord scale))
 
   (match-chord-with-scales-p [0 4 7])
-
 
   (let [chord-indexes [0 4 7]]
     (->> (vals @scales-atom)
