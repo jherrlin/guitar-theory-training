@@ -8,7 +8,6 @@
    [se.jherrlin.music-theory :as music-theory]
    [reagent.dom :as rd]
    [re-frame.core :as re-frame]
-   [reitit.core :as r]
    [reitit.coercion.spec :as rss]
    [reitit.frontend :as rf]
    [reitit.frontend.controllers :as rfc]
@@ -88,46 +87,57 @@ specific text format and a spaced repetition algorithm selects questions."]])
   (re-frame/reg-sub n (or s (fn [db _] (get db n))))
   (re-frame/reg-event-db n (or e (fn [db [_ e]] (assoc db n e)))))
 
+(->> @(re-frame/subscribe [:current-route])
+     :data :name)
+
 (defn ^:dev/after-load header-menu [router]
-  (let [current-route @(re-frame/subscribe [:current-route])]
-    [:div {:style {:flex "1"}}
-     [:> semantic-ui/Menu {:size       "small"
-                           :borderless true
-                           :style      {:background "#FFFFFF"}}
-      [:> semantic-ui/Menu.Item
-       {:as   "a"
-        :href (rfe/href ::the-neck)}
-       "Neck"]
+  (let [current-route      @(re-frame/subscribe [:current-route])
+        current-route-name (get-in current-route [:data :name])]
+    (when (and current-route current-route-name)
+      [:div {:style {:flex "1"}}
+       [:> semantic-ui/Menu {:size       "small"
+                             :borderless true
+                             :style      {:background "#FFFFFF"}}
+        [:> semantic-ui/Menu.Item
+         {:as     "a"
+          :href   (rfe/href ::the-neck)
+          :active (= ::the-neck current-route-name)}
+         "Neck"]
 
-      [:> semantic-ui/Menu.Item
-       {:as   "a"
-        :href (rfe/href ::chord-tones-redirect)}
-       "Chords"]
-      [:> semantic-ui/Menu.Item
-       {:as   "a"
-        :href (rfe/href ::scale-redirect)}
-       "Scales"]
-      [:> semantic-ui/Menu.Item
-       {:as   "a"
-        :href (rfe/href ::harmonization {:tone :c :major-or-minor :major :triad-or-seventh :triad})}
-       "Harmonizations"]
+        [:> semantic-ui/Menu.Item
+         {:as     "a"
+          :href   (rfe/href ::chord-tones-redirect)
+          :active (= ::chord-tones current-route-name)}
+         "Chords"]
+        [:> semantic-ui/Menu.Item
+         {:as     "a"
+          :href   (rfe/href ::scale-redirect)
+          :active (= ::scale current-route-name)}
+         "Scales"]
+        [:> semantic-ui/Menu.Item
+         {:as     "a"
+          :href   (rfe/href ::harmonization {:tone :c :major-or-minor :major :triad-or-seventh :triad})
+          :active (= ::harmonization current-route-name)}
+         "Harmonizations"]
 
-      [:> semantic-ui/Menu.Item
-       {:as   "a"
-        :href (rfe/href ::mode {:scale :ionian :key :c})}
-       "Modes"]
+        [:> semantic-ui/Menu.Item
+         {:as     "a"
+          :href   (rfe/href ::mode {:scale :ionian :key :c})
+          :active (= ::mode current-route-name)}
+         "Modes"]
 
-      [:> semantic-ui/Menu.Item
-       {:as   "a"
-        :href (rfe/href ::drills)}
-       "Drills"]
+        [:> semantic-ui/Menu.Item
+         {:as     "a"
+          :href   (rfe/href ::drills)
+          :active (= ::drills current-route-name)}
+         "Drills"]
 
-      [:> semantic-ui/Menu.Menu {:position "right"}
-       [:> semantic-ui/Menu.Item
-        {:as     "a"
-         :href   "https://github.com/jherrlin/guitar-theory-training"
-         :target "_blank"}
-        "Source code"]]]]))
+        [:> semantic-ui/Menu.Menu {:position "right"}
+         [:> semantic-ui/Menu.Item
+          {:as     "a"
+           :href   "https://github.com/jherrlin/guitar-theory-training"
+           :target "_blank"}
+          "Source code"]]]])))
 
 (defn ^:dev/after-load main [router]
   (let [current-route @(re-frame/subscribe [:current-route])]
@@ -161,32 +171,43 @@ specific text format and a spaced repetition algorithm selects questions."]])
       [:div
 
        [:div
-        (for [{:keys [tone url-name title]}
+        (for [{tone' :tone
+               :keys [url-name title]}
               (->> (music-theory/find-root-p :a)
                    (map (fn [x] {:tone     x
                                  :url-name (-> x name str/lower-case (str/replace "#" "sharp"))
                                  :title    (-> x name str/upper-case)})))]
           ^{:key url-name}
           [:div {:style {:margin-right "10px" :display "inline"}}
-           [:a {:href (rfe/href ::harmonization {:tone tone :major-or-minor major-or-minor :triad-or-seventh triad-or-seventh})}
-            [:button title]]])]
+           [:a {:href (rfe/href ::harmonization {:tone tone' :major-or-minor major-or-minor :triad-or-seventh triad-or-seventh})}
+            [:button
+             {:disabled (= tone tone')}
+             title]]])]
 
        [:br]
        [:div {:style {:display "flex"}}
         [:div {:style {:margin-right "10px"}}
          [:a {:href (rfe/href ::harmonization {:tone tone :major-or-minor :major :triad-or-seventh triad-or-seventh})}
-          [:button "major"]]]
+          [:button
+           {:disabled (= major-or-minor :major)}
+           "major"]]]
         [:div {:style {:margin-right "10px"}}
          [:a {:href (rfe/href ::harmonization {:tone tone :major-or-minor :minor :triad-or-seventh triad-or-seventh})}
-          [:button "minor"]]]]
+          [:button
+           {:disabled (= major-or-minor :minor)}
+           "minor"]]]]
        [:br]
        [:div {:style {:display "flex"}}
         [:div {:style {:margin-right "10px"}}
          [:a {:href (rfe/href ::harmonization {:tone tone :major-or-minor major-or-minor :triad-or-seventh :triad})}
-          [:button "triad"]]]
+          [:button
+           {:disabled (= triad-or-seventh :triad)}
+           "triad"]]]
         [:div {:style {:margin-right "10px"}}
          [:a {:href (rfe/href ::harmonization {:tone tone :major-or-minor major-or-minor :triad-or-seventh :seventh})}
-          [:button "seventh"]]]]
+          [:button
+           {:disabled (= triad-or-seventh :seventh)}
+           "seventh"]]]]
 
        [:br]
        [:code
@@ -205,17 +226,28 @@ specific text format and a spaced repetition algorithm selects questions."]])
                 (vec))
            16)]]]
        [:div
-        (for [{chord-tones :chord/tones
-               chord-name  :chord/name
-               chord-intervals :chord/intervals}
+        (for [{chord-id        :chord/id
+               chord-tones     :chord/tones
+               chord-name      :chord/name
+               chord-intervals :chord/intervals
+               chord-tags      :chord/tags
+               :as             m}
               (music-theory/diatonic-chord-progressions-p tone major-or-minor triad-or-seventh)]
           ^{:key (str chord-name)}
-          [:div
-           [:h3 chord-name]
-           [:p "Functions: "chord-intervals]
-           [:code
-            [:pre {:style {:overflow-x "auto"}}
-             (music-theory/fret-table-with-tones-p chord-tones 16)]]])]])))
+          (do (def m m)
+              [:div
+               [:h3
+                {:on-click
+                 #(re-frame/dispatch
+                   [::push-state
+                    ::chord-tones
+                    {:tone (-> chord-tones first name)
+                     :chord-name (-> chord-id name)}])}
+                chord-name]
+               [:p "Functions: " chord-intervals]
+               [:code
+                [:pre {:style {:overflow-x "auto"}}
+                 (music-theory/fret-table-with-tones-p chord-tones 16)]]]))]])))
 
 (defn href
   "Return relative url for given route. Url can be used in HTML links."
@@ -230,22 +262,26 @@ specific text format and a spaced repetition algorithm selects questions."]])
   (let [chord @(re-frame/subscribe [::chord])
         tone  @(re-frame/subscribe [::tone])]
     (when (and chord tone)
-      (let [{chord-indexes :chord/indexes
+      (let [{chord-id      :chord/id
+             chord-indexes :chord/indexes
              intervals     :chord/intervals
              intervals-xs  :chord/intervals-xs
              sufix         :chord/sufix}
             (get-in @music-theory/chords-atom [@(re-frame/subscribe [::chord])])]
         [:div
          [:div
-          (for [{:keys [tone url-name title]}
+          (for [{tone' :tone
+                 :keys [url-name title]}
                 (->> (music-theory/find-root-p :a)
                      (map (fn [x] {:tone     x
                                    :url-name (-> x name str/lower-case (str/replace "#" "sharp"))
                                    :title    (-> x name str/upper-case)})))]
             ^{:key url-name}
             [:div {:style {:margin-right "10px" :display "inline"}}
-             [:a {:href (rfe/href ::chord-tones {:tone tone :chord-name chord})}
-              [:button title]]])]
+             [:a {:href (rfe/href ::chord-tones {:tone tone' :chord-name chord})}
+              [:button
+               {:disabled (= tone tone')}
+               title]]])]
          [:br]
          [:div
           (for [{id           :chord/id
@@ -256,7 +292,9 @@ specific text format and a spaced repetition algorithm selects questions."]])
             ^{:key (str sufix "-chord")}
             [:div {:style {:margin-right "10px" :display "inline"}}
              [:a {:href (rfe/href ::chord-tones {:tone tone :chord-name id})}
-              [:button (str (or display-text sufix))]]])]
+              [:button
+               {:disabled (= id chord)}
+               (str (or display-text sufix))]]])]
 
          [:h2 (str (-> tone name str/upper-case) sufix)]
 
@@ -314,7 +352,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
         [:div
 
          [:div
-          (for [{:keys [tone url-name title]}
+          (for [{:keys [url-name tone title]}
                 (->> (music-theory/find-root-p :a)
                      (map (fn [x] {:tone     x
                                    :url-name (-> x name str/lower-case (str/replace "#" "sharp"))
@@ -322,7 +360,9 @@ specific text format and a spaced repetition algorithm selects questions."]])
             ^{:key url-name}
             [:div {:style {:margin-right "10px" :display "inline"}}
              [:a {:href (rfe/href ::scale {:scale scale :key tone})}
-              [:button title]]])]
+              [:button
+               {:disabled (= tone key)}
+               title]]])]
 
          [:br]
          [:div
@@ -333,7 +373,9 @@ specific text format and a spaced repetition algorithm selects questions."]])
             ^{:key (str title "-scale")}
             [:div {:style {:margin-right "10px" :display "inline"}}
              [:a {:href (rfe/href ::scale {:scale id :key key})}
-              [:button title]]])]
+              [:button
+               {:disabled (= scale id)}
+               title]]])]
 
          [:br]
 
@@ -395,11 +437,14 @@ specific text format and a spaced repetition algorithm selects questions."]])
             ^{:key url-name}
             [:div {:style {:margin-right "10px" :display "inline"}}
              [:a {:href (rfe/href ::mode {:scale scale :key tone})}
-              [:button title]]])]
+              [:button
+               {:disabled (= tone key)}
+               title]]])]
 
          [:br]
          [:div
-          (for [{:keys [title scale]}
+          (for [{scale' :scale
+                 :keys [title]}
                 (->> @music-theory/modes-atom
                      vals
                      (map (fn [{:mode/keys [scale] :as m}]
@@ -411,9 +456,10 @@ specific text format and a spaced repetition algorithm selects questions."]])
                      (sort-by :title))]
             ^{:key (str title "-mode-select")}
             [:div {:style {:margin-right "10px" :display "inline"}}
-             [:a {:href (rfe/href ::mode {:scale scale :key key})}
-              [:button title]]])]
-
+             [:a {:href (rfe/href ::mode {:scale scale' :key key})}
+              [:button
+               {:disabled (= scale' scale)}
+               title]]])]
 
          [:h2 (str (-> key name str/upper-case) " - " (-> scale name str/capitalize))]
          [:pre {:style {:overflow-x "auto"}}
@@ -429,7 +475,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
 
 
 
-         [:h3 "* All tones in scale"]
+         [:h3 "All tones in scale"]
          [:code
           [:pre {:style {:overflow-x "auto"}}
            (music-theory/fret-table-with-tones-p
@@ -437,7 +483,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
              (music-theory/find-root-p @(re-frame/subscribe [::key])))
             16)]]
 
-         [:h3 "* Mode patterns"]
+         [:h3 "Mode patterns"]
          [:div
           (for [{mode-title     :mode/title
                  mode-pattern   :mode/pattern
