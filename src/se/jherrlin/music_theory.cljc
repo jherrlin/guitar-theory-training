@@ -10,16 +10,11 @@
             octave perfect-octave]
     :as intervals]
    [se.jherrlin.music-theory.utils
-    :refer [fformat find-chord find-chord-name  find-root
-            fret-table-with-tones match-chord-with-scales
-            list-insert]
+    :refer [find-chord find-chord-name find-root
+            fret-table-with-tones match-chord-with-scales]
     :as utils]
    [clojure.set :as set]))
 
-
-(comment
-  (remove-ns 'se.jherrlin.music-theory)
-  )
 
 (def tones [:c :c# :d :d# :e :f :f# :g :g# :a :a# :b])
 
@@ -41,12 +36,10 @@
 ;; State / data end
 ;; ---------------
 
-
 ;; ---------------
 ;; Partially applied functions.
 ;; Presets arguments that can be predefined.
 ;; ---------------
-
 (def diatonic-chord-progressions-str utils/diatonic-chord-progressions-str)
 
 (def find-root-p #(find-root % tones))
@@ -92,23 +85,10 @@
 (defn locate-pattern-on-fret [root-tone mode-spec]
   (utils/locate-pattern-on-fret find-root-p interval-p [:e :b :g :d :a :e] root-tone mode-spec))
 
-(comment
-  (locate-pattern-on-fret
-   :c
-   (-> @modes-atom :ionian :mode/pattern))
-  )
-
 (defn chord-pattern-str [modes-atom mode-pattern tone]
   (->> modes-atom mode-pattern :chord/pattern (locate-pattern-on-fret tone)
        utils/padding-fret-pattern
        utils/fret-pattern-to-str))
-(comment
-  (->> @chord-patterns-atom :major-1 :chord/pattern (locate-pattern-on-fret :c))
-
-  (print
-   (chord-pattern-str @chord-patterns-atom :dominant-seven-1 :e))
-
-  )
 
 (defn mode-pattern-str [modes-atom mode-pattern tone]
   (->> modes-atom mode-pattern :mode/pattern (locate-pattern-on-fret tone)
@@ -117,11 +97,6 @@
 
 (defn mode-pattern-str-p [mode-pattern tone]
   (mode-pattern-str @modes-atom mode-pattern tone))
-
-(comment
-  (print
-   (mode-pattern-str @modes-atom :mixolydian-6 :g))
-  )
 ;; ---------------
 ;; Partial functions end.
 ;; ---------------
@@ -552,7 +527,7 @@
 ;; --------------------
 
 ;; --------------------
-;; Comment and useful stuff
+;; Comment and REPL code
 ;; --------------------
 (comment
   (diatonic-chord-progressions-p :c :major :triad)
@@ -596,5 +571,15 @@
          (filter (fn [{:scale/keys [indexes]}]
                    (set/subset? (set chord-indexes) (set indexes))))))
 
+  (locate-pattern-on-fret
+   :c
+   (-> @modes-atom :ionian :mode/pattern))
 
+  (->> @chord-patterns-atom :major-1 :chord/pattern (locate-pattern-on-fret :c))
+
+  (print
+   (chord-pattern-str @chord-patterns-atom :dominant-seven-1 :e))
+
+  (print
+   (mode-pattern-str @modes-atom :mixolydian-6 :g))
   )
