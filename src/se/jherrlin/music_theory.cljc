@@ -13,7 +13,8 @@
     :refer [find-chord find-chord-name find-root
             fret-table-with-tones match-chord-with-scales]
     :as utils]
-   [clojure.set :as set]))
+   [clojure.set :as set]
+   [clojure.string :as str]))
 
 
 (def tones [:c :c# :d :d# :e :f :f# :g :g# :a :a# :b])
@@ -76,7 +77,8 @@
 
 (def define-chord-pattern
   (partial utils/define-chord-pattern
-           chord-patterns-atom))
+           chord-patterns-atom
+           intervals/intervals-map-by-function))
 
 (def define-mode
   (partial utils/define-mode
@@ -440,7 +442,8 @@
 ;;
 ;; Matrixes specifies patterns on how chords looks like and where each interval
 ;; is located in the matrix. This corresponds to how the chord looks like on the
-;; fret board.
+;; guitar fret board. `nil`s are tones on the fret board where no finger is
+;; located.
 ;; --------------------
 (define-chord-pattern :major-1
   {:name :major}
@@ -551,7 +554,41 @@
    [nil             nil            nil]
    [nil             nil            nil]])
 
+(define-chord-pattern :fifth-1
+  {:name :fifth}
+  "-  -  -
+   -  -  -
+   -  -  -
+   -  -  1
+   -  -  5
+   1  -  -")
 
+(define-chord-pattern :fifth-2
+  {:name :fifth}
+  [[nil              nil            nil            nil]
+   [nil              nil            nil            root]
+   [nil              nil            perfect-fifth  nil]
+   [root             nil            nil            nil]
+   [nil              nil            nil            nil]
+   [nil              nil            nil            nil]])
+
+(define-chord-pattern :diminished-fifth-1
+  {:name :diminished-fifth}
+  "-   -   -
+   -  b3   -
+   -   -   1
+   -  b5   -
+   1   -   -
+   -   -   -")
+
+(define-chord-pattern :diminished-fifth-2
+  {:name :diminished-fifth}
+  "-   -   -
+   -   -   -
+   b3  -   -
+   -   -   1
+   -  b5   -
+   1   -   -")
 ;; --------------------
 ;; Chord patterns end
 ;; --------------------

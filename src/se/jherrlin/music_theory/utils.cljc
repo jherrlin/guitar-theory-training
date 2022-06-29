@@ -149,18 +149,32 @@
                    :scale/f (juxt-intervals indexes))))))
 
 (defn define-chord-pattern
-  ([chord-patterns-atom pattern-name pattern]
-   (define-chord-pattern chord-patterns-atom pattern-name {} pattern))
-  ([chord-patterns-atom pattern-name meta-data pattern]
-   (let [meta-data (->> meta-data
+  ([chord-patterns-atom intervals-map-by-function pattern-name pattern]
+   (define-chord-pattern chord-patterns-atom intervals-map-by-function pattern-name {} pattern))
+  ([chord-patterns-atom intervals-map-by-function pattern-name meta-data pattern]
+   (let [pattern' (if-not (string? pattern)
+                   pattern
+                   (->> pattern
+                        (str/trim)
+                        (str/split-lines)
+                        (map str/trim)
+                        (mapv #(->> %
+                                    (re-seq #"(b{0,2}#{0,2}\d)|-")
+                                    (mapv (comp
+                                           (fn [s]
+                                             (when-not (= s "-")
+                                               (get-in intervals-map-by-function [s :semitones])))
+                                           first))))))
+         meta-data (->> meta-data
                         (map (fn [[k v]]
                                [(->> k name (str "chord-pattern/") keyword) v]))
                         (into {}))]
      (swap! chord-patterns-atom assoc pattern-name
-            (assoc meta-data
-                   :chord/pattern pattern
-                   :chord/pattern-id pattern-name
-                   :chord/pattern-title (name pattern-name))))))
+            (cond-> (assoc meta-data
+                           :chord/pattern pattern'
+                           :chord/pattern-id pattern-name
+                           :chord/pattern-title (name pattern-name))
+              (string? pattern) (assoc :chord/pattern-str pattern))))))
 
 (defn define-mode
   ([modes-atom pattern-name pattern]
