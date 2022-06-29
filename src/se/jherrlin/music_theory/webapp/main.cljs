@@ -299,7 +299,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
          [:div {:style {:height  "100%"
                         :display "inline-flex"}}
           [:h2 (str (-> tone name str/upper-case) sufix)]
-          [:p {:style {:margin-left "1em"
+          [:p {:style {:margin-left "4em"
                        :margin-top  "0.5em"}}
            (str "("explanation ")")]]
 
