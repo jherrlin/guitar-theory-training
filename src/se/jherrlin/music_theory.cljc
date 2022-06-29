@@ -82,7 +82,8 @@
 
 (def define-mode
   (partial utils/define-mode
-           modes-atom))
+           modes-atom
+           intervals/intervals-map-by-function))
 
 (defn locate-pattern-on-fret [root-tone mode-spec]
   (utils/locate-pattern-on-fret find-root-p interval-p [:e :b :g :d :a :e] root-tone mode-spec))
@@ -244,6 +245,10 @@
 
 (define-scale :diminished
   "1, 2, b3, 4, b5, b6, 6, 7")
+
+(define-scale :mixolydian-blues-hybrid
+  "1, 2, b3, 3, 4, b5, 5, 6, b7")
+
 ;; ---------------
 ;; Scales end
 ;; ---------------
@@ -433,6 +438,16 @@
    [minor-seventh   nil               root           minor-second]
    [perfect-fourth  diminished-fifth  nil            minor-sixth]
    [root            minor-second      nil            minor-third]])
+
+(define-mode :mixolydian-blues-hybrid
+  {:scale :mixolydian-blues-hybrid}
+  "-   1   -   2  b3
+   -   5   -   6  b7
+   2  b3   3   4  b5
+   6  b7   -   1   -
+   3   4  b5   5   -
+   -   1   -   2  b3")
+
 ;; --------------------
 ;; Modes end
 ;; --------------------

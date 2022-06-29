@@ -177,18 +177,32 @@
               (string? pattern) (assoc :chord/pattern-str pattern))))))
 
 (defn define-mode
-  ([modes-atom pattern-name pattern]
-   (define-mode modes-atom pattern-name {} pattern))
-  ([modes-atom pattern-name meta-data pattern]
-   (let [meta-data (->> meta-data
+  ([modes-atom intervals-map-by-function pattern-name pattern]
+   (define-mode modes-atom intervals-map-by-function pattern-name {} pattern))
+  ([modes-atom intervals-map-by-function pattern-name meta-data pattern]
+   (let [pattern'  (if-not (string? pattern)
+                     pattern
+                     (->> pattern
+                          (str/trim)
+                          (str/split-lines)
+                          (map str/trim)
+                          (mapv #(->> %
+                                      (re-seq #"(b{0,2}#{0,2}\d)|-")
+                                      (mapv (comp
+                                             (fn [s]
+                                               (when-not (= s "-")
+                                                 (get-in intervals-map-by-function [s :semitones])))
+                                             first))))))
+         meta-data (->> meta-data
                         (map (fn [[k v]]
                                [(->> k name (str "mode/") keyword) v]))
                         (into {}))]
      (swap! modes-atom assoc pattern-name
-            (assoc meta-data
-                   :mode/pattern pattern
-                   :mode/id pattern-name
-                   :mode/title (name pattern-name))))))
+            (cond-> (assoc meta-data
+                           :mode/pattern pattern'
+                           :mode/id pattern-name
+                           :mode/title (name pattern-name))
+              (string? pattern) (assoc :mode/pattern-str pattern))))))
 
 (def triad   (juxt #(nth % 0) #(nth % 2) #(nth % 4)))
 (def seventh (juxt #(nth % 0) #(nth % 2) #(nth % 4) #(nth % 6)))
