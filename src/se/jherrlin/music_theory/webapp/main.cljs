@@ -520,17 +520,6 @@ specific text format and a spaced repetition algorithm selects questions."]])
             [:a {:href (rfe/href ::chord-tones {:chord-name chord-id :tone key})}
              [:button chord-title]]])]))))
 
-(def drill-events-
-  [{:n ::tones-in-chord}
-   {:n ::name-the-chord}
-   {:n ::intervals-in-chord}
-   {:n ::name-the-interval}
-   {:n ::tone-in-interval}])
-
-(doseq [{:keys [n s e]} drill-events-]
-  (re-frame/reg-sub n (or s (fn [db _] (get db n))))
-  (re-frame/reg-event-db n (or e (fn [db [_ e]] (assoc db n e)))))
-
 (defn download-object [export-name value]
   (let [data-blob (js/Blob. #js [value] #js {:type "plain/text"})
         link (.createElement js/document "a")]
@@ -539,6 +528,18 @@ specific text format and a spaced repetition algorithm selects questions."]])
     (.appendChild (.-body js/document) link)
     (.click link)
     (.removeChild (.-body js/document) link)))
+
+(def drill-events-
+  [{:n ::tones-in-chord}
+   {:n ::name-the-chord}
+   {:n ::intervals-in-chord}
+   {:n ::name-the-interval}
+   {:n ::tone-in-interval}
+   {:n ::modes-in-each-key}])
+
+(doseq [{:keys [n s e]} drill-events-]
+  (re-frame/reg-sub n (or s (fn [db _] (get db n))))
+  (re-frame/reg-event-db n (or e (fn [db [_ e]] (assoc db n e)))))
 
 (defn the-neck-view []
   [:div
@@ -552,9 +553,9 @@ specific text format and a spaced repetition algorithm selects questions."]])
   (let [tones-in-chord? @(re-frame/subscribe [::tones-in-chord])
         name-the-chord? @(re-frame/subscribe [::name-the-chord])
         intervals-in-chord? @(re-frame/subscribe [::intervals-in-chord])
-
         name-the-interval? @(re-frame/subscribe [::name-the-interval])
-        tone-in-interval? @(re-frame/subscribe [::tone-in-interval])]
+        tone-in-interval? @(re-frame/subscribe [::tone-in-interval])
+        modes-in-each-key? @(re-frame/subscribe [::modes-in-each-key])]
     [:div
      [:div "Here you can generate and download music and guitar theory questions and
 answers in an Org-drill format. Select the type of questions that interests you
@@ -576,6 +577,10 @@ the org-drill mode."]
      [:label "Tone in interval:"]
      [:input {:type "checkbox" :on-click #(re-frame/dispatch [::tone-in-interval (not tone-in-interval?)])}]
      [:br]
+     [:label "Modes in each key:"]
+     [:input {:type "checkbox" :on-click #(re-frame/dispatch [::modes-in-each-key (not modes-in-each-key?)])}]
+     [:br]
+     [:br]
      [:br]
      [:button
       {:on-click
@@ -594,7 +599,10 @@ the org-drill mode."]
                  (drills/name-the-interval music-theory/interval-p music-theory/find-root-p music-theory/tones @music-theory/chords-atom))
                tone-in-interval-p
                (fn []
-                 (drills/tone-in-interval music-theory/interval-p music-theory/find-root-p music-theory/tones @music-theory/chords-atom))]
+                 (drills/tone-in-interval music-theory/interval-p music-theory/find-root-p music-theory/tones @music-theory/chords-atom))
+               modes-in-each-key-p
+               (fn []
+                 (drills/modes-in-each-key music-theory/tones @music-theory/modes-atom music-theory/mode-pattern-str-p))]
            (download-object
             "music-theory-drills.org"
             (str
@@ -603,7 +611,8 @@ the org-drill mode."]
              (when name-the-chord?     (name-the-chord-p))
              (when intervals-in-chord? (intervals-in-chord-p))
              (when name-the-interval?  (name-the-interval-p))
-             (when tone-in-interval?   (tone-in-interval-p))))))}
+             (when tone-in-interval?   (tone-in-interval-p))
+             (when modes-in-each-key?  (modes-in-each-key-p))))))}
       "Download questions / answers"]]))
 
 (def routes

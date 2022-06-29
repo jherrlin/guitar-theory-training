@@ -16,20 +16,20 @@
         ]
     (->> (for [chord (vals chords-map)
                tone  all-tones]
-         (assoc chord :tone tone))
+           (assoc chord :tone tone))
          (map (fn [{:chord/keys [f sufix]
                     tone        :tone}]
                 (let [chord-name      (str (-> tone name str/upper-case) sufix)
                       chord-tones     (f (find-root-f tone))
                       chord-tones-str (->> chord-tones (map (comp str/upper-case name)) (str/join ", "))]
                   (str
-                 "** " (fformat "%-60s:music:theory:chords:drill:" (str "Tones in " chord-name " chord"))
-                 "\n\n"
-                 "   What tones are in the " chord-name " chord?"
-                 "\n\n"
-                 "*** Answer \n\n    " chord-tones-str
-                 ;; (fret-board-table-f chord-tones)
-                 "\n\n"))))
+                   "** " (fformat "%-60s:music:theory:chords:drill:" (str "Tones in " chord-name " chord"))
+                   "\n\n"
+                   "   What tones are in the " chord-name " chord?"
+                   "\n\n"
+                   "*** Answer \n\n    " chord-tones-str
+                   ;; (fret-board-table-f chord-tones)
+                   "\n\n"))))
          (apply str))))
 
 {:chord/intervals    "1 b3 b5 bb7",
