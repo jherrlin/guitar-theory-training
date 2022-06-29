@@ -412,6 +412,46 @@
    [nil           perfect-fourth  nil  perfect-fifth   nil]
    [nil           root            nil  major-second    minor-third]])
 
+(define-mode :dorian-6
+  {:scale  :dorian
+   :string 6}
+  "-   -   -   -   -
+   -   -   -   -   -
+   -   -   -   -   -
+   6  b7   -   1   -
+   -   4   -   5   -
+   -   1   -   2  b3")
+
+(define-mode :dorian-5
+  {:scale  :dorian
+   :string 5}
+  "-   -   -   -   -
+   -   -   -   -   -
+   6  b7   -   1   -
+   -   4   -   5   -
+   -   1   -   2  b3
+   -   -   -   -   -")
+
+(define-mode :dorian-4
+  {:scale  :dorian
+   :string 4}
+  "-   -   -   -
+   6  b7   -   1
+   4   -   5   -
+   1   -   2  b3
+   -   -   -   -
+   -   -   -   -")
+
+(define-mode :dorian-3
+  {:scale  :dorian
+   :string 3}
+  "6  b7   -   1
+   -   4   -   5
+   1   -   2  b3
+   -   -   -   -
+   -   -   -   -
+   -   -   -   -")
+
 (define-mode :phrygian
   {:scale  :phrygian}
   [[root            minor-second   nil             minor-third]
