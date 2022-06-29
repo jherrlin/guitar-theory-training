@@ -172,7 +172,7 @@
 
 (define-chord :fifth
   {:sufix       "5"
-   :explanation "power chord"}
+   :explanation "5th"}
   "1 5")
 
 (define-chord :diminished-fifth

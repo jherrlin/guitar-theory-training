@@ -264,6 +264,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
       (let [{chord-id      :chord/id
              chord-indexes :chord/indexes
              intervals     :chord/intervals
+             explanation   :chord/explanation
              intervals-xs  :chord/intervals-xs
              sufix         :chord/sufix}
             (get-in @music-theory/chords-atom [@(re-frame/subscribe [::chord])])]
@@ -294,8 +295,13 @@ specific text format and a spaced repetition algorithm selects questions."]])
               [:button
                {:disabled (= id chord)}
                (str (or display-text sufix))]]])]
-
-         [:h2 (str (-> tone name str/upper-case) sufix)]
+         [:br]
+         [:div {:style {:height  "100%"
+                        :display "inline-flex"}}
+          [:h2 (str (-> tone name str/upper-case) sufix)]
+          [:p {:style {:margin-left "1em"
+                       :margin-top  "0.5em"}}
+           (str "("explanation ")")]]
 
          [:pre {:style {:overflow-x "auto"}}
           (->> (map
