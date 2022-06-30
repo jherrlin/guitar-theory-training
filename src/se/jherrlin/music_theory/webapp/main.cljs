@@ -529,18 +529,6 @@ specific text format and a spaced repetition algorithm selects questions."]])
     (.click link)
     (.removeChild (.-body js/document) link)))
 
-(def drill-events-
-  [{:n ::tones-in-chord}
-   {:n ::name-the-chord}
-   {:n ::intervals-in-chord}
-   {:n ::name-the-interval}
-   {:n ::tone-in-interval}
-   {:n ::modes-in-each-key}])
-
-(doseq [{:keys [n s e]} drill-events-]
-  (re-frame/reg-sub n (or s (fn [db _] (get db n))))
-  (re-frame/reg-event-db n (or e (fn [db [_ e]] (assoc db n e)))))
-
 (defn the-neck-view []
   [:div
    [:h2 "Guitar neck with all tones in standard tuning."]
@@ -549,13 +537,27 @@ specific text format and a spaced repetition algorithm selects questions."]])
     [:pre {:style {:overflow-x "auto"}}
      (music-theory/fret-table-with-tones-p music-theory/tones 13)]]])
 
+(def drill-events-
+  [{:n ::tones-in-chord}
+   {:n ::name-the-chord}
+   {:n ::intervals-in-chord}
+   {:n ::name-the-interval}
+   {:n ::tone-in-interval}
+   {:n ::modes-in-each-key}
+   {:n ::find-all-locations-of-tone}])
+
+(doseq [{:keys [n s e]} drill-events-]
+  (re-frame/reg-sub n (or s (fn [db _] (get db n))))
+  (re-frame/reg-event-db n (or e (fn [db [_ e]] (assoc db n e)))))
+
 (defn drills-view []
-  (let [tones-in-chord? @(re-frame/subscribe [::tones-in-chord])
-        name-the-chord? @(re-frame/subscribe [::name-the-chord])
-        intervals-in-chord? @(re-frame/subscribe [::intervals-in-chord])
-        name-the-interval? @(re-frame/subscribe [::name-the-interval])
-        tone-in-interval? @(re-frame/subscribe [::tone-in-interval])
-        modes-in-each-key? @(re-frame/subscribe [::modes-in-each-key])]
+  (let [tones-in-chord?             @(re-frame/subscribe [::tones-in-chord])
+        name-the-chord?             @(re-frame/subscribe [::name-the-chord])
+        intervals-in-chord?         @(re-frame/subscribe [::intervals-in-chord])
+        name-the-interval?          @(re-frame/subscribe [::name-the-interval])
+        tone-in-interval?           @(re-frame/subscribe [::tone-in-interval])
+        modes-in-each-key?          @(re-frame/subscribe [::modes-in-each-key])
+        find-all-locations-of-tone? @(re-frame/subscribe [::find-all-locations-of-tone])]
     [:div
      [:div "Here you can generate and download music and guitar theory questions and
 answers in an Org-drill format. Select the type of questions that interests you
@@ -580,6 +582,9 @@ the org-drill mode."]
      [:label "Modes in each key:"]
      [:input {:type "checkbox" :on-click #(re-frame/dispatch [::modes-in-each-key (not modes-in-each-key?)])}]
      [:br]
+     [:label "Find locations of tone [C D E F G A B]:"]
+     [:input {:type "checkbox" :on-click #(re-frame/dispatch [::find-all-locations-of-tone (not find-all-locations-of-tone?)])}]
+     [:br]
      [:br]
      [:br]
      [:button
@@ -602,17 +607,21 @@ the org-drill mode."]
                  (drills/tone-in-interval music-theory/interval-p music-theory/find-root-p music-theory/tones @music-theory/chords-atom))
                modes-in-each-key-p
                (fn []
-                 (drills/modes-in-each-key music-theory/tones @music-theory/modes-atom music-theory/mode-pattern-str-p))]
+                 (drills/modes-in-each-key music-theory/tones @music-theory/modes-atom music-theory/mode-pattern-str-p))
+               find-all-locations-of-tone-p
+               (fn []
+                 (drills/find-all-locations-of-tone music-theory/tones music-theory/fret-table-with-tones-p))]
            (download-object
             "music-theory-drills.org"
             (str
              "#+STARTUP: overview\n\n"
-             (when tones-in-chord?     (tones-in-chord-p))
-             (when name-the-chord?     (name-the-chord-p))
-             (when intervals-in-chord? (intervals-in-chord-p))
-             (when name-the-interval?  (name-the-interval-p))
-             (when tone-in-interval?   (tone-in-interval-p))
-             (when modes-in-each-key?  (modes-in-each-key-p))))))}
+             (when tones-in-chord?             (tones-in-chord-p))
+             (when name-the-chord?             (name-the-chord-p))
+             (when intervals-in-chord?         (intervals-in-chord-p))
+             (when name-the-interval?          (name-the-interval-p))
+             (when tone-in-interval?           (tone-in-interval-p))
+             (when modes-in-each-key?          (modes-in-each-key-p))
+             (when find-all-locations-of-tone? (find-all-locations-of-tone-p))))))}
       "Download questions / answers"]]))
 
 (def routes
