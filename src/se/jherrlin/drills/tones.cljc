@@ -18,7 +18,7 @@
                 (let [tone-str    (-> tone name str/upper-case)
                       nr-of-frets 13]
                   (str
-                   "** " (fformat "%-60s:music:theory:tone-location:drill:" (str "Tone " tone-str " locations on the fretboard" ))
+                   "** " (fformat "%-60s:music:theory:tonelocation:drill:" (str "Tone " tone-str " locations on the fretboard" ))
                    "\n\n"
                    "   " "Find all locations on the fretboard where tone " tone-str " is located."
                    "\n\n"
