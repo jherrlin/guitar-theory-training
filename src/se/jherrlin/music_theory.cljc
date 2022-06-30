@@ -161,13 +161,13 @@
 
 (define-chord :major-seven-flat-5
   {:sufix        "(maj7)b5"
-   :explanation  "major major sevent flat 5"
+   :explanation  "major major seven flat 5"
    :display-text "maj7b5"}
   "1 3 b5 7")
 
 (define-chord :major-seven-sharp-5
   {:sufix        "(maj7)#5"
-   :explanation  "major major sevent sharp 5"
+   :explanation  "major major seven sharp 5"
    :display-text "maj7#5"}
   "1 3 #5 7")
 
