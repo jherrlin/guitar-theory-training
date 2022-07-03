@@ -581,7 +581,8 @@ specific text format and a spaced repetition algorithm selects questions."]])
    {:n ::name-the-interval}
    {:n ::tone-in-interval}
    {:n ::modes-in-each-key}
-   {:n ::find-all-locations-of-tone}])
+   {:n ::find-all-locations-of-tone}
+   {:n ::intervals-in-scales}])
 
 (doseq [{:keys [n s e]} drill-events-]
   (re-frame/reg-sub n (or s (fn [db [n']] (get db n'))))
@@ -594,7 +595,8 @@ specific text format and a spaced repetition algorithm selects questions."]])
         name-the-interval?          @(re-frame/subscribe [::name-the-interval])
         tone-in-interval?           @(re-frame/subscribe [::tone-in-interval])
         modes-in-each-key?          @(re-frame/subscribe [::modes-in-each-key])
-        find-all-locations-of-tone? @(re-frame/subscribe [::find-all-locations-of-tone])]
+        find-all-locations-of-tone? @(re-frame/subscribe [::find-all-locations-of-tone])
+        intervals-in-scales?        @(re-frame/subscribe [::intervals-in-scales])]
     [:div
      [:div "Here you can generate and download music and guitar theory questions and
 answers in an Org-drill format. Select the type of questions that interests you
@@ -622,6 +624,9 @@ the org-drill mode."]
      [:label "Find locations of tone [C D E F G A B]:"]
      [:input {:type "checkbox" :on-click #(re-frame/dispatch [::find-all-locations-of-tone (not find-all-locations-of-tone?)])}]
      [:br]
+     [:label "Intervals in scales"]
+     [:input {:type "checkbox" :on-click #(re-frame/dispatch [::intervals-in-scales (not intervals-in-scales?)])}]
+     [:br]
      [:br]
      [:br]
      [:button
@@ -647,7 +652,10 @@ the org-drill mode."]
                  (drills/modes-in-each-key music-theory/tones @music-theory/modes-atom music-theory/mode-pattern-str-p))
                find-all-locations-of-tone-p
                (fn []
-                 (drills/find-all-locations-of-tone music-theory/tones music-theory/fret-table-with-tones-p))]
+                 (drills/find-all-locations-of-tone music-theory/tones music-theory/fret-table-with-tones-p))
+               intervals-in-scales-p
+               (fn []
+                 (drills/intervals-in-scales @music-theory/scales-atom))]
            (download-object
             "music-theory-drills.org"
             (str
@@ -658,8 +666,10 @@ the org-drill mode."]
              (when name-the-interval?          (name-the-interval-p))
              (when tone-in-interval?           (tone-in-interval-p))
              (when modes-in-each-key?          (modes-in-each-key-p))
-             (when find-all-locations-of-tone? (find-all-locations-of-tone-p))))))}
+             (when find-all-locations-of-tone? (find-all-locations-of-tone-p))
+             (when intervals-in-scales?        (intervals-in-scales-p))))))}
       "Download questions / answers"]]))
+
 
 (def routes
   ["/"
