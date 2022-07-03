@@ -18,6 +18,7 @@
 
 
 (def tones [:c :c# :d :d# :e :f :f# :g :g# :a :a# :b])
+;; (def tones [:c :db :d :eb :e :f :gb :g :ab :a :bb :b])
 
 ;; ---------------
 ;; State / data

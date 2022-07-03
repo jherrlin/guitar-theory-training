@@ -22,6 +22,13 @@
          (take tones-count)
          (vec))))
 
+(defn tone->str
+  [x]
+  (let [x (if (keyword? x)
+            (name x)
+            x)]
+    (-> x str/lower-case str/capitalize)))
+
 (defn juxt-intervals [intervals]
   (apply juxt
          (map
@@ -34,7 +41,7 @@
   ([tones chord-tones nr-of-frets]
    (let [in-chord?   #(contains? (set chord-tones) %)
          show        #(if (in-chord? %)
-                        (->> % name str/upper-case (fformat " %-3s"))
+                        (->> % name tone->str (fformat " %-3s"))
                         (fformat "%4s" ""))
          top-row (str "|" (str/join "|" (map #(fformat " %-3s" (str %)) (range 0 nr-of-frets))) "|")]
      (str
@@ -63,7 +70,7 @@
          (filter (fn [{:chord/keys [f] :as m}]
                    (= (set chord-tones) (set (f tones)))))
          (map (fn [{s :chord/sufix}]
-                (str (-> root-tone name str/upper-case) s)))
+                (str (-> root-tone tone->str) s)))
          first)))
 
 (defn find-chord [chords-map all-tones chord-tones]
@@ -300,7 +307,7 @@
 
 (defn fret-pattern-to-str [fret]
   (let [fret (reverse fret)
-        get-string (fn [n] (map (comp #(if (nil? %) "" (-> % name str/upper-case)) :tone) (nth fret n)))
+        get-string (fn [n] (map (comp #(if (nil? %) "" (-> % tone->str)) :tone) (nth fret n)))
         rows       (->> [(map str (range 16))
                          (get-string 5)
                          (get-string 4)

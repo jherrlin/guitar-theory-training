@@ -2,7 +2,7 @@
   (:require
    [se.jherrlin.drills :as drills]
    [se.jherrlin.music-theory.utils
-    :refer [fformat]
+    :refer [fformat tone->str]
     :as utils]
    ["semantic-ui-react" :as semantic-ui]
    [se.jherrlin.music-theory :as music-theory]
@@ -176,7 +176,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
               (->> (music-theory/find-root-p :a)
                    (map (fn [x] {:tone     x
                                  :url-name (-> x name str/lower-case (str/replace "#" "sharp"))
-                                 :title    (-> x name str/upper-case)})))]
+                                 :title    (-> x name tone->str)})))]
           ^{:key url-name}
           [:div {:style {:margin-right "10px" :display "inline"}}
            [:a {:href (rfe/href ::harmonization {:tone tone' :major-or-minor major-or-minor :triad-or-seventh triad-or-seventh})}
@@ -208,7 +208,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
            {:disabled (= triad-or-seventh :seventh)}
            "seventh"]]]]
 
-       [:h2 (str (-> tone name str/upper-case) " - " (-> major-or-minor name) " - " (-> triad-or-seventh name))]
+       [:h2 (str (-> tone tone->str) " - " (-> major-or-minor name) " - " (-> triad-or-seventh name))]
 
        [:br]
        [:code
@@ -275,7 +275,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
                 (->> (music-theory/find-root-p :a)
                      (map (fn [x] {:tone     x
                                    :url-name (-> x name str/lower-case (str/replace "#" "sharp"))
-                                   :title    (-> x name str/upper-case)})))]
+                                   :title    (-> x tone->str)})))]
             ^{:key url-name}
             [:div {:style {:margin-right "10px" :display "inline"}}
              [:a {:href (rfe/href ::chord-tones {:tone tone' :chord-name chord})}
@@ -298,15 +298,15 @@ specific text format and a spaced repetition algorithm selects questions."]])
          [:br]
          [:div {:style {:height  "100%"
                         :display "inline-flex"}}
-          [:h2 (str (-> tone name str/upper-case) sufix)]
+          [:h2 (str (-> tone tone->str) sufix)]
           [:p {:style {:margin-left "4em"
                        :margin-top  "0.5em"}}
-           (str "("explanation ")")]]
+           (str "(" explanation ")")]]
 
          [:pre {:style {:overflow-x "auto"}}
           (->> (map
                 (fn [i x]
-                  (str (fformat "%8s" i) " -> " (name x)))
+                  (str (fformat "%8s" i) " -> " (tone->str x)))
                 intervals-xs
                 ((get-in @music-theory/chords-atom [@(re-frame/subscribe [::chord]) :chord/f])
                  (music-theory/find-root-p @(re-frame/subscribe [::tone]))))
@@ -361,7 +361,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
                 (->> (music-theory/find-root-p :a)
                      (map (fn [x] {:tone     x
                                    :url-name (-> x name str/lower-case (str/replace "#" "sharp"))
-                                   :title    (-> x name str/upper-case)})))]
+                                   :title    (-> x tone->str)})))]
             ^{:key url-name}
             [:div {:style {:margin-right "10px" :display "inline"}}
              [:a {:href (rfe/href ::scale {:scale scale :key tone})}
@@ -388,12 +388,12 @@ specific text format and a spaced repetition algorithm selects questions."]])
                 title     :scale/title }
                (get-in @music-theory/scales-atom [@(re-frame/subscribe [::scale])])]
            [:div
-            [:h2 (str (-> key name str/upper-case) " - " (-> title str/capitalize))]])
+            [:h2 (str (-> key tone->str) " - " (-> title str/capitalize))]])
 
          [:pre {:style {:overflow-x "auto"}}
           (->> (map
                 (fn [i x]
-                  (str (fformat "%8s" i) " -> " (name x)))
+                  (str (fformat "%8s" i) " -> " (tone->str x)))
                 intervals-xs
                 ((get-in @music-theory/scales-atom [@(re-frame/subscribe [::scale]) :scale/f])
                  (music-theory/find-root-p @(re-frame/subscribe [::key]))))
@@ -438,7 +438,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
                 (->> (music-theory/find-root-p :a)
                      (map (fn [x] {:tone     x
                                    :url-name (-> x name str/lower-case (str/replace "#" "sharp"))
-                                   :title    (-> x name str/upper-case)})))]
+                                   :title    (-> x tone->str)})))]
             ^{:key url-name}
             [:div {:style {:margin-right "10px" :display "inline"}}
              [:a {:href (rfe/href ::mode {:scale scale :key tone})}
@@ -466,11 +466,11 @@ specific text format and a spaced repetition algorithm selects questions."]])
                {:disabled (= scale' scale)}
                title]]])]
 
-         [:h2 (str (-> key name str/upper-case) " - " (-> scale name str/capitalize))]
+         [:h2 (str (-> key tone->str) " - " (-> scale name str/capitalize))]
          [:pre {:style {:overflow-x "auto"}}
           (->> (map
                 (fn [i x]
-                  (str (fformat "%8s" i) " -> " (name x)))
+                  (str (fformat "%8s" i) " -> " (tone->str x)))
                 intervals-xs
                 ((get-in @music-theory/scales-atom [@(re-frame/subscribe [::scale]) :scale/f])
                  (music-theory/find-root-p @(re-frame/subscribe [::key]))))
