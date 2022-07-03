@@ -84,7 +84,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
    {:n ::key}])
 
 (doseq [{:keys [n s e]} events-]
-  (re-frame/reg-sub n (or s (fn [db _] (get db n))))
+  (re-frame/reg-sub n (or s (fn [db [n']] (get db n'))))
   (re-frame/reg-event-db n (or e (fn [db [_ e]] (assoc db n e)))))
 
 (->> @(re-frame/subscribe [:current-route])
@@ -529,13 +529,50 @@ specific text format and a spaced repetition algorithm selects questions."]])
     (.click link)
     (.removeChild (.-body js/document) link)))
 
+(def neck-view-events-
+  [{:n ::neck-view-all
+    :s (fn [db [kw]] (get db kw true))}
+   {:n ::neck-view-fulls
+    :s (fn [db [kw]] (get db kw true))}
+   {:n ::neck-view-halfs
+    :s (fn [db [kw]] (get db kw true))}])
+
+(doseq [{:keys [n s e]} neck-view-events-]
+  (re-frame/reg-sub n (or s (fn [db [n']] (get db n'))))
+  (re-frame/reg-event-db n (or e (fn [db [_ e]] (assoc db n e)))))
+
 (defn the-neck-view []
-  [:div
-   [:h2 "Guitar neck with all tones in standard tuning."]
-   [:br]
-   [:code
-    [:pre {:style {:overflow-x "auto"}}
-     (music-theory/fret-table-with-tones-p music-theory/tones 13)]]])
+  (let [all   @(re-frame/subscribe [::neck-view-all])
+        fulls @(re-frame/subscribe [::neck-view-fulls])
+        halfs @(re-frame/subscribe [::neck-view-halfs])]
+    [:div
+     [:h2 "Guitar neck with all tones in standard tuning."]
+     [:br]
+     [:button {:on-click #(re-frame/dispatch [::neck-view-all (not all)])} (if all "Hide" "Show")]
+     (when all
+       [:code
+        [:pre {:style {:overflow-x "auto"}}
+         (music-theory/fret-table-with-tones-p music-theory/tones 25)]])
+     [:br]
+     [:br]
+     [:button {:on-click #(re-frame/dispatch [::neck-view-fulls (not fulls)])} (if fulls "Hide" "Show")]
+     (when fulls
+       [:code
+        [:pre {:style {:overflow-x "auto"}}
+         (music-theory/fret-table-with-tones-p
+          (->> music-theory/tones
+               (filter (comp not #(str/includes? % "#") name)))
+          25)]])
+     [:br]
+     [:br]
+     [:button {:on-click #(re-frame/dispatch [::neck-view-halfs (not halfs)])} (if halfs "Hide" "Show")]
+     (when halfs
+       [:code
+        [:pre {:style {:overflow-x "auto"}}
+         (music-theory/fret-table-with-tones-p
+          (->> music-theory/tones
+               (filter (comp not #(= % 1)count name)))
+          25)]])]))
 
 (def drill-events-
   [{:n ::tones-in-chord}
@@ -547,7 +584,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
    {:n ::find-all-locations-of-tone}])
 
 (doseq [{:keys [n s e]} drill-events-]
-  (re-frame/reg-sub n (or s (fn [db _] (get db n))))
+  (re-frame/reg-sub n (or s (fn [db [n']] (get db n'))))
   (re-frame/reg-event-db n (or e (fn [db [_ e]] (assoc db n e)))))
 
 (defn drills-view []
