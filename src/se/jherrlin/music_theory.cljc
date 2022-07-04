@@ -2,7 +2,7 @@
   (:require
    [se.jherrlin.music-theory.intervals
     :refer [perfect-unison root minor-second major-second
-            augmented-second minor-third major-third
+            minor-third major-third
             augmented-third diminished-fourth perfect-fourth
             augmented-fourth diminished-fifth perfect-fifth
             augmented-fifth minor-sixth major-sixth augmented-sixth
@@ -13,7 +13,8 @@
     :refer [find-chord find-chord-name find-root
             fret-table-with-tones match-chord-with-scales]
     :as utils]
-   [clojure.set :as set]))
+   [clojure.set :as set]
+   [clojure.string :as str]))
 
 
 (def tones           [:c :c# :d :d# :e :f :f# :g :g# :a :a# :b])
@@ -287,164 +288,214 @@
 ;; Scales end
 ;; ---------------
 
+(defn ->str [xs]
+  (->> xs
+       (map
+        (fn [row]
+          (->> row
+               (map (fn [i]
+                      (condp = i
+                        perfect-unison     "1"
+                        root               "1"
+                        minor-second       "b2"
+                        major-second       "2"
+                        minor-third        "b3"
+                        major-third        "3"
+                        perfect-fourth     "4"
+                        diminished-fifth   "b5"
+                        perfect-fifth      "5"
+                        minor-sixth        "b6"
+                        major-sixth        "6"
+
+                        minor-seventh      "b7"
+                        major-seventh      "7"
+                        diminished-seventh "bb7"
+
+                        augmented-sixth    "#6"
+                        augmented-third    "#3"
+                        diminished-fourth  "b4"
+                        augmented-fourth   "#4"
+                        augmented-fifth    "#5"
+                        nil "-")))
+               (map #(utils/fformat "%4s" %))
+               (apply str))))
+       (str/join "\n")
+       (str "\n")
+       (print)))
+
 ;; --------------------
 ;; Modes
 ;; --------------------
 (define-mode :ionian
   {:scale :ionian}
-  [[major-seventh root            nil           major-second]    ;; high E
-   [nil           perfect-fifth   nil           major-sixth]     ;; B
-   [major-second  nil             major-third   perfect-fourth]  ;; G
-   [major-sixth   nil             major-seventh root]            ;; D
-   [major-third   perfect-fourth  nil           perfect-fifth]   ;; A
-   [nil           root            nil           major-second]])  ;; E
+  "
+   -   -   -   -
+   -   -   -   -
+   -   -   -   -
+   6   -   7   1
+   3   4   -   5
+   -   1   -   2")
 
 (define-mode :ionian-6
   {:scale :ionian
    :string  6}
-  [[nil          nil             nil            nil]
-   [nil          nil             nil            nil]
-   [nil          nil             nil            nil]
-   [major-sixth  nil             major-seventh  root]
-   [major-third  perfect-fourth  nil            perfect-fifth]
-   [nil          root            nil            major-second]])
+  "
+   -   -   -   -
+   -   -   -   -
+   -   -   -   -
+   6   -   7   1
+   3   4   -   5
+   -   1   -   2")
 
 (define-mode :ionian-5
   {:scale :ionian
    :string  5}
-  [[nil          nil             nil            nil]
-   [nil          nil             nil            nil]
-   [major-sixth  nil             major-seventh  root]
-   [major-third  perfect-fourth  nil            perfect-fifth]
-   [nil          root            nil            major-second]
-   [nil          nil             nil            nil]])
+  "
+   -   -   -   -
+   -   -   -   -
+   6   -   7   1
+   3   4   -   5
+   -   1   -   2
+   -   -   -   -")
 
 (define-mode :ionian-4
   {:scale :ionian
    :string  4}
-  [[nil          nil             nil            nil            nil]
-   [nil          major-sixth     nil            major-seventh  root]
-   [major-third  perfect-fourth  nil            perfect-fifth  nil]
-   [nil          root            nil            major-second   nil]
-   [nil          nil             nil            nil            nil]
-   [nil          nil             nil            nil            nil]])
+  "
+   -   -   -   -   -
+   -   6   -   7   1
+   3   4   -   5   -
+   -   1   -   2   -
+   -   -   -   -   -
+   -   -   -   -   -")
 
 (define-mode :ionian-3
   {:scale :ionian
    :string  3}
-  [[major-sixth  nil             major-seventh  root]
-   [major-third  perfect-fourth  nil            perfect-fifth]
-   [root         nil             major-second   nil]
-   [nil          nil             nil            nil]
-   [nil          nil             nil            nil]
-   [nil          nil             nil            nil]])
+  "
+   6   -   7   1
+   3   4   -   5
+   1   -   2   -
+   -   -   -   -
+   -   -   -   -
+   -   -   -   -")
 
 (define-mode :mixolydian
   {:scale  :mixolydian}
-  [[nil           root            nil           major-second   nil]
-   [nil           perfect-fifth   nil           major-sixth    minor-seventh]
-   [major-second  nil             major-third   perfect-fourth nil]
-   [major-sixth   minor-seventh   nil           root           nil]
-   [major-third   perfect-fourth  nil           perfect-fifth  nil]
-   [nil           root            nil           major-second   nil]])
+  "
+   -   1   -   2   -
+   -   5   -   6  b7
+   2   -   3   4   -
+   6  b7   -   1   -
+   3   4   -   5   -
+   -   1   -   2   -")
 
 (define-mode :mixolydian-6
   {:scale :mixolydian
    :string  6}
-  [[nil          nil             nil            nil]
-   [nil          nil             nil            nil]
-   [nil          nil             nil            nil]
-   [major-sixth  minor-seventh   nil            root]
-   [major-third  perfect-fourth  nil            perfect-fifth]
-   [nil          root            nil            major-second]])
+  "
+   -   -   -   -
+   -   -   -   -
+   -   -   -   -
+   6  b7   -   1
+   3   4   -   5
+   -   1   -   2")
 
 (define-mode :mixolydian-5
   {:scale :mixolydian
    :string  5}
-  [[nil          nil             nil            nil]
-   [nil          nil             nil            nil]
-   [major-sixth  minor-seventh   nil            root]
-   [major-third  perfect-fourth  nil            perfect-fifth]
-   [nil          root            nil            major-second]
-   [nil          nil             nil            nil]])
+  "
+   -   -   -   -
+   -   -   -   -
+   6  b7   -   1
+   3   4   -   5
+   -   1   -   2
+   -   -   -   -")
 
 (define-mode :mixolydian-4
   {:scale :mixolydian
    :string  4}
-  [[nil          nil             nil            nil            nil]
-   [nil          major-sixth     minor-seventh  nil            root]
-   [major-third  perfect-fourth  nil            perfect-fifth  nil]
-   [nil          root            nil            major-second   nil]
-   [nil          nil             nil            nil            nil]
-   [nil          nil             nil            nil            nil]])
+  "
+   -   -   -   -   -
+   -   6  b7   -   1
+   3   4   -   5   -
+   -   1   -   2   -
+   -   -   -   -   -
+   -   -   -   -   -")
 
 (define-mode :mixolydian-3
   {:scale  :mixolydian
    :string 3}
-  [[major-sixth  minor-seventh   nil            root]
-   [major-third  perfect-fourth  nil            perfect-fifth]
-   [root         nil             major-second   nil]
-   [nil          nil             nil            nil]
-   [nil          nil             nil            nil]
-   [nil          nil             nil            nil]])
+  "
+   6  b7   -   1
+   3   4   -   5
+   1   -   2   -
+   -   -   -   -
+   -   -   -   -
+   -   -   -   -")
 
 (define-mode :aeolian
   {:scale  :aeolian}
-  [[nil           root            nil          major-second    minor-third]
-   [nil           perfect-fifth   minor-sixth  nil             minor-seventh]
-   [major-second  minor-third     nil          perfect-fourth  nil]
-   [nil           minor-seventh   nil          root            nil]
-   [nil           perfect-fourth  nil          perfect-fifth   minor-sixth]
-   [nil           root            nil          major-second    minor-third]])
+  "
+   -   1   -   2  b3
+   -   5  b6   -  b7
+   2  b3   -   4   -
+   -  b7   -   1   -
+   -   4   -   5  b6
+   -   1   -   2  b3")
 
 (define-mode :aeolian-6
   {:scale  :aeolian
    :string 6}
-  [[nil            nil             nil            nil]
-   [nil            nil             nil            nil]
-   [nil            nil             nil            nil]
-   [minor-seventh  nil             root           nil]
-   [perfect-fourth nil             perfect-fifth  minor-sixth]
-   [root           nil             major-second   minor-third]])
+  "
+   -   -   -   -
+   -   -   -   -
+   -   -   -   -
+  b7   -   1   -
+   4   -   5  b6
+   1   -   2  b3")
 
 (define-mode :aeolian-5
   {:scale  :aeolian
    :string 5}
-  [[nil            nil             nil            nil]
-   [nil            nil             nil            nil]
-   [minor-seventh  nil             root           nil]
-   [perfect-fourth nil             perfect-fifth  minor-sixth]
-   [root           nil             major-second   minor-third]
-   [nil            nil             nil            nil]])
+  "-   -   -   -
+   -   -   -   -
+  b7   -   1   -
+   4   -   5  b6
+   1   -   2  b3
+   -   -   -   -")
 
 (define-mode :aeolian-4
   {:scale  :aeolian
    :string 4}
-  [[nil             nil             nil            nil]
-   [nil             minor-seventh   nil            root]
-   [perfect-fourth  nil             perfect-fifth  minor-sixth]
-   [root            nil             major-second   minor-third]
-   [nil             nil             nil            nil]
-   [nil             nil             nil            nil]])
+  "
+   -   -   -   -
+   -  b7   -   1
+   4   -   5  b6
+   1   -   2  b3
+   -   -   -   -
+   -   -   -   -")
 
 (define-mode :aeolian-3
   {:scale  :aeolian
    :string 3}
-  [[nil             minor-seventh   nil            root           nil]
-   [nil             perfect-fourth  nil            perfect-fifth  minor-sixth]
-   [root            nil             major-second   minor-third    nil]
-   [nil             nil             nil            nil            nil]
-   [nil             nil             nil            nil            nil]
-   [nil             nil             nil            nil            nil]])
+  "
+   -  b7   -   1   -
+   -   4   -   5  b6
+   1   -   2  b3   -
+   -   -   -   -   -
+   -   -   -   -   -
+   -   -   -   -   -")
 
 (define-mode :dorian
   {:scale  :dorian}
-  [[nil           root            nil  major-second    minor-third]
-   [nil           perfect-fifth   nil  major-sixth     minor-seventh]
-   [major-second  minor-third     nil  perfect-fourth  nil]
-   [major-sixth   minor-seventh   nil  root            nil]
-   [nil           perfect-fourth  nil  perfect-fifth   nil]
-   [nil           root            nil  major-second    minor-third]])
+  "
+   -   1   -   2  b3
+   -   5   -   6  b7
+   2  b3   -   4   -
+   6  b7   -   1   -
+   -   4   -   5   -
+   -   1   -   2  b3")
 
 (define-mode :dorian-6
   {:scale  :dorian
@@ -488,30 +539,33 @@
 
 (define-mode :phrygian
   {:scale  :phrygian}
-  [[root            minor-second   nil             minor-third]
-   [perfect-fifth   minor-sixth    nil             minor-seventh]
-   [minor-third     nil            perfect-fourth  nil]
-   [minor-seventh   nil            root            minor-second]
-   [perfect-fourth  nil            perfect-fifth   minor-sixth]
-   [root            minor-second   nil             minor-third]])
+  "
+   1  b2   -  b3
+   5  b6   -  b7
+  b3   -   4   -
+  b7   -   1  b2
+   4   -   5  b6
+   1  b2   -  b3")
 
 (define-mode :lydian
   {:scale  :lydian}
-  [[major-seventh     root           nil              major-second]
-   [augmented-fourth  perfect-fifth  nil              major-sixth]
-   [major-second      nil            major-third      nil]
-   [major-sixth       nil            major-seventh    root]
-   [major-third       nil            augmented-fourth perfect-fifth]
-   [nil               root           nil              major-second]])
+  "
+   7   1   -   2
+  b5   5   -   6
+   2   -   3   -
+   6   -   7   1
+   3   -  b5   5
+   -   1   -   2")
 
 (define-mode :locrian
   {:scale  :locrian}
-  [[root            minor-second      nil            minor-third]
-   [nil             minor-sixth       nil            minor-seventh]
-   [minor-third     nil               perfect-fourth diminished-fifth]
-   [minor-seventh   nil               root           minor-second]
-   [perfect-fourth  diminished-fifth  nil            minor-sixth]
-   [root            minor-second      nil            minor-third]])
+  "
+   1  b2   -  b3
+   -  b6   -  b7
+  b3   -   4  b5
+  b7   -   1  b2
+   4  b5   -  b6
+   1  b2   -  b3")
 
 (define-mode :mixolydian-blues-hybrid
   {:scale :mixolydian-blues-hybrid}
@@ -536,112 +590,123 @@
 ;; --------------------
 (define-chord-pattern :major-1
   {:name :major}
-  [[major-third   nil   nil          nil]     ;; E string
-   [nil           root  nil          nil]     ;; B string
-   [perfect-fifth nil   nil          nil]     ;; G string
-   [nil           nil   major-third  nil]     ;; D string
-   [nil           nil   nil          root]    ;; A string
-   [nil           nil   nil          nil]])   ;; E string
+  "
+   3   -   -   -
+   -   1   -   -
+   5   -   -   -
+   -   -   3   -
+   -   -   -   1
+   -   -   -   -")
 
 (define-chord-pattern :major-2
   {:name :major}
-  [[perfect-fifth nil nil]
-   [nil nil major-third]
-   [nil nil root]
-   [nil nil perfect-fifth]
-   [root nil nil]
-   [nil nil nil]])
+  "
+   5   -   -
+   -   -   3
+   -   -   1
+   -   -   5
+   1   -   -
+   -   -   -")
 
 (define-chord-pattern :major-3
   {:name :major}
-  [[root          nil         nil]
-   [perfect-fifth nil         nil]
-   [nil           major-third nil]
-   [nil           nil         root]
-   [nil           nil         perfect-fifth]
-   [root          nil         nil]])
+  "
+   1   -   -
+   5   -   -
+   -   3   -
+   -   -   1
+   -   -   5
+   1   -   -")
 
 (define-chord-pattern :minor-1
   {:name :minor}
-  [[root          nil nil]
-   [perfect-fifth nil nil]
-   [minor-third   nil nil]
-   [nil           nil root]
-   [nil           nil perfect-fifth]
-   [root          nil nil]])
+  "
+   1   -   -
+   5   -   -
+  b3   -   -
+   -   -   1
+   -   -   5
+   1   -   -")
 
 (define-chord-pattern :minor-2
   {:name :minor}
-  [[perfect-fifth  nil          nil]
-   [nil            minor-third  nil]
-   [nil            nil          root]
-   [nil            nil          perfect-fifth]
-   [root           nil          nil]
-   [nil            nil          nil]])
+  "
+   5   -   -
+   -  b3   -
+   -   -   1
+   -   -   5
+   1   -   -
+   -   -   -")
 
 (define-chord-pattern :minor-3
   {:name :minor}
-  [[nil            minor-third  nil            nil]
-   [nil            nil          nil            root]
-   [nil            nil          perfect-fifth  nil]
-   [root           nil          nil            nil]
-   [nil            nil          nil            nil]
-   [nil            nil          nil            nil]])
+  "
+   -  b3   -   -
+   -   -   -   1
+   -   -   5   -
+   1   -   -   -
+   -   -   -   -
+   -   -   -   -")
 
 (define-chord-pattern :dominant-seven-1
   {:name :dominant-seven}
-  [[root           nil          nil]
-   [perfect-fifth  nil          nil]
-   [nil            major-third  nil]
-   [minor-seventh  nil          nil]
-   [nil            nil          perfect-fifth]
-   [root           nil          nil]])
+  "
+   1   -   -
+   5   -   -
+   -   3   -
+  b7   -   -
+   -   -   5
+   1   -   -")
 
 (define-chord-pattern :dominant-seven-2
   {:name :dominant-seven}
-  [[nil     nil            major-third]
-   [nil     minor-seventh  nil]
-   [nil     nil            perfect-fifth]
-   [root    nil            nil]
-   [nil     nil            nil]
-   [nil     nil            nil]])
+  "
+   -   -   3
+   -  b7   -
+   -   -   5
+   1   -   -
+   -   -   -
+   -   -   -")
 
 (define-chord-pattern :dominant-seven-3
   {:name :dominant-seven}
-  [[perfect-fifth  nil            nil]
-   [nil            nil            major-third]
-   [minor-seventh  nil            nil]
-   [nil            nil            perfect-fifth]
-   [root           nil            nil]
-   [nil            nil            nil]])
-
+  "
+   5   -   -
+   -   -   3
+  b7   -   -
+   -   -   5
+   1   -   -
+   -   -   -")
 
 (define-chord-pattern :minor-seven-1
   {:name :minor-seven}
-  [[perfect-fifth  nil            nil]
-   [nil            minor-third    nil]
-   [minor-seventh  nil            nil]
-   [nil            nil            perfect-fifth]
-   [root           nil            nil]
-   [nil            nil            nil]])
+  "
+   5   -   -
+   -  b3   -
+  b7   -   -
+   -   -   5
+   1   -   -
+   -   -   -")
 
 (define-chord-pattern :minor-seven-2
   {:name :minor-seven}
-  [[root             nil            nil]
-   [perfect-fifth    nil            nil]
-   [minor-third      nil            nil]
-   [minor-seventh    nil            nil]
-   [nil              nil            perfect-fifth]
-   [root             nil            nil]])
+  "
+   1   -   -
+   5   -   -
+  b3   -   -
+  b7   -   -
+   -   -   5
+   1   -   -")
 
 (define-chord-pattern :minor-seven-3
   {:name :minor-seven}
-  [[nil             minor-third    nil]
-   [nil             minor-seventh  nil]
-   [nil             nil            perfect-fifth]
-   [root            nil            nil]
-   [nil             nil            nil]
-   [nil             nil            nil]])
+  "
+   -  b3   -
+   -  b7   -
+   -   -   5
+   1   -   -
+   -   -   -
+   -   -   -")
 
 (define-chord-pattern :fifth-1
   {:name :fifth}
@@ -654,12 +719,13 @@
 
 (define-chord-pattern :fifth-2
   {:name :fifth}
-  [[nil              nil            nil            nil]
-   [nil              nil            nil            root]
-   [nil              nil            perfect-fifth  nil]
-   [root             nil            nil            nil]
-   [nil              nil            nil            nil]
-   [nil              nil            nil            nil]])
+  "
+   -   -   -   -
+   -   -   -   1
+   -   -   5   -
+   1   -   -   -
+   -   -   -   -
+   -   -   -   -")
 
 (define-chord-pattern :diminished-fifth-1
   {:name :diminished-fifth}
