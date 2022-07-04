@@ -67,7 +67,7 @@
         tones           (find-root root-tone all-tones)]
     (->> chords-map
          vals
-         (filter (fn [{:chord/keys [f] :as m}]
+         (filter (fn [{:chord/keys [f]}]
                    (= (set chord-tones) (set (f tones)))))
          (map (fn [{s :chord/sufix}]
                 (str (-> root-tone tone->str) s)))
@@ -78,7 +78,7 @@
         tones           (find-root root-tone all-tones)]
     (->> chords-map
          (vals)
-         (filter (fn [{:chord/keys [f] :as m}]
+         (filter (fn [{:chord/keys [f]}]
                    (= chord-tones (f tones))))
          (first))))
 
@@ -214,7 +214,6 @@
 (def triad   (juxt #(nth % 0) #(nth % 2) #(nth % 4)))
 (def seventh (juxt #(nth % 0) #(nth % 2) #(nth % 4) #(nth % 6)))
 
-
 (defn diatonic-chord-progressions [triad-or-seven-map scales-map chords-map all-tones tone kind triad-or-seven]
   {:pre [(keyword? tone) (keyword? kind)]}
   (let [scale-tones ((get-in scales-map [kind :scale/f]) (find-root tone all-tones))]
@@ -322,3 +321,51 @@
         row-length (-> rows first count)]
     (->> (list-insert rows (str "|" (apply str (take (- row-length 2) (repeat "-"))) "|") 1)
          (str/join "\n"))))
+
+(defn interval->tone
+  [intervals-map-by-function get-in-intervals-map-f
+   find-root-f sharp-tones flat-tones tone interval]
+  {:pre [(keyword? tone) (string? interval)]}
+  (let [tones (if (str/includes? interval "#")
+                sharp-tones flat-tones)]
+    (nth
+     (find-root-f tone tones)
+     (get-in-intervals-map-f intervals-map-by-function))))
+
+(defn index-of [x xs]
+  (loop [counter       0
+         [this & rest] xs]
+    (cond
+      (= this x)
+      counter
+      (nil? rest)
+      nil
+      :else
+      (recur (inc counter) rest))))
+
+(defn fretboard-string [flat-tones sharp-tones string-tune]
+  {:pre [(contains? (set (concat flat-tones sharp-tones)) string-tune)]}
+  (let [index (index-of
+               string-tune
+               (concat sharp-tones flat-tones))]
+    (->> (mapv
+          (fn [x s f]
+            (let [tone (set [s f])]
+              {:x          x
+               :tone       tone
+               :flat-tone  f
+               :sharp-tone s
+               :tone-pred  (fn [t] (boolean (tone t)))}))
+          (iterate inc 0)
+          (find-root (nth sharp-tones (mod index 12)) sharp-tones)
+          (find-root (nth flat-tones (mod index 12)) flat-tones)))))
+
+(defn fretboard-strings
+  [flat-tones sharp-tones string-tunes]
+  (->> string-tunes
+       (mapv
+        (fn [y string-tune]
+          (mapv
+           #(assoc % :y y)
+           (fretboard-string flat-tones sharp-tones string-tune)))
+        (iterate inc 0))))
