@@ -369,3 +369,46 @@
            #(assoc % :y y)
            (fretboard-string flat-tones sharp-tones string-tune)))
         (iterate inc 0))))
+
+(defn intervals-and-key-to-fretboard-matrix
+  [fretboard-strings-f interval->tone-f tuning key-of intervals fretboard-length]
+  (let [fretboard        (fretboard-strings-f tuning)]
+    (->> fretboard
+         (map
+          (fn [row]
+            (->> row
+                 (map
+                  (fn [{:keys [flat-tone sharp-tone]}]
+                    (->> intervals
+                         (map (partial interval->tone-f key-of))
+                         (map (fn [t]
+                                (condp = t
+                                  sharp-tone sharp-tone
+                                  flat-tone  flat-tone
+                                  nil)))
+                         (remove nil?)
+                         (first))))
+                 (cycle)
+                 (take fretboard-length)))))))
+
+(defn intervals-and-key-to-fretboard-matrix-str
+  [matrix]
+  (let [matrix-with-nrs (concat
+                         [(-> matrix first count range)]
+                         matrix)
+        rows            (->> matrix-with-nrs
+                             (map
+                              (fn [row]
+                                (->> row
+                                     (mapv #(cond
+                                              (nil? %)    ""
+                                              (number? %) (str %)
+                                              :else
+                                              (tone->str %))))))
+                             (map (fn [row]
+                                    (apply str (interpose "|" (map #(fformat " %-3s" %) row)))))
+                             (map (fn [row]
+                                    (str "|" row "|"))))
+        row-length      (-> rows first count)]
+  (->> (list-insert rows (str "|" (apply str (take (- row-length 2) (repeat "-"))) "|") 1)
+       (str/join "\n"))))

@@ -11,10 +11,9 @@
     :as intervals]
    [se.jherrlin.music-theory.utils
     :refer [find-chord find-chord-name find-root
-            fret-table-with-tones index-of match-chord-with-scales]
+            fret-table-with-tones match-chord-with-scales]
     :as utils]
-   [clojure.set :as set]
-   [clojure.string :as str]))
+   [clojure.set :as set]))
 
 
 (def tones           [:c :c# :d :d# :e :f :f# :g :g# :a :a# :b])
@@ -124,6 +123,17 @@
 
 (defn fretboard-strings [tuning]
   (utils/fretboard-strings flat-tones sharp-tones tuning))
+
+(defn intervals-and-key-to-fretboard-matrix
+  [tuning key-of intervals fretboard-length]
+  (utils/intervals-and-key-to-fretboard-matrix
+   fretboard-strings
+   interval->tone
+   tuning key-of intervals fretboard-length))
+
+(def intervals-and-key-to-fretboard-matrix-str
+  utils/intervals-and-key-to-fretboard-matrix-str)
+
 ;; ---------------
 ;; Partial functions end.
 ;; ---------------
@@ -732,166 +742,14 @@
    (mode-pattern-str @modes-atom :mixolydian-6 :g))
 
   (utils/fretboard-string flat-tones sharp-tones :f#)
+
+  (interval->tone :c "b5")  ;; => :gb
+
+  (->> (intervals-and-key-to-fretboard-matrix
+        standard-tuning
+        :c
+        ["1" "b3" "5"]
+        13)
+       intervals-and-key-to-fretboard-matrix-str
+       println)
   )
-
-
-(interval->tone :c "b5")  ;; => :gb
-
-;; intervals-and-key-to-fretboard-matrix
-(defn intervals-and-key-to-fretboard-matrix
-  [interval->tone-f tuning key-of intervals fretboard-length]
-  (let [
-        ;; intervals        ["1" "b3" "5"]
-        ;; key-of           :c
-        ;; tuning           standard-tuning
-        ;; interval->tone-f interval->tone
-        ;; fretboard-length 12
-        fretboard        (fretboard-strings tuning)
-        ]
-    (->> fretboard
-         (map
-          (fn [row]
-            (->> row
-                 (map
-                  (fn [{:keys [flat-tone sharp-tone]}]
-                    (->> intervals
-                         (map (partial interval->tone-f key-of))
-                         (map (fn [t]
-                                (condp = t
-                                  sharp-tone sharp-tone
-                                  flat-tone  flat-tone
-                                  nil)))
-                         (remove nil?)
-                         (first))))
-                 (cycle)
-                 (take fretboard-length)))))))
-
-(defn intervals-and-key-to-fretboard-matrix-str
-  [matrix]
-  (let [matrix-with-nrs (concat
-                         [(-> matrix first count range)]
-                         matrix)
-        rows            (->> matrix-with-nrs
-                             (map
-                              (fn [row]
-                                (->> row
-                                     (mapv #(cond
-                                              (nil? %)    ""
-                                              (number? %) (str %)
-                                              :else
-                                              (utils/tone->str %))))))
-                             (map (fn [row]
-                                    (apply str (interpose "|" (map #(utils/fformat " %-3s" %) row)))))
-                             (map (fn [row]
-                                    (str "|" row "|"))))
-        row-length      (-> rows first count)]
-  (->> (utils/list-insert rows (str "|" (apply str (take (- row-length 2) (repeat "-"))) "|") 1)
-       (str/join "\n"))))
-
-(->> (intervals-and-key-to-fretboard-matrix
-      interval->tone
-      standard-tuning
-      :c
-      ["1" "b3" "5"]
-      13)
-     intervals-and-key-to-fretboard-matrix-str
-     println)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{"3"   {:semitones 4, :function "3", :name "Major third"},
- "b3"  {:semitones 3, :function "b3", :name "Minor third"},
- "4"   {:semitones 5, :function "4", :name "perfect fourth"},
- "#5"  {:semitones 8, :function "#5", :name "Augmented fifth"},
- "b4"  {:semitones 4, :function "b4", :name "Diminished fourth"},
- "b7"  {:semitones 10, :function "b7", :name "Minor seventh"},
- "#6"  {:semitones 10, :function "#6", :name "Augmented sixth"},
- "b5"  {:semitones 6, :function "b5", :name "Diminished fifth"},
- "7"   {:semitones 11, :function "7", :name "Major seventh"},
- "bb7" {:semitones 9, :function "bb7", :name "Diminished seventh"},
- "5"   {:semitones 7, :function "5", :name "Perfect fifth"},
- "6"   {:semitones 9, :function "6", :name "Major sixth"},
- "b6"  {:semitones 8, :function "b6", :name "Minor sixth"},
- "1"   {:semitones 0, :function "1", :name "Perfect unison"},
- "b2"  {:semitones 1, :function "b2", :name "Minor second"},
- "#4"  {:semitones 6, :function "#4", :name "Augmented fourth"},
- "2"   {:semitones 2, :function "2", :name "Major second"},
- "#2"  {:semitones 3, :function "#2", :name "Augmented second"},
- "#3"  {:semitones 5, :function "#3", :name "Augmented third"}}
