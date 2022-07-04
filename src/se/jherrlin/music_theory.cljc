@@ -288,41 +288,6 @@
 ;; Scales end
 ;; ---------------
 
-(defn ->str [xs]
-  (->> xs
-       (map
-        (fn [row]
-          (->> row
-               (map (fn [i]
-                      (condp = i
-                        perfect-unison     "1"
-                        root               "1"
-                        minor-second       "b2"
-                        major-second       "2"
-                        minor-third        "b3"
-                        major-third        "3"
-                        perfect-fourth     "4"
-                        diminished-fifth   "b5"
-                        perfect-fifth      "5"
-                        minor-sixth        "b6"
-                        major-sixth        "6"
-
-                        minor-seventh      "b7"
-                        major-seventh      "7"
-                        diminished-seventh "bb7"
-
-                        augmented-sixth    "#6"
-                        augmented-third    "#3"
-                        diminished-fourth  "b4"
-                        augmented-fourth   "#4"
-                        augmented-fifth    "#5"
-                        nil "-")))
-               (map #(utils/fformat "%4s" %))
-               (apply str))))
-       (str/join "\n")
-       (str "\n")
-       (print)))
-
 ;; --------------------
 ;; Modes
 ;; --------------------
