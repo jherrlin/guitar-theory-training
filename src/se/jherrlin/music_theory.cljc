@@ -708,6 +708,33 @@
    -   -   1
    -  b5   -
    1   -   -")
+
+(define-chord-pattern :major-maj-seven-4
+  {:name :major-maj-seven}
+  "-   -   3
+   -   -   7
+   -   -   5
+   1   -   -
+   -   -   -
+   -   -   -")
+
+(define-chord-pattern :major-maj-seven-6
+  {:name :major-maj-seven}
+  "1   -   -
+   5   -   -
+   -   3   -
+   -   7   -
+   -   -   5
+   1   -   -")
+
+(define-chord-pattern :major-maj-seven-5
+  {:name :major-maj-seven}
+  "5   -   -
+   -   -   3
+   -   7   -
+   -   -   5
+   1   -   -
+   -   -   -")
 ;; --------------------
 ;; Chord patterns end
 ;; --------------------
