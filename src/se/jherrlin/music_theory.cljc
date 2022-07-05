@@ -1,13 +1,6 @@
 (ns se.jherrlin.music-theory
   (:require
    [se.jherrlin.music-theory.intervals
-    :refer [perfect-unison root minor-second major-second
-            minor-third major-third
-            augmented-third diminished-fourth perfect-fourth
-            augmented-fourth diminished-fifth perfect-fifth
-            augmented-fifth minor-sixth major-sixth augmented-sixth
-            diminished-seventh minor-seventh major-seventh
-            octave perfect-octave]
     :as intervals]
    [se.jherrlin.music-theory.utils
     :refer [find-chord find-chord-name find-root
@@ -21,7 +14,6 @@
 (def sharp-tones     [:c :c# :d :d# :e :f :f# :g :g# :a :a# :b])
 (def flat-tones      [:c :db :d :eb :e :f :gb :g :ab :a :bb :b])
 (def standard-tuning [:e :b :g :d :a :e])
-
 
 
 ;; ---------------
@@ -121,6 +113,13 @@
    flat-tones
    tone
    interval))
+
+(comment
+  (interval->tone :f# "3")
+  (interval->tone :f# "3")
+  (interval->tone :a# "b5")
+  (interval->tone :e "b3")
+  )
 
 (defn fretboard-strings [tuning]
   (utils/fretboard-strings flat-tones sharp-tones tuning))

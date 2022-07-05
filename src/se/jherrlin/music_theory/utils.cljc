@@ -322,16 +322,6 @@
     (->> (list-insert rows (str "|" (apply str (take (- row-length 2) (repeat "-"))) "|") 1)
          (str/join "\n"))))
 
-(defn interval->tone
-  [intervals-map-by-function get-in-intervals-map-f
-   find-root-f sharp-tones flat-tones tone interval]
-  {:pre [(keyword? tone) (string? interval)]}
-  (let [tones (if (str/includes? interval "#")
-                sharp-tones flat-tones)]
-    (nth
-     (find-root-f tone tones)
-     (get-in-intervals-map-f intervals-map-by-function))))
-
 (defn index-of [x xs]
   (loop [counter       0
          [this & rest] xs]
@@ -342,6 +332,20 @@
       nil
       :else
       (recur (inc counter) rest))))
+
+(defn interval->tone
+  [intervals-map-by-function get-in-intervals-map-f
+   find-root-f sharp-tones flat-tones tone interval]
+  {:pre [(keyword? tone) (string? interval)]}
+  (let [tones      (if (str/includes? interval "b")
+                     flat-tones sharp-tones)
+        flat-tone? (-> tone name (str/includes? "b"))
+        tone-idx   (if flat-tone?
+                     (index-of tone flat-tones)
+                     (index-of tone sharp-tones))]
+    (nth
+     (find-root-f (nth tones tone-idx) tones)
+     (get-in-intervals-map-f intervals-map-by-function))))
 
 (defn fretboard-string [flat-tones sharp-tones string-tune]
   {:pre [(contains? (set (concat flat-tones sharp-tones)) string-tune)]}

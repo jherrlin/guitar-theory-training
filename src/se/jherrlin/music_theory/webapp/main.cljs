@@ -392,22 +392,21 @@ specific text format and a spaced repetition algorithm selects questions."]])
 
          [:pre {:style {:overflow-x "auto"}}
           (->> (map
-                (fn [i x]
-                  (str (fformat "%8s" i) " -> " (tone->str x)))
-                intervals-xs
-                ((get-in @music-theory/scales-atom [@(re-frame/subscribe [::scale]) :scale/f])
-                 (music-theory/find-root-p @(re-frame/subscribe [::key]))))
+                (fn [i]
+                  (str (fformat "%8s" i) " -> " (-> (music-theory/interval->tone key i) tone->str)))
+                intervals-xs)
                (str/join "\n")
                (apply str)
                (str "Interval -> Tone\n"))]
 
          [:code
           [:pre {:style {:overflow-x "auto"}}
-           (music-theory/fret-table-with-tones-p
-            ((get-in @music-theory/scales-atom [@(re-frame/subscribe [::scale]) :scale/f])
-             (music-theory/find-root-p @(re-frame/subscribe [::key])))
-            16)]]
-
+           (->> (music-theory/intervals-and-key-to-fretboard-matrix
+                 music-theory/standard-tuning
+                 key
+                 intervals-xs
+                 16)
+                (music-theory/intervals-and-key-to-fretboard-matrix-str))]]
 
          [:h3 "Chords to scale"]
          (for [{chord-title :chord/title
