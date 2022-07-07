@@ -511,6 +511,43 @@
    4   -   5  b6
    1  b2   -  b3")
 
+
+(define-mode :phrygian-6
+  {:scale  :phrygian}
+  "-   -   -   -
+   -   -   -   -
+   -   -   -   -
+  b7   -   1   -
+   4   -   5  b6
+   1  b2   -  b3")
+
+(define-mode :phrygian-5
+  {:scale  :phrygian}
+  "-   -   -   -
+   -   -   -   -
+  b7   -   1   -
+   4   -   5  b6
+   1  b2   -  b3
+   -   -   -   -")
+
+(define-mode :phrygian-4
+  {:scale  :phrygian}
+  "-   -   -   -
+   -  b7   -   1
+   4   -   5  b6
+   1  b2   -  b3
+   -   -   -   -
+   -   -   -   -")
+
+(define-mode :phrygian-3
+  {:scale  :phrygian}
+  "-  b7   -   1   -
+   -   4   -   5  b6
+   1  b2   -  b3   -
+   -   -   -   -   -
+   -   -   -   -   -
+   -   -   -   -   -")
+
 (define-mode :lydian
   {:scale  :lydian}
   "
