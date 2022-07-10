@@ -155,61 +155,71 @@
                    :scale/tags tags
                    :scale/f (juxt-intervals indexes))))))
 
+(defn inteval->matrix [interval]
+  (->> interval
+       (str/trim)
+       (str/split-lines)
+       (map str/trim)
+       (mapv (fn [line]
+               (->> line
+                    (re-seq #"(b{0,2}#{0,2}\d)|-")
+                    (mapv (comp #(when-not (= "-" %) %) first)))))))
+
 (defn define-chord-pattern
   ([chord-patterns-atom intervals-map-by-function pattern-name pattern]
    (define-chord-pattern chord-patterns-atom intervals-map-by-function pattern-name {} pattern))
   ([chord-patterns-atom intervals-map-by-function pattern-name meta-data pattern]
-   (let [pattern' (if-not (string? pattern)
-                   pattern
-                   (->> pattern
-                        (str/trim)
-                        (str/split-lines)
-                        (map str/trim)
-                        (mapv #(->> %
-                                    (re-seq #"(b{0,2}#{0,2}\d)|-")
-                                    (mapv (comp
-                                           (fn [s]
-                                             (when-not (= s "-")
-                                               (get-in intervals-map-by-function [s :semitones])))
-                                           first))))))
+   (let [pattern'
+         (->> pattern
+              (str/trim)
+              (str/split-lines)
+              (map str/trim)
+              (mapv #(->> %
+                          (re-seq #"(b{0,2}#{0,2}\d)|-")
+                          (mapv (comp
+                                 (fn [s]
+                                   (when-not (= s "-")
+                                     (get-in intervals-map-by-function [s :semitones])))
+                                 first)))))
          meta-data (->> meta-data
                         (map (fn [[k v]]
                                [(->> k name (str "chord-pattern/") keyword) v]))
                         (into {}))]
      (swap! chord-patterns-atom assoc pattern-name
-            (cond-> (assoc meta-data
-                           :chord/pattern pattern'
-                           :chord/pattern-id pattern-name
-                           :chord/pattern-title (name pattern-name))
-              (string? pattern) (assoc :chord/pattern-str pattern))))))
+            (assoc meta-data
+                   :chord/pattern-matrix (inteval->matrix pattern)
+                   :chord/pattern pattern'
+                   :chord/pattern-id pattern-name
+                   :chord/pattern-title (name pattern-name)
+                   :chord/pattern-str pattern)))))
 
 (defn define-mode
   ([modes-atom intervals-map-by-function pattern-name pattern]
    (define-mode modes-atom intervals-map-by-function pattern-name {} pattern))
   ([modes-atom intervals-map-by-function pattern-name meta-data pattern]
-   (let [pattern'  (if-not (string? pattern)
-                     pattern
-                     (->> pattern
-                          (str/trim)
-                          (str/split-lines)
-                          (map str/trim)
-                          (mapv #(->> %
-                                      (re-seq #"(b{0,2}#{0,2}\d)|-")
-                                      (mapv (comp
-                                             (fn [s]
-                                               (when-not (= s "-")
-                                                 (get-in intervals-map-by-function [s :semitones])))
-                                             first))))))
+   (let [pattern'
+         (->> pattern
+              (str/trim)
+              (str/split-lines)
+              (map str/trim)
+              (mapv #(->> %
+                          (re-seq #"(b{0,2}#{0,2}\d)|-")
+                          (mapv (comp
+                                 (fn [s]
+                                   (when-not (= s "-")
+                                     (get-in intervals-map-by-function [s :semitones])))
+                                 first)))))
          meta-data (->> meta-data
                         (map (fn [[k v]]
                                [(->> k name (str "mode/") keyword) v]))
                         (into {}))]
      (swap! modes-atom assoc pattern-name
-            (cond-> (assoc meta-data
-                           :mode/pattern pattern'
-                           :mode/id pattern-name
-                           :mode/title (name pattern-name))
-              (string? pattern) (assoc :mode/pattern-str pattern))))))
+            (assoc meta-data
+                   :mode/pattern-matrix (inteval->matrix pattern)
+                   :mode/pattern pattern'
+                   :mode/id pattern-name
+                   :mode/title (name pattern-name)
+                   :mode/pattern-str pattern)))))
 
 (def triad   (juxt #(nth % 0) #(nth % 2) #(nth % 4)))
 (def seventh (juxt #(nth % 0) #(nth % 2) #(nth % 4) #(nth % 6)))
@@ -376,7 +386,7 @@
 
 (defn intervals-and-key-to-fretboard-matrix
   [fretboard-strings-f interval->tone-f tuning key-of intervals fretboard-length]
-  (let [fretboard        (fretboard-strings-f tuning)]
+  (let [fretboard (fretboard-strings-f tuning)]
     (->> fretboard
          (map
           (fn [row]
@@ -397,22 +407,25 @@
 
 (defn intervals-and-key-to-fretboard-matrix-str
   [matrix]
-  (let [matrix-with-nrs (concat
-                         [(-> matrix first count range)]
-                         matrix)
-        rows            (->> matrix-with-nrs
-                             (map
-                              (fn [row]
-                                (->> row
-                                     (mapv #(cond
-                                              (nil? %)    ""
-                                              (number? %) (str %)
-                                              :else
-                                              (tone->str %))))))
-                             (map (fn [row]
-                                    (apply str (interpose "|" (map #(fformat " %-3s" %) row)))))
-                             (map (fn [row]
-                                    (str "|" row "|"))))
+  (let [matrix-with-nrs
+        (concat
+         [(-> matrix first count range)]
+         matrix)
+        rows
+        (->> matrix-with-nrs
+             (map
+              (fn [row]
+                (->> row
+                     (map
+                      #(cond
+                         (nil? %)    ""
+                         (number? %) (str %)
+                         :else
+                         (tone->str %))))))
+             (map (fn [row]
+                    (apply str (interpose "|" (map #(fformat " %-3s" %) row)))))
+             (map (fn [row]
+                    (str "|" row "|"))))
         row-length      (-> rows first count)]
-  (->> (list-insert rows (str "|" (apply str (take (- row-length 2) (repeat "-"))) "|") 1)
-       (str/join "\n"))))
+    (->> (list-insert rows (str "|" (apply str (take (- row-length 2) (repeat "-"))) "|") 1)
+         (str/join "\n"))))

@@ -15,7 +15,6 @@
 (def flat-tones      [:c :db :d :eb :e :f :gb :g :ab :a :bb :b])
 (def standard-tuning [:e :b :g :d :a :e])
 
-
 ;; ---------------
 ;; State / data
 ;; ---------------
@@ -83,10 +82,16 @@
            intervals/intervals-map-by-function))
 
 (defn locate-pattern-on-fret [root-tone mode-spec]
-  (utils/locate-pattern-on-fret find-root-p interval-p [:e :b :g :d :a :e] root-tone mode-spec))
+  (utils/locate-pattern-on-fret
+   find-root-p
+   interval-p
+   [:e :b :g :d :a :e]
+   root-tone
+   mode-spec))
 
 (defn chord-pattern-str [modes-atom mode-pattern tone]
-  (->> modes-atom mode-pattern :chord/pattern (locate-pattern-on-fret tone)
+  (->> (get-in modes-atom [mode-pattern :chord/pattern])
+       (locate-pattern-on-fret tone)
        utils/padding-fret-pattern
        utils/fret-pattern-to-str))
 
@@ -577,6 +582,8 @@
    3   4  b5   5   -
    -   1   -   2  b3")
 
+
+
 ;; --------------------
 ;; Modes end
 ;; --------------------
@@ -844,6 +851,18 @@
         :c
         ["1" "b3" "5"]
         13)
-       intervals-and-key-to-fretboard-matrix-str
-       println)
+       ;; intervals-and-key-to-fretboard-matrix-str
+       ;; println
+       )
+
+
+  (intervals-and-key-to-fretboard-matrix
+   (utils/fretboard-strings
+    flat-tones sharp-tones standard-tuning)  ;; fretboard
+   :c                                        ;; key-of
+   ["1" "b3" "5"]                            ;; interval
+   13                                        ;; fretboard lenght
+   pattern                                   ;; modes / chord patterns
+   )
+
   )

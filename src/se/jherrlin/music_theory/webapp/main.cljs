@@ -306,7 +306,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
          [:pre {:style {:overflow-x "auto"}}
           (->> (map
                 (fn [i x]
-                  (str (fformat "%8s" i) " -> " (tone->str x)))
+                  (str (fformat "%8s" i) " -> " (-> (music-theory/interval->tone tone i) tone->str)))
                 intervals-xs
                 ((get-in @music-theory/chords-atom [@(re-frame/subscribe [::chord]) :chord/f])
                  (music-theory/find-root-p @(re-frame/subscribe [::tone]))))
@@ -316,10 +316,12 @@ specific text format and a spaced repetition algorithm selects questions."]])
 
          [:h3 "All tone positions in the chord"]
          [:pre {:style {:overflow-x "auto"}}
-          (music-theory/fret-table-with-tones-p
-           ((get-in @music-theory/chords-atom [@(re-frame/subscribe [::chord]) :chord/f])
-            (music-theory/find-root-p @(re-frame/subscribe [::tone])))
-           16)]
+          (->> (music-theory/intervals-and-key-to-fretboard-matrix
+                music-theory/standard-tuning
+                tone
+                intervals-xs
+                16)
+               (music-theory/intervals-and-key-to-fretboard-matrix-str))]
 
          [:h3 "Chord patterns"]
          [:div
