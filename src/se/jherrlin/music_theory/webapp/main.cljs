@@ -13,7 +13,8 @@
    [reitit.frontend.controllers :as rfc]
    [reitit.frontend.easy :as rfe]
    [clojure.string :as str]
-   [clojure.set :as set]))
+   [clojure.set :as set]
+   [v2.se.jherrlin.music-theory.webapp.main :as v2-main]))
 
 
 (re-frame/reg-fx
@@ -671,89 +672,89 @@ the org-drill mode."]
              (when intervals-in-scales?        (intervals-in-scales-p))))))}
       "Download questions / answers"]]))
 
-
 (def routes
-  ["/"
-   [""
-    {:name      ::home
-     :view      [home-page]
-     :link-text "Home"}]
-   ["the-neck"
-    {:name ::the-neck
-     :view [the-neck-view]}]
-   ["chord"
-    {:name      ::chord-tones-redirect
-     :controllers
-     [{:start (fn [_]
-                (js/console.log "Chord redirect")
-                (re-frame/dispatch [::push-state ::chord-tones {:tone "c" :chord-name "major"}]))
-       :stop  (fn [& params] (js/console.log "Leaving..."))}]}]
-   ["chord/:tone/:chord-name"
-    {:name      ::chord-tones
-     :view      [chord-tones-view]
-     :link-text "chord-tones"
-     :controllers
-     [{:parameters {:path [:tone :chord-name]}
-       :start      (fn [{{:keys [tone chord-name]} :path}]
-                     (let [tone (-> tone
-                                    (str/lower-case)
-                                    (str/replace "sharp" "#"))]
-                       (js/console.log "Entering chord:" tone chord-name)
-                       (re-frame/dispatch [::tone (keyword tone)])
-                       (re-frame/dispatch [::chord (keyword chord-name)])))
-       :stop       (fn [& params] (js/console.log "Leaving..."))}]}]
-   ["drills"
-    {:name      ::drills
-     :view      [drills-view]
-     :link-text "drills-view"}]
-   ["scale"
-    {:name      ::scale-redirect
-     :controllers
-     [{:start (fn [_]
-                (js/console.log "Scale redirect")
-                (re-frame/dispatch [::push-state ::scale {:scale :major :key :c}]))
-       :stop  (fn [& params] (js/console.log "Leaving scale redirect..."))}]}]
-   ["scale/:scale/:key"
-    {:name      ::scale
-     :view      [scale-in-key-view]
-     :link-text "chord-tones"
-     :controllers
-     [{:parameters {:path [:scale :key]}
-       :start      (fn [{{:keys [scale key]} :path}]
-                     (let [scale' (keyword scale)
-                           key'   (keyword key)]
-                       (js/console.log "Entering scale:" scale key)
-                       (re-frame/dispatch [::scale scale'])
-                       (re-frame/dispatch [::key key'])))
-       :stop       (fn [& params] (js/console.log "Leaving scale"))}]}]
-   ["mode/:scale/:key"
-    {:name      ::mode
-     :view      [mode-view]
-     :link-text "mode"
-     :controllers
-     [{:parameters {:path [:scale :key]}
-       :start      (fn [{{:keys [scale key]} :path}]
-                     (let [scale' (keyword scale)
-                           key'   (keyword key)]
-                       (js/console.log "Entering mode:" scale key)
-                       (re-frame/dispatch [::scale scale'])
-                       (re-frame/dispatch [::key key'])))
-       :stop       (fn [& params] (js/console.log "Leaving mode"))}]}]
-   ["harmonization/:tone/:major-or-minor/:triad-or-seventh"
-    {:name      ::harmonization
-     :view      [harmonization-view]
-     :link-text "Harmonization"
-     :controllers
-     [{:parameters {:path [:tone :major-or-minor :triad-or-seventh]}
-       :start      (fn [{{:keys [tone major-or-minor triad-or-seventh]} :path}]
-                     (let [tone (-> tone
-                                    (str/lower-case)
-                                    (str/replace "sharp" "#"))]
-                       (js/console.log "Entering harmonization:" tone major-or-minor triad-or-seventh)
-                       (re-frame/dispatch [:harmonization/tone (keyword tone)])
-                       (re-frame/dispatch [:harmonization/major-or-minor (keyword major-or-minor)])
-                       (re-frame/dispatch [:harmonization/triad-or-seventh (keyword triad-or-seventh)])))
-       :stop       (fn [& params] (js/console.log "Leaving harmonization"))}]}]])
+  [v2-main/routes
+   ["/"
+    [""
+     {:name      ::home
+      :view      [home-page]
+      :link-text "Home"}]
+    ["the-neck"
+     {:name ::the-neck
+      :view [the-neck-view]}]
+    ["chord"
+     {:name      ::chord-tones-redirect
+      :controllers
+      [{:start (fn [_]
+                 (js/console.log "Chord redirect")
+                 (re-frame/dispatch [::push-state ::chord-tones {:tone "c" :chord-name "major"}]))
+        :stop  (fn [& params] (js/console.log "Leaving..."))}]}]
+    ["chord/:tone/:chord-name"
+     {:name      ::chord-tones
+      :view      [chord-tones-view]
+      :link-text "chord-tones"
+      :controllers
+      [{:parameters {:path [:tone :chord-name]}
+        :start      (fn [{{:keys [tone chord-name]} :path}]
+                      (let [tone (-> tone
+                                     (str/lower-case)
+                                     (str/replace "sharp" "#"))]
+                        (js/console.log "Entering chord:" tone chord-name)
+                        (re-frame/dispatch [::tone (keyword tone)])
+                        (re-frame/dispatch [::chord (keyword chord-name)])))
+        :stop       (fn [& params] (js/console.log "Leaving..."))}]}]
+    ["drills"
+     {:name      ::drills
+      :view      [drills-view]
+      :link-text "drills-view"}]
+    ["scale"
+     {:name      ::scale-redirect
+      :controllers
+      [{:start (fn [_]
+                 (js/console.log "Scale redirect")
+                 (re-frame/dispatch [::push-state ::scale {:scale :major :key :c}]))
+        :stop  (fn [& params] (js/console.log "Leaving scale redirect..."))}]}]
+    ["scale/:scale/:key"
+     {:name      ::scale
+      :view      [scale-in-key-view]
+      :link-text "chord-tones"
+      :controllers
+      [{:parameters {:path [:scale :key]}
+        :start      (fn [{{:keys [scale key]} :path}]
+                      (let [scale' (keyword scale)
+                            key'   (keyword key)]
+                        (js/console.log "Entering scale:" scale key)
+                        (re-frame/dispatch [::scale scale'])
+                        (re-frame/dispatch [::key key'])))
+        :stop       (fn [& params] (js/console.log "Leaving scale"))}]}]
+    ["mode/:scale/:key"
+     {:name      ::mode
+      :view      [mode-view]
+      :link-text "mode"
+      :controllers
+      [{:parameters {:path [:scale :key]}
+        :start      (fn [{{:keys [scale key]} :path}]
+                      (let [scale' (keyword scale)
+                            key'   (keyword key)]
+                        (js/console.log "Entering mode:" scale key)
+                        (re-frame/dispatch [::scale scale'])
+                        (re-frame/dispatch [::key key'])))
+        :stop       (fn [& params] (js/console.log "Leaving mode"))}]}]
+    ["harmonization/:tone/:major-or-minor/:triad-or-seventh"
+     {:name      ::harmonization
+      :view      [harmonization-view]
+      :link-text "Harmonization"
+      :controllers
+      [{:parameters {:path [:tone :major-or-minor :triad-or-seventh]}
+        :start      (fn [{{:keys [tone major-or-minor triad-or-seventh]} :path}]
+                      (let [tone (-> tone
+                                     (str/lower-case)
+                                     (str/replace "sharp" "#"))]
+                        (js/console.log "Entering harmonization:" tone major-or-minor triad-or-seventh)
+                        (re-frame/dispatch [:harmonization/tone (keyword tone)])
+                        (re-frame/dispatch [:harmonization/major-or-minor (keyword major-or-minor)])
+                        (re-frame/dispatch [:harmonization/triad-or-seventh (keyword triad-or-seventh)])))
+        :stop       (fn [& params] (js/console.log "Leaving harmonization"))}]}]]])
 
 (defn on-navigate [new-match]
   (when new-match

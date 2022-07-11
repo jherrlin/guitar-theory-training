@@ -10,6 +10,8 @@
   (def all-tones [#{:c} #{:db :c#} #{:d} #{:d# :eb} #{:e} #{:f} #{:gb :f#} #{:g} #{:g# :ab} #{:a} #{:bb :a#} #{:b}])
   )
 
+(def all-tones [#{:c} #{:db :c#} #{:d} #{:d# :eb} #{:e} #{:f} #{:gb :f#} #{:g} #{:g# :ab} #{:a} #{:bb :a#} #{:b}])
+
 #?(:cljs
    (defn fformat
      "Formats a string using goog.string.format.
@@ -18,6 +20,19 @@
      (apply gstring/format fmt args))
    :clj (def fformat format))
 
+(defn rotate-until
+  [pred xs]
+  {:pre [(fn? pred) (coll? xs)]}
+  (let [xs-count (count xs)]
+    (->> (cycle xs)
+         (drop-while #(not (pred %)))
+         (take xs-count)
+         (vec))))
+
+(rotate-until
+   #(% :f#)
+   all-tones)
+
 (defn sharp-or-flat [tone interval]
   {:pre [(set? tone)]}
   (cond
@@ -25,7 +40,19 @@
     (str/includes? interval "b") (first (filter (comp #(str/includes? % "b") name) tone))
     (str/includes? interval "#") (first (filter (comp #(str/includes? % "#") name) tone))))
 
-(defn juxt-indexes [indexes intervals]
+(sharp-or-flat
+   #{:g#}
+   "3#")
+
+(defn juxt-indexes [indexes]
+  (apply juxt
+         (map
+          (fn [index]
+            (fn [tones]
+              (nth tones index)))
+          indexes)))
+
+(defn juxt-indexes-and-intervals [indexes intervals]
   (apply juxt
          (map
           (fn [index interval]
@@ -36,7 +63,7 @@
           indexes
           intervals)))
 
-(defn inteval->matrix [interval]
+(defn intevals-string->intervals-matrix [interval]
   (->> interval
        (str/trim)
        (str/split-lines)
@@ -45,6 +72,14 @@
                (->> line
                     (re-seq #"(b{0,2}#{0,2}\d)|-")
                     (mapv (comp #(when-not (= "-" %) %) first)))))))
+
+(defn tones-and-intervals [tones intervals]
+  {:pre [(= (count tones) (count intervals))]}
+  (map
+   (fn [t i]
+     (sharp-or-flat t i))
+   tones
+   intervals))
 
 (defn define-chord
   ([intervals-map chord-id intervals-str]
@@ -64,22 +99,13 @@
        :chord/indexes   indexes
        :chord/title     (-> chord-id
                             name
-                            (str/replace "-" " "))
-       :chord/f         (juxt-indexes indexes intervals)}))))
-
-(let [{:chord/keys [f]}
-      (define-chord
-        se.jherrlin.music-theory.intervals/intervals-map-by-function
-        :minor
-        "1 b3 5")]
-  (f all-tones))
-;; => [:c :eb :g]
+                            (str/replace "-" " "))}))))
 
 (defn define-chord-pattern
   ([pattern-name pattern]
    (define-chord-pattern pattern-name {} pattern))
   ([pattern-name meta-data pattern]
-   (let [pattern'  (inteval->matrix pattern)
+   (let [pattern'  (intevals-string->intervals-matrix pattern)
          meta-data (->> meta-data
                         (map (fn [[k v]]
                                [(->> k name (str "chord-pattern/") keyword) v]))
@@ -123,14 +149,18 @@
              :scale/indexes   indexes
              :scale/title     (-> scale-id
                                   name
-                                  (str/replace "-" " "))
-             :scale/f         (juxt-indexes indexes intervals)}))))
+                                  (str/replace "-" " "))}))))
+
+(define-scale
+  v2.se.jherrlin.music-theory.intervals/intervals-map-by-function
+  :major
+  "1, 2, 3, 4, 5, 6, 7")
 
 (defn define-mode
   ([pattern-name pattern]
    (define-mode pattern-name {} pattern))
   ([pattern-name meta-data pattern]
-   (let [pattern'  (inteval->matrix pattern)
+   (let [pattern'  (intevals-string->intervals-matrix pattern)
          meta-data (->> meta-data
                         (map (fn [[k v]]
                                [(->> k name (str "mode/") keyword) v]))
@@ -151,30 +181,6 @@
    6   -   7   1
    3   4   -   5
    -   1   -   2")
-
-(defn rotate-until
-  [pred xs]
-  {:pre [(fn? pred) (coll? xs)]}
-  (let [xs-count (count xs)]
-    (->> (cycle xs)
-         (drop-while #(not (pred %)))
-         (take xs-count)
-         (vec))))
-
-(rotate-until
-   #(% :f#)
-   all-tones)
-
-(defn sharp-or-flat [tone interval]
-  {:pre [(set? tone)]}
-  (cond
-    (= 1 (count tone))           (first tone)
-    (str/includes? interval "b") (first (filter (comp #(str/includes? % "b") name) tone))
-    (str/includes? interval "#") (first (filter (comp #(str/includes? % "#") name) tone))))
-
-(sharp-or-flat
-   #{:g#}
-   "3#")
 
 (defn fretboard-string [rotate-until all-tones string-tune number-of-frets]
   (->> (mapv
@@ -307,14 +313,23 @@
     (->> chords-map
          (vals)
          (filter (fn [{:chord/keys [f]}]
-                   (= chord-tones (f tones))))
+                   (let [chord-to-serch (f tones)
+                         chord-to-match chord-tones]
+                     (and (= (count chord-to-serch) (count chord-to-match))
+                          (->> (map
+                                (fn [c1 c2]
+                                  (boolean (c1 c2)))
+                                chord-to-serch
+                                chord-to-match)
+                               (every? true?))))))
          (first))))
 
-(find-chord
- @v2.se.jherrlin.music-theory.definitions/chords-atom
- all-tones
- [:c :e :g]
- )
+(comment
+  (find-chord
+   @v2.se.jherrlin.music-theory.definitions/chords-atom
+   all-tones
+   [:c :e :g]
+   ))
 
 (defn chord-name
   [chords-map all-tones chord-tones]
@@ -322,10 +337,22 @@
         {:chord/keys [sufix]} (find-chord chords-map all-tones chord-tones)]
     (str (-> root-tone name str/lower-case str/capitalize) sufix)))
 
-(chord-name
- @v2.se.jherrlin.music-theory.definitions/chords-atom
- all-tones
- #_[:c :eb :g]
- #_[:c :e :g# :b]
- [:c :e :g#]
- )
+(comment
+  (chord-name
+   @v2.se.jherrlin.music-theory.definitions/chords-atom
+   all-tones
+   #_[:c :eb :g]
+   #_[:c :e :g# :b]
+   [:c :e :g]
+   )
+
+  (let [{:chord/keys [intervals indexes] :as m}
+      (define-chord
+        se.jherrlin.music-theory.intervals/intervals-map-by-function
+        :minor
+        "1 b3 5")]
+  (->> ((juxt-indexes-and-intervals indexes intervals)
+        (rotate-until #(% :g) all-tones))
+       (chord-name @v2.se.jherrlin.music-theory.definitions/chords-atom all-tones))
+  )
+  )
