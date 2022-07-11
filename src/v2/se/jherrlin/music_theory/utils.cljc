@@ -246,11 +246,13 @@
                               fretboard-tone     (nth
                                                   (rotate-until #(% key-of) all-tones)
                                                   interval-semitones)]
-                          (assoc tone' :match? (= tone fretboard-tone))))))
+                          (assoc tone'
+                                 :match? (= tone fretboard-tone)
+                                 :interval interval')))))
             found-pattern-xys'
             (->> pattern-check
                  (filter :match?)
-                 (map (juxt :x :y))
+                 (map #(select-keys % [:x :y :interval]))
                  (set)
                  (into found-pattern-xys))]
         (if-not (= fretboard-count counter)
@@ -260,7 +262,18 @@
           (->> fretboard
                (apply concat)
                (map (fn [{:keys [x y] :as m}]
-                      (assoc m :pattern-match? (contains? found-pattern-xys' [x y]))))
+                      (if-not (contains? (->> found-pattern-xys'
+                                              (map (juxt :x :y))
+                                              (set))
+                                         [x y])
+                        m
+                        (assoc m
+                               :pattern-match? true
+                               :interval (->> found-pattern-xys'
+                                              (filter (fn [{x' :x y' :y}]
+                                                        (= [x y] [x' y'])))
+                                              (first)
+                                              :interval)))))
                (partition fretboard-count)
                (mapv #(mapv identity %))))))))
 
@@ -272,7 +285,7 @@
   all-tones
   [:e :b :g :d :a :e]
   25)
- :g
+ :c
  [[nil nil nil nil]
   [nil nil nil nil]
   [nil nil nil nil]
@@ -313,5 +326,6 @@
  @v2.se.jherrlin.music-theory.definitions/chords-atom
  all-tones
  #_[:c :eb :g]
- [:c :e :g# :b]
+ #_[:c :e :g# :b]
+ [:c :e :g#]
  )
