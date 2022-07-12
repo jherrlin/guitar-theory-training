@@ -24,6 +24,8 @@
   (re-frame/reg-sub n (or s (fn [db [n']] (get db n'))))
   (re-frame/reg-event-db n (or e (fn [db [_ e]] (assoc db n e)))))
 
+(apply concat [#{:a :b} #{:c} #{:c :d}])
+
 (defn chords-view []
   (let [chord  @(re-frame/subscribe [::chord])
         key-of @(re-frame/subscribe [::key-of])
@@ -34,34 +36,36 @@
          sufix       :chord/sufix}
         (get-in @definitions/chords-atom [chord])]
     (when (and chord key-of)
-      [:div
-       [:div "chord:"]
-       [:p sufix]
-       [:p explanation]
+      (let [tones ((utils/juxt-indexes-and-intervals indexes intervals)
+                    (utils/rotate-until #(% key-of) utils/all-tones))]
+        [:div
+         [:div "chord:"]
+         [:p sufix]
+         [:p explanation]
 
-       ;; Intervals
-       [:pre {:style {:overflow-x "auto"}}
-        (->> (map
-              (fn [interval index]
-                (str (fformat "%8s" interval) " -> " (-> index name str/capitalize)))
-              intervals
-              ((utils/juxt-indexes-and-intervals indexes intervals)
-               (utils/rotate-until #(% key-of) definitions/all-tones)))
-             (str/join "\n")
-             (apply str)
-             (str "Interval -> Tone\n"))]
+         ;; Intervals
+         [:pre {:style {:overflow-x "auto"}}
+          (->> (map
+                (fn [interval index]
+                  (str (fformat "%8s" interval) " -> " (-> index name str/capitalize)))
+                intervals
+                ((utils/juxt-indexes-and-intervals indexes intervals)
+                 (utils/rotate-until #(% key-of) definitions/all-tones)))
+               (str/join "\n")
+               (apply str)
+               (str "Interval -> Tone\n"))]
 
-       ;; All tones in chord
-       [:h3 "All tone positions in the chord"]
-       [:pre {:style {:overflow-x "auto"}}
-        (->> (music-theory/intervals-and-key-to-fretboard-matrix
-              music-theory/standard-tuning
-              key-of
-              intervals
-              16)
-             (music-theory/intervals-and-key-to-fretboard-matrix-str))]
-
-       ])))
+         ;; All tones in chord
+         [:h3 "All tone positions in the chord"]
+         [:pre {:style {:overflow-x "auto"}}
+          (utils/fretboard-str
+             (utils/fretboard-strings
+              utils/rotate-until
+              utils/all-tones
+              [:e :b :g :d :a :e]
+              25)
+             (partial
+              utils/fretboard-tone-str-chord-f tones))]]))))
 
 (def routes
   ["chord/:key-of/:chord-name"

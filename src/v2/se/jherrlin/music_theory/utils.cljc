@@ -20,7 +20,7 @@
      (apply gstring/format fmt args))
    :clj (def fformat format))
 
-(defn list-insert [lst elem index]
+(defn list-insert [elem index lst]
   (let [[l r] (split-at index lst)]
     (concat l [elem] r)))
 
@@ -42,7 +42,8 @@
   (cond
     (= 1 (count tone))           (first tone)
     (str/includes? interval "b") (first (filter (comp #(str/includes? % "b") name) tone))
-    (str/includes? interval "#") (first (filter (comp #(str/includes? % "#") name) tone))))
+    (str/includes? interval "#") (first (filter (comp #(str/includes? % "#") name) tone))
+    :else                        (first (filter (comp #(str/includes? % "#") name) tone))))
 
 (sharp-or-flat
    #{:g#}
@@ -155,10 +156,11 @@
                                   name
                                   (str/replace "-" " "))}))))
 
-(define-scale
-  v2.se.jherrlin.music-theory.intervals/intervals-map-by-function
-  :major
-  "1, 2, 3, 4, 5, 6, 7")
+(comment
+  (define-scale
+    v2.se.jherrlin.music-theory.intervals/intervals-map-by-function
+    :major
+    "1, 2, 3, 4, 5, 6, 7"))
 
 (defn define-mode
   ([pattern-name pattern]
@@ -229,14 +231,15 @@
                (nth rotated-tones interval-index)
                interval)))))))
 
-(intervals->tones
- all-tones
- sharp-or-flat
- rotate-until
- se.jherrlin.music-theory.intervals/intervals-map-by-function
- :c
- ["1" "b3" "5"]
- )
+(comment
+  (intervals->tones
+   all-tones
+   sharp-or-flat
+   rotate-until
+   v2.se.jherrlin.music-theory.intervals/intervals-map-by-function
+   :c
+   ["1" "b3" "5"]
+   ))
 
 (defn find-pattern [all-tones intervals-map-by-function fretboard key-of interval-matrix]
   (let [interval-matrix-width (-> interval-matrix first count)
@@ -287,21 +290,22 @@
                (partition fretboard-count)
                (mapv #(mapv identity %))))))))
 
-(find-pattern
- all-tones
- se.jherrlin.music-theory.intervals/intervals-map-by-function
- (fretboard-strings
-  rotate-until
-  all-tones
-  [:e :b :g :d :a :e]
-  25)
- :c
- [[nil nil nil nil]
-  [nil nil nil nil]
-  [nil nil nil nil]
-  ["6" nil "7" "1"]
-  ["3" "4" nil "5"]
-  [nil "1" nil "2"]])
+(comment
+  (find-pattern
+   all-tones
+   se.jherrlin.music-theory.intervals/intervals-map-by-function
+   (fretboard-strings
+    rotate-until
+    all-tones
+    [:e :b :g :d :a :e]
+    25)
+   :c
+   [[nil nil nil nil]
+    [nil nil nil nil]
+    [nil nil nil nil]
+    ["6" nil "7" "1"]
+    ["3" "4" nil "5"]
+    [nil "1" nil "2"]]))
 
 (defn match-chord-with-scales [scales-map chord-indexes]
   (->> scales-map
@@ -361,52 +365,68 @@
   )
 
 
-(defn intervals-and-key-to-fretboard-matrix-str
-  ([matrix]
-   (intervals-and-key-to-fretboard-matrix-str matrix false))
-  ([matrix pattern?]
-   (let [rows
-         (->> matrix
-              (concat [(-> matrix first count range)])
-              (map
-               (fn [row]
-                 (->> row
-                      (map
-                       (fn [{:keys [x y tone pattern-match? interval] :as m}]
-                         (if pattern?
-                           (cond
-                             (number? m)            (str m)
-                             (nil? pattern-match?)  ""
-                             (true? pattern-match?) (-> (sharp-or-flat tone interval) name str/capitalize))
+(defn fretboard-str
+  [matrix tone-f]
+  (let [add-table-stuff
+        (fn [row]
+          (str "|" (apply str (interpose "|" (map #(fformat " %-3s" %) row))) "|"))
+        rows
+        (->> matrix
+             (map
+              (fn [row]
+                (->> row
+                     (map
+                      (fn [{:keys [x y tone pattern-match? interval] :as m}]
+                        (tone-f m))))))
+             (map add-table-stuff))
+        row-length (-> rows first count)]
+    (->> rows
+         (list-insert (add-table-stuff (->> matrix first count range (map str))) 0)
+         (list-insert (str "|" (apply str (take (- row-length 2) (repeat "-"))) "|") 1)
+         (str/join "\n"))))
 
-                           (cond
-                             (nil? m)    ""
-                             (number? m) (str m)
-                             :else       (-> tone (sharp-or-flat "#") name str/capitalize))))))))
-              (map (fn [row]
-                     (apply str (interpose "|" (map #(fformat " %-3s" %) row)))))
-              (map (fn [row]
-                     (str "|" row "|"))))
-         row-length (-> rows first count)]
-     (->> (list-insert rows (str "|" (apply str (take (- row-length 2) (repeat "-"))) "|") 1)
-          (str/join "\n")))))
+(defn fretboard-tone-str-pattern-f [{:keys [x y tone pattern-match? interval] :as m}]
+  (cond
+    (nil? interval) ""
+    (seq interval)  (-> (sharp-or-flat tone interval) name str/capitalize)))
 
-(print
- (intervals-and-key-to-fretboard-matrix-str
-  (find-pattern
-   all-tones
-   se.jherrlin.music-theory.intervals/intervals-map-by-function
-   (fretboard-strings
-    rotate-until
-    all-tones
-    [:e :b :g :d :a :e]
-    25)
-   :c
-   [[nil nil nil nil]
-    [nil nil nil nil]
-    [nil nil nil nil]
-    ["6" nil "7" "1"]
-    ["3" "4" nil "5"]
-    [nil "1" nil "2"]])
-  true
-  ))
+(defn fretboard-tone-str-sharps-f [{:keys [x y tone pattern-match? interval] :as m}]
+  (cond
+    (nil? m) ""
+    :else    (-> tone (sharp-or-flat "#") name str/capitalize)))
+
+(defn fretboard-tone-str-flats-f [{:keys [x y tone pattern-match? interval] :as m}]
+  (cond
+    (nil? m) ""
+    :else    (-> tone (sharp-or-flat "b") name str/capitalize)))
+
+(defn fretboard-tone-str-chord-f [chord-tones {:keys [x y tone pattern-match? interval] :as m}]
+  (if-let [tone' (first (set/intersection (set chord-tones) tone))]
+    (-> tone' name str/capitalize)
+    ""))
+
+(comment
+  (print
+   (fretboard-str
+    (find-pattern
+     all-tones
+     se.jherrlin.music-theory.intervals/intervals-map-by-function
+     (fretboard-strings
+      rotate-until
+      all-tones
+      [:e :b :g :d :a :e]
+      25)
+     :ab
+     [[nil nil nil nil]
+      [nil nil nil nil]
+      [nil nil nil nil]
+      ["6" nil "7" "1"]
+      ["3" "4" nil "5"]
+      [nil "1" nil "2"]])
+    #_fretboard-tone-str-sharps-f
+    #_fretboard-tone-str-flats-f
+    #_fretboard-tone-str-pattern-f
+    (partial fretboard-tone-str-chord-f [:c :e :g])
+    )
+   )
+  )
