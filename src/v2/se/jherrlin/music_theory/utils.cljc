@@ -20,6 +20,10 @@
      (apply gstring/format fmt args))
    :clj (def fformat format))
 
+(defn list-insert [lst elem index]
+  (let [[l r] (split-at index lst)]
+    (concat l [elem] r)))
+
 (defn rotate-until
   [pred xs]
   {:pre [(fn? pred) (coll? xs)]}
@@ -306,7 +310,6 @@
                  (let [scale-indexes (get scale :scale/indexes)]
                    (set/subset? (set chord-indexes) (set scale-indexes)))))))
 
-;; TODOs
 (defn find-chord [chords-map all-tones chord-tones]
   (let [[root-tone & _] chord-tones
         tones           (rotate-until #(% root-tone) all-tones)]
@@ -356,3 +359,54 @@
        (chord-name @v2.se.jherrlin.music-theory.definitions/chords-atom all-tones))
   )
   )
+
+
+(defn intervals-and-key-to-fretboard-matrix-str
+  ([matrix]
+   (intervals-and-key-to-fretboard-matrix-str matrix false))
+  ([matrix pattern?]
+   (let [rows
+         (->> matrix
+              (concat [(-> matrix first count range)])
+              (map
+               (fn [row]
+                 (->> row
+                      (map
+                       (fn [{:keys [x y tone pattern-match? interval] :as m}]
+                         (if pattern?
+                           (cond
+                             (number? m)            (str m)
+                             (nil? pattern-match?)  ""
+                             (true? pattern-match?) (-> (sharp-or-flat tone interval) name str/capitalize))
+
+                           (cond
+                             (nil? m)    ""
+                             (number? m) (str m)
+                             :else       (-> tone (sharp-or-flat "#") name str/capitalize))))))))
+              (map (fn [row]
+                     (apply str (interpose "|" (map #(fformat " %-3s" %) row)))))
+              (map (fn [row]
+                     (str "|" row "|"))))
+         row-length (-> rows first count)]
+     (->> (list-insert rows (str "|" (apply str (take (- row-length 2) (repeat "-"))) "|") 1)
+          (str/join "\n")))))
+
+(print
+ (intervals-and-key-to-fretboard-matrix-str
+  (find-pattern
+   all-tones
+   se.jherrlin.music-theory.intervals/intervals-map-by-function
+   (fretboard-strings
+    rotate-until
+    all-tones
+    [:e :b :g :d :a :e]
+    25)
+   :c
+   [[nil nil nil nil]
+    [nil nil nil nil]
+    [nil nil nil nil]
+    ["6" nil "7" "1"]
+    ["3" "4" nil "5"]
+    [nil "1" nil "2"]])
+  true
+  ))
