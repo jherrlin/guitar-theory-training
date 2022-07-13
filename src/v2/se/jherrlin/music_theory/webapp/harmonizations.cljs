@@ -84,7 +84,7 @@
        [:br]
 
        ;; All tones in progressions
-       [:h3 "All tones in progressin"]
+       [:h3 "All tones in harmonization"]
        [:code
         [:pre {:style {:overflow-x "auto"}}
          (let [tones (->> (music-theory/diatonic-chord-progressions-p key-of major-or-minor triad-or-seventh)
