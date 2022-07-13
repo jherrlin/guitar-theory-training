@@ -439,9 +439,9 @@
 ;; --------------------
 (define-mode :ionian
   {:scale :ionian}
-  "-   -   -   -
-   -   -   -   -
-   -   -   -   -
+  "7   1   -   2
+   -   5   -   6
+   2   -   3   4
    6   -   7   1
    3   4   -   5
    -   1   -   2")
@@ -715,7 +715,7 @@
    -   -   -   -   -
    -   -   -   -   -")
 
-(define-mode :lydian-4
+(define-mode :lydian-3
   {:scale  :lydian}
   "6   -   7   1
    3   -  #4   5

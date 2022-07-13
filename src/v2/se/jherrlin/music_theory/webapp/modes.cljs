@@ -87,7 +87,7 @@
                (apply str)
                (str "Interval -> Tone\n"))]
 
-         ;; All tones in chord
+         ;; All tones in mode
          [:h3 "All tones in scale"]
          [:pre {:style {:overflow-x "auto"}}
           (utils/fretboard-str
@@ -108,11 +108,14 @@
              [:<>
               [:h3 "Mode patterns"]
               [:div
-               (for [{id      :mode/id
-                      pattern :mode/pattern}
+               (for [{id             :mode/id
+                      pattern        :mode/pattern
+                      root-on-string :mode/string}
                      mode-patterns]
                  ^{:key (-> id name)}
                  [:div {:style {:margin-top "2em"}}
+                  (when root-on-string
+                    [:p (str "Root on string: " root-on-string)])
                   [:pre {:style {:overflow-x "auto"}}
                    (utils/fretboard-str
                     (utils/find-pattern
