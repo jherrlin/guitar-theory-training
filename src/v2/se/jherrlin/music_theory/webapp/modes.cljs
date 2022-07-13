@@ -28,12 +28,119 @@
   (let [scale  @(re-frame/subscribe [::scale])
         key-of @(re-frame/subscribe [::key-of])]
     (when (and scale key-of)
-      [:div
-       [:p "modes"]
-       [:div (str scale)]
-       [:div (str key-of)]])
-    )
-  )
+      (let [{intervals    :scale/intervals
+             indexes      :scale/indexes
+             intervals-xs :scale/intervals-xs
+             sufix        :scale/sufix}
+            (get @definitions/scales-atom scale)
+            tones ((utils/juxt-indexes-and-intervals indexes intervals)
+                   (utils/rotate-until #(% key-of) utils/all-tones))]
+        [:<>
+         ;; Links to keys
+         [:div
+          (for [{key-of' :key-of
+                 :keys [url-name title]}
+                (->> (music-theory/find-root-p :a)
+                     (map (fn [x] {:key-of   x
+                                   :url-name (-> x name str/lower-case (str/replace "#" "sharp"))
+                                   :title    (-> x name str/capitalize)})))]
+            ^{:key url-name}
+            [:div {:style {:margin-right "10px" :display "inline"}}
+             [:a {:href (rfe/href ::mode {:scale scale :key-of key-of'})}
+              [:button
+               {:disabled (= key-of' key-of)}
+               title]]])]
+
+         [:br]
+
+         ;; Links to chords
+         [:div
+          (for [{scale' :scale
+                 :keys  [title]}
+                (->> @music-theory/modes-atom
+                     vals
+                     (map (fn [{:mode/keys [scale] :as m}]
+                            (merge m (get @music-theory/scales-atom scale))))
+                     (map (fn [{scale :mode/scale title :scale/title}]
+                            {:scale scale
+                             :title title}))
+                     (set)
+                     (sort-by :title))]
+            ^{:key (str title "-mode-select")}
+            [:div {:style {:margin-right "10px" :display "inline"}}
+             [:a {:href (rfe/href ::mode {:scale scale' :key-of key-of})}
+              [:button
+               {:disabled (= scale' scale)}
+               title]]])]
+
+         ;; Title
+         [:h2 (str (-> key-of name str/capitalize) " - " (-> scale name str/capitalize))]
+
+         ;; Intervals
+         [:pre {:style {:overflow-x "auto"}}
+          (->> (map
+                (fn [interval index]
+                  (str (fformat "%8s" interval) " -> " (-> index name str/capitalize)))
+                intervals
+                ((utils/juxt-indexes-and-intervals indexes intervals)
+                 (utils/rotate-until #(% key-of) definitions/all-tones)))
+               (str/join "\n")
+               (apply str)
+               (str "Interval -> Tone\n"))]
+
+         ;; All tones in chord
+         [:h3 "All tones in scale"]
+         [:pre {:style {:overflow-x "auto"}}
+          (utils/fretboard-str
+           (utils/fretboard-strings
+            utils/rotate-until
+            utils/all-tones
+            [:e :b :g :d :a :e]
+            25)
+           (partial
+            utils/fretboard-tone-str-chord-f tones))]
+
+         ;; Mode patterns
+         (let [mode-patterns (->> @definitions/modes-atom
+                                  (vals)
+                                  (filter (comp #{scale} :mode/scale)))]
+           (when (seq mode-patterns)
+             [:<>
+              [:h3 "Chord patterns"]
+              [:div
+               (for [{id      :mode/id
+                      pattern :mode/pattern}
+                     mode-patterns]
+                 ^{:key (-> id name)}
+                 [:div {:style {:margin-top "2em"}}
+                  [:p (str id)]
+                  [:pre {:style {:overflow-x "auto"}}
+                   (utils/fretboard-str
+                    (utils/find-pattern
+                     definitions/all-tones
+                     intervals/intervals-map-by-function
+                     (utils/fretboard-strings
+                      utils/rotate-until
+                      definitions/all-tones
+                      [:e :b :g :d :a :e]
+                      24)
+                     key-of
+                     pattern)
+                    utils/fretboard-tone-str-pattern-f)]])]]))
+
+         ;; Chords to mode
+         [:h3 "Chords to mode"]
+         (for [{chord-title :chord/title
+                chord-id    :chord/id}
+               (let [{scale-indexes :scale/indexes}
+                     (get @definitions/scales-atom scale)]
+                 (->> (vals @definitions/chords-atom)
+                      (filter (fn [{:chord/keys [indexes]}]
+                                (set/subset? (set indexes) (set scale-indexes))))))]
+           ^{:key chord-title}
+           [:div {:style {:margin-right "10px" :display "inline"}}
+            [:a {:href (rfe/href ::chord-tones {:chord-name chord-id :tone key})}
+             [:button chord-title]]])]))))
 
 (def routes
   ["mode/:scale/:key-of"

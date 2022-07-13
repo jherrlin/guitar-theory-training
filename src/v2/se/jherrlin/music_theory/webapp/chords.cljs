@@ -37,7 +37,6 @@
       (let [tones ((utils/juxt-indexes-and-intervals indexes intervals)
                    (utils/rotate-until #(% key-of) utils/all-tones))]
         [:div
-
          ;; Links to keys
          [:div
           (for [{tone' :tone
