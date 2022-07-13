@@ -102,17 +102,17 @@
          ;; Mode patterns
          (let [mode-patterns (->> @definitions/modes-atom
                                   (vals)
-                                  (filter (comp #{scale} :mode/scale)))]
+                                  (filter (comp #{scale} :mode/scale))
+                                  (sort-by :mode/pattern-title))]
            (when (seq mode-patterns)
              [:<>
-              [:h3 "Chord patterns"]
+              [:h3 "Mode patterns"]
               [:div
                (for [{id      :mode/id
                       pattern :mode/pattern}
                      mode-patterns]
                  ^{:key (-> id name)}
                  [:div {:style {:margin-top "2em"}}
-                  [:p (str id)]
                   [:pre {:style {:overflow-x "auto"}}
                    (utils/fretboard-str
                     (utils/find-pattern
@@ -133,7 +133,9 @@
                 chord-id    :chord/id}
                (let [{scale-indexes :scale/indexes}
                      (get @definitions/scales-atom scale)]
-                 (->> (vals @definitions/chords-atom)
+                 (->> @definitions/chords-atom
+                      (vals)
+                      (sort-by :chord/order)
                       (filter (fn [{:chord/keys [indexes]}]
                                 (set/subset? (set indexes) (set scale-indexes))))))]
            ^{:key chord-title}

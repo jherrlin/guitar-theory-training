@@ -108,7 +108,9 @@
                 chord-id    :chord/id}
                (let [{scale-indexes :scale/indexes}
                      (get @definitions/scales-atom scale)]
-                 (->> (vals @definitions/chords-atom)
+                 (->> @definitions/chords-atom
+                      (vals)
+                      (sort-by :chord/order)
                       (filter (fn [{:chord/keys [indexes]}]
                                 (set/subset? (set indexes) (set scale-indexes))))))]
            ^{:key (str chord-title)}

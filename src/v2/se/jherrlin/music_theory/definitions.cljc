@@ -422,14 +422,6 @@
 (define-scale :pentatonic-neutral
   "1, 2, 4, 5, b7")
 
-
-
-
-
-
-
-
-
 (define-scale :diatonic
   "1, 2, 3, 5, 6")
 
@@ -695,6 +687,42 @@
    6   -   7   1
    3   -  b5   5
    -   1   -   2")
+
+(define-mode :lydian-6
+  {:scale  :lydian}
+  "-   -   -   -
+   -   -   -   -
+   -   -   -   -
+   6   -   7   1
+   3   -  #4   5
+   -   1   -   2")
+
+(define-mode :lydian-5
+  {:scale  :lydian}
+  "-   -   -   -
+   -   -   -   -
+   6   -   7   1
+   3   -  #4   5
+   -   1   -   2
+   -   -   -   -")
+
+(define-mode :lydian-4
+  {:scale  :lydian}
+  "-   -   -   -   -
+   -   6   -   7   1
+   3   -  #4   5   -
+   -   1   -   2   -
+   -   -   -   -   -
+   -   -   -   -   -")
+
+(define-mode :lydian-4
+  {:scale  :lydian}
+  "6   -   7   1
+   3   -  #4   5
+   1   -   2   -
+   -   -   -   -
+   -   -   -   -
+   -   -   -   -")
 
 (define-mode :locrian
   {:scale  :locrian}

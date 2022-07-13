@@ -104,7 +104,8 @@
          ;; Chord patterns
          (let [chord-patterns (->> @definitions/chord-patterns-atom
                                    (vals)
-                                   (filter (comp #{chord} :chord-pattern/name)))]
+                                   (filter (comp #{chord} :chord-pattern/name))
+                                   (sort-by :chord/pattern-title))]
            (when (seq chord-patterns)
              [:<>
               [:h3 "Chord patterns"]
@@ -132,7 +133,9 @@
          (let [scales-to-chord
                (let [{chord-indexes :chord/indexes}
                      (get @definitions/chords-atom chord)]
-                 (->> (vals @definitions/scales-atom)
+                 (->> @definitions/scales-atom
+                      (vals)
+                      (sort-by :scale/order)
                       (filter (fn [{:scale/keys [indexes]}]
                                 (set/subset? (set chord-indexes) (set indexes))))))]
            (when (seq scales-to-chord)
