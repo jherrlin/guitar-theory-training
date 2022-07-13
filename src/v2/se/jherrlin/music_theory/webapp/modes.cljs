@@ -46,7 +46,7 @@
                                    :title    (-> x name str/capitalize)})))]
             ^{:key url-name}
             [:div {:style {:margin-right "10px" :display "inline"}}
-             [:a {:href (rfe/href ::mode {:scale scale :key-of key-of'})}
+             [:a {:href (rfe/href :v2/mode {:scale scale :key-of key-of'})}
               [:button
                {:disabled (= key-of' key-of)}
                title]]])]
@@ -68,7 +68,7 @@
                      (sort-by :title))]
             ^{:key (str title "-mode-select")}
             [:div {:style {:margin-right "10px" :display "inline"}}
-             [:a {:href (rfe/href ::mode {:scale scale' :key-of key-of})}
+             [:a {:href (rfe/href :v2/mode {:scale scale' :key-of key-of})}
               [:button
                {:disabled (= scale' scale)}
                title]]])]
@@ -139,12 +139,12 @@
                                 (set/subset? (set indexes) (set scale-indexes))))))]
            ^{:key chord-title}
            [:div {:style {:margin-right "10px" :display "inline"}}
-            [:a {:href (rfe/href ::chord-tones {:chord-name chord-id :tone key})}
+            [:a {:href (rfe/href :v2/chord {:chord-name chord-id :key-of key})}
              [:button chord-title]]])]))))
 
 (def routes
   ["mode/:scale/:key-of"
-   {:name ::mode
+   {:name :v2/mode
     :view [mode-view]
     :controllers
     [{:parameters {:path [:scale :key-of]}

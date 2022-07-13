@@ -47,7 +47,7 @@
                                    :title    (-> x name str/capitalize)})))]
             ^{:key url-name}
             [:div {:style {:margin-right "10px" :display "inline"}}
-             [:a {:href (rfe/href ::chord-view {:key-of tone' :chord-name chord})}
+             [:a {:href (rfe/href :v2/chord {:key-of tone' :chord-name chord})}
               [:button
                {:disabled (= key-of tone')}
                title]]])]
@@ -62,7 +62,7 @@
                 (->> @definitions/chords-atom vals)]
             ^{:key (str sufix "-chord")}
             [:div {:style {:margin-right "10px" :display "inline"}}
-             [:a {:href (rfe/href ::chord-view {:key-of key-of :chord-name id})}
+             [:a {:href (rfe/href :v2/chord {:key-of key-of :chord-name id})}
               [:button
                {:disabled (= id chord)}
                (str (or display-text sufix))]]])]
@@ -148,9 +148,8 @@
 
 (def routes
   ["chord/:key-of/:chord-name"
-   {:name      ::chord-view
+   {:name      :v2/chord
     :view      [chords-view]
-    :link-text "chord-view"
     :controllers
     [{:parameters {:path [:key-of :chord-name]}
       :start      (fn [{{:keys [key-of chord-name]} :path}]

@@ -109,8 +109,8 @@ specific text format and a spaced repetition algorithm selects questions."]])
 
         [:> semantic-ui/Menu.Item
          {:as     "a"
-          :href   (rfe/href ::chords/chord-view {:key-of :c :chord-name :major})
-          :active (= ::chords/chord-view current-route-name)}
+          :href   (rfe/href :v2/chord {:key-of :c :chord-name :major})
+          :active (= :v2/chord current-route-name)}
          "Chords"]
         [:> semantic-ui/Menu.Item
          {:as     "a"
@@ -125,8 +125,8 @@ specific text format and a spaced repetition algorithm selects questions."]])
 
         [:> semantic-ui/Menu.Item
          {:as     "a"
-          :href   (rfe/href ::mode {:scale :ionian :key :c})
-          :active (= ::mode current-route-name)}
+          :href   (rfe/href :v2/mode {:scale :ionian :key-of :c})
+          :active (= :v2/mode current-route-name)}
          "Modes"]
 
         [:> semantic-ui/Menu.Item

@@ -39,7 +39,7 @@
 
 (def routes
   ["harmonization/:key-of/:major-or-minor/:triad-or-seventh"
-   {:name ::harmonization
+   {:name :v2/harmonization
     :view [harmonization-view]
     :controllers
     [{:parameters {:path [:key-of :major-or-minor :triad-or-seventh]}

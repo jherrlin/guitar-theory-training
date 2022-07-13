@@ -687,8 +687,35 @@
    -   -   -   -
    -   -   -   -
   b7   -   1   -
-   5  b5   -  b6
+   4  b5   -  b6
    1  b2   -  b3")
+
+(define-mode :locrian-5
+  {:scale  :locrian}
+  "-   -   -   -
+   -   -   -   -
+  b7   -   1   -
+   4  b5   -  b6
+   1  b2   -  b3
+   -   -   -   -")
+
+(define-mode :locrian-4
+  {:scale  :locrian}
+  "-   -   -   -
+   -  b7   -   1
+   4  b5   -  b6
+   1  b2   -  b3
+   -   -   -   -
+   -   -   -   -")
+
+(define-mode :locrian-3
+  {:scale  :locrian}
+  "-  b7   -   1   -
+   -   4  b5   -  b6
+   1  b2   -  b3   -
+   -   -   -   -   -
+   -   -   -   -   -
+   -   -   -   -   -")
 
 (define-mode :mixolydian-blues-hybrid
   {:scale :mixolydian-blues-hybrid}

@@ -36,7 +36,7 @@
 
 (def routes
   ["scale/:scale/:key-of"
-   {:name ::scale
+   {:name :v2/scale
     :view [scales-view]
     :controllers
     [{:parameters {:path [:scale :key-of]}
