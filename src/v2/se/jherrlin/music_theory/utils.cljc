@@ -251,6 +251,14 @@
                   (mapv (comp vec (partial take interval-matrix-width) (partial drop counter)))
                   (apply concat)
                   (mapv vector (apply concat interval-matrix)))
+            box-match? (->> combinations
+                            (remove (comp nil? first))
+                            (every? (fn [[interval' {:keys [tone] :as tone'}]]
+                                      (let [interval-semitones (get-in intervals-map-by-function [interval' :semitones])
+                                            fretboard-tone     (nth
+                                                                (rotate-until #(% key-of) all-tones)
+                                                                interval-semitones)]
+                                        (= tone fretboard-tone)))))
             pattern-check
             (->> combinations
                  (remove (comp nil? first))
@@ -263,11 +271,13 @@
                                  :match? (= tone fretboard-tone)
                                  :interval interval')))))
             found-pattern-xys'
-            (->> pattern-check
-                 (filter :match?)
-                 (map #(select-keys % [:x :y :interval]))
-                 (set)
-                 (into found-pattern-xys))]
+            (if-not box-match?
+              found-pattern-xys
+              (->> pattern-check
+                   (filter :match?)
+                   (map #(select-keys % [:x :y :interval]))
+                   (set)
+                   (into found-pattern-xys)))]
         (if-not (= fretboard-count counter)
           (recur
            (inc counter)
@@ -410,23 +420,37 @@
    (fretboard-str
     (find-pattern
      all-tones
-     se.jherrlin.music-theory.intervals/intervals-map-by-function
+     v2.se.jherrlin.music-theory.intervals/intervals-map-by-function
      (fretboard-strings
       rotate-until
       all-tones
       [:e :b :g :d :a :e]
-      25)
-     :ab
-     [[nil nil nil nil]
-      [nil nil nil nil]
-      [nil nil nil nil]
-      ["6" nil "7" "1"]
-      ["3" "4" nil "5"]
-      [nil "1" nil "2"]])
+      14)
+     :c
+     [["3" nil nil nil]
+      [nil "1" nil nil]
+      ["5" nil nil nil]
+      [nil nil "3" nil]
+      [nil nil nil "1"]
+      [nil nil nil nil]])
     #_fretboard-tone-str-sharps-f
     #_fretboard-tone-str-flats-f
-    #_fretboard-tone-str-pattern-f
-    (partial fretboard-tone-str-chord-f [:c :e :g])
+    fretboard-tone-str-pattern-f
+    #_(partial fretboard-tone-str-chord-f [:c :e :g])
     )
    )
   )
+
+
+{:chord-pattern/name :major,
+  :chord/pattern
+ [["3" nil nil nil]
+   [nil "1" nil nil]
+   ["5" nil nil nil]
+   [nil nil "3" nil]
+   [nil nil nil "1"]
+   [nil nil nil nil]],
+  :chord/pattern-id :major-1,
+  :chord/pattern-title "major-1",
+  :chord/pattern-str
+  "\n   3   -   -   -\n   -   1   -   -\n   5   -   -   -\n   -   -   3   -\n   -   -   -   1\n   -   -   -   -"}

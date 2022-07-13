@@ -13,8 +13,8 @@
    [clojure.string :as str]
    [clojure.set :as set]
    [v2.se.jherrlin.music-theory.definitions :as definitions]
-   [se.jherrlin.music-theory :as music-theory]))
-
+   [se.jherrlin.music-theory :as music-theory]
+   [v2.se.jherrlin.music-theory.intervals :as intervals]))
 
 (def events-
   [{:n ::key-of}
@@ -23,8 +23,6 @@
 (doseq [{:keys [n s e]} events-]
   (re-frame/reg-sub n (or s (fn [db [n']] (get db n'))))
   (re-frame/reg-event-db n (or e (fn [db [_ e]] (assoc db n e)))))
-
-(apply concat [#{:a :b} #{:c} #{:c :d}])
 
 (defn chords-view []
   (let [chord  @(re-frame/subscribe [::chord])
@@ -37,11 +35,47 @@
         (get-in @definitions/chords-atom [chord])]
     (when (and chord key-of)
       (let [tones ((utils/juxt-indexes-and-intervals indexes intervals)
-                    (utils/rotate-until #(% key-of) utils/all-tones))]
+                   (utils/rotate-until #(% key-of) utils/all-tones))]
         [:div
-         [:div "chord:"]
-         [:p sufix]
-         [:p explanation]
+
+         ;; Links to keys
+         [:div
+          (for [{tone' :tone
+                 :keys [url-name title]}
+                (->> (music-theory/find-root-p :a)
+                     (map (fn [x] {:tone     x
+                                   :url-name (-> x name str/lower-case (str/replace "#" "sharp"))
+                                   :title    (-> x name str/capitalize)})))]
+            ^{:key url-name}
+            [:div {:style {:margin-right "10px" :display "inline"}}
+             [:a {:href (rfe/href ::chord-tones {:tone tone' :chord-name chord})}
+              [:button
+               {:disabled (= key-of tone')}
+               title]]])]
+
+         [:br]
+         ;; Links to chords
+         [:div
+          (for [{id           :chord/id
+                 sufix        :chord/sufix
+                 explanation  :chord/explanation
+                 display-text :chord/display-text}
+                (->> @definitions/chords-atom vals)]
+            ^{:key (str sufix "-chord")}
+            [:div {:style {:margin-right "10px" :display "inline"}}
+             [:a {:href (rfe/href ::chord-tones {:tone key-of :chord-name id})}
+              [:button
+               {:disabled (= id chord)}
+               (str (or display-text sufix))]]])]
+
+         ;; Chord name
+         [:br]
+         [:div {:style {:height  "100%"
+                        :display "inline-flex"}}
+          [:h2 (str (-> key-of name str/capitalize) sufix)]
+          [:p {:style {:margin-left "4em"
+                       :margin-top  "0.5em"}}
+           (str "(" explanation ")")]]
 
          ;; Intervals
          [:pre {:style {:overflow-x "auto"}}
@@ -59,13 +93,51 @@
          [:h3 "All tone positions in the chord"]
          [:pre {:style {:overflow-x "auto"}}
           (utils/fretboard-str
-             (utils/fretboard-strings
-              utils/rotate-until
-              utils/all-tones
-              [:e :b :g :d :a :e]
-              25)
-             (partial
-              utils/fretboard-tone-str-chord-f tones))]]))))
+           (utils/fretboard-strings
+            utils/rotate-until
+            utils/all-tones
+            [:e :b :g :d :a :e]
+            25)
+           (partial
+            utils/fretboard-tone-str-chord-f tones))]
+
+         ;; Chord patterns
+         [:h3 "Chord patterns"]
+         [:div
+          (for [{id      :chord/pattern-id
+                 pattern :chord/pattern}
+                (->> @definitions/chord-patterns-atom
+                     (vals)
+                     (filter (comp #{chord} :chord-pattern/name)))]
+            ^{:key (-> id name)}
+            [:div {:style {:margin-top "2em"}}
+             [:p (str id)]
+             [:pre {:style {:overflow-x "auto"}}
+              (utils/fretboard-str
+               (utils/find-pattern
+                definitions/all-tones
+                intervals/intervals-map-by-function
+                (utils/fretboard-strings
+                 utils/rotate-until
+                 definitions/all-tones
+                 [:e :b :g :d :a :e]
+                 24)
+                key-of
+                pattern)
+               utils/fretboard-tone-str-pattern-f)]])]
+
+         [:h3 "Scales to chord"]
+         (for [{scale-title :scale/title
+                scale-id    :scale/id}
+               (let [{chord-indexes :chord/indexes}
+                     (get-in @music-theory/chords-atom [@(re-frame/subscribe [::chord])])]
+                 (->> (vals @music-theory/scales-atom)
+                      (filter (fn [{:scale/keys [indexes]}]
+                                (set/subset? (set chord-indexes) (set indexes))))))]
+           ^{:key scale-title}
+           [:div {:style {:margin-right "10px" :display "inline"}}
+            [:a {:href (rfe/href ::scale {:scale scale-id :key key-of})}
+             [:button scale-title]]])]))))
 
 (def routes
   ["chord/:key-of/:chord-name"
