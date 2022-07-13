@@ -95,16 +95,17 @@
          indexes   (->> intervals
                         (mapv #(get-in intervals-map [% :semitones])))]
      (merge
-      (->> meta-data
-           (map (fn [[k v]]
-                  [(->> k name (str "chord/") keyword) v]))
-           (into {}))
       {:chord/id        chord-id
        :chord/intervals intervals
        :chord/indexes   indexes
        :chord/title     (-> chord-id
                             name
-                            (str/replace "-" " "))}))))
+                            (str/replace "-" " "))
+       :chord/order     999}
+      (->> meta-data
+           (map (fn [[k v]]
+                  [(->> k name (str "chord/") keyword) v]))
+           (into {}))))))
 
 (defn define-chord-pattern
   ([pattern-name pattern]
@@ -145,16 +146,18 @@
                         (vec))
          indexes   (->> intervals
                         (mapv #(get-in intervals-map [% :semitones])))]
-     (merge (->> meta-data
-                 (map (fn [[k v]]
-                        [(->> k name (str "scale/") keyword) v]))
-                 (into {}))
-            {:scale/id        scale-id
-             :scale/intervals intervals
-             :scale/indexes   indexes
-             :scale/title     (-> scale-id
-                                  name
-                                  (str/replace "-" " "))}))))
+     (merge
+      {:scale/id        scale-id
+       :scale/intervals intervals
+       :scale/indexes   indexes
+       :scale/title     (-> scale-id
+                            name
+                            (str/replace "-" " "))
+       :scale/order     999}
+      (->> meta-data
+           (map (fn [[k v]]
+                  [(->> k name (str "scale/") keyword) v]))
+           (into {}))))))
 
 (comment
   (define-scale

@@ -25,10 +25,10 @@
   (re-frame/reg-event-db n (or e (fn [db [_ e]] (assoc db n e)))))
 
 (defn chords-view []
-  (let [chord  @(re-frame/subscribe [::chord])
-        key-of @(re-frame/subscribe [::key-of])
-        {chord-id    :chord/id
-         indexes     :chord/indexes
+  (let [nr-of-frets @(re-frame/subscribe [:nr-of-frets])
+        chord       @(re-frame/subscribe [::chord])
+        key-of      @(re-frame/subscribe [::key-of])
+        {indexes     :chord/indexes
          intervals   :chord/intervals
          explanation :chord/explanation
          sufix       :chord/sufix}
@@ -51,15 +51,16 @@
               [:button
                {:disabled (= key-of tone')}
                title]]])]
-
          [:br]
+
          ;; Links to chords
          [:div
           (for [{id           :chord/id
                  sufix        :chord/sufix
-                 explanation  :chord/explanation
                  display-text :chord/display-text}
-                (->> @definitions/chords-atom vals)]
+                (->> @definitions/chords-atom
+                     vals
+                     (sort-by :chord/order))]
             ^{:key (str sufix "-chord")}
             [:div {:style {:margin-right "10px" :display "inline"}}
              [:a {:href (rfe/href :v2/chord {:key-of key-of :chord-name id})}
@@ -96,7 +97,7 @@
             utils/rotate-until
             utils/all-tones
             [:e :b :g :d :a :e]
-            25)
+            nr-of-frets)
            (partial
             utils/fretboard-tone-str-chord-f tones))]
 
@@ -113,7 +114,6 @@
                      chord-patterns]
                  ^{:key (-> id name)}
                  [:div {:style {:margin-top "2em"}}
-                  [:p (str id)]
                   [:pre {:style {:overflow-x "auto"}}
                    (utils/fretboard-str
                     (utils/find-pattern
@@ -123,7 +123,7 @@
                       utils/rotate-until
                       definitions/all-tones
                       [:e :b :g :d :a :e]
-                      24)
+                      nr-of-frets)
                      key-of
                      pattern)
                     utils/fretboard-tone-str-pattern-f)]])]]))
@@ -143,7 +143,7 @@
                     scales-to-chord]
                 ^{:key scale-title}
                 [:div {:style {:margin-right "10px" :display "inline"}}
-                 [:a {:href (rfe/href ::scale {:scale scale-id :key key-of})}
+                 [:a {:href (rfe/href :v2/scale {:scale scale-id :key-of key-of})}
                   [:button scale-title]]])]))]))))
 
 (def routes

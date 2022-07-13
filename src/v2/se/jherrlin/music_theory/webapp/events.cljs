@@ -33,3 +33,16 @@
  :current-route
  (fn [db]
    (:current-route db)))
+
+(re-frame/reg-sub
+ :nr-of-frets
+ (fn [db]
+   (get db :nr-of-frets 16)))
+
+(re-frame/reg-event-db
+ :nr-of-frets
+ (fn [db [_ n]]
+   (assoc db :nr-of-frets (if (string? n)
+                            (js/parseInt n)
+                            n
+                            ))))

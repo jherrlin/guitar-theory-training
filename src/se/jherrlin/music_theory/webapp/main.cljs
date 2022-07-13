@@ -103,6 +103,12 @@ specific text format and a spaced repetition algorithm selects questions."]])
                              :style      {:background "#FFFFFF"}}
         [:> semantic-ui/Menu.Item
          {:as     "a"
+          :href   (rfe/href :v2/settings)
+          :active (= :v2/settings current-route-name)}
+         "Settings"]
+
+        [:> semantic-ui/Menu.Item
+         {:as     "a"
           :href   (rfe/href ::the-neck)
           :active (= ::the-neck current-route-name)}
          "Neck"]
@@ -114,13 +120,13 @@ specific text format and a spaced repetition algorithm selects questions."]])
          "Chords"]
         [:> semantic-ui/Menu.Item
          {:as     "a"
-          :href   (rfe/href ::scale-redirect)
-          :active (= ::scale current-route-name)}
+          :href   (rfe/href :v2/scale {:scale :major :key-of :c})
+          :active (= :v2/scale current-route-name)}
          "Scales"]
         [:> semantic-ui/Menu.Item
          {:as     "a"
-          :href   (rfe/href ::harmonization {:tone :c :major-or-minor :major :triad-or-seventh :triad})
-          :active (= ::harmonization current-route-name)}
+          :href   (rfe/href :v2/harmonization {:key-of :c :major-or-minor :major :triad-or-seventh :triad})
+          :active (= :v2/harmonization current-route-name)}
          "Harmonizations"]
 
         [:> semantic-ui/Menu.Item

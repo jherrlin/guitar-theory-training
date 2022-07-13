@@ -81,14 +81,40 @@
 (define-chord :major
   {:sufix        ""
    :explanation  "major"
-   :display-text "Major"}
+   :display-text "major"
+   :order        1}
   "1 3 5")
 
 (define-chord :minor
   {:sufix        "m"
    :explanation  "minor"
-   :display-text "Minor"}
+   :display-text "minor"
+   :order        2}
   "1 b3 5")
+
+(define-chord :major-maj-seven
+  {:sufix       "maj7"
+   :explanation "major maj 7th"
+   :order       3}
+  "1 3 5 7")
+
+(define-chord :dominant-seven
+  {:sufix       "7"
+   :explanation "dominant 7th"
+   :order        4}
+  "1 3 5 b7")
+
+(define-chord :minor-maj-seven
+  {:sufix       "m(maj7)"
+   :explanation "minor maj 7th"
+   :order        5}
+  "1 b3 5 7")
+
+(define-chord :minor-seven
+  {:sufix       "m7"
+   :explanation "minor 7th"
+   :order       6}
+  "1 b3 5 b7")
 
 (define-chord :sus2
   {:sufix       "sus2"
@@ -104,26 +130,6 @@
   {:sufix       "sus4"
    :explanation "suspended 4"}
   "1 4 5")
-
-(define-chord :dominant-seven
-  {:sufix       "7"
-   :explanation "dominant 7th"}
-  "1 3 5 b7")
-
-(define-chord :minor-seven
-  {:sufix       "m7"
-   :explanation "minor 7th"}
-  "1 b3 5 b7")
-
-(define-chord :minor-maj-seven
-  {:sufix        "m(maj7)"
-   :explanation  "minor maj 7th"}
-  "1 b3 5 7")
-
-(define-chord :major-maj-seven
-  {:sufix       "maj7"
-   :explanation "major maj 7th"}
-  "1 3 5 7")
 
 (define-chord :minor-seven-flat-5
   {:sufix       "m7b5"
@@ -359,10 +365,41 @@
 ;; Scales
 ;; ---------------
 (define-scale :major
+  {:order 1}
   "1, 2, 3, 4, 5, 6, 7")
 
 (define-scale :minor
+  {:order 2}
   "1, 2, b3, 4, 5, b6, b7")
+
+
+(define-scale :lydian
+  {:order 3}
+  "1, 2, 3, #4, 5, 6, 7")
+
+(define-scale :ionian
+  {:order 4}
+  "1, 2, 3, 4, 5, 6, 7")
+
+(define-scale :mixolydian
+  {:order 5}
+  "1, 2, 3, 4, 5, 6, b7")
+
+(define-scale :dorian
+  {:order 6}
+  "1, 2, b3, 4, 5, 6, b7")
+
+(define-scale :aeolian
+  {:order 7}
+  "1, 2, b3, 4, 5, b6, b7")
+
+(define-scale :phrygian
+  {:order 8}
+  "1, b2, b3, 4, 5, b6, b7")
+
+(define-scale :locrian
+  {:order 9}
+  "1, b2, b3, 4, b5, b6, b7")
 
 (define-scale :harmonic-minor
   "1, 2, b3, 4, 5, b6, 7")
@@ -385,26 +422,13 @@
 (define-scale :pentatonic-neutral
   "1, 2, 4, 5, b7")
 
-(define-scale :ionian
-  "1, 2, 3, 4, 5, 6, 7")
 
-(define-scale :dorian
-  "1, 2, b3, 4, 5, 6, b7")
 
-(define-scale :phrygian
-  "1, b2, b3, 4, 5, b6, b7")
 
-(define-scale :lydian
-  "1, 2, 3, #4, 5, 6, 7")
 
-(define-scale :mixolydian
-  "1, 2, 3, 4, 5, 6, b7")
 
-(define-scale :aeolian
-  "1, 2, b3, 4, 5, b6, b7")
 
-(define-scale :locrian
-  "1, b2, b3, 4, b5, b6, b7")
+
 
 (define-scale :diatonic
   "1, 2, 3, 5, 6")

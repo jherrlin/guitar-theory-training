@@ -25,13 +25,12 @@
   (re-frame/reg-event-db n (or e (fn [db [_ e]] (assoc db n e)))))
 
 (defn mode-view []
-  (let [scale  @(re-frame/subscribe [::scale])
-        key-of @(re-frame/subscribe [::key-of])]
+  (let [nr-of-frets @(re-frame/subscribe [:nr-of-frets])
+        scale       @(re-frame/subscribe [::scale])
+        key-of      @(re-frame/subscribe [::key-of])]
     (when (and scale key-of)
-      (let [{intervals    :scale/intervals
-             indexes      :scale/indexes
-             intervals-xs :scale/intervals-xs
-             sufix        :scale/sufix}
+      (let [{intervals :scale/intervals
+             indexes   :scale/indexes}
             (get @definitions/scales-atom scale)
             tones ((utils/juxt-indexes-and-intervals indexes intervals)
                    (utils/rotate-until #(% key-of) utils/all-tones))]
@@ -39,7 +38,7 @@
          ;; Links to keys
          [:div
           (for [{key-of' :key-of
-                 :keys [url-name title]}
+                 :keys   [url-name title]}
                 (->> (music-theory/find-root-p :a)
                      (map (fn [x] {:key-of   x
                                    :url-name (-> x name str/lower-case (str/replace "#" "sharp"))
@@ -96,7 +95,7 @@
             utils/rotate-until
             utils/all-tones
             [:e :b :g :d :a :e]
-            25)
+            nr-of-frets)
            (partial
             utils/fretboard-tone-str-chord-f tones))]
 
@@ -123,7 +122,7 @@
                       utils/rotate-until
                       definitions/all-tones
                       [:e :b :g :d :a :e]
-                      24)
+                      nr-of-frets)
                      key-of
                      pattern)
                     utils/fretboard-tone-str-pattern-f)]])]]))
@@ -139,7 +138,7 @@
                                 (set/subset? (set indexes) (set scale-indexes))))))]
            ^{:key chord-title}
            [:div {:style {:margin-right "10px" :display "inline"}}
-            [:a {:href (rfe/href :v2/chord {:chord-name chord-id :key-of key})}
+            [:a {:href (rfe/href :v2/chord {:chord-name chord-id :key-of key-of})}
              [:button chord-title]]])]))))
 
 (def routes

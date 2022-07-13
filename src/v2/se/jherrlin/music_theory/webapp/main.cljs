@@ -4,6 +4,7 @@
    [v2.se.jherrlin.music-theory.webapp.chords :as chords]
    [v2.se.jherrlin.music-theory.webapp.scales :as scales]
    [v2.se.jherrlin.music-theory.webapp.modes :as modes]
+   [v2.se.jherrlin.music-theory.webapp.settings :as settings]
    [v2.se.jherrlin.music-theory.webapp.harmonizations :as harmonizations]
    ["semantic-ui-react" :as semantic-ui]
    [reagent.dom :as rd]
@@ -31,4 +32,5 @@
    chords/routes
    modes/routes
    scales/routes
-   harmonizations/routes])
+   harmonizations/routes
+   settings/routes])
