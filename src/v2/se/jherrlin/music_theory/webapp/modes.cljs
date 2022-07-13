@@ -52,7 +52,7 @@
 
          [:br]
 
-         ;; Links to chords
+         ;; Links to modes
          [:div
           (for [{scale' :scale
                  :keys  [title]}
