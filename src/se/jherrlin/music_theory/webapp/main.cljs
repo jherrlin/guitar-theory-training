@@ -50,32 +50,21 @@
 
 (defn home-page []
   [:div
-   [:h1 "Guitar theory"]
+   [:h1 "Music / guitar theory"]
    [:div
-    "In the summer of 2022 I decided to learn a bit of music / guitar theory. "
-    "As a " [:a {:href "https://www.gnu.org/software/emacs/" :target "_blank"} "Emacs"]
-    " user I decided to use my favorite tool to help me out. Ive been using (1) "
-    [:a {:href "https://orgmode.org/worg/org-contrib/org-drill.html" :target "_blank"} "org-drill"]
-    " a couple of times when trying to learn new stuff and I really like it. This
-project started out as a tool that could generate org-drill questions and
-anwsers into a plain text file with "
-    [:a {:href "https://orgmode.org/" :target "_blank"} "org mode"]
-    " structure. The org-drill setup was very useful but I needed to quickly get an
-overview of scales, chords and modes. So I made a small frontend. The source
+    "In the summer of 2022 I decided to learn a bit of theory. "
+    "As an " [:a {:href "https://www.gnu.org/software/emacs/" :target "_blank"} "Emacs"]
+    " user I decided to use my favorite tool to help me out. "
+    [:a {:href "https://orgmode.org/worg/org-contrib/org-drill.html" :target "_blank"} "Org drill"]
+    " is a fantastic tool for spaced repetition learning. The project started out
+as a tool that could generate Org drill questions and anwsers into a plain text
+file with "
+    [:a {:href "https://orgmode.org/" :target "_blank"} "Org mode"]
+    " structure. The Org drill feature was useful but I needed to quickly get an
+overview of scales, chords and modes. So I made this webapp. The source
 code lives on "
     [:a {:href "https://github.com/jherrlin/guitar-theory-training" :target "_blank"} "GitHub"]
-    " and you are more than welcome to improve the project. Please send a pull
-request."]
-   [:br]
-   [:br]
-   [:div "! Everything is using sharps (#) and never flats (b). This may break some
-general rules but it's how it's implemented here. Feel free to improve!"]
-   [:br]
-   [:div "In the webapp you can browse guitar chords, scales, modes and more. And yoy can
-generate org-drill text files that you can use in Emacs to help you learn."]
-   [:br] [:br]
-   [:div "1. org-drill is a Emacs mode where you specify questions and answers in a
-specific text format and a spaced repetition algorithm selects questions."]])
+    " and you are more than welcome to send pull requests or open issues."]])
 
 (def events-
   [{:n ::tone}
@@ -552,9 +541,10 @@ specific text format and a spaced repetition algorithm selects questions."]])
   (re-frame/reg-event-db n (or e (fn [db [_ e]] (assoc db n e)))))
 
 (defn the-neck-view []
-  (let [all   @(re-frame/subscribe [::neck-view-all])
-        fulls @(re-frame/subscribe [::neck-view-fulls])
-        halfs @(re-frame/subscribe [::neck-view-halfs])]
+  (let [nr-of-frets @(re-frame/subscribe [:nr-of-frets])
+        all         @(re-frame/subscribe [::neck-view-all])
+        fulls       @(re-frame/subscribe [::neck-view-fulls])
+        halfs       @(re-frame/subscribe [::neck-view-halfs])]
     [:div
      [:h2 "Guitar neck with all tones in standard tuning."]
      [:br]
@@ -562,7 +552,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
      (when all
        [:code
         [:pre {:style {:overflow-x "auto"}}
-         (music-theory/fret-table-with-tones-p music-theory/tones 25)]])
+         (music-theory/fret-table-with-tones-p music-theory/tones nr-of-frets)]])
      [:br]
      [:br]
      [:button {:on-click #(re-frame/dispatch [::neck-view-fulls (not fulls)])} (if fulls "Hide" "Show")]
@@ -572,7 +562,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
          (music-theory/fret-table-with-tones-p
           (->> music-theory/tones
                (filter (comp not #(str/includes? % "#") name)))
-          25)]])
+          nr-of-frets)]])
      [:br]
      [:br]
      [:button {:on-click #(re-frame/dispatch [::neck-view-halfs (not halfs)])} (if halfs "Hide" "Show")]
@@ -582,7 +572,7 @@ specific text format and a spaced repetition algorithm selects questions."]])
          (music-theory/fret-table-with-tones-p
           (->> music-theory/tones
                (filter (comp not #(= % 1)count name)))
-          25)]])]))
+          nr-of-frets)]])]))
 
 (def drill-events-
   [{:n ::tones-in-chord}
