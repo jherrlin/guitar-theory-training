@@ -2,6 +2,9 @@
   (:require
    [v2.se.jherrlin.music-theory.webapp.events :as events]
    [v2.se.jherrlin.music-theory.webapp.chords :as chords]
+   [v2.se.jherrlin.music-theory.webapp.scales :as scales]
+   [v2.se.jherrlin.music-theory.webapp.modes :as modes]
+   [v2.se.jherrlin.music-theory.webapp.harmonizations :as harmonizations]
    ["semantic-ui-react" :as semantic-ui]
    [reagent.dom :as rd]
    [re-frame.core :as re-frame]
@@ -25,7 +28,10 @@
    [""
     {:name      ::v2-home
      :view      [index]}]
-   chords/routes])
+   chords/routes
+   modes/routes
+   scales/routes
+   harmonizations/routes])
 
 (def router
   (rf/router

@@ -153,4 +153,4 @@
                       (js/console.log "Entering chord:" key-of chord-name)
                       (re-frame/dispatch [::key-of (keyword key-of)])
                       (re-frame/dispatch [::chord (keyword chord-name)])))
-      :stop       (fn [& params] (js/console.log "Leaving..."))}]}])
+      :stop       (fn [& params] (js/console.log "Leaving chords..."))}]}])
