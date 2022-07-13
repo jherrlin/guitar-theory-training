@@ -48,7 +48,7 @@
                                    :title    (-> x name str/capitalize)})))]
             ^{:key url-name}
             [:div {:style {:margin-right "10px" :display "inline"}}
-             [:a {:href (rfe/href ::chord-tones {:tone tone' :chord-name chord})}
+             [:a {:href (rfe/href ::chord-view {:key-of tone' :chord-name chord})}
               [:button
                {:disabled (= key-of tone')}
                title]]])]
@@ -63,7 +63,7 @@
                 (->> @definitions/chords-atom vals)]
             ^{:key (str sufix "-chord")}
             [:div {:style {:margin-right "10px" :display "inline"}}
-             [:a {:href (rfe/href ::chord-tones {:tone key-of :chord-name id})}
+             [:a {:href (rfe/href ::chord-view {:key-of key-of :chord-name id})}
               [:button
                {:disabled (= id chord)}
                (str (or display-text sufix))]]])]
@@ -102,42 +102,50 @@
             utils/fretboard-tone-str-chord-f tones))]
 
          ;; Chord patterns
-         [:h3 "Chord patterns"]
-         [:div
-          (for [{id      :chord/pattern-id
-                 pattern :chord/pattern}
-                (->> @definitions/chord-patterns-atom
-                     (vals)
-                     (filter (comp #{chord} :chord-pattern/name)))]
-            ^{:key (-> id name)}
-            [:div {:style {:margin-top "2em"}}
-             [:p (str id)]
-             [:pre {:style {:overflow-x "auto"}}
-              (utils/fretboard-str
-               (utils/find-pattern
-                definitions/all-tones
-                intervals/intervals-map-by-function
-                (utils/fretboard-strings
-                 utils/rotate-until
-                 definitions/all-tones
-                 [:e :b :g :d :a :e]
-                 24)
-                key-of
-                pattern)
-               utils/fretboard-tone-str-pattern-f)]])]
+         (let [chord-patterns (->> @definitions/chord-patterns-atom
+                                   (vals)
+                                   (filter (comp #{chord} :chord-pattern/name)))]
+           (when (seq chord-patterns)
+             [:<>
+              [:h3 "Chord patterns"]
+              [:div
+               (for [{id      :chord/pattern-id
+                      pattern :chord/pattern}
+                     chord-patterns]
+                 ^{:key (-> id name)}
+                 [:div {:style {:margin-top "2em"}}
+                  [:p (str id)]
+                  [:pre {:style {:overflow-x "auto"}}
+                   (utils/fretboard-str
+                    (utils/find-pattern
+                     definitions/all-tones
+                     intervals/intervals-map-by-function
+                     (utils/fretboard-strings
+                      utils/rotate-until
+                      definitions/all-tones
+                      [:e :b :g :d :a :e]
+                      24)
+                     key-of
+                     pattern)
+                    utils/fretboard-tone-str-pattern-f)]])]]))
 
-         [:h3 "Scales to chord"]
-         (for [{scale-title :scale/title
-                scale-id    :scale/id}
+         ;; Scales to chord
+         (let [scales-to-chord
                (let [{chord-indexes :chord/indexes}
-                     (get-in @music-theory/chords-atom [@(re-frame/subscribe [::chord])])]
-                 (->> (vals @music-theory/scales-atom)
+                     (get @definitions/chords-atom chord)]
+                 (->> (vals @definitions/scales-atom)
                       (filter (fn [{:scale/keys [indexes]}]
                                 (set/subset? (set chord-indexes) (set indexes))))))]
-           ^{:key scale-title}
-           [:div {:style {:margin-right "10px" :display "inline"}}
-            [:a {:href (rfe/href ::scale {:scale scale-id :key key-of})}
-             [:button scale-title]]])]))))
+           (when (seq scales-to-chord)
+             [:<>
+              [:h3 "Scales to chord"]
+              (for [{scale-title :scale/title
+                     scale-id    :scale/id}
+                    scales-to-chord]
+                ^{:key scale-title}
+                [:div {:style {:margin-right "10px" :display "inline"}}
+                 [:a {:href (rfe/href ::scale {:scale scale-id :key key-of})}
+                  [:button scale-title]]])]))]))))
 
 (def routes
   ["chord/:key-of/:chord-name"

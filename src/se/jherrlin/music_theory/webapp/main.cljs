@@ -14,6 +14,8 @@
    [reitit.frontend.easy :as rfe]
    [clojure.string :as str]
    [clojure.set :as set]
+   [v2.se.jherrlin.music-theory.webapp.harmonizations :as harmonizations]
+   [v2.se.jherrlin.music-theory.webapp.chords :as chords]
    [v2.se.jherrlin.music-theory.webapp.main :as v2-main]))
 
 
@@ -107,8 +109,8 @@ specific text format and a spaced repetition algorithm selects questions."]])
 
         [:> semantic-ui/Menu.Item
          {:as     "a"
-          :href   (rfe/href ::chord-tones-redirect)
-          :active (= ::chord-tones current-route-name)}
+          :href   (rfe/href ::chords/chord-view {:key-of :c :chord-name :major})
+          :active (= ::chords/chord-view current-route-name)}
          "Chords"]
         [:> semantic-ui/Menu.Item
          {:as     "a"

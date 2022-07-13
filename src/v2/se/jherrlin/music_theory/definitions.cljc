@@ -681,6 +681,15 @@
    4  b5   -  b6
    1  b2   -  b3")
 
+(define-mode :locrian-6
+  {:scale  :locrian}
+  "-   -   -   -
+   -   -   -   -
+   -   -   -   -
+  b7   -   1   -
+   5  b5   -  b6
+   1  b2   -  b3")
+
 (define-mode :mixolydian-blues-hybrid
   {:scale :mixolydian-blues-hybrid}
   "-   1   -   2  b3
