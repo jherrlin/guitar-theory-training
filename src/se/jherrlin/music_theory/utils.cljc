@@ -263,17 +263,17 @@
 
 (defn diatonic-chord-progressions-str [xs]
   (str
-   "     T = Tonic (stable), S = Subdominant (leaving), D = Dominant (back home)"
+   "  T = Tonic (stable), S = Subdominant (leaving), D = Dominant (back home)"
    "\n\n"
-   (->> xs (map (comp #(fformat "   %-10s" %) str :harmonization/index)) (str/join))
+   (->> xs (map (comp #(fformat "  %-10s" %) str :harmonization/index)) (str/join) (str/trim))
    "\n"
-   (->> xs (map (comp #(fformat "   %-10s" %) str :harmonization/position)) (str/join))
+   (->> xs (map (comp #(fformat "  %-10s" %) str :harmonization/position)) (str/join) (str/trim))
    "\n"
-   (->> xs (map (comp #(fformat "   %-10s" %) str :harmonization/mode-str)) (str/join))
+   (->> xs (map (comp #(fformat "  %-10s" %) str :harmonization/mode-str)) (str/join) (str/trim))
    "\n"
-   (->> xs (map (comp #(fformat "   %-10s" %) str :harmonization/family-str)) (str/join))
+   (->> xs (map (comp #(fformat "  %-10s" %) str :harmonization/family-str)) (str/join) (str/trim))
    "\n"
-   (->> xs (map (comp #(fformat "   %-10s" %) str :chord/name)) (str/join))))
+   (->> xs (map (comp #(fformat "  %-10s" %) str :chord/name)) (str/join) (str/trim))))
 
 (defn list-insert [lst elem index]
   (let [[l r] (split-at index lst)]
