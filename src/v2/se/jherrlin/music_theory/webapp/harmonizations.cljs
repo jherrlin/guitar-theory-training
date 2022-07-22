@@ -1,39 +1,40 @@
 (ns v2.se.jherrlin.music-theory.webapp.harmonizations
   (:require
-   [v2.se.jherrlin.music-theory.utils
-    :refer [fformat]
-    :as utils]
-   ["semantic-ui-react" :as semantic-ui]
-   [reagent.dom :as rd]
+   [v2.se.jherrlin.music-theory.utils :as utils]
    [re-frame.core :as re-frame]
-   [reitit.coercion.spec :as rss]
-   [reitit.frontend :as rf]
-   [reitit.frontend.controllers :as rfc]
    [reitit.frontend.easy :as rfe]
    [clojure.string :as str]
-   [clojure.set :as set]
-   [v2.se.jherrlin.music-theory.definitions :as definitions]
-   [se.jherrlin.music-theory :as music-theory]
-   [v2.se.jherrlin.music-theory.intervals :as intervals]))
+   [se.jherrlin.music-theory :as music-theory]))
 
 
 (def events-
   [{:n ::key-of}
    {:n ::major-or-minor}
-   {:n ::triad-or-seventh}])
+   {:n ::triad-or-seventh}
+   {:n ::show-tips?
+    :s (fn [db [n']] (get db n' false))}])
 
 (doseq [{:keys [n s e]} events-]
   (re-frame/reg-sub n (or s (fn [db [n']] (get db n'))))
   (re-frame/reg-event-db n (or e (fn [db [_ e]] (assoc db n e)))))
 
+(defn chord-progression-tips-view [key-of major-or-minor triad-or-seventh]
+  [:div
+   [:br]
+   (when (and (= major-or-minor :major) (= triad-or-seventh :triad))
+     [:<>
+      [:p "1   -   5   -   6   -   4"]
+      [:p "1   -   4   -   6   -   5"]
+      [:p "1   -   4   -   5"]])])
+
 (defn harmonization-view []
   (let [nr-of-frets      @(re-frame/subscribe [:nr-of-frets])
         key-of           @(re-frame/subscribe [::key-of])
         major-or-minor   @(re-frame/subscribe [::major-or-minor])
-        triad-or-seventh @(re-frame/subscribe [::triad-or-seventh])]
+        triad-or-seventh @(re-frame/subscribe [::triad-or-seventh])
+        show-tips?       @(re-frame/subscribe [::show-tips?])]
     (when (and key-of major-or-minor triad-or-seventh)
       [:div
-
 
        [:div
         (for [{tone' :tone
@@ -83,6 +84,15 @@
 
        [:br]
 
+       ;; Chord progression tips
+       [:div #_{:style {:display         "flex"
+                        :justify-content "center"}}
+        [:button {:on-click #(re-frame/dispatch [::show-tips? (not show-tips?)])}
+         (str (if show-tips? "Hide" "Show") " chord progression tips")]
+        (when show-tips?
+          [chord-progression-tips-view key-of major-or-minor triad-or-seventh])]
+       [:br]
+
        ;; All tones in progressions
        [:h3 "All tones in harmonization"]
        [:code
@@ -99,8 +109,7 @@
                [:e :b :g :d :a :e]
                nr-of-frets)
               (partial
-               utils/fretboard-tone-str-chord-f tones)))
-         ]]
+               utils/fretboard-tone-str-chord-f tones)))]]
 
        ;; Chords in progressions
        [:div
