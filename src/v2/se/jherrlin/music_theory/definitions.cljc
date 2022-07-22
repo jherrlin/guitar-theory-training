@@ -294,6 +294,16 @@
    -   -   -
    -   -   -")
 
+(define-chord-pattern :minor-seven-4
+  {:name :minor-seven}
+  "
+   -
+   5
+  b3
+  b7
+   -
+   1")
+
 (define-chord-pattern :fifth-1
   {:name :fifth}
   "-  -  -
@@ -331,15 +341,6 @@
    -  b5   -
    1   -   -")
 
-(define-chord-pattern :major-maj-seven-4
-  {:name :major-maj-seven}
-  "-   -   3
-   -   -   7
-   -   -   5
-   1   -   -
-   -   -   -
-   -   -   -")
-
 (define-chord-pattern :major-maj-seven-6
   {:name :major-maj-seven}
   "1   -   -
@@ -357,6 +358,24 @@
    -   -   5
    1   -   -
    -   -   -")
+
+(define-chord-pattern :major-maj-seven-4
+  {:name :major-maj-seven}
+  "-   -   3
+   -   -   7
+   -   -   5
+   1   -   -
+   -   -   -
+   -   -   -")
+
+(define-chord-pattern :major-maj-seven-3
+  {:name :major-maj-seven}
+  "-   -
+   5   -
+   -   3
+   -   7
+   -   -
+   1   -")
 ;; --------------------
 ;; Chord patterns end
 ;; --------------------
@@ -371,7 +390,6 @@
 (define-scale :minor
   {:order 2}
   "1, 2, b3, 4, 5, b6, b7")
-
 
 (define-scale :lydian
   {:order 3}
@@ -430,6 +448,27 @@
 
 (define-scale :mixolydian-blues-hybrid
   "1, 2, b3, 3, 4, b5, 5, 6, b7")
+
+(define-scale :diminished-half
+  "1, b2, b3, 3, b5, 5, 6, b7")
+
+(define-scale :diminished-whole
+  "1, 2, b3, 4, b5, b6, 6, 7")
+
+(define-scale :diminished-whole-tone
+  "1, b2, b3, 3, b5, b6, b7")
+
+(define-scale :dominant-7th
+  "1, 2, 3, 4, 5, 6, b7")
+
+(define-scale :lydian-augmented
+  "1, 2, 3, #4, #5, 6, 7")
+
+(define-scale :lydian-minor
+  "1, 2, 3, #4, 5, b6, b7")
+
+(define-scale :lydian-diminished
+  "1, 2, b3, #4, 5, 6, 7")
 ;; ---------------
 ;; Scales end
 ;; ---------------
