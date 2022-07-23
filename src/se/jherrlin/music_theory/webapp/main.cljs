@@ -16,7 +16,8 @@
    [clojure.set :as set]
    [v2.se.jherrlin.music-theory.webapp.harmonizations :as harmonizations]
    [v2.se.jherrlin.music-theory.webapp.chords :as chords]
-   [v2.se.jherrlin.music-theory.webapp.main :as v2-main]))
+   [v2.se.jherrlin.music-theory.webapp.main :as v2-main]
+   [v2.se.jherrlin.music-theory.definitions :as definitions]))
 
 
 (re-frame/reg-fx
@@ -655,7 +656,7 @@ the org-drill mode."]
                  (drills/find-all-locations-of-tone music-theory/tones music-theory/fret-table-with-tones-p))
                intervals-in-scales-p
                (fn []
-                 (drills/intervals-in-scales @music-theory/scales-atom))]
+                 (drills/intervals-in-scales @definitions/scales-atom))]
            (download-object
             "music-theory-drills.org"
             (str
