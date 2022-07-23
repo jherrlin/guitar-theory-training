@@ -56,10 +56,10 @@
          [:div
           (for [{scale' :scale
                  :keys  [title]}
-                (->> @music-theory/modes-atom
+                (->> @definitions/modes-atom
                      vals
                      (map (fn [{:mode/keys [scale] :as m}]
-                            (merge m (get @music-theory/scales-atom scale))))
+                            (merge m (get @definitions/scales-atom scale))))
                      (map (fn [{scale :mode/scale title :scale/title}]
                             {:scale scale
                              :title title}))

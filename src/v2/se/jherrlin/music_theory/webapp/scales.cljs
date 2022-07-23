@@ -16,7 +16,6 @@
    [se.jherrlin.music-theory :as music-theory]
    [v2.se.jherrlin.music-theory.intervals :as intervals]))
 
-
 (def events-
   [{:n ::key-of}
    {:n ::scale}])
@@ -71,7 +70,7 @@
 
          ;; Scale name
          (let [{title :scale/title}
-               (get @music-theory/scales-atom scale)]
+               (get @definitions/scales-atom :diminished-whole #_scale)]
            [:div
             [:h2 (str (-> key-of name str/capitalize) " - " (-> title str/capitalize))]])
          [:br]

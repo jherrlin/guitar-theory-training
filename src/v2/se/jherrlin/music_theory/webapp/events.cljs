@@ -42,7 +42,7 @@
 (re-frame/reg-event-db
  :nr-of-frets
  (fn [db [_ n]]
-   (assoc db :nr-of-frets (if (string? n)
-                            (js/parseInt n)
-                            n
-                            ))))
+   (assoc db :nr-of-frets
+          (if-not (string? n)
+            n
+            (js/parseInt n)))))
