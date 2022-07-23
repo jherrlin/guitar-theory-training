@@ -12,20 +12,22 @@
 
 (def events-
   [{:n ::key-of}
-   {:n ::scale}])
+   {:n ::scale}
+   {:n ::tone-or-interval
+    :s (fn [db [n']] (get db n' :tone))}])
 
 (doseq [{:keys [n s e]} events-]
   (re-frame/reg-sub n (or s (fn [db [n']] (get db n'))))
   (re-frame/reg-event-db n (or e (fn [db [_ e]] (assoc db n e)))))
 
 (defn scales-view []
-  (let [nr-of-frets @(re-frame/subscribe [:nr-of-frets])
-        scale       @(re-frame/subscribe [::scale])
-        key-of      @(re-frame/subscribe [::key-of])]
+  (let [nr-of-frets      @(re-frame/subscribe [:nr-of-frets])
+        scale            @(re-frame/subscribe [::scale])
+        key-of           @(re-frame/subscribe [::key-of])
+        tone-or-interval @(re-frame/subscribe [::tone-or-interval])]
     (when (and scale key-of)
       (let [{intervals :scale/intervals
-             indexes   :scale/indexes
-             sufix     :scale/sufix}
+             indexes   :scale/indexes}
             (get @definitions/scales-atom scale)
             tones ((utils/juxt-indexes-and-intervals indexes intervals)
                    (utils/rotate-until #(% key-of) utils/all-tones))]
@@ -82,6 +84,19 @@
                (str "Interval -> Tone\n"))]
 
          ;; Scale on fretboard
+         [:button
+          {:on-click
+           #(re-frame/dispatch
+             [::tone-or-interval
+              (if (= tone-or-interval :tone)
+                :interval
+                :tone)])}
+          (str
+           "Show as "
+           (if (= tone-or-interval :tone)
+             "intervals"
+             "tones"))]
+
          [:code
           [:pre {:style {:overflow-x "auto"}}
            (utils/fretboard-str
@@ -90,8 +105,12 @@
              utils/all-tones
              [:e :b :g :d :a :e]
              nr-of-frets)
-            (partial
-             utils/fretboard-tone-str-chord-f tones))]]
+            (if (= tone-or-interval :tone)
+              (partial
+               utils/fretboard-tone-str-chord-f tones)
+              (partial
+               utils/fretboard-tone-str-chord-f-2
+               (mapv vector tones intervals))))]]
 
          ;; Chords to scale
          [:h3 "Chords to scale"]

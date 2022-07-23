@@ -85,8 +85,21 @@
                (apply str)
                (str "Interval -> Tone\n"))]
 
+         [:button
+          {:on-click
+           #(re-frame/dispatch
+             [::tone-or-interval
+              (if (= tone-or-interval :tone)
+                :interval
+                :tone)])}
+          (str
+           "Show as "
+           (if (= tone-or-interval :tone)
+             "intervals"
+             "tones"))]
+
          ;; All tones in mode
-         [:h3 "All tones in scale"]
+         [:h3 (str "All " (if (= tone-or-interval :tone) "tones" "intervals") " in scale")]
          [:pre {:style {:overflow-x "auto"}}
           (utils/fretboard-str
            (utils/fretboard-strings
@@ -94,8 +107,12 @@
             utils/all-tones
             [:e :b :g :d :a :e]
             nr-of-frets)
-           (partial
-            utils/fretboard-tone-str-chord-f tones))]
+           (if (= tone-or-interval :tone)
+             (partial
+              utils/fretboard-tone-str-chord-f tones)
+             (partial
+              utils/fretboard-tone-str-chord-f-2
+              (mapv vector tones intervals))))]
 
          ;; Mode patterns
          (let [mode-patterns (->> @definitions/modes-atom
@@ -105,16 +122,6 @@
            (when (seq mode-patterns)
              [:<>
               [:h3 "Mode patterns"]
-              [:button
-               {:on-click
-                #(re-frame/dispatch
-                  [::tone-or-interval
-                   (if (= tone-or-interval :tone)
-                     :interval
-                     :tone)])}
-               (if (= tone-or-interval :tone)
-                 "intervals"
-                 "tones")]
               [:div
                (for [{id             :mode/id
                       pattern        :mode/pattern

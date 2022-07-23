@@ -465,6 +465,17 @@
     (-> tone' name str/capitalize)
     ""))
 
+(defn fretboard-tone-str-chord-f-2
+  [chord-tones-and-intervals
+   {:keys [x y tone pattern-match? interval] :as m}]
+  (if-let [i (->> chord-tones-and-intervals
+                  (filter (fn [[tone' interval']]
+                            (tone tone')))
+                  (first)
+                  (second))]
+    i
+    ""))
+
 (defn fretboard-interval-f [{:keys [x y tone pattern-match? interval] :as m}]
   (if (nil? interval)
     ""
@@ -515,4 +526,14 @@
     fretboard-interval-f
     #_fretboard-tone-str-pattern-f
     ))
+
+  (println
+   (fretboard-str
+    (fretboard-strings
+     rotate-until
+     all-tones
+     [:e :b :g :d :a :e]
+     15)
+    (partial
+     fretboard-tone-str-chord-f [:c :e :g])))
   )

@@ -87,8 +87,21 @@
                (apply str)
                (str "Interval -> Tone\n"))]
 
+         [:button
+          {:on-click
+           #(re-frame/dispatch
+             [::tone-or-interval
+              (if (= tone-or-interval :tone)
+                :interval
+                :tone)])}
+          (str
+           "Show as "
+           (if (= tone-or-interval :tone)
+             "intervals"
+             "tones"))]
+
          ;; All tones in chord
-         [:h3 "All tone positions in the chord"]
+         [:h3 "All " (if (= tone-or-interval :tone) "tone" "interval") " positions in the chord"]
          [:pre {:style {:overflow-x "auto"}}
           (utils/fretboard-str
            (utils/fretboard-strings
@@ -96,8 +109,12 @@
             utils/all-tones
             [:e :b :g :d :a :e]
             nr-of-frets)
-           (partial
-            utils/fretboard-tone-str-chord-f tones))]
+           (if (= tone-or-interval :tone)
+             (partial
+              utils/fretboard-tone-str-chord-f tones)
+             (partial
+              utils/fretboard-tone-str-chord-f-2
+              (mapv vector tones intervals))))]
 
          ;; Chord patterns
          (let [chord-patterns (->> @definitions/chord-patterns-atom
@@ -107,16 +124,6 @@
            (when (seq chord-patterns)
              [:<>
               [:h3 "Chord patterns"]
-              [:button
-               {:on-click
-                #(re-frame/dispatch
-                  [::tone-or-interval
-                   (if (= tone-or-interval :tone)
-                     :interval
-                     :tone)])}
-               (if (= tone-or-interval :tone)
-                 "intervals"
-                 "tones")]
               [:div
                (for [{id      :chord/pattern-id
                       pattern :chord/pattern}
