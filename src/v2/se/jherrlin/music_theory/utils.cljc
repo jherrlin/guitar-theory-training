@@ -332,13 +332,12 @@
         tones           (rotate-until #(% root-tone) all-tones)]
     (->> chords-map
          (vals)
-         (filter (fn [{:chord/keys [f]}]
-                   (let [chord-to-serch (f tones)
+         (filter (fn [{:chord/keys [intervals indexes]}]
+                   (let [chord-to-serch ((juxt-indexes-and-intervals indexes intervals) tones)
                          chord-to-match chord-tones]
                      (and (= (count chord-to-serch) (count chord-to-match))
                           (->> (map
-                                (fn [c1 c2]
-                                  (boolean (c1 c2)))
+                                #(= %1 %2)
                                 chord-to-serch
                                 chord-to-match)
                                (every? true?))))))
@@ -346,10 +345,19 @@
 
 (comment
   (find-chord
-   @v2.se.jherrlin.music-theory.definitions/chords-atom
+   #_@v2.se.jherrlin.music-theory.definitions/chords-atom
+   {:major
+    #:chord{:id           :major,
+            :intervals    ["1" "3" "5"],
+            :indexes      [0 4 7],
+            :title        "major",
+            :order        1,
+            :sufix        "",
+            :explanation  "major",
+            :display-text "major"}}
    all-tones
-   [:c :e :g]
-   ))
+   [:c :e :g])
+  )
 
 (defn chord-name
   [chords-map all-tones chord-tones]
@@ -368,7 +376,7 @@
 
   (let [{:chord/keys [intervals indexes] :as m}
         (define-chord
-          se.jherrlin.music-theory.intervals/intervals-map-by-function
+          v2.se.jherrlin.music-theory.intervals/intervals-map-by-function
           :minor
           "1 b3 5")]
     (->> ((juxt-indexes-and-intervals indexes intervals)
@@ -442,17 +450,3 @@
     )
    )
   )
-
-
-{:chord-pattern/name :major,
-  :chord/pattern
- [["3" nil nil nil]
-   [nil "1" nil nil]
-   ["5" nil nil nil]
-   [nil nil "3" nil]
-   [nil nil nil "1"]
-   [nil nil nil nil]],
-  :chord/pattern-id :major-1,
-  :chord/pattern-title "major-1",
-  :chord/pattern-str
-  "\n   3   -   -   -\n   -   1   -   -\n   5   -   -   -\n   -   -   3   -\n   -   -   -   1\n   -   -   -   -"}
