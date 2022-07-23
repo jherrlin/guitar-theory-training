@@ -1,20 +1,15 @@
 (ns v2.se.jherrlin.music-theory.webapp.modes
   (:require
+   [clojure.set :as set]
+   [clojure.string :as str]
+   [re-frame.core :as re-frame]
+   [reitit.frontend.easy :as rfe]
+   [se.jherrlin.music-theory :as music-theory]
+   [v2.se.jherrlin.music-theory.definitions :as definitions]
+   [v2.se.jherrlin.music-theory.intervals :as intervals]
    [v2.se.jherrlin.music-theory.utils
     :refer [fformat]
-    :as utils]
-   ["semantic-ui-react" :as semantic-ui]
-   [reagent.dom :as rd]
-   [re-frame.core :as re-frame]
-   [reitit.coercion.spec :as rss]
-   [reitit.frontend :as rf]
-   [reitit.frontend.controllers :as rfc]
-   [reitit.frontend.easy :as rfe]
-   [clojure.string :as str]
-   [clojure.set :as set]
-   [v2.se.jherrlin.music-theory.definitions :as definitions]
-   [se.jherrlin.music-theory :as music-theory]
-   [v2.se.jherrlin.music-theory.intervals :as intervals]))
+    :as utils]))
 
 (def events-
   [{:n ::key-of}

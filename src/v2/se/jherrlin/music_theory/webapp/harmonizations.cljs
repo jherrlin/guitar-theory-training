@@ -1,10 +1,10 @@
 (ns v2.se.jherrlin.music-theory.webapp.harmonizations
   (:require
-   [v2.se.jherrlin.music-theory.utils :as utils]
+   [clojure.string :as str]
    [re-frame.core :as re-frame]
    [reitit.frontend.easy :as rfe]
-   [clojure.string :as str]
-   [se.jherrlin.music-theory :as music-theory]))
+   [se.jherrlin.music-theory :as music-theory]
+   [v2.se.jherrlin.music-theory.utils :as utils]))
 
 
 (def events-
