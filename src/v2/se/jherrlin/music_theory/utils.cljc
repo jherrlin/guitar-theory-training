@@ -34,8 +34,8 @@
          (vec))))
 
 (rotate-until
-   #(% :f#)
-   all-tones)
+ #(% :f#)
+ all-tones)
 
 (defn sharp-or-flat [tone interval]
   {:pre [(set? tone)]}
@@ -46,8 +46,8 @@
       (first)))
 
 (sharp-or-flat
-   #{:g#}
-   "3#")
+ #{:g#}
+ "3#")
 
 (defn juxt-indexes [indexes]
   (apply juxt
@@ -56,6 +56,14 @@
             (fn [tones]
               (nth tones index)))
           indexes)))
+
+(defn tones-on-indexes [indexes tones]
+  ((juxt-indexes indexes) tones))
+
+(comment
+  ((juxt-indexes [0 3 7]) all-tones)
+  (tones-on-indexes [0 3 7] all-tones)
+  )
 
 (defn juxt-indexes-and-intervals [indexes intervals]
   (apply juxt
@@ -67,6 +75,14 @@
                interval)))
           indexes
           intervals)))
+
+(defn tones-on-indexes-with-intervals [indexes intervals tones]
+  ((juxt-indexes-and-intervals indexes intervals) tones))
+
+(comment
+  ((juxt-indexes-and-intervals [0 3 7] ["1" "b3" "5"]) all-tones)
+  (tones-on-indexes-with-intervals [0 3 7] ["1" "b3" "5"] all-tones)
+  )
 
 (defn intevals-string->intervals-matrix [interval]
   (->> interval
@@ -163,7 +179,8 @@
   (define-scale
     v2.se.jherrlin.music-theory.intervals/intervals-map-by-function
     :major
-    "1, 2, 3, 4, 5, 6, 7"))
+    "1, 2, 3, 4, 5, 6, 7")
+  )
 
 (defn define-mode
   ([pattern-name pattern]
@@ -202,10 +219,10 @@
              (take number-of-frets)))))
 
 (fretboard-string
-   rotate-until
-   all-tones
-   :g
-   24)
+ rotate-until
+ all-tones
+ :g
+ 24)
 
 (defn fretboard-strings
   [rotate-until all-tones string-tunes number-of-frets]
@@ -241,8 +258,8 @@
    rotate-until
    v2.se.jherrlin.music-theory.intervals/intervals-map-by-function
    :c
-   ["1" "b3" "5"]
-   ))
+   ["1" "b3" "5"])
+  )
 
 (defn find-pattern [all-tones intervals-map-by-function fretboard key-of interval-matrix]
   (let [interval-matrix-width (-> interval-matrix first count)
@@ -367,21 +384,44 @@
 
 (comment
   (chord-name
-   @v2.se.jherrlin.music-theory.definitions/chords-atom
+   ;; @v2.se.jherrlin.music-theory.definitions/chords-atom
+   {:major
+    #:chord{:id           :major,
+            :intervals    ["1" "3" "5"],
+            :indexes      [0 4 7],
+            :title        "major",
+            :order        1,
+            :sufix        "",
+            :explanation  "major",
+            :display-text "major"}}
    all-tones
-   #_[:c :eb :g]
-   #_[:c :e :g# :b]
-   [:c :e :g]
-   )
+   [:c :e :g])
 
-  (let [{:chord/keys [intervals indexes] :as m}
-        (define-chord
-          v2.se.jherrlin.music-theory.intervals/intervals-map-by-function
-          :minor
-          "1 b3 5")]
-    (->> ((juxt-indexes-and-intervals indexes intervals)
-          (rotate-until #(% :g) all-tones))
-         (chord-name @v2.se.jherrlin.music-theory.definitions/chords-atom all-tones))
+  (let [tone :g
+        {:chord/keys [intervals indexes] :as m}
+        #:chord{:id        :minor,
+                :intervals ["1" "b3" "5"],
+                :indexes   [0 3 7],
+                :title     "minor",
+                :order     999}
+        ;; (define-chord
+        ;;   v2.se.jherrlin.music-theory.intervals/intervals-map-by-function
+        ;;   :minor
+        ;;   "1 b3 5")
+        ]
+    (chord-name
+     ;; @v2.se.jherrlin.music-theory.definitions/chords-atom
+     {:minor
+      #:chord{:id           :minor,
+              :intervals    ["1" "b3" "5"],
+              :indexes      [0 3 7],
+              :title        "minor",
+              :order        2,
+              :sufix        "m",
+              :explanation  "minor",
+              :display-text "minor"}}
+     all-tones
+     (tones-on-indexes-with-intervals indexes intervals (rotate-until #(% tone) all-tones)))
     )
   )
 
