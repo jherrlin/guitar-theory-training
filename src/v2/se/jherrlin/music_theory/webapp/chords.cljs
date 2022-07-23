@@ -13,16 +13,19 @@
 
 (def events-
   [{:n ::key-of}
-   {:n ::chord}])
+   {:n ::chord}
+   {:n ::tone-or-interval
+    :s (fn [db [n']] (get db n' :tone))}])
 
 (doseq [{:keys [n s e]} events-]
   (re-frame/reg-sub n (or s (fn [db [n']] (get db n'))))
   (re-frame/reg-event-db n (or e (fn [db [_ e]] (assoc db n e)))))
 
 (defn chords-view []
-  (let [nr-of-frets @(re-frame/subscribe [:nr-of-frets])
-        chord       @(re-frame/subscribe [::chord])
-        key-of      @(re-frame/subscribe [::key-of])
+  (let [nr-of-frets      @(re-frame/subscribe [:nr-of-frets])
+        chord            @(re-frame/subscribe [::chord])
+        key-of           @(re-frame/subscribe [::key-of])
+        tone-or-interval @(re-frame/subscribe [::tone-or-interval])
         {indexes     :chord/indexes
          intervals   :chord/intervals
          explanation :chord/explanation
@@ -104,6 +107,16 @@
            (when (seq chord-patterns)
              [:<>
               [:h3 "Chord patterns"]
+              [:button
+               {:on-click
+                #(re-frame/dispatch
+                  [::tone-or-interval
+                   (if (= tone-or-interval :tone)
+                     :interval
+                     :tone)])}
+               (if (= tone-or-interval :tone)
+                 "intervals"
+                 "tones")]
               [:div
                (for [{id      :chord/pattern-id
                       pattern :chord/pattern}
@@ -122,7 +135,9 @@
                       nr-of-frets)
                      key-of
                      pattern)
-                    utils/fretboard-tone-str-pattern-f)]])]]))
+                    (if (= tone-or-interval :tone)
+                      utils/fretboard-tone-str-pattern-f
+                      utils/fretboard-interval-f))]])]]))
 
          ;; Scales to chord
          (let [scales-to-chord

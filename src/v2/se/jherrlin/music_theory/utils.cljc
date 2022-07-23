@@ -465,6 +465,11 @@
     (-> tone' name str/capitalize)
     ""))
 
+(defn fretboard-interval-f [{:keys [x y tone pattern-match? interval] :as m}]
+  (if (nil? interval)
+    ""
+    interval))
+
 (comment
   (print
    (fretboard-str
@@ -487,6 +492,27 @@
     #_fretboard-tone-str-flats-f
     fretboard-tone-str-pattern-f
     #_(partial fretboard-tone-str-chord-f [:c :e :g])
-    )
-   )
+    ))
+
+
+  (print
+   (fretboard-str
+    (find-pattern
+     all-tones
+     v2.se.jherrlin.music-theory.intervals/intervals-map-by-function
+     (fretboard-strings
+      rotate-until
+      all-tones
+      [:e :b :g :d :a :e]
+      14)
+     :c
+     [["3" nil nil nil]
+      [nil "1" nil nil]
+      ["5" nil nil nil]
+      [nil nil "3" nil]
+      [nil nil nil "1"]
+      [nil nil nil nil]])
+    fretboard-interval-f
+    #_fretboard-tone-str-pattern-f
+    ))
   )
