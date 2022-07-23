@@ -39,11 +39,11 @@
 
 (defn sharp-or-flat [tone interval]
   {:pre [(set? tone)]}
-  (cond
-    (= 1 (count tone))           (first tone)
-    (str/includes? interval "b") (first (filter (comp #(str/includes? % "b") name) tone))
-    (str/includes? interval "#") (first (filter (comp #(str/includes? % "#") name) tone))
-    :else                        (first (filter (comp #(str/includes? % "#") name) tone))))
+  (-> (cond
+        (= 1 (count tone))           tone
+        (str/includes? interval "b") (filter (comp #(str/includes? % "b") name) tone)
+        :else                        (filter (comp #(str/includes? % "#") name) tone))
+      (first)))
 
 (sharp-or-flat
    #{:g#}
@@ -367,16 +367,15 @@
    )
 
   (let [{:chord/keys [intervals indexes] :as m}
-      (define-chord
-        se.jherrlin.music-theory.intervals/intervals-map-by-function
-        :minor
-        "1 b3 5")]
-  (->> ((juxt-indexes-and-intervals indexes intervals)
-        (rotate-until #(% :g) all-tones))
-       (chord-name @v2.se.jherrlin.music-theory.definitions/chords-atom all-tones))
+        (define-chord
+          se.jherrlin.music-theory.intervals/intervals-map-by-function
+          :minor
+          "1 b3 5")]
+    (->> ((juxt-indexes-and-intervals indexes intervals)
+          (rotate-until #(% :g) all-tones))
+         (chord-name @v2.se.jherrlin.music-theory.definitions/chords-atom all-tones))
+    )
   )
-  )
-
 
 (defn fretboard-str
   [matrix tone-f]

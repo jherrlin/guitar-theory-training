@@ -80,7 +80,6 @@
                (str/join "\n")
                (apply str)
                (str "Interval -> Tone\n"))]
-         [:br]
 
          ;; Scale on fretboard
          [:code
@@ -93,7 +92,6 @@
              nr-of-frets)
             (partial
              utils/fretboard-tone-str-chord-f tones))]]
-         [:br]
 
          ;; Chords to scale
          [:h3 "Chords to scale"]
