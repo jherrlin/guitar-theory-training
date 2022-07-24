@@ -67,7 +67,7 @@
 
          ;; Scale name
          (let [{title :scale/title}
-               (get @definitions/scales-atom :diminished-whole #_scale)]
+               (get @definitions/scales-atom scale)]
            [:div
             [:h2 (str (-> key-of name str/capitalize) " - " (-> title str/capitalize))]])
          [:br]
@@ -116,7 +116,7 @@
          (let [scale-patterns
                (->> @definitions/scale-patterns-atom
                     (vals)
-                    (filter (comp #{:pentatonic-blues #_scale} :scale-pattern/scale))
+                    (filter (comp #{scale} :scale-pattern/scale))
                     (sort-by :scale-pattern/order))]
            (when (seq scale-patterns)
              [:<>
