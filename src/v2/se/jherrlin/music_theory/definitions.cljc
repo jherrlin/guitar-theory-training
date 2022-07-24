@@ -32,6 +32,9 @@
 
 (def modes-atom (atom {}))
 @modes-atom
+
+(def scale-patterns-atom (atom {}))
+@scale-patterns-atom
 ;; ---------------
 ;; State / data end
 ;; ---------------
@@ -63,6 +66,14 @@
    (let [scale (utils/define-scale intervals/intervals-map-by-function scale-id meta-data intervals-str)
          id    (get scale :scale/id)]
      (swap! scales-atom assoc id scale))))
+
+(defn define-scale-pattern
+  ([pattern-name pattern]
+   (define-scale-pattern pattern-name {} pattern))
+  ([pattern-name meta-data pattern]
+   (let [scale-pattern (utils/define-scale-pattern pattern-name meta-data pattern)
+         id            (get scale-pattern :scale-pattern/id)]
+     (swap! scale-patterns-atom assoc id scale-pattern))))
 
 (defn define-mode
   ([pattern-name pattern]
@@ -471,6 +482,56 @@
   "1, 2, b3, #4, 5, 6, 7")
 ;; ---------------
 ;; Scales end
+;; ---------------
+
+;; ---------------
+;; Scales patterns
+;; ---------------
+(define-scale-pattern :pentatonic-blues-1
+  {:scale  :pentatonic-blues
+   :tuning [:e :b :g :d :a :e]
+   :order  1}
+  "-   -   -   -
+   -   -   -   -
+   -   -   -   -
+  b7   -   1   -
+   4  b5   5   -
+   1   -   -  b3")
+
+(define-scale-pattern :pentatonic-blues-2
+  {:scale  :pentatonic-blues
+   :tuning [:e :b :g :d :a :e]
+   :order  2}
+  "-   -   -   -
+   -   -   -   -
+  b7   -   1   -
+   4  b5   5   -
+   1   -   -  b3
+   -   -   -   -")
+
+(define-scale-pattern :pentatonic-blues-3
+  {:scale  :pentatonic-blues
+   :tuning [:e :b :g :d :a :e]
+   :order  3}
+  "-   -   -   -
+   -  b7   -   1
+   4  b5   5   -
+   1   -   -  b3
+   -   -   -   -
+   -   -   -   -")
+
+(define-scale-pattern :pentatonic-blues-4
+  {:scale  :pentatonic-blues
+   :tuning [:e :b :g :d :a :e]
+   :order  4}
+  "-  b7   -   1
+   -   4  b5   5
+   1   -   -  b3
+   -   -   -   -
+   -   -   -   -
+   -   -   -   -")
+;; ---------------
+;; Scales patterns end
 ;; ---------------
 
 ;; --------------------

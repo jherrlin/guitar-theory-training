@@ -139,6 +139,22 @@
        :chord/pattern-title (name pattern-name)
        :chord/pattern-str   pattern}))))
 
+(defn define-scale-pattern
+  ([pattern-name pattern]
+   (define-scale-pattern pattern-name {} pattern))
+  ([pattern-name meta-data pattern]
+   (let [pattern'  (intevals-string->intervals-matrix pattern)
+         meta-data (->> meta-data
+                        (map (fn [[k v]]
+                               [(->> k name (str "scale-pattern/") keyword) v]))
+                        (into {}))]
+     (merge
+      meta-data
+      {:scale-pattern/pattern       pattern'
+       :scale-pattern/id            pattern-name
+       :scale-pattern/pattern-title (name pattern-name)
+       :scale-pattern/pattern-str   pattern}))))
+
 (->> #{"1" "b3" "4" "5" "b5"}
      (sort-by last))
 ;; => ("1" "b3" "4" "b5" "5")

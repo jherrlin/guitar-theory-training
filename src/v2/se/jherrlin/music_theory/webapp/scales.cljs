@@ -6,6 +6,7 @@
    [reitit.frontend.easy :as rfe]
    [se.jherrlin.music-theory :as music-theory]
    [v2.se.jherrlin.music-theory.definitions :as definitions]
+   [v2.se.jherrlin.music-theory.intervals :as intervals]
    [v2.se.jherrlin.music-theory.utils
     :refer [fformat]
     :as utils]))
@@ -111,6 +112,36 @@
               (partial
                utils/fretboard-tone-str-chord-f-2
                (mapv vector tones intervals))))]]
+
+         (let [scale-patterns
+               (->> @definitions/scale-patterns-atom
+                    (vals)
+                    (filter (comp #{:pentatonic-blues #_scale} :scale-pattern/scale))
+                    (sort-by :scale-pattern/order))]
+           (when (seq scale-patterns)
+             [:<>
+              [:h3 "Patterns"]
+              [:div
+               (for [{id      :scale-pattern/id
+                      pattern :scale-pattern/pattern}
+                     scale-patterns]
+                 ^{:key (-> id name)}
+                 [:div {:style {:margin-top "2em"}}
+                  [:pre {:style {:overflow-x "auto"}}
+                   (utils/fretboard-str
+                    (utils/find-pattern
+                     definitions/all-tones
+                     intervals/intervals-map-by-function
+                     (utils/fretboard-strings
+                      utils/rotate-until
+                      definitions/all-tones
+                      [:e :b :g :d :a :e]
+                      nr-of-frets)
+                     key-of
+                     pattern)
+                    (if (= tone-or-interval :tone)
+                      utils/fretboard-tone-str-pattern-f
+                      utils/fretboard-interval-f))]])]]))
 
          ;; Chords to scale
          [:h3 "Chords to scale"]
