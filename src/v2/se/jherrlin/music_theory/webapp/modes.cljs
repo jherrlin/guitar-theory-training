@@ -71,7 +71,7 @@
                title]]])]
 
          ;; Title
-         [:h2 (str (-> key-of name str/capitalize) " - " (-> scale name str/capitalize))]
+         [:h2 (str (-> key-of name str/capitalize) " - " (-> scale name (str/replace "-" " ") str/capitalize))]
 
          ;; Intervals
          [:pre {:style {:overflow-x "auto"}}
