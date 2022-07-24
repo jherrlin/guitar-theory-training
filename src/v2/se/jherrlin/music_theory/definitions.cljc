@@ -18,6 +18,8 @@
    #{:bb :a#}
    #{:b}])
 
+(def standard-tuning [:e :b :g :d :a :e])
+
 ;; ---------------
 ;; State / data
 ;; ---------------
@@ -186,9 +188,9 @@
 ;; located.
 ;; --------------------
 (define-chord-pattern :major-1
-  {:name :major}
-  "
-   3   -   -   -
+  {:name   :major
+   :tuning standard-tuning}
+  "3   -   -   -
    -   1   -   -
    5   -   -   -
    -   -   3   -
@@ -196,9 +198,9 @@
    -   -   -   -")
 
 (define-chord-pattern :major-2
-  {:name :major}
-  "
-   5   -   -
+  {:name   :major
+   :tuning standard-tuning}
+  "5   -   -
    -   -   3
    -   -   1
    -   -   5
@@ -206,9 +208,9 @@
    -   -   -")
 
 (define-chord-pattern :major-3
-  {:name :major}
-  "
-   1   -   -
+  {:name   :major
+   :tuning standard-tuning}
+  "1   -   -
    5   -   -
    -   3   -
    -   -   1
@@ -216,9 +218,9 @@
    1   -   -")
 
 (define-chord-pattern :minor-1
-  {:name :minor}
-  "
-   1   -   -
+  {:name   :minor
+   :tuning standard-tuning}
+  "1   -   -
    5   -   -
   b3   -   -
    -   -   1
@@ -226,9 +228,9 @@
    1   -   -")
 
 (define-chord-pattern :minor-2
-  {:name :minor}
-  "
-   5   -   -
+  {:name   :minor
+   :tuning standard-tuning}
+  "5   -   -
    -  b3   -
    -   -   1
    -   -   5
@@ -236,9 +238,9 @@
    -   -   -")
 
 (define-chord-pattern :minor-3
-  {:name :minor}
-  "
-   -  b3   -   -
+  {:name   :minor
+   :tuning standard-tuning}
+  "-  b3   -   -
    -   -   -   1
    -   -   5   -
    1   -   -   -
@@ -246,9 +248,9 @@
    -   -   -   -")
 
 (define-chord-pattern :dominant-seven-1
-  {:name :dominant-seven}
-  "
-   1   -   -
+  {:name   :dominant-seven
+   :tuning standard-tuning}
+  "1   -   -
    5   -   -
    -   3   -
   b7   -   -
@@ -256,9 +258,9 @@
    1   -   -")
 
 (define-chord-pattern :dominant-seven-2
-  {:name :dominant-seven}
-  "
-   -   -   3
+  {:name   :dominant-seven
+   :tuning standard-tuning}
+  "-   -   3
    -  b7   -
    -   -   5
    1   -   -
@@ -266,7 +268,8 @@
    -   -   -")
 
 (define-chord-pattern :dominant-seven-3
-  {:name :dominant-seven}
+  {:name   :dominant-seven
+   :tuning standard-tuning}
   "
    5   -   -
    -   -   3
@@ -276,7 +279,8 @@
    -   -   -")
 
 (define-chord-pattern :minor-seven-1
-  {:name :minor-seven}
+  {:name   :minor-seven
+   :tuning standard-tuning}
   "
    5   -   -
    -  b3   -
@@ -286,7 +290,8 @@
    -   -   -")
 
 (define-chord-pattern :minor-seven-2
-  {:name :minor-seven}
+  {:name   :minor-seven
+   :tuning standard-tuning}
   "
    1   -   -
    5   -   -
@@ -296,7 +301,8 @@
    1   -   -")
 
 (define-chord-pattern :minor-seven-3
-  {:name :minor-seven}
+  {:name   :minor-seven
+   :tuning standard-tuning}
   "
    -  b3   -
    -  b7   -
@@ -306,7 +312,8 @@
    -   -   -")
 
 (define-chord-pattern :minor-seven-4
-  {:name :minor-seven}
+  {:name   :minor-seven
+   :tuning standard-tuning}
   "
    -
    5
@@ -316,7 +323,8 @@
    1")
 
 (define-chord-pattern :fifth-1
-  {:name :fifth}
+  {:name   :fifth
+   :tuning standard-tuning}
   "-  -  -
    -  -  -
    -  -  -
@@ -325,7 +333,8 @@
    1  -  -")
 
 (define-chord-pattern :fifth-2
-  {:name :fifth}
+  {:name   :fifth
+   :tuning standard-tuning}
   "
    -   -   -   -
    -   -   -   1
@@ -335,7 +344,8 @@
    -   -   -   -")
 
 (define-chord-pattern :diminished-fifth-1
-  {:name :diminished-fifth}
+  {:name   :diminished-fifth
+   :tuning standard-tuning}
   "-   -   -
    -  b3   -
    -   -   1
@@ -344,7 +354,8 @@
    -   -   -")
 
 (define-chord-pattern :diminished-fifth-2
-  {:name :diminished-fifth}
+  {:name   :diminished-fifth
+   :tuning standard-tuning}
   "-   -   -
    -   -   -
    b3  -   -
@@ -353,7 +364,8 @@
    1   -   -")
 
 (define-chord-pattern :major-maj-seven-6
-  {:name :major-maj-seven}
+  {:name   :major-maj-seven
+   :tuning standard-tuning}
   "1   -   -
    5   -   -
    -   3   -
@@ -362,7 +374,8 @@
    1   -   -")
 
 (define-chord-pattern :major-maj-seven-5
-  {:name :major-maj-seven}
+  {:name   :major-maj-seven
+   :tuning standard-tuning}
   "5   -   -
    -   -   3
    -   7   -
@@ -371,7 +384,8 @@
    -   -   -")
 
 (define-chord-pattern :major-maj-seven-4
-  {:name :major-maj-seven}
+  {:name   :major-maj-seven
+   :tuning standard-tuning}
   "-   -   3
    -   -   7
    -   -   5
@@ -380,7 +394,8 @@
    -   -   -")
 
 (define-chord-pattern :major-maj-seven-3
-  {:name :major-maj-seven}
+  {:name   :major-maj-seven
+   :tuning standard-tuning}
   "-   -
    5   -
    -   3
@@ -489,7 +504,7 @@
 ;; ---------------
 (define-scale-pattern :pentatonic-blues-1
   {:scale  :pentatonic-blues
-   :tuning [:e :b :g :d :a :e]
+   :tuning standard-tuning
    :order  1}
   "-   -   -   -
    -   -   -   -
@@ -500,7 +515,7 @@
 
 (define-scale-pattern :pentatonic-blues-2
   {:scale  :pentatonic-blues
-   :tuning [:e :b :g :d :a :e]
+   :tuning standard-tuning
    :order  2}
   "-   -   -   -
    -   -   -   -
@@ -511,7 +526,7 @@
 
 (define-scale-pattern :pentatonic-blues-3
   {:scale  :pentatonic-blues
-   :tuning [:e :b :g :d :a :e]
+   :tuning standard-tuning
    :order  3}
   "-   -   -   -
    -  b7   -   1
@@ -522,7 +537,7 @@
 
 (define-scale-pattern :pentatonic-blues-4
   {:scale  :pentatonic-blues
-   :tuning [:e :b :g :d :a :e]
+   :tuning standard-tuning
    :order  4}
   "-  b7   -   1
    -   4  b5   5
@@ -538,7 +553,8 @@
 ;; Modes
 ;; --------------------
 (define-mode :ionian
-  {:scale :ionian}
+  {:scale  :ionian
+   :tuning standard-tuning}
   "7   1   -   2
    -   5   -   6
    2   -   3   4
@@ -547,8 +563,9 @@
    -   1   -   2")
 
 (define-mode :ionian-6
-  {:scale :ionian
-   :string  6}
+  {:scale  :ionian
+   :string 6
+   :tuning standard-tuning}
   "-   -   -   -
    -   -   -   -
    -   -   -   -
@@ -557,8 +574,9 @@
    -   1   -   2")
 
 (define-mode :ionian-5
-  {:scale :ionian
-   :string  5}
+  {:scale  :ionian
+   :string 5
+   :tuning standard-tuning}
   "-   -   -   -
    -   -   -   -
    6   -   7   1
@@ -567,8 +585,9 @@
    -   -   -   -")
 
 (define-mode :ionian-4
-  {:scale :ionian
-   :string  4}
+  {:scale  :ionian
+   :string 4
+   :tuning standard-tuning}
   "-   -   -   -   -
    -   6   -   7   1
    3   4   -   5   -
@@ -577,8 +596,9 @@
    -   -   -   -   -")
 
 (define-mode :ionian-3
-  {:scale :ionian
-   :string  3}
+  {:scale  :ionian
+   :string 3
+   :tuning standard-tuning}
   "6   -   7   1
    3   4   -   5
    1   -   2   -
@@ -587,7 +607,8 @@
    -   -   -   -")
 
 (define-mode :mixolydian
-  {:scale  :mixolydian}
+  {:scale  :mixolydian
+   :tuning standard-tuning}
   "-   1   -   2   -
    -   5   -   6  b7
    2   -   3   4   -
@@ -596,8 +617,9 @@
    -   1   -   2   -")
 
 (define-mode :mixolydian-6
-  {:scale :mixolydian
-   :string  6}
+  {:scale  :mixolydian
+   :string 6
+   :tuning standard-tuning}
   "-   -   -   -
    -   -   -   -
    -   -   -   -
@@ -606,8 +628,9 @@
    -   1   -   2")
 
 (define-mode :mixolydian-5
-  {:scale :mixolydian
-   :string  5}
+  {:scale  :mixolydian
+   :string 5
+   :tuning standard-tuning}
   "-   -   -   -
    -   -   -   -
    6  b7   -   1
@@ -616,8 +639,9 @@
    -   -   -   -")
 
 (define-mode :mixolydian-4
-  {:scale :mixolydian
-   :string  4}
+  {:scale  :mixolydian
+   :string 4
+   :tuning standard-tuning}
   "-   -   -   -   -
    -   6  b7   -   1
    3   4   -   5   -
@@ -627,7 +651,8 @@
 
 (define-mode :mixolydian-3
   {:scale  :mixolydian
-   :string 3}
+   :string 3
+   :tuning standard-tuning}
   "6  b7   -   1
    3   4   -   5
    1   -   2   -
@@ -636,7 +661,8 @@
    -   -   -   -")
 
 (define-mode :aeolian
-  {:scale  :aeolian}
+  {:scale  :aeolian
+   :tuning standard-tuning}
   "-   1   -   2  b3
    -   5  b6   -  b7
    2  b3   -   4   -
@@ -646,7 +672,8 @@
 
 (define-mode :aeolian-6
   {:scale  :aeolian
-   :string 6}
+   :string 6
+   :tuning standard-tuning}
   "-   -   -   -
    -   -   -   -
    -   -   -   -
@@ -656,7 +683,8 @@
 
 (define-mode :aeolian-5
   {:scale  :aeolian
-   :string 5}
+   :string 5
+   :tuning standard-tuning}
   "-   -   -   -
    -   -   -   -
   b7   -   1   -
@@ -666,7 +694,8 @@
 
 (define-mode :aeolian-4
   {:scale  :aeolian
-   :string 4}
+   :string 4
+   :tuning standard-tuning}
   "-   -   -   -
    -  b7   -   1
    4   -   5  b6
@@ -676,7 +705,8 @@
 
 (define-mode :aeolian-3
   {:scale  :aeolian
-   :string 3}
+   :string 3
+   :tuning standard-tuning}
   "-  b7   -   1   -
    -   4   -   5  b6
    1   -   2  b3   -
@@ -685,7 +715,8 @@
    -   -   -   -   -")
 
 (define-mode :dorian
-  {:scale  :dorian}
+  {:scale  :dorian
+   :tuning standard-tuning}
   "-   1   -   2  b3
    -   5   -   6  b7
    2  b3   -   4   -
@@ -695,7 +726,8 @@
 
 (define-mode :dorian-6
   {:scale  :dorian
-   :string 6}
+   :string 6
+   :tuning standard-tuning}
   "-   -   -   -   -
    -   -   -   -   -
    -   -   -   -   -
@@ -705,7 +737,8 @@
 
 (define-mode :dorian-5
   {:scale  :dorian
-   :string 5}
+   :string 5
+   :tuning standard-tuning}
   "-   -   -   -   -
    -   -   -   -   -
    6  b7   -   1   -
@@ -715,7 +748,8 @@
 
 (define-mode :dorian-4
   {:scale  :dorian
-   :string 4}
+   :string 4
+   :tuning standard-tuning}
   "-   -   -   -
    6  b7   -   1
    4   -   5   -
@@ -725,7 +759,8 @@
 
 (define-mode :dorian-3
   {:scale  :dorian
-   :string 3}
+   :string 3
+   :tuning standard-tuning}
   "6  b7   -   1
    -   4   -   5
    1   -   2  b3
@@ -734,7 +769,8 @@
    -   -   -   -")
 
 (define-mode :phrygian
-  {:scale  :phrygian}
+  {:scale  :phrygian
+   :tuning standard-tuning}
   "1  b2   -  b3
    5  b6   -  b7
   b3   -   4   -
@@ -744,7 +780,8 @@
 
 
 (define-mode :phrygian-6
-  {:scale  :phrygian}
+  {:scale  :phrygian
+   :tuning standard-tuning}
   "-   -   -   -
    -   -   -   -
    -   -   -   -
@@ -753,7 +790,8 @@
    1  b2   -  b3")
 
 (define-mode :phrygian-5
-  {:scale  :phrygian}
+  {:scale  :phrygian
+   :tuning standard-tuning}
   "-   -   -   -
    -   -   -   -
   b7   -   1   -
@@ -762,7 +800,8 @@
    -   -   -   -")
 
 (define-mode :phrygian-4
-  {:scale  :phrygian}
+  {:scale  :phrygian
+   :tuning standard-tuning}
   "-   -   -   -
    -  b7   -   1
    4   -   5  b6
@@ -771,7 +810,8 @@
    -   -   -   -")
 
 (define-mode :phrygian-3
-  {:scale  :phrygian}
+  {:scale  :phrygian
+   :tuning standard-tuning}
   "-  b7   -   1   -
    -   4   -   5  b6
    1  b2   -  b3   -
@@ -780,7 +820,8 @@
    -   -   -   -   -")
 
 (define-mode :lydian
-  {:scale  :lydian}
+  {:scale  :lydian
+   :tuning standard-tuning}
   "7   1   -   2
   b5   5   -   6
    2   -   3   -
@@ -789,7 +830,8 @@
    -   1   -   2")
 
 (define-mode :lydian-6
-  {:scale  :lydian}
+  {:scale  :lydian
+   :tuning standard-tuning}
   "-   -   -   -
    -   -   -   -
    -   -   -   -
@@ -798,7 +840,8 @@
    -   1   -   2")
 
 (define-mode :lydian-5
-  {:scale  :lydian}
+  {:scale  :lydian
+   :tuning standard-tuning}
   "-   -   -   -
    -   -   -   -
    6   -   7   1
@@ -807,7 +850,8 @@
    -   -   -   -")
 
 (define-mode :lydian-4
-  {:scale  :lydian}
+  {:scale  :lydian
+   :tuning standard-tuning}
   "-   -   -   -   -
    -   6   -   7   1
    3   -  #4   5   -
@@ -816,7 +860,8 @@
    -   -   -   -   -")
 
 (define-mode :lydian-3
-  {:scale  :lydian}
+  {:scale  :lydian
+   :tuning standard-tuning}
   "6   -   7   1
    3   -  #4   5
    1   -   2   -
@@ -825,7 +870,8 @@
    -   -   -   -")
 
 (define-mode :locrian
-  {:scale  :locrian}
+  {:scale  :locrian
+   :tuning standard-tuning}
   "1  b2   -  b3
    -  b6   -  b7
   b3   -   4  b5
@@ -834,7 +880,8 @@
    1  b2   -  b3")
 
 (define-mode :locrian-6
-  {:scale  :locrian}
+  {:scale  :locrian
+   :tuning standard-tuning}
   "-   -   -   -
    -   -   -   -
    -   -   -   -
@@ -843,7 +890,8 @@
    1  b2   -  b3")
 
 (define-mode :locrian-5
-  {:scale  :locrian}
+  {:scale  :locrian
+   :tuning standard-tuning}
   "-   -   -   -
    -   -   -   -
   b7   -   1   -
@@ -852,7 +900,8 @@
    -   -   -   -")
 
 (define-mode :locrian-4
-  {:scale  :locrian}
+  {:scale  :locrian
+   :tuning standard-tuning}
   "-   -   -   -
    -  b7   -   1
    4  b5   -  b6
@@ -861,7 +910,8 @@
    -   -   -   -")
 
 (define-mode :locrian-3
-  {:scale  :locrian}
+  {:scale  :locrian
+   :tuning standard-tuning}
   "-  b7   -   1   -
    -   4  b5   -  b6
    1  b2   -  b3   -
@@ -870,7 +920,8 @@
    -   -   -   -   -")
 
 (define-mode :mixolydian-blues-hybrid
-  {:scale :mixolydian-blues-hybrid}
+  {:scale  :mixolydian-blues-hybrid
+   :tuning standard-tuning}
   "-   1   -   2  b3
    -   5   -   6  b7
    2  b3   3   4  b5
