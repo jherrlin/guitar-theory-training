@@ -217,7 +217,6 @@
    -   -   5
    1   -   -")
 
-
 (define-chord-pattern :major-4
   {:name   :major
    :tuning standard-tuning}
