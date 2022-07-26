@@ -217,6 +217,16 @@
    -   -   5
    1   -   -")
 
+(define-chord-pattern :major-4
+  {:name   :major
+   :tuning standard-tuning}
+  "-   -   -   1
+   3   -   -   -
+   1   -   -   -
+   5   -   -   -
+   -   -   3   -
+   -   -   -   1")
+
 (define-chord-pattern :minor-1
   {:name   :minor
    :tuning standard-tuning}
