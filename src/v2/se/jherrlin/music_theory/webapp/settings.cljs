@@ -20,16 +20,34 @@
       [:label "Tuning"]
       [:br]
       [:select
-       {:on-change
+       {:value tuning-name
+        :on-change
         #(do
            (re-frame/dispatch [:tuning-name (keyword (.. % -target -value))])
            (re-frame/dispatch [:tuning-tones (if (= :guitar (.. % -target -value))
                                                definitions/standard-guitar-tuning
-                                               definitions/standard-ukulele-tuning)]))}
+                                               definitions/standard-ukulele-tuning)])
+           (re-frame/dispatch [:push-state
+                               :v3/settings
+                               {:instrumnt (keyword (.. % -target -value))}]))}
        [:option {:value :guitar} "Guitar"]
        [:option {:value :ukulele} "Ukulele"]]]]))
 
 (def routes
-  ["settings"
-   {:name      :v2/settings
-    :view      [settings-view]}])
+  [["/v2/settings"
+    {:name :v2/settings
+     :view [settings-view]
+     :controllers
+     [{:start (fn [_]
+                (re-frame/dispatch [:push-state
+                                    :v3/settings
+                                    {:instrumnt @(re-frame/subscribe [:tuning-name])}]))
+       :stop  (fn [& params] (js/console.log "Leaving settings v2"))}]}]
+   ["/v3/:instrumnt/settings"
+    {:name :v3/settings
+     :view [settings-view]
+     :controllers
+     [{:parameters {:path [:instrumnt]}
+       :start      (fn [{{:keys [instrumnt]} :path}]
+                     (re-frame/dispatch [:tuning-name (keyword instrumnt)]))
+       :stop       (fn [& params] (js/console.log "Leaving settings v3"))}]}]])

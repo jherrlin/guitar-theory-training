@@ -24,7 +24,6 @@
 (defn chords-view []
   (let [nr-of-frets      @(re-frame/subscribe [:nr-of-frets])
         tuning-name      @(re-frame/subscribe [:tuning-name])
-        tuning-tones     @(re-frame/subscribe [:tuning-tones])
         chord            @(re-frame/subscribe [::chord])
         key-of           @(re-frame/subscribe [::key-of])
         tone-or-interval @(re-frame/subscribe [::tone-or-interval])
@@ -121,7 +120,10 @@
               (mapv vector tones intervals))))]
 
          ;; Chord patterns
-         (let [chord-patterns (->> @definitions/chord-patterns-atom
+         (let [tuning-tones (if (:guitar tuning-name)
+                              definitions/standard-guitar-tuning
+                              definitions/standard-ukulele-tuning)
+               chord-patterns (->> @definitions/chord-patterns-atom
                                    (vals)
                                    (filter (comp #{chord} :chord-pattern/name))
                                    (filter (comp #{tuning-tones} :chord-pattern/tuning))
@@ -174,16 +176,33 @@
                   [:button scale-title]]])]))]))))
 
 (def routes
-  ["chord/:key-of/:chord-name"
-   {:name      :v2/chord
-    :view      [chords-view]
-    :controllers
-    [{:parameters {:path [:key-of :chord-name]}
-      :start      (fn [{{:keys [key-of chord-name]} :path}]
-                    (let [key-of (-> key-of
-                                     (str/lower-case)
-                                     (str/replace "sharp" "#"))]
-                      (js/console.log "Entering chord:" key-of chord-name)
-                      (re-frame/dispatch [::key-of (keyword key-of)])
-                      (re-frame/dispatch [::chord (keyword chord-name)])))
-      :stop       (fn [& params] (js/console.log "Leaving chords..."))}]}])
+  [["/v2/chord/:key-of/:chord-name"
+    {:name :v2/chord
+     :view [chords-view]
+     :controllers
+     [{:parameters {:path [:key-of :chord-name]}
+       :start      (fn [{{:keys [key-of chord-name]} :path}]
+                     (let [key-of (-> key-of
+                                      (str/lower-case)
+                                      (str/replace "sharp" "#"))]
+                       (js/console.log "Entering chord:" key-of chord-name)
+                       (re-frame/dispatch [:push-state
+                                           :v3/chord
+                                           {:key-of     (keyword key-of)
+                                            :chord-name (keyword chord-name)
+                                            :instrumnt  @(re-frame/subscribe [:tuning-name])}])))
+       :stop       (fn [& params] (js/console.log "Leaving chords..."))}]}]
+   ["/v3/:instrumnt/chord/:key-of/:chord-name"
+    {:name :v3/chord
+     :view [chords-view]
+     :controllers
+     [{:parameters {:path [:key-of :chord-name :instrumnt]}
+       :start      (fn [{{:keys [key-of chord-name instrumnt]} :path}]
+                     (let [key-of (-> key-of
+                                      (str/lower-case)
+                                      (str/replace "sharp" "#"))]
+                       (js/console.log "Entering chord:" key-of chord-name)
+                       (re-frame/dispatch [::key-of (keyword key-of)])
+                       (re-frame/dispatch [::chord (keyword chord-name)])
+                       (re-frame/dispatch [:tuning-name (keyword instrumnt)])))
+       :stop       (fn [& params] (js/console.log "Leaving chords..."))}]}]])

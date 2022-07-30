@@ -107,8 +107,8 @@
              utils/rotate-until
              utils/all-tones
              (if (= :guitar tuning-name)
-              definitions/standard-guitar-tuning
-              definitions/standard-ukulele-tuning)
+               definitions/standard-guitar-tuning
+               definitions/standard-ukulele-tuning)
              nr-of-frets)
             (if (= tone-or-interval :tone)
               (partial
@@ -167,15 +167,31 @@
              [:button chord-title]]])]))))
 
 (def routes
-  ["scale/:scale/:key-of"
-   {:name :v2/scale
-    :view [scales-view]
-    :controllers
-    [{:parameters {:path [:scale :key-of]}
-      :start      (fn [{{:keys [scale key-of]} :path}]
-                    (let [scale'  (keyword scale)
-                          key-of' (keyword key-of)]
-                      (js/console.log "Entering scale:" scale key-of)
-                      (re-frame/dispatch [::scale scale'])
-                      (re-frame/dispatch [::key-of key-of'])))
-      :stop       (fn [& params] (js/console.log "Leaving scale"))}]}])
+  [["/v2/scale/:scale/:key-of"
+    {:name :v2/scale
+     :view [scales-view]
+     :controllers
+     [{:parameters {:path [:scale :key-of]}
+       :start      (fn [{{:keys [scale key-of]} :path}]
+                     (let [scale'  (keyword scale)
+                           key-of' (keyword key-of)]
+                       (js/console.log "Entering scale v2:" scale key-of)
+                       (re-frame/dispatch [:push-state
+                                           :v3/scale
+                                           {:key-of    key-of'
+                                            :scale     scale'
+                                            :instrumnt @(re-frame/subscribe [:tuning-name])}])))
+       :stop       (fn [& params] (js/console.log "Leaving scale v2"))}]}]
+   ["/v3/:instrumnt/scale/:scale/:key-of"
+    {:name :v3/scale
+     :view [scales-view]
+     :controllers
+     [{:parameters {:path [:scale :key-of :instrumnt]}
+       :start      (fn [{{:keys [scale key-of instrumnt]} :path}]
+                     (let [scale'  (keyword scale)
+                           key-of' (keyword key-of)]
+                       (js/console.log "Entering scale v3:" scale key-of)
+                       (re-frame/dispatch [::scale scale'])
+                       (re-frame/dispatch [::key-of key-of'])
+                       (re-frame/dispatch [:tuning-name (keyword instrumnt)])))
+       :stop       (fn [& params] (js/console.log "Leaving scale v3"))}]}]])

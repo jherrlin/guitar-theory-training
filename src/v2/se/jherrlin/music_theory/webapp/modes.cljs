@@ -164,7 +164,7 @@
              [:button chord-title]]])]))))
 
 (def routes
-  ["mode/:scale/:key-of"
+  ["/v2/mode/:scale/:key-of"
    {:name :v2/mode
     :view [mode-view]
     :controllers

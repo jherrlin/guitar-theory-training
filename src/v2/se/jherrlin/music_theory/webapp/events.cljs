@@ -19,7 +19,7 @@
      {:current-route nil})))
 
 (re-frame/reg-event-fx
- ::push-state
+ :push-state
  (fn [_ [_ & route]]
    {:push-state route}))
 

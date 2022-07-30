@@ -32,11 +32,6 @@
      db
      {:current-route nil})))
 
-(re-frame/reg-event-fx
- ::push-state
- (fn [_ [_ & route]]
-   {:push-state route}))
-
 (re-frame/reg-event-db
  ::navigated
  (fn [db [_ new-match]]
@@ -238,7 +233,7 @@ code lives on "
            [:h3
             {:on-click
              #(re-frame/dispatch
-               [::push-state
+               [:push-state
                 ::chord-tones
                 {:tone (-> chord-tones first name)
                  :chord-name (-> chord-id name)}])}
@@ -686,7 +681,7 @@ the org-drill mode."]
       :controllers
       [{:start (fn [_]
                  (js/console.log "Chord redirect")
-                 (re-frame/dispatch [::push-state ::chord-tones {:tone "c" :chord-name "major"}]))
+                 (re-frame/dispatch [:push-state ::chord-tones {:tone "c" :chord-name "major"}]))
         :stop  (fn [& params] (js/console.log "Leaving..."))}]}]
     ["chord/:tone/:chord-name"
      {:name      ::chord-tones
@@ -711,7 +706,7 @@ the org-drill mode."]
       :controllers
       [{:start (fn [_]
                  (js/console.log "Scale redirect")
-                 (re-frame/dispatch [::push-state ::scale {:scale :major :key :c}]))
+                 (re-frame/dispatch [:push-state ::scale {:scale :major :key :c}]))
         :stop  (fn [& params] (js/console.log "Leaving scale redirect..."))}]}]
     ["scale/:scale/:key"
      {:name      ::scale

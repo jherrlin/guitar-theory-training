@@ -17,10 +17,7 @@
   [:div "hejsan"])
 
 (def routes
-  ["/v2/"
-   [""
-    {:name      ::v2-home
-     :view      [index]}]
+  [""
    chords/routes
    modes/routes
    scales/routes

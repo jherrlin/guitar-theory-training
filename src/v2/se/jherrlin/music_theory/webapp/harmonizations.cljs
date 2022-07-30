@@ -138,7 +138,7 @@
                utils/fretboard-tone-str-chord-f chord-tones))]]])]])))
 
 (def routes
-  ["harmonization/:key-of/:major-or-minor/:triad-or-seventh"
+  ["/v2/harmonization/:key-of/:major-or-minor/:triad-or-seventh"
    {:name :v2/harmonization
     :view [harmonization-view]
     :controllers
