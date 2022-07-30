@@ -59,7 +59,12 @@
 (re-frame/reg-event-db
  :tuning-name
  (fn [db [k n]]
-   (assoc db k n)))
+   (-> db
+       (assoc k n)
+       (assoc :tuning-tones
+              (if (= :guitar n)
+                definitions/standard-guitar-tuning
+                definitions/standard-ukulele-tuning)))))
 
 (re-frame/reg-sub
  :tuning-tones
