@@ -12,8 +12,7 @@
     :as utils]))
 
 (def events-
-  [{:n ::key-of}
-   {:n ::scale}
+  [{:n ::scale}
    {:n ::tone-or-interval
     :s (fn [db [n']] (get db n' :tone))}])
 
@@ -24,7 +23,7 @@
 (defn mode-view []
   (let [nr-of-frets      @(re-frame/subscribe [:nr-of-frets])
         scale            @(re-frame/subscribe [::scale])
-        key-of           @(re-frame/subscribe [::key-of])
+        key-of           @(re-frame/subscribe [:key-of])
         tone-or-interval @(re-frame/subscribe [::tone-or-interval])]
     (when (and scale key-of)
       (let [{intervals :scale/intervals
@@ -174,5 +173,5 @@
                           key-of' (keyword key-of)]
                       (js/console.log "Entering mode:" scale key-of)
                       (re-frame/dispatch [::scale scale'])
-                      (re-frame/dispatch [::key-of key-of'])))
+                      (re-frame/dispatch [:key-of key-of'])))
       :stop       (fn [& params] (js/console.log "Leaving mode"))}]}])

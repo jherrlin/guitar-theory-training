@@ -70,3 +70,13 @@
  :tuning-tones
  (fn [db [k n]]
    (assoc db k n)))
+
+(re-frame/reg-sub
+ :key-of
+ (fn [db [k]]
+   (get db k :c)))
+
+(re-frame/reg-event-db
+ :key-of
+ (fn [db [k n]]
+   (assoc db k n)))

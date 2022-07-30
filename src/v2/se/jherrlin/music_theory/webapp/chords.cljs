@@ -12,8 +12,7 @@
     :as utils]))
 
 (def events-
-  [{:n ::key-of}
-   {:n ::chord}
+  [{:n ::chord}
    {:n ::tone-or-interval
     :s (fn [db [n']] (get db n' :tone))}])
 
@@ -25,7 +24,7 @@
   (let [nr-of-frets      @(re-frame/subscribe [:nr-of-frets])
         tuning-name      @(re-frame/subscribe [:tuning-name])
         chord            @(re-frame/subscribe [::chord])
-        key-of           @(re-frame/subscribe [::key-of])
+        key-of           @(re-frame/subscribe [:key-of])
         tone-or-interval @(re-frame/subscribe [::tone-or-interval])
         {indexes     :chord/indexes
          intervals   :chord/intervals
@@ -202,7 +201,7 @@
                                       (str/lower-case)
                                       (str/replace "sharp" "#"))]
                        (js/console.log "Entering chord:" key-of chord-name)
-                       (re-frame/dispatch [::key-of (keyword key-of)])
+                       (re-frame/dispatch [:key-of (keyword key-of)])
                        (re-frame/dispatch [::chord (keyword chord-name)])
                        (re-frame/dispatch [:tuning-name (keyword instrumnt)])))
        :stop       (fn [& params] (js/console.log "Leaving chords..."))}]}]])

@@ -75,11 +75,10 @@ code lives on "
   (re-frame/reg-sub n (or s (fn [db [n']] (get db n'))))
   (re-frame/reg-event-db n (or e (fn [db [_ e]] (assoc db n e)))))
 
-(->> @(re-frame/subscribe [:current-route])
-     :data :name)
-
 (defn ^:dev/after-load header-menu [router]
-  (let [current-route      @(re-frame/subscribe [:current-route])
+  (let [key-of             @(re-frame/subscribe [:key-of])
+        tuning-name        @(re-frame/subscribe [:tuning-name])
+        current-route      @(re-frame/subscribe [:current-route])
         current-route-name (get-in current-route [:data :name])]
     (when (and current-route current-route-name)
       [:div {:style {:flex "1"}}
@@ -88,8 +87,8 @@ code lives on "
                              :style      {:background "#FFFFFF"}}
         [:> semantic-ui/Menu.Item
          {:as     "a"
-          :href   (rfe/href :v2/settings)
-          :active (= :v2/settings current-route-name)}
+          :href   (rfe/href :v3/settings {:instrumnt tuning-name})
+          :active (= :v3/settings current-route-name)}
          "Settings"]
 
         [:> semantic-ui/Menu.Item
@@ -100,17 +99,17 @@ code lives on "
 
         [:> semantic-ui/Menu.Item
          {:as     "a"
-          :href   (rfe/href :v2/chord {:key-of :c :chord-name :major})
-          :active (= :v2/chord current-route-name)}
+          :href   (rfe/href :v3/chord {:key-of key-of :chord-name :major :instrumnt tuning-name})
+          :active (= :v3/chord current-route-name)}
          "Chords"]
         [:> semantic-ui/Menu.Item
          {:as     "a"
-          :href   (rfe/href :v2/scale {:scale :major :key-of :c})
-          :active (= :v2/scale current-route-name)}
+          :href   (rfe/href :v3/scale {:scale :major :key-of key-of :instrumnt tuning-name})
+          :active (= :v3/scale current-route-name)}
          "Scales"]
         [:> semantic-ui/Menu.Item
          {:as     "a"
-          :href   (rfe/href :v2/harmonization {:key-of :c :major-or-minor :major :triad-or-seventh :triad})
+          :href   (rfe/href :v2/harmonization {:key-of key-of :major-or-minor :major :triad-or-seventh :triad})
           :active (= :v2/harmonization current-route-name)}
          "Harmonizations"]
 

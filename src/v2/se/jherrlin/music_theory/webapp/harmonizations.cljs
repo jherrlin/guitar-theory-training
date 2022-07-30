@@ -8,8 +8,7 @@
 
 
 (def events-
-  [{:n ::key-of}
-   {:n ::major-or-minor}
+  [{:n ::major-or-minor}
    {:n ::triad-or-seventh}
    {:n ::show-tips?
     :s (fn [db [n']] (get db n' false))}])
@@ -29,7 +28,7 @@
 
 (defn harmonization-view []
   (let [nr-of-frets      @(re-frame/subscribe [:nr-of-frets])
-        key-of           @(re-frame/subscribe [::key-of])
+        key-of           @(re-frame/subscribe [:key-of])
         major-or-minor   @(re-frame/subscribe [::major-or-minor])
         triad-or-seventh @(re-frame/subscribe [::triad-or-seventh])
         show-tips?       @(re-frame/subscribe [::show-tips?])]
@@ -148,7 +147,7 @@
                                      (str/lower-case)
                                      (str/replace "sharp" "#"))]
                       (js/console.log "Entering harmonization:" key-of major-or-minor triad-or-seventh)
-                      (re-frame/dispatch [::key-of (keyword key-of)])
+                      (re-frame/dispatch [:key-of (keyword key-of)])
                       (re-frame/dispatch [::major-or-minor (keyword major-or-minor)])
                       (re-frame/dispatch [::triad-or-seventh (keyword triad-or-seventh)])))
       :stop       (fn [& params] (js/console.log "Leaving harmonization"))}]}])
