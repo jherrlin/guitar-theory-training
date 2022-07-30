@@ -31,7 +31,8 @@
                                :v3/settings
                                {:instrument (keyword (.. % -target -value))}]))}
        [:option {:value :guitar} "Guitar"]
-       [:option {:value :ukulele} "Ukulele"]]]]))
+       [:option {:value :ukulele} "Ukulele"]
+       [:option {:value :bass} "Bass"]]]]))
 
 (def routes
   [["/v2/settings"

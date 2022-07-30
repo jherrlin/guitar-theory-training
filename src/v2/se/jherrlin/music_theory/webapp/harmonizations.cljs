@@ -29,6 +29,7 @@
 
 (defn harmonization-view []
   (let [tuning-name      @(re-frame/subscribe [:tuning-name])
+        tuning-tones     @(re-frame/subscribe [:tuning-tones])
         nr-of-frets      @(re-frame/subscribe [:nr-of-frets])
         key-of           @(re-frame/subscribe [:key-of])
         major-or-minor   @(re-frame/subscribe [::major-or-minor])
@@ -107,9 +108,7 @@
             (utils/fretboard-strings
              utils/rotate-until
              utils/all-tones
-             (if (= :guitar tuning-name)
-               definitions/standard-guitar-tuning
-               definitions/standard-ukulele-tuning)
+             tuning-tones
              nr-of-frets)
             (partial
              utils/fretboard-tone-str-chord-f tones)))]]
@@ -135,9 +134,7 @@
               (utils/fretboard-strings
                utils/rotate-until
                utils/all-tones
-               (if (= :guitar tuning-name)
-                 definitions/standard-guitar-tuning
-                 definitions/standard-ukulele-tuning)
+               tuning-tones
                nr-of-frets)
               (partial
                utils/fretboard-tone-str-chord-f chord-tones))]]])]])))

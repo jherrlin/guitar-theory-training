@@ -20,6 +20,7 @@
 
 (def standard-guitar-tuning [:e :b :g :d :a :e])
 (def standard-ukulele-tuning [:a :e :c :g])
+(def standard-bass-tuning [:g :d :a :e])
 
 ;; ---------------
 ;; State / data

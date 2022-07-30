@@ -23,6 +23,7 @@
 (defn chords-view []
   (let [nr-of-frets      @(re-frame/subscribe [:nr-of-frets])
         tuning-name      @(re-frame/subscribe [:tuning-name])
+        tuning-tones     @(re-frame/subscribe [:tuning-tones])
         chord            @(re-frame/subscribe [::chord])
         key-of           @(re-frame/subscribe [:key-of])
         tone-or-interval @(re-frame/subscribe [::tone-or-interval])
@@ -107,9 +108,7 @@
            (utils/fretboard-strings
             utils/rotate-until
             utils/all-tones
-            (if (= :guitar tuning-name)
-              definitions/standard-guitar-tuning
-              definitions/standard-ukulele-tuning)
+            tuning-tones
             nr-of-frets)
            (if (= tone-or-interval :tone)
              (partial
@@ -119,10 +118,7 @@
               (mapv vector tones intervals))))]
 
          ;; Chord patterns
-         (let [tuning-tones (if (:guitar tuning-name)
-                              definitions/standard-guitar-tuning
-                              definitions/standard-ukulele-tuning)
-               chord-patterns (->> @definitions/chord-patterns-atom
+         (let [chord-patterns (->> @definitions/chord-patterns-atom
                                    (vals)
                                    (filter (comp #{chord} :chord-pattern/name))
                                    (filter (comp #{tuning-tones} :chord-pattern/tuning))
@@ -144,9 +140,7 @@
                      (utils/fretboard-strings
                       utils/rotate-until
                       definitions/all-tones
-                      (if (= :guitar tuning-name)
-                        definitions/standard-guitar-tuning
-                        definitions/standard-ukulele-tuning)
+                      tuning-tones
                       nr-of-frets)
                      key-of
                      pattern)

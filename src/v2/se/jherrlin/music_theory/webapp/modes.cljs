@@ -22,6 +22,7 @@
 
 (defn mode-view []
   (let [tuning-name      @(re-frame/subscribe [:tuning-name])
+        tuning-tones     @(re-frame/subscribe [:tuning-tones])
         nr-of-frets      @(re-frame/subscribe [:nr-of-frets])
         scale            @(re-frame/subscribe [::scale])
         key-of           @(re-frame/subscribe [:key-of])
@@ -105,9 +106,7 @@
            (utils/fretboard-strings
             utils/rotate-until
             utils/all-tones
-            (if (= :guitar tuning-name)
-              definitions/standard-guitar-tuning
-              definitions/standard-ukulele-tuning)
+            tuning-tones
             nr-of-frets)
            (if (= tone-or-interval :tone)
              (partial
@@ -117,10 +116,7 @@
               (mapv vector tones intervals))))]
 
          ;; Mode patterns
-         (let [tuning-tones  (if (:guitar tuning-name)
-                               definitions/standard-guitar-tuning
-                               definitions/standard-ukulele-tuning)
-               mode-patterns (->> @definitions/modes-atom
+         (let [mode-patterns (->> @definitions/modes-atom
                                   (vals)
                                   (filter (comp #{scale} :mode/scale))
                                   (filter (comp #{tuning-tones} :mode/tuning))
@@ -145,9 +141,7 @@
                      (utils/fretboard-strings
                       utils/rotate-until
                       definitions/all-tones
-                      (if (= :guitar tuning-name)
-                        definitions/standard-guitar-tuning
-                        definitions/standard-ukulele-tuning)
+                      tuning-tones
                       nr-of-frets)
                      key-of
                      pattern)

@@ -26,6 +26,7 @@
 
 (defn neck-view []
   (let [tuning-name  @(re-frame/subscribe [:tuning-name])
+        tuning-tones @(re-frame/subscribe [:tuning-tones])
         nr-of-frets  @(re-frame/subscribe [:nr-of-frets])
         all          @(re-frame/subscribe [::neck-view-all])
         fulls        @(re-frame/subscribe [::neck-view-fulls])
@@ -41,9 +42,7 @@
           (utils/fretboard-strings
            utils/rotate-until
            utils/all-tones
-           (if (= :guitar tuning-name)
-             definitions/standard-guitar-tuning
-             definitions/standard-ukulele-tuning)
+           tuning-tones
            nr-of-frets)
           (partial
            utils/fretboard-tone-str-chord-f (->> definitions/all-tones
@@ -58,9 +57,7 @@
           (utils/fretboard-strings
            utils/rotate-until
            utils/all-tones
-           (if (= :guitar tuning-name)
-             definitions/standard-guitar-tuning
-             definitions/standard-ukulele-tuning)
+           tuning-tones
            nr-of-frets)
           (partial
            utils/fretboard-tone-str-chord-f (->> music-theory/tones
@@ -75,9 +72,7 @@
           (utils/fretboard-strings
            utils/rotate-until
            utils/all-tones
-           (if (= :guitar tuning-name)
-             definitions/standard-guitar-tuning
-             definitions/standard-ukulele-tuning)
+           tuning-tones
            nr-of-frets)
           (partial
            utils/fretboard-tone-str-chord-f (->> music-theory/tones

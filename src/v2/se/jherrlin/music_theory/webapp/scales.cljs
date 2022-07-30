@@ -105,9 +105,7 @@
             (utils/fretboard-strings
              utils/rotate-until
              utils/all-tones
-             (if (= :guitar tuning-name)
-               definitions/standard-guitar-tuning
-               definitions/standard-ukulele-tuning)
+             tuning-tones
              nr-of-frets)
             (if (= tone-or-interval :tone)
               (partial
@@ -139,9 +137,7 @@
                      (utils/fretboard-strings
                       utils/rotate-until
                       definitions/all-tones
-                      (if (= :guitar tuning-name)
-                        definitions/standard-guitar-tuning
-                        definitions/standard-ukulele-tuning)
+                      tuning-tones
                       nr-of-frets)
                      key-of
                      pattern)

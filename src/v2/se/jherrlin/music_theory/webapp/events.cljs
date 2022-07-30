@@ -62,9 +62,10 @@
    (-> db
        (assoc k n)
        (assoc :tuning-tones
-              (if (= :guitar n)
-                definitions/standard-guitar-tuning
-                definitions/standard-ukulele-tuning)))))
+              (condp = n
+                :ukulele definitions/standard-ukulele-tuning
+                :bass definitions/standard-bass-tuning
+                definitions/standard-guitar-tuning)))))
 
 (re-frame/reg-sub
  :tuning-tones
