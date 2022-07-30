@@ -29,7 +29,7 @@
                                                definitions/standard-ukulele-tuning)])
            (re-frame/dispatch [:push-state
                                :v3/settings
-                               {:instrumnt (keyword (.. % -target -value))}]))}
+                               {:instrument (keyword (.. % -target -value))}]))}
        [:option {:value :guitar} "Guitar"]
        [:option {:value :ukulele} "Ukulele"]]]]))
 
@@ -41,13 +41,13 @@
      [{:start (fn [_]
                 (re-frame/dispatch [:push-state
                                     :v3/settings
-                                    {:instrumnt @(re-frame/subscribe [:tuning-name])}]))
+                                    {:instrument @(re-frame/subscribe [:tuning-name])}]))
        :stop  (fn [& params] (js/console.log "Leaving settings v2"))}]}]
-   ["/v3/:instrumnt/settings"
+   ["/v3/:instrument/settings"
     {:name :v3/settings
      :view [settings-view]
      :controllers
-     [{:parameters {:path [:instrumnt]}
-       :start      (fn [{{:keys [instrumnt]} :path}]
-                     (re-frame/dispatch [:tuning-name (keyword instrumnt)]))
+     [{:parameters {:path [:instrument]}
+       :start      (fn [{{:keys [instrument]} :path}]
+                     (re-frame/dispatch [:tuning-name (keyword instrument)]))
        :stop       (fn [& params] (js/console.log "Leaving settings v3"))}]}]])

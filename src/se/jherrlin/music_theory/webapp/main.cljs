@@ -87,7 +87,7 @@ code lives on "
                              :style      {:background "#FFFFFF"}}
         [:> semantic-ui/Menu.Item
          {:as     "a"
-          :href   (rfe/href :v3/settings {:instrumnt tuning-name})
+          :href   (rfe/href :v3/settings {:instrument tuning-name})
           :active (= :v3/settings current-route-name)}
          "Settings"]
 
@@ -99,12 +99,12 @@ code lives on "
 
         [:> semantic-ui/Menu.Item
          {:as     "a"
-          :href   (rfe/href :v3/chord {:key-of key-of :chord-name :major :instrumnt tuning-name})
+          :href   (rfe/href :v3/chord {:key-of key-of :chord-name :major :instrument tuning-name})
           :active (= :v3/chord current-route-name)}
          "Chords"]
         [:> semantic-ui/Menu.Item
          {:as     "a"
-          :href   (rfe/href :v3/scale {:scale :major :key-of key-of :instrumnt tuning-name})
+          :href   (rfe/href :v3/scale {:scale :major :key-of key-of :instrument tuning-name})
           :active (= :v3/scale current-route-name)}
          "Scales"]
         [:> semantic-ui/Menu.Item

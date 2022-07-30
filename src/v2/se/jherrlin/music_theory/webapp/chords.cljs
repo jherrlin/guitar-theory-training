@@ -45,7 +45,7 @@
                                    :title    (-> x name str/capitalize)})))]
             ^{:key url-name}
             [:div {:style {:margin-right "10px" :display "inline"}}
-             [:a {:href (rfe/href :v2/chord {:key-of tone' :chord-name chord})}
+             [:a {:href (rfe/href :v3/chord {:key-of tone' :chord-name chord :instrument tuning-name})}
               [:button
                {:disabled (= key-of tone')}
                title]]])]
@@ -61,7 +61,7 @@
                      (sort-by :chord/order))]
             ^{:key (str sufix "-chord")}
             [:div {:style {:margin-right "10px" :display "inline"}}
-             [:a {:href (rfe/href :v2/chord {:key-of key-of :chord-name id})}
+             [:a {:href (rfe/href :v3/chord {:key-of key-of :chord-name id :instrument tuning-name})}
               [:button
                {:disabled (= id chord)}
                (str (or display-text sufix))]]])]
@@ -171,7 +171,7 @@
                     scales-to-chord]
                 ^{:key scale-title}
                 [:div {:style {:margin-right "10px" :display "inline"}}
-                 [:a {:href (rfe/href :v2/scale {:scale scale-id :key-of key-of})}
+                 [:a {:href (rfe/href :v3/scale {:scale scale-id :key-of key-of :instrument tuning-name})}
                   [:button scale-title]]])]))]))))
 
 (def routes
@@ -189,19 +189,19 @@
                                            :v3/chord
                                            {:key-of     (keyword key-of)
                                             :chord-name (keyword chord-name)
-                                            :instrumnt  @(re-frame/subscribe [:tuning-name])}])))
+                                            :instrument  @(re-frame/subscribe [:tuning-name])}])))
        :stop       (fn [& params] (js/console.log "Leaving chords..."))}]}]
-   ["/v3/:instrumnt/chord/:key-of/:chord-name"
+   ["/v3/:instrument/chord/:key-of/:chord-name"
     {:name :v3/chord
      :view [chords-view]
      :controllers
-     [{:parameters {:path [:key-of :chord-name :instrumnt]}
-       :start      (fn [{{:keys [key-of chord-name instrumnt]} :path}]
+     [{:parameters {:path [:key-of :chord-name :instrument]}
+       :start      (fn [{{:keys [key-of chord-name instrument]} :path}]
                      (let [key-of (-> key-of
                                       (str/lower-case)
                                       (str/replace "sharp" "#"))]
                        (js/console.log "Entering chord:" key-of chord-name)
                        (re-frame/dispatch [:key-of (keyword key-of)])
                        (re-frame/dispatch [::chord (keyword chord-name)])
-                       (re-frame/dispatch [:tuning-name (keyword instrumnt)])))
+                       (re-frame/dispatch [:tuning-name (keyword instrument)])))
        :stop       (fn [& params] (js/console.log "Leaving chords..."))}]}]])

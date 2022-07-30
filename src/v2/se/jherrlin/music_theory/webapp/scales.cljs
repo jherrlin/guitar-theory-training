@@ -45,7 +45,7 @@
                                    :title    (-> x name str/capitalize)})))]
             ^{:key url-name}
             [:div {:style {:margin-right "10px" :display "inline"}}
-             [:a {:href (rfe/href :v2/scale {:scale scale :key-of key-of'})}
+             [:a {:href (rfe/href :v3/scale {:scale scale :key-of key-of' :instrument tuning-name})}
               [:button
                {:disabled (= key-of' key-of)}
                title]]])]
@@ -60,7 +60,7 @@
                      (sort-by :scale/order))]
             ^{:key (str title "-scale")}
             [:div {:style {:margin-right "10px" :display "inline"}}
-             [:a {:href (rfe/href :v2/scale {:scale id :key-of key-of})}
+             [:a {:href (rfe/href :v3/scale {:scale id :key-of key-of :instrument tuning-name})}
               [:button
                {:disabled (= scale id)}
                title]]])]
@@ -162,7 +162,7 @@
                                 (set/subset? (set indexes) (set scale-indexes))))))]
            ^{:key (str chord-title)}
            [:div {:style {:margin-right "10px" :display "inline"}}
-            [:a {:href (rfe/href :v2/chord {:chord-name chord-id :key-of key-of})}
+            [:a {:href (rfe/href :v3/chord {:chord-name chord-id :key-of key-of :instrument tuning-name})}
              [:button chord-title]]])]))))
 
 (def routes
@@ -179,18 +179,18 @@
                                            :v3/scale
                                            {:key-of    key-of'
                                             :scale     scale'
-                                            :instrumnt @(re-frame/subscribe [:tuning-name])}])))
+                                            :instrument @(re-frame/subscribe [:tuning-name])}])))
        :stop       (fn [& params] (js/console.log "Leaving scale v2"))}]}]
-   ["/v3/:instrumnt/scale/:scale/:key-of"
+   ["/v3/:instrument/scale/:scale/:key-of"
     {:name :v3/scale
      :view [scales-view]
      :controllers
-     [{:parameters {:path [:scale :key-of :instrumnt]}
-       :start      (fn [{{:keys [scale key-of instrumnt]} :path}]
+     [{:parameters {:path [:scale :key-of :instrument]}
+       :start      (fn [{{:keys [scale key-of instrument]} :path}]
                      (let [scale'  (keyword scale)
                            key-of' (keyword key-of)]
                        (js/console.log "Entering scale v3:" scale key-of)
                        (re-frame/dispatch [::scale scale'])
                        (re-frame/dispatch [:key-of key-of'])
-                       (re-frame/dispatch [:tuning-name (keyword instrumnt)])))
+                       (re-frame/dispatch [:tuning-name (keyword instrument)])))
        :stop       (fn [& params] (js/console.log "Leaving scale v3"))}]}]])
