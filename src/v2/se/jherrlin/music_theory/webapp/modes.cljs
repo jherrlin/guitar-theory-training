@@ -21,7 +21,8 @@
   (re-frame/reg-event-db n (or e (fn [db [_ e]] (assoc db n e)))))
 
 (defn mode-view []
-  (let [nr-of-frets      @(re-frame/subscribe [:nr-of-frets])
+  (let [tuning-name      @(re-frame/subscribe [:tuning-name])
+        nr-of-frets      @(re-frame/subscribe [:nr-of-frets])
         scale            @(re-frame/subscribe [::scale])
         key-of           @(re-frame/subscribe [:key-of])
         tone-or-interval @(re-frame/subscribe [::tone-or-interval])]
@@ -104,7 +105,9 @@
            (utils/fretboard-strings
             utils/rotate-until
             utils/all-tones
-            [:e :b :g :d :a :e]
+            (if (= :guitar tuning-name)
+              definitions/standard-guitar-tuning
+              definitions/standard-ukulele-tuning)
             nr-of-frets)
            (if (= tone-or-interval :tone)
              (partial
@@ -114,9 +117,13 @@
               (mapv vector tones intervals))))]
 
          ;; Mode patterns
-         (let [mode-patterns (->> @definitions/modes-atom
+         (let [tuning-tones  (if (:guitar tuning-name)
+                               definitions/standard-guitar-tuning
+                               definitions/standard-ukulele-tuning)
+               mode-patterns (->> @definitions/modes-atom
                                   (vals)
                                   (filter (comp #{scale} :mode/scale))
+                                  (filter (comp #{tuning-tones} :mode/tuning))
                                   (sort-by :mode/pattern-title))]
            (when (seq mode-patterns)
              [:<>
@@ -138,7 +145,9 @@
                      (utils/fretboard-strings
                       utils/rotate-until
                       definitions/all-tones
-                      [:e :b :g :d :a :e]
+                      (if (= :guitar tuning-name)
+                        definitions/standard-guitar-tuning
+                        definitions/standard-ukulele-tuning)
                       nr-of-frets)
                      key-of
                      pattern)
@@ -163,15 +172,32 @@
              [:button chord-title]]])]))))
 
 (def routes
-  ["/v2/mode/:scale/:key-of"
-   {:name :v2/mode
-    :view [mode-view]
-    :controllers
-    [{:parameters {:path [:scale :key-of]}
-      :start      (fn [{{:keys [scale key-of]} :path}]
-                    (let [scale'  (keyword scale)
-                          key-of' (keyword key-of)]
-                      (js/console.log "Entering mode:" scale key-of)
-                      (re-frame/dispatch [::scale scale'])
-                      (re-frame/dispatch [:key-of key-of'])))
-      :stop       (fn [& params] (js/console.log "Leaving mode"))}]}])
+  [["/v2/mode/:scale/:key-of"
+    {:name :v2/mode
+     :view [mode-view]
+     :controllers
+     [{:parameters {:path [:scale :key-of]}
+       :start      (fn [{{:keys [scale key-of]} :path}]
+                     (let [scale'  (keyword scale)
+                           key-of' (keyword key-of)]
+                       (js/console.log "Entering mode v2:" scale key-of)
+                       (re-frame/dispatch
+                        [:push-state
+                         :v3/mode
+                         {:scale      scale'
+                          :key-of     key-of'
+                          :instrument @(re-frame/subscribe [:tuning-name])}])))
+       :stop       (fn [& params] (js/console.log "Leaving mode v2"))}]}]
+   ["/v3/:instrument/mode/:scale/:key-of"
+    {:name :v3/mode
+     :view [mode-view]
+     :controllers
+     [{:parameters {:path [:scale :key-of :instrument]}
+       :start      (fn [{{:keys [scale key-of instrument]} :path}]
+                     (let [scale'  (keyword scale)
+                           key-of' (keyword key-of)]
+                       (js/console.log "Entering mode v3:" instrument scale key-of)
+                       (re-frame/dispatch [::scale scale'])
+                       (re-frame/dispatch [:key-of key-of'])
+                       (re-frame/dispatch [:tuning-name (keyword instrument)])))
+       :stop       (fn [& params] (js/console.log "Leaving mode v3"))}]}]])

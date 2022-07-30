@@ -4,7 +4,8 @@
    [re-frame.core :as re-frame]
    [reitit.frontend.easy :as rfe]
    [se.jherrlin.music-theory :as music-theory]
-   [v2.se.jherrlin.music-theory.utils :as utils]))
+   [v2.se.jherrlin.music-theory.utils :as utils]
+   [v2.se.jherrlin.music-theory.definitions :as definitions]))
 
 
 (def events-
@@ -27,7 +28,8 @@
       [:p "1   -   4   -   5"]])])
 
 (defn harmonization-view []
-  (let [nr-of-frets      @(re-frame/subscribe [:nr-of-frets])
+  (let [tuning-name      @(re-frame/subscribe [:tuning-name])
+        nr-of-frets      @(re-frame/subscribe [:nr-of-frets])
         key-of           @(re-frame/subscribe [:key-of])
         major-or-minor   @(re-frame/subscribe [::major-or-minor])
         triad-or-seventh @(re-frame/subscribe [::triad-or-seventh])
@@ -102,13 +104,15 @@
                           (set)
                           (vec))]
            (utils/fretboard-str
-              (utils/fretboard-strings
-               utils/rotate-until
-               utils/all-tones
-               [:e :b :g :d :a :e]
-               nr-of-frets)
-              (partial
-               utils/fretboard-tone-str-chord-f tones)))]]
+            (utils/fretboard-strings
+             utils/rotate-until
+             utils/all-tones
+             (if (= :guitar tuning-name)
+               definitions/standard-guitar-tuning
+               definitions/standard-ukulele-tuning)
+             nr-of-frets)
+            (partial
+             utils/fretboard-tone-str-chord-f tones)))]]
 
        ;; Chords in progressions
        [:div
@@ -131,23 +135,47 @@
               (utils/fretboard-strings
                utils/rotate-until
                utils/all-tones
-               [:e :b :g :d :a :e]
+               (if (= :guitar tuning-name)
+                 definitions/standard-guitar-tuning
+                 definitions/standard-ukulele-tuning)
                nr-of-frets)
               (partial
                utils/fretboard-tone-str-chord-f chord-tones))]]])]])))
 
 (def routes
-  ["/v2/harmonization/:key-of/:major-or-minor/:triad-or-seventh"
-   {:name :v2/harmonization
-    :view [harmonization-view]
-    :controllers
-    [{:parameters {:path [:key-of :major-or-minor :triad-or-seventh]}
-      :start      (fn [{{:keys [key-of major-or-minor triad-or-seventh]} :path}]
-                    (let [key-of (-> key-of
-                                     (str/lower-case)
-                                     (str/replace "sharp" "#"))]
-                      (js/console.log "Entering harmonization:" key-of major-or-minor triad-or-seventh)
-                      (re-frame/dispatch [:key-of (keyword key-of)])
-                      (re-frame/dispatch [::major-or-minor (keyword major-or-minor)])
-                      (re-frame/dispatch [::triad-or-seventh (keyword triad-or-seventh)])))
-      :stop       (fn [& params] (js/console.log "Leaving harmonization"))}]}])
+  [["/v2/harmonization/:key-of/:major-or-minor/:triad-or-seventh"
+    {:name :v2/harmonization
+     :view [harmonization-view]
+     :controllers
+     [{:parameters {:path [:key-of :major-or-minor :triad-or-seventh]}
+       :start      (fn [{{:keys [key-of major-or-minor triad-or-seventh]} :path}]
+                     (let [key-of            (-> key-of
+                                                 (str/lower-case)
+                                                 (str/replace "sharp" "#"))
+                           key-of'           (keyword key-of)
+                           major-or-minor'   (keyword major-or-minor)
+                           triad-or-seventh' (keyword triad-or-seventh)]
+                       (js/console.log "Entering harmonization v2:" key-of major-or-minor triad-or-seventh)
+                       (re-frame/dispatch
+                        [:push-state
+                         :v3/harmonization
+                         {:key-of           key-of'
+                          :major-or-minor   major-or-minor'
+                          :triad-or-seventh triad-or-seventh'
+                          :instrument       @(re-frame/subscribe [:tuning-name])}])))
+       :stop       (fn [& params] (js/console.log "Leaving harmonization v2"))}]}]
+   ["/v3/:instrument/harmonization/:key-of/:major-or-minor/:triad-or-seventh"
+    {:name :v3/harmonization
+     :view [harmonization-view]
+     :controllers
+     [{:parameters {:path [:key-of :major-or-minor :triad-or-seventh :instrument]}
+       :start      (fn [{{:keys [key-of major-or-minor triad-or-seventh instrument]} :path}]
+                     (let [key-of (-> key-of
+                                      (str/lower-case)
+                                      (str/replace "sharp" "#"))]
+                       (js/console.log "Entering harmonization v3:" instrument key-of major-or-minor triad-or-seventh)
+                       (re-frame/dispatch [:key-of (keyword key-of)])
+                       (re-frame/dispatch [::major-or-minor (keyword major-or-minor)])
+                       (re-frame/dispatch [::triad-or-seventh (keyword triad-or-seventh)])
+                       (re-frame/dispatch [:tuning-name (keyword instrument)])))
+       :stop       (fn [& params] (js/console.log "Leaving harmonization v3"))}]}]])
