@@ -236,6 +236,14 @@
    -   -   3   -
    -   -   -   1")
 
+(define-chord-pattern :minor-10
+  {:name   :minor
+   :tuning standard-ukulele-tuning}
+  "1   -   -
+   5   -   -
+  b3   -   -
+   -   -   1")
+
 (define-chord-pattern :minor-1
   {:name   :minor
    :tuning standard-guitar-tuning}
@@ -265,6 +273,14 @@
    1   -   -   -
    -   -   -   -
    -   -   -   -")
+
+(define-chord-pattern :dominant-seven-10
+  {:name   :dominant-seven
+   :tuning standard-ukulele-tuning}
+  "-  b7
+   3   -
+   1   -
+   5   -")
 
 (define-chord-pattern :dominant-seven-1
   {:name   :dominant-seven
@@ -381,6 +397,14 @@
    -   -   1
    -  b5   -
    1   -   -")
+
+(define-chord-pattern :major-maj-seven-10
+  {:name   :major-maj-seven
+   :tuning standard-ukulele-tuning}
+  "7   -   -   -
+   -   5   -   -
+   -   -   3   -
+   -   -   -   1")
 
 (define-chord-pattern :major-maj-seven-6
   {:name   :major-maj-seven
