@@ -22,7 +22,9 @@
   (re-frame/reg-event-db n (or e (fn [db [_ e]] (assoc db n e)))))
 
 (defn scales-view []
-  (let [nr-of-frets      @(re-frame/subscribe [:nr-of-frets])
+  (let [tuning-name      @(re-frame/subscribe [:tuning-name])
+        tuning-tones     @(re-frame/subscribe [:tuning-tones])
+        nr-of-frets      @(re-frame/subscribe [:nr-of-frets])
         scale            @(re-frame/subscribe [::scale])
         key-of           @(re-frame/subscribe [::key-of])
         tone-or-interval @(re-frame/subscribe [::tone-or-interval])]
@@ -104,7 +106,9 @@
             (utils/fretboard-strings
              utils/rotate-until
              utils/all-tones
-             [:e :b :g :d :a :e]
+             (if (= :guitar tuning-name)
+              definitions/standard-guitar-tuning
+              definitions/standard-ukulele-tuning)
              nr-of-frets)
             (if (= tone-or-interval :tone)
               (partial
@@ -117,6 +121,7 @@
                (->> @definitions/scale-patterns-atom
                     (vals)
                     (filter (comp #{scale} :scale-pattern/scale))
+                    (filter (comp #{tuning-tones} :scale-pattern/tuning))
                     (sort-by :scale-pattern/order))]
            (when (seq scale-patterns)
              [:<>
@@ -135,7 +140,9 @@
                      (utils/fretboard-strings
                       utils/rotate-until
                       definitions/all-tones
-                      [:e :b :g :d :a :e]
+                      (if (= :guitar tuning-name)
+                        definitions/standard-guitar-tuning
+                        definitions/standard-ukulele-tuning)
                       nr-of-frets)
                      key-of
                      pattern)
