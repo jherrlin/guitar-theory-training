@@ -2,7 +2,8 @@
   (:require
    [re-frame.core :as re-frame]
    [reitit.frontend.controllers :as rfc]
-   [reitit.frontend.easy :as rfe]))
+   [reitit.frontend.easy :as rfe]
+   [v2.se.jherrlin.music-theory.definitions :as definitions]))
 
 
 (re-frame/reg-fx
@@ -46,3 +47,23 @@
           (if-not (string? n)
             n
             (js/parseInt n)))))
+
+(re-frame/reg-sub
+ :tuning-name
+ (fn [db [k]]
+   (get db k :guitar)))
+
+(re-frame/reg-event-db
+ :tuning-name
+ (fn [db [k n]]
+   (assoc db k n)))
+
+(re-frame/reg-sub
+ :tuning-tones
+ (fn [db [k]]
+   (get db k definitions/standard-guitar-tuning)))
+
+(re-frame/reg-event-db
+ :tuning-tones
+ (fn [db [k n]]
+   (assoc db k n)))

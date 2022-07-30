@@ -552,4 +552,37 @@
      15)
     (partial
      fretboard-tone-str-chord-f [:c :e :g])))
+
+
+;; Interval -> Tone
+;;        1 -> C
+;;        3 -> E
+;;        5 -> G
+
+  (print
+   (fretboard-str
+    (find-pattern
+     all-tones
+     v2.se.jherrlin.music-theory.intervals/intervals-map-by-function
+     (fretboard-strings
+      rotate-until
+      all-tones
+      [:a :e :c :g]
+      14)
+     :c
+     [[nil nil nil "1"]
+      ["3" nil nil nil]
+      ["1" nil nil nil]
+      ["5" nil nil nil]])
+    fretboard-interval-f))
+
+  (println
+   (fretboard-str
+    (fretboard-strings
+     rotate-until
+     all-tones
+     [:a :e :c :g]
+     15)
+    (partial
+     fretboard-tone-str-chord-f [:c :e :g])))
   )

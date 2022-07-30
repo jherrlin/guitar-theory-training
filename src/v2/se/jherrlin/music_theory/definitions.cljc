@@ -18,7 +18,8 @@
    #{:bb :a#}
    #{:b}])
 
-(def standard-tuning [:e :b :g :d :a :e])
+(def standard-guitar-tuning [:e :b :g :d :a :e])
+(def standard-ukulele-tuning [:a :e :c :g])
 
 ;; ---------------
 ;; State / data
@@ -189,7 +190,7 @@
 ;; --------------------
 (define-chord-pattern :major-1
   {:name   :major
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "3   -   -   -
    -   1   -   -
    5   -   -   -
@@ -197,9 +198,17 @@
    -   -   -   1
    -   -   -   -")
 
+(define-chord-pattern :major-10
+  {:name   :major
+   :tuning standard-ukulele-tuning}
+  "-   -   -   1
+   3   -   -   -
+   1   -   -   -
+   5   -   -   -")
+
 (define-chord-pattern :major-2
   {:name   :major
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "5   -   -
    -   -   3
    -   -   1
@@ -209,7 +218,7 @@
 
 (define-chord-pattern :major-3
   {:name   :major
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "1   -   -
    5   -   -
    -   3   -
@@ -219,7 +228,7 @@
 
 (define-chord-pattern :major-4
   {:name   :major
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   -   -   1
    3   -   -   -
    1   -   -   -
@@ -229,7 +238,7 @@
 
 (define-chord-pattern :minor-1
   {:name   :minor
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "1   -   -
    5   -   -
   b3   -   -
@@ -239,7 +248,7 @@
 
 (define-chord-pattern :minor-2
   {:name   :minor
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "5   -   -
    -  b3   -
    -   -   1
@@ -249,7 +258,7 @@
 
 (define-chord-pattern :minor-3
   {:name   :minor
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-  b3   -   -
    -   -   -   1
    -   -   5   -
@@ -259,7 +268,7 @@
 
 (define-chord-pattern :dominant-seven-1
   {:name   :dominant-seven
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "1   -   -
    5   -   -
    -   3   -
@@ -269,7 +278,7 @@
 
 (define-chord-pattern :dominant-seven-2
   {:name   :dominant-seven
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   -   3
    -  b7   -
    -   -   5
@@ -279,7 +288,7 @@
 
 (define-chord-pattern :dominant-seven-3
   {:name   :dominant-seven
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "
    5   -   -
    -   -   3
@@ -290,7 +299,7 @@
 
 (define-chord-pattern :minor-seven-1
   {:name   :minor-seven
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "
    5   -   -
    -  b3   -
@@ -301,7 +310,7 @@
 
 (define-chord-pattern :minor-seven-2
   {:name   :minor-seven
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "
    1   -   -
    5   -   -
@@ -312,7 +321,7 @@
 
 (define-chord-pattern :minor-seven-3
   {:name   :minor-seven
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "
    -  b3   -
    -  b7   -
@@ -323,7 +332,7 @@
 
 (define-chord-pattern :minor-seven-4
   {:name   :minor-seven
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "
    -
    5
@@ -334,7 +343,7 @@
 
 (define-chord-pattern :fifth-1
   {:name   :fifth
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-  -  -
    -  -  -
    -  -  -
@@ -344,7 +353,7 @@
 
 (define-chord-pattern :fifth-2
   {:name   :fifth
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "
    -   -   -   -
    -   -   -   1
@@ -355,7 +364,7 @@
 
 (define-chord-pattern :diminished-fifth-1
   {:name   :diminished-fifth
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   -   -
    -  b3   -
    -   -   1
@@ -365,7 +374,7 @@
 
 (define-chord-pattern :diminished-fifth-2
   {:name   :diminished-fifth
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   -   -
    -   -   -
    b3  -   -
@@ -375,7 +384,7 @@
 
 (define-chord-pattern :major-maj-seven-6
   {:name   :major-maj-seven
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "1   -   -
    5   -   -
    -   3   -
@@ -385,7 +394,7 @@
 
 (define-chord-pattern :major-maj-seven-5
   {:name   :major-maj-seven
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "5   -   -
    -   -   3
    -   7   -
@@ -395,7 +404,7 @@
 
 (define-chord-pattern :major-maj-seven-4
   {:name   :major-maj-seven
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   -   3
    -   -   7
    -   -   5
@@ -405,7 +414,7 @@
 
 (define-chord-pattern :major-maj-seven-3
   {:name   :major-maj-seven
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   -
    5   -
    -   3
@@ -514,7 +523,7 @@
 ;; ---------------
 (define-scale-pattern :pentatonic-blues-1
   {:scale  :pentatonic-blues
-   :tuning standard-tuning
+   :tuning standard-guitar-tuning
    :order  1}
   "-   -   -   -
    -   -   -   -
@@ -525,7 +534,7 @@
 
 (define-scale-pattern :pentatonic-blues-2
   {:scale  :pentatonic-blues
-   :tuning standard-tuning
+   :tuning standard-guitar-tuning
    :order  2}
   "-   -   -   -
    -   -   -   -
@@ -536,7 +545,7 @@
 
 (define-scale-pattern :pentatonic-blues-3
   {:scale  :pentatonic-blues
-   :tuning standard-tuning
+   :tuning standard-guitar-tuning
    :order  3}
   "-   -   -   -
    -  b7   -   1
@@ -547,7 +556,7 @@
 
 (define-scale-pattern :pentatonic-blues-4
   {:scale  :pentatonic-blues
-   :tuning standard-tuning
+   :tuning standard-guitar-tuning
    :order  4}
   "-  b7   -   1
    -   4  b5   5
@@ -564,7 +573,7 @@
 ;; --------------------
 (define-mode :ionian
   {:scale  :ionian
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "7   1   -   2
    -   5   -   6
    2   -   3   4
@@ -575,7 +584,7 @@
 (define-mode :ionian-6
   {:scale  :ionian
    :string 6
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   -   -   -
    -   -   -   -
    -   -   -   -
@@ -586,7 +595,7 @@
 (define-mode :ionian-5
   {:scale  :ionian
    :string 5
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   -   -   -
    -   -   -   -
    6   -   7   1
@@ -597,7 +606,7 @@
 (define-mode :ionian-4
   {:scale  :ionian
    :string 4
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   -   -   -   -
    -   6   -   7   1
    3   4   -   5   -
@@ -608,7 +617,7 @@
 (define-mode :ionian-3
   {:scale  :ionian
    :string 3
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "6   -   7   1
    3   4   -   5
    1   -   2   -
@@ -618,7 +627,7 @@
 
 (define-mode :mixolydian
   {:scale  :mixolydian
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   1   -   2   -
    -   5   -   6  b7
    2   -   3   4   -
@@ -629,7 +638,7 @@
 (define-mode :mixolydian-6
   {:scale  :mixolydian
    :string 6
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   -   -   -
    -   -   -   -
    -   -   -   -
@@ -640,7 +649,7 @@
 (define-mode :mixolydian-5
   {:scale  :mixolydian
    :string 5
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   -   -   -
    -   -   -   -
    6  b7   -   1
@@ -651,7 +660,7 @@
 (define-mode :mixolydian-4
   {:scale  :mixolydian
    :string 4
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   -   -   -   -
    -   6  b7   -   1
    3   4   -   5   -
@@ -662,7 +671,7 @@
 (define-mode :mixolydian-3
   {:scale  :mixolydian
    :string 3
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "6  b7   -   1
    3   4   -   5
    1   -   2   -
@@ -672,7 +681,7 @@
 
 (define-mode :aeolian
   {:scale  :aeolian
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   1   -   2  b3
    -   5  b6   -  b7
    2  b3   -   4   -
@@ -683,7 +692,7 @@
 (define-mode :aeolian-6
   {:scale  :aeolian
    :string 6
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   -   -   -
    -   -   -   -
    -   -   -   -
@@ -694,7 +703,7 @@
 (define-mode :aeolian-5
   {:scale  :aeolian
    :string 5
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   -   -   -
    -   -   -   -
   b7   -   1   -
@@ -705,7 +714,7 @@
 (define-mode :aeolian-4
   {:scale  :aeolian
    :string 4
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   -   -   -
    -  b7   -   1
    4   -   5  b6
@@ -716,7 +725,7 @@
 (define-mode :aeolian-3
   {:scale  :aeolian
    :string 3
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-  b7   -   1   -
    -   4   -   5  b6
    1   -   2  b3   -
@@ -726,7 +735,7 @@
 
 (define-mode :dorian
   {:scale  :dorian
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   1   -   2  b3
    -   5   -   6  b7
    2  b3   -   4   -
@@ -737,7 +746,7 @@
 (define-mode :dorian-6
   {:scale  :dorian
    :string 6
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   -   -   -   -
    -   -   -   -   -
    -   -   -   -   -
@@ -748,7 +757,7 @@
 (define-mode :dorian-5
   {:scale  :dorian
    :string 5
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   -   -   -   -
    -   -   -   -   -
    6  b7   -   1   -
@@ -759,7 +768,7 @@
 (define-mode :dorian-4
   {:scale  :dorian
    :string 4
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   -   -   -
    6  b7   -   1
    4   -   5   -
@@ -770,7 +779,7 @@
 (define-mode :dorian-3
   {:scale  :dorian
    :string 3
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "6  b7   -   1
    -   4   -   5
    1   -   2  b3
@@ -780,7 +789,7 @@
 
 (define-mode :phrygian
   {:scale  :phrygian
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "1  b2   -  b3
    5  b6   -  b7
   b3   -   4   -
@@ -791,7 +800,7 @@
 
 (define-mode :phrygian-6
   {:scale  :phrygian
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   -   -   -
    -   -   -   -
    -   -   -   -
@@ -801,7 +810,7 @@
 
 (define-mode :phrygian-5
   {:scale  :phrygian
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   -   -   -
    -   -   -   -
   b7   -   1   -
@@ -811,7 +820,7 @@
 
 (define-mode :phrygian-4
   {:scale  :phrygian
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   -   -   -
    -  b7   -   1
    4   -   5  b6
@@ -821,7 +830,7 @@
 
 (define-mode :phrygian-3
   {:scale  :phrygian
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-  b7   -   1   -
    -   4   -   5  b6
    1  b2   -  b3   -
@@ -831,7 +840,7 @@
 
 (define-mode :lydian
   {:scale  :lydian
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "7   1   -   2
   b5   5   -   6
    2   -   3   -
@@ -841,7 +850,7 @@
 
 (define-mode :lydian-6
   {:scale  :lydian
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   -   -   -
    -   -   -   -
    -   -   -   -
@@ -851,7 +860,7 @@
 
 (define-mode :lydian-5
   {:scale  :lydian
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   -   -   -
    -   -   -   -
    6   -   7   1
@@ -861,7 +870,7 @@
 
 (define-mode :lydian-4
   {:scale  :lydian
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   -   -   -   -
    -   6   -   7   1
    3   -  #4   5   -
@@ -871,7 +880,7 @@
 
 (define-mode :lydian-3
   {:scale  :lydian
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "6   -   7   1
    3   -  #4   5
    1   -   2   -
@@ -881,7 +890,7 @@
 
 (define-mode :locrian
   {:scale  :locrian
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "1  b2   -  b3
    -  b6   -  b7
   b3   -   4  b5
@@ -891,7 +900,7 @@
 
 (define-mode :locrian-6
   {:scale  :locrian
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   -   -   -
    -   -   -   -
    -   -   -   -
@@ -901,7 +910,7 @@
 
 (define-mode :locrian-5
   {:scale  :locrian
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   -   -   -
    -   -   -   -
   b7   -   1   -
@@ -911,7 +920,7 @@
 
 (define-mode :locrian-4
   {:scale  :locrian
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   -   -   -
    -  b7   -   1
    4  b5   -  b6
@@ -921,7 +930,7 @@
 
 (define-mode :locrian-3
   {:scale  :locrian
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-  b7   -   1   -
    -   4  b5   -  b6
    1  b2   -  b3   -
@@ -931,7 +940,7 @@
 
 (define-mode :mixolydian-blues-hybrid
   {:scale  :mixolydian-blues-hybrid
-   :tuning standard-tuning}
+   :tuning standard-guitar-tuning}
   "-   1   -   2  b3
    -   5   -   6  b7
    2  b3   3   4  b5
