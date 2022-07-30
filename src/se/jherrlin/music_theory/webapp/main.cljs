@@ -93,7 +93,7 @@ code lives on "
 
         [:> semantic-ui/Menu.Item
          {:as     "a"
-          :href   (rfe/href ::the-neck)
+          :href   (rfe/href :v3/neck {:instrument tuning-name})
           :active (= ::the-neck current-route-name)}
          "Neck"]
 
@@ -674,7 +674,11 @@ the org-drill mode."]
       :link-text "Home"}]
     ["the-neck"
      {:name ::the-neck
-      :view [the-neck-view]}]
+      :view [the-neck-view]
+      :controllers
+      [{:start (fn [_]
+                 (re-frame/dispatch [:push-state :v3/neck {:instrument @(re-frame/subscribe [:tuning-name])}]))
+        :stop  (fn [& params] (js/console.log "Leaving..."))}]}]
     ["chord"
      {:name      ::chord-tones-redirect
       :controllers
