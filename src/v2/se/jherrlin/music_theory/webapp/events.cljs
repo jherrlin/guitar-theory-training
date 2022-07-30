@@ -37,16 +37,19 @@
 
 (re-frame/reg-sub
  :nr-of-frets
- (fn [db]
-   (get db :nr-of-frets 16)))
+ (fn [db [k]]
+   (get db k 16)))
 
 (re-frame/reg-event-db
  :nr-of-frets
- (fn [db [_ n]]
-   (assoc db :nr-of-frets
-          (if-not (string? n)
-            n
-            (js/parseInt n)))))
+ (fn [db [k n]]
+   (assoc db k
+          (let [nr-of-frets (if-not (string? n)
+                              n
+                              (js/parseInt n))]
+            (if (<= nr-of-frets 4)
+              4
+              nr-of-frets)))))
 
 (re-frame/reg-sub
  :tuning-name
