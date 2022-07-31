@@ -298,19 +298,24 @@
         fretboard-count       (-> fretboard first count)]
     (loop [counter           0
            found-pattern-xys #{}]
-      (let [combinations
+      (let [combinations-p
             (->>  fretboard
-                  (mapv (comp vec (partial take interval-matrix-width) (partial drop counter)))
-                  (apply concat)
-                  (mapv vector (apply concat interval-matrix)))
-            box-match? (->> combinations
-                            (remove (comp nil? first))
-                            (every? (fn [[interval' {:keys [tone] :as tone'}]]
-                                      (let [interval-semitones (get-in intervals-map-by-function [interval' :semitones])
-                                            fretboard-tone     (nth
-                                                                (rotate-until #(% key-of) all-tones)
-                                                                interval-semitones)]
-                                        (= tone fretboard-tone)))))
+                  (mapv (comp vec (partial take interval-matrix-width) (partial drop counter))))
+            combinations
+            (->> combinations-p
+                 (apply concat)
+                 (mapv vector (apply concat interval-matrix)))
+            box-match?     (->> combinations
+                                (remove (comp nil? first))
+                                (every? (fn [[interval' {:keys [tone] :as tone'}]]
+                                          (let [interval-semitones (get-in intervals-map-by-function [interval' :semitones])
+                                                fretboard-tone     (nth
+                                                                    (rotate-until #(% key-of) all-tones)
+                                                                    interval-semitones)]
+                                            (and
+                                             (= (-> combinations-p first count)
+                                                interval-matrix-width)
+                                             (= tone fretboard-tone))))))
             pattern-check
             (->> combinations
                  (remove (comp nil? first))
@@ -320,7 +325,7 @@
                                                   (rotate-until #(% key-of) all-tones)
                                                   interval-semitones)]
                           (assoc tone'
-                                 :match? (= tone fretboard-tone)
+                                 :match? (and box-match? (= tone fretboard-tone))
                                  :interval interval')))))
             found-pattern-xys'
             (if-not box-match?
@@ -330,7 +335,7 @@
                    (map #(select-keys % [:x :y :interval]))
                    (set)
                    (into found-pattern-xys)))]
-        (if-not (= fretboard-count counter)
+        (if (< counter fretboard-count)
           (recur
            (inc counter)
            found-pattern-xys')
@@ -547,17 +552,16 @@
       rotate-until
       all-tones
       [:e :b :g :d :a :e]
-      14)
+      16)
      :c
-     [["3" nil nil nil]
-      [nil "1" nil nil]
-      ["5" nil nil nil]
-      [nil nil "3" nil]
-      [nil nil nil "1"]
-      [nil nil nil nil]])
-    fretboard-interval-f
-    #_fretboard-tone-str-pattern-f
-    ))
+     [[nil nil nil]
+      [nil "1" nil]
+      ["5" nil nil]
+      [nil nil "3"]
+      [nil nil nil]
+      [nil nil nil]])
+    ;; fretboard-interval-f
+    fretboard-tone-str-pattern-f))
 
   (println
    (fretboard-str
@@ -601,4 +605,23 @@
      15)
     (partial
      fretboard-tone-str-chord-f [:c :e :g])))
+
+
+
+
+  (find-pattern
+   all-tones
+   v2.se.jherrlin.music-theory.intervals/intervals-map-by-function
+   (fretboard-strings
+    rotate-until
+    all-tones
+    [:e :b :g :d :a :e]
+    16)
+   :c
+   [[nil nil nil]
+    [nil "1" nil]
+    ["5" nil nil]
+    [nil nil "3"]
+    [nil nil nil]
+    [nil nil nil]])
   )
