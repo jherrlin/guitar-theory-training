@@ -224,6 +224,22 @@
    3   4   -   5
    -   1   -   2")
 
+(defn define-triad-pattern
+  ([pattern-name pattern]
+   (define-mode pattern-name {} pattern))
+  ([pattern-name meta-data pattern]
+   (let [pattern'  (intevals-string->intervals-matrix pattern)
+         meta-data (->> meta-data
+                        (map (fn [[k v]]
+                               [(->> k name (str "triad-pattern/") keyword) v]))
+                        (into {}))]
+     (merge
+      meta-data
+      {:triad-pattern/pattern       pattern'
+       :triad-pattern/id            pattern-name
+       :triad-pattern/pattern-title (name pattern-name)
+       :triad-pattern/pattern-str   pattern}))))
+
 (defn fretboard-string [rotate-until all-tones string-tune number-of-frets]
   (->> (mapv
         (fn [x t]

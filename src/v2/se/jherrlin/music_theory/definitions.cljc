@@ -34,6 +34,9 @@
 (def chord-patterns-atom (atom {}))
 @chord-patterns-atom
 
+(def triad-patterns-atom (atom {}))
+@triad-patterns-atom
+
 (def modes-atom (atom {}))
 @modes-atom
 
@@ -86,6 +89,14 @@
    (let [mode (utils/define-mode pattern-name meta-data pattern)
          id   (get mode :mode/id)]
      (swap! modes-atom assoc id mode))))
+
+(defn define-triad-pattern
+  ([pattern-name pattern]
+   (define-triad-pattern pattern-name {} pattern))
+  ([pattern-name meta-data pattern]
+   (let [mode (utils/define-triad-pattern pattern-name meta-data pattern)
+         id   (get mode :triad-pattern/id)]
+     (swap! triad-patterns-atom assoc id mode))))
 ;; ---------------
 ;; Partial functions end.
 ;; ---------------
@@ -180,6 +191,23 @@
 ;; ---------------
 ;; Chords end
 ;; ---------------
+
+;; ---------------
+;; Triad patterns
+;; ---------------
+(define-triad-pattern :major-1
+  {:name   :major
+   :tuning standard-guitar-tuning}
+  "3   -
+   -   1
+   5   -
+   -   -
+   -   -
+   -   -")
+;; ---------------
+;; Triad patterns end
+;; ---------------
+
 
 ;; --------------------
 ;; Chord patterns

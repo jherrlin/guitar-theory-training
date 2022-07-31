@@ -148,6 +148,37 @@
                       utils/fretboard-tone-str-pattern-f
                       utils/fretboard-interval-f))]])]]))
 
+         ;; Triads
+         (let [triad-patterns (->> @definitions/triad-patterns-atom
+                                   (vals)
+                                   (filter (comp #{chord} :triad-pattern/name))
+                                   (filter (comp #{tuning-tones} :triad-pattern/tuning))
+                                   (sort-by :triad-pattern/pattern-title))]
+           (when (seq triad-patterns)
+             [:<>
+              [:h3 "Triads"]
+              [:div
+               (for [{id      :triad-pattern/id
+                      pattern :triad-pattern/pattern}
+                     triad-patterns]
+                 ^{:key (-> id name)}
+                 [:div {:style {:margin-top "2em"}}
+                  [:pre {:style {:overflow-x "auto"}}
+                   (utils/fretboard-str
+                    (utils/find-pattern
+                     definitions/all-tones
+                     intervals/intervals-map-by-function
+                     (utils/fretboard-strings
+                      utils/rotate-until
+                      definitions/all-tones
+                      tuning-tones
+                      nr-of-frets)
+                     key-of
+                     pattern)
+                    (if (= tone-or-interval :tone)
+                      utils/fretboard-tone-str-pattern-f
+                      utils/fretboard-interval-f))]])]]))
+
          ;; Scales to chord
          (let [scales-to-chord
                (let [{chord-indexes :chord/indexes}
