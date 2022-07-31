@@ -197,13 +197,136 @@
 ;; ---------------
 (define-triad-pattern :major-1
   {:name   :major
-   :tuning standard-guitar-tuning}
+   :tuning standard-guitar-tuning
+   :order 1}
   "3   -
    -   1
    5   -
    -   -
    -   -
    -   -")
+
+(define-triad-pattern :major-2
+  {:name   :major
+   :tuning standard-guitar-tuning
+   :order 2}
+  "5   -   -
+   -   -   3
+   -   -   1
+   -   -   -
+   -   -   -
+   -   -   -")
+
+(define-triad-pattern :major-3
+  {:name   :major
+   :tuning standard-guitar-tuning
+   :order 3}
+  "1   -   -
+   5   -   -
+   -   3   -
+   -   -   -
+   -   -   -
+   -   -   -")
+
+(define-triad-pattern :major-4
+  {:name   :major
+   :tuning standard-guitar-tuning
+   :order 4}
+  "-
+   3
+   1
+   5
+   -
+   -")
+
+(define-triad-pattern :major-5
+  {:name   :major
+   :tuning standard-guitar-tuning
+   :order 5}
+  "-   -   -
+   5   -   -
+   -   3   -
+   -   -   1
+   -   -   -
+   -   -   -")
+
+(define-triad-pattern :major-6
+  {:name   :major
+   :tuning standard-guitar-tuning
+   :order 6}
+  "-   -   -
+   -   1   -
+   5   -   -
+   -   -   3
+   -   -   -
+   -   -   -")
+
+(define-triad-pattern :major-7
+  {:name   :major
+   :tuning standard-guitar-tuning
+   :order 7}
+  "-   -   -
+   -   -   -
+   3   -   -
+   -   1   -
+   -   5   -
+   -   -   -")
+
+(define-triad-pattern :major-8
+  {:name   :major
+   :tuning standard-guitar-tuning
+   :order 8}
+  "-   -   -   -
+   -   -   -   -
+   5   -   -   -
+   -   -   3   -
+   -   -   -   1
+   -   -   -   -")
+
+(define-triad-pattern :major-9
+  {:name   :major
+   :tuning standard-guitar-tuning
+   :order 9}
+  "-   -   -
+   -   -   -
+   1   -   -
+   5   -   -
+   -   -   3
+   -   -   -")
+
+(define-triad-pattern :major-10
+  {:name   :major
+   :tuning standard-guitar-tuning
+   :order 10}
+  "-   -   -
+   -   -   -
+   -   -   -
+   1   -   -
+   5   -   -
+   -   -   3")
+
+(define-triad-pattern :major-11
+  {:name   :major
+   :tuning standard-guitar-tuning
+   :order 11}
+  "-   -
+   -   -
+   -   -
+   3   -
+   -   1
+   -   5")
+
+(define-triad-pattern :major-12
+  {:name   :major
+   :tuning standard-guitar-tuning
+   :order  12}
+  "-   -   -   -
+   -   -   -   -
+   -   -   -   -
+   5   -   -   -
+   -   -   3   -
+   -   -   -   1")
+
 ;; ---------------
 ;; Triad patterns end
 ;; ---------------

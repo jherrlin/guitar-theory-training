@@ -153,7 +153,7 @@
                                    (vals)
                                    (filter (comp #{chord} :triad-pattern/name))
                                    (filter (comp #{tuning-tones} :triad-pattern/tuning))
-                                   (sort-by :triad-pattern/pattern-title))]
+                                   (sort-by :triad-pattern/order))]
            (when (seq triad-patterns)
              [:<>
               [:h3 "Triads"]
