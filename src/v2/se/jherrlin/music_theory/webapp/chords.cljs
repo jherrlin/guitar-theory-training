@@ -195,7 +195,9 @@
                              (apply map merge)
                              (partition-all nr-of-frets)
                              (mapv #(mapv identity %)))
-                        utils/fretboard-tone-str-pattern-f)]]]))]
+                        (if (= tone-or-interval :tone)
+                          utils/fretboard-tone-str-pattern-f
+                          utils/fretboard-interval-f))]]]))]
                 [:div
                  (for [{id      :triad-pattern/id
                         pattern :triad-pattern/pattern}
