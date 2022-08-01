@@ -14,7 +14,9 @@
 (def events-
   [{:n ::chord}
    {:n ::tone-or-interval
-    :s (fn [db [n']] (get db n' :tone))}])
+    :s (fn [db [n']] (get db n' :tone))}
+   {:n ::combined-triads?
+    :s (fn [db [n']] (get db n' true))}])
 
 (doseq [{:keys [n s e]} events-]
   (re-frame/reg-sub n (or s (fn [db [n']] (get db n'))))
@@ -27,6 +29,7 @@
         chord            @(re-frame/subscribe [::chord])
         key-of           @(re-frame/subscribe [:key-of])
         tone-or-interval @(re-frame/subscribe [::tone-or-interval])
+        combined-triads? @(re-frame/subscribe [::combined-triads?])
         {indexes     :chord/indexes
          intervals   :chord/intervals
          explanation :chord/explanation
@@ -157,27 +160,63 @@
            (when (seq triad-patterns)
              [:<>
               [:h3 "Triads"]
-              [:div
-               (for [{id      :triad-pattern/id
-                      pattern :triad-pattern/pattern}
-                     triad-patterns]
-                 ^{:key (-> id name)}
-                 [:div {:style {:margin-top "2em"}}
-                  [:pre {:style {:overflow-x "auto"}}
-                   (utils/fretboard-str
-                    (utils/find-pattern
-                     definitions/all-tones
-                     intervals/intervals-map-by-function
-                     (utils/fretboard-strings
-                      utils/rotate-until
-                      definitions/all-tones
-                      tuning-tones
-                      nr-of-frets)
-                     key-of
-                     pattern)
-                    (if (= tone-or-interval :tone)
-                      utils/fretboard-tone-str-pattern-f
-                      utils/fretboard-interval-f))]])]]))
+              [:button {:on-click #(re-frame/dispatch [::combined-triads? (not combined-triads?)])}
+               (if combined-triads?
+                 "Separated" "Combined")]
+              (if combined-triads?
+                [:div
+                 (for [x (->> @definitions/triad-patterns-atom
+                              vals
+                              (filter (comp #{chord} :triad-pattern/name))
+                              (group-by :triad-pattern/on-strings)
+                              (vals)
+                              (reverse))]
+                   (let [tuning-tones [:e :b :g :d :a :e]
+                         nr-of-frets  16
+                         desc         (str "On strings: " (str/join "," (-> x first :triad-pattern/on-strings)))]
+                     [:<>
+                      [:div {:style {:margin-top "2em"}}
+                       ;; [:p desc]
+                       [:pre {:style {:overflow-x "auto"}}
+                        (utils/fretboard-str
+                        (->> x
+                             (map :triad-pattern/pattern)
+                             (map #(utils/find-pattern
+                                    definitions/all-tones
+                                    intervals/intervals-map-by-function
+                                    (utils/fretboard-strings
+                                     utils/rotate-until
+                                     definitions/all-tones
+                                     tuning-tones
+                                     nr-of-frets)
+                                    key-of
+                                    %))
+                             (map (partial apply concat))
+                             (apply map merge)
+                             (partition-all nr-of-frets)
+                             (mapv #(mapv identity %)))
+                        utils/fretboard-tone-str-pattern-f)]]]))]
+                [:div
+                 (for [{id      :triad-pattern/id
+                        pattern :triad-pattern/pattern}
+                       triad-patterns]
+                   ^{:key (-> id name)}
+                   [:div {:style {:margin-top "2em"}}
+                    [:pre {:style {:overflow-x "auto"}}
+                     (utils/fretboard-str
+                      (utils/find-pattern
+                       definitions/all-tones
+                       intervals/intervals-map-by-function
+                       (utils/fretboard-strings
+                        utils/rotate-until
+                        definitions/all-tones
+                        tuning-tones
+                        nr-of-frets)
+                       key-of
+                       pattern)
+                      (if (= tone-or-interval :tone)
+                        utils/fretboard-tone-str-pattern-f
+                        utils/fretboard-interval-f))]])])]))
 
          ;; Scales to chord
          (let [scales-to-chord
