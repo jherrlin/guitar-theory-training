@@ -25,7 +25,14 @@
      [:<>
       [:p "1   -   5   -   6   -   4"]
       [:p "1   -   4   -   6   -   5"]
-      [:p "1   -   4   -   5"]])])
+      [:p "1   -   4   -   5"]])
+
+   (when (and (= major-or-minor :minor) (= triad-or-seventh :triad))
+     [:<>
+      [:p "1   -   6   -   3   -   7"]
+      [:p "1   -   6   -   3   -   4"]
+      [:p "1   -   4   -   5"]
+      [:p "1   -   4   -   1   -   6   -   5   -   [7]   -   1  # 12 bar blues"]])])
 
 (defn harmonization-view []
   (let [tuning-name      @(re-frame/subscribe [:tuning-name])

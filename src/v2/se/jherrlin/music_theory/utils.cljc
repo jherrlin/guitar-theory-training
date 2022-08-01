@@ -127,14 +127,22 @@
   ([pattern-name pattern]
    (define-chord-pattern pattern-name {} pattern))
   ([pattern-name meta-data pattern]
-   (let [pattern'  (intevals-string->intervals-matrix pattern)
-         meta-data (->> meta-data
-                        (map (fn [[k v]]
-                               [(->> k name (str "chord-pattern/") keyword) v]))
-                        (into {}))]
+   (let [pattern'   (intevals-string->intervals-matrix pattern)
+         meta-data  (->> meta-data
+                         (map (fn [[k v]]
+                                [(->> k name (str "chord-pattern/") keyword) v]))
+                         (into {}))
+         inversion? (->> pattern'
+                         (reverse)
+                         (apply concat)
+                         (remove nil?)
+                         (first)
+                         (= "1")
+                         (not))]
      (merge
       meta-data
-      {:chord/pattern       pattern'
+      {:chord/inversion?    inversion?
+       :chord/pattern       pattern'
        :chord/pattern-id    pattern-name
        :chord/pattern-title (name pattern-name)
        :chord/pattern-str   pattern}))))
@@ -239,10 +247,18 @@
                          (filter (fn [[string-idx intervals-on-string]]
                                    (some seq intervals-on-string)))
                          (map (fn [[string-idx _]] string-idx))
-                         (vec))]
+                         (vec))
+         inversion? (->> pattern'
+                         (reverse)
+                         (apply concat)
+                         (remove nil?)
+                         (first)
+                         (= "1")
+                         (not))]
      (merge
       meta-data
-      {:triad-pattern/on-strings    on-strings
+      {:triad-pattern/inversion?    inversion?
+       :triad-pattern/on-strings    on-strings
        :triad-pattern/pattern       pattern'
        :triad-pattern/id            pattern-name
        :triad-pattern/pattern-title (name pattern-name)
