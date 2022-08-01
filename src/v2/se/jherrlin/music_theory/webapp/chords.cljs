@@ -162,7 +162,7 @@
               [:h3 "Triads"]
               [:button {:on-click #(re-frame/dispatch [::combined-triads? (not combined-triads?)])}
                (if combined-triads?
-                 "Separated" "Combined")]
+                 "Separated patterns" "Combined patterns")]
               (if combined-triads?
                 [:div
                  (for [x (->> @definitions/triad-patterns-atom
@@ -170,7 +170,8 @@
                               (filter (comp #{chord} :triad-pattern/name))
                               (group-by :triad-pattern/on-strings)
                               (vals)
-                              (reverse))]
+                              (reverse)
+                              (sort-by (comp #(apply + %) :triad-pattern/on-strings first)))]
                    (let [tuning-tones [:e :b :g :d :a :e]
                          nr-of-frets  16
                          desc         (str "On strings: " (str/join "," (-> x first :triad-pattern/on-strings)))]
@@ -179,25 +180,25 @@
                        ;; [:p desc]
                        [:pre {:style {:overflow-x "auto"}}
                         (utils/fretboard-str
-                        (->> x
-                             (map :triad-pattern/pattern)
-                             (map #(utils/find-pattern
-                                    definitions/all-tones
-                                    intervals/intervals-map-by-function
-                                    (utils/fretboard-strings
-                                     utils/rotate-until
+                         (->> x
+                              (map :triad-pattern/pattern)
+                              (map #(utils/find-pattern
                                      definitions/all-tones
-                                     tuning-tones
-                                     nr-of-frets)
-                                    key-of
-                                    %))
-                             (map (partial apply concat))
-                             (apply map merge)
-                             (partition-all nr-of-frets)
-                             (mapv #(mapv identity %)))
-                        (if (= tone-or-interval :tone)
-                          utils/fretboard-tone-str-pattern-f
-                          utils/fretboard-interval-f))]]]))]
+                                     intervals/intervals-map-by-function
+                                     (utils/fretboard-strings
+                                      utils/rotate-until
+                                      definitions/all-tones
+                                      tuning-tones
+                                      nr-of-frets)
+                                     key-of
+                                     %))
+                              (map (partial apply concat))
+                              (apply map merge)
+                              (partition-all nr-of-frets)
+                              (mapv #(mapv identity %)))
+                         (if (= tone-or-interval :tone)
+                           utils/fretboard-tone-str-pattern-f
+                           utils/fretboard-interval-f))]]]))]
                 [:div
                  (for [{id      :triad-pattern/id
                         pattern :triad-pattern/pattern}
