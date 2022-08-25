@@ -193,6 +193,24 @@
   {:sufix       "6"
    :explanation "sixth"}
   "1 3 5 6")
+
+(define-chord :ninth
+  {:sufix       "9"
+   :explanation "ninth # fifth is the least important tone, it may be ignored"
+   :text        "The most important tones are 3 b7 and 9"}
+  "1 3 5 b7 9")
+
+(define-chord :maj-ninth
+  {:sufix       "Maj 9"
+   :explanation "Maj ninth # fifth is the least important tone, it may be ignored"
+   :text        "The most important tones are 3 7 and 9"}
+  "1 3 5 7 9")
+
+(define-chord :minor-ninth
+  {:sufix       "m9"
+   :explanation "Maj ninth # fifth is the least important tone, it may be ignored"
+   :text        "The most important tones are b3 b7 and 9"}
+  "1 b3 5 b7 9")
 ;; ---------------
 ;; Chords end
 ;; ---------------
@@ -831,6 +849,16 @@
    -   3   -
    -   -   -
    -   -   -")
+
+(define-chord-pattern :ninth-1
+  {:name   :ninth
+   :tuning standard-guitar-tuning}
+  "-   5
+   -   9
+   -  b7
+   3   -
+   -   1
+   -   -")
 ;; --------------------
 ;; Chord patterns end
 ;; --------------------

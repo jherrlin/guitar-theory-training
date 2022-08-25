@@ -20,6 +20,7 @@
 (def diminished-seventh 9)
 (def minor-seventh      10)
 (def major-seventh      11)
+(def ninth              major-second)
 (def octave             perfect-unison)
 (def perfect-octave     perfect-unison)
 
@@ -80,7 +81,10 @@
     :name      "Minor seventh"}
    {:semitones major-seventh
     :function  "7"
-    :name      "Major seventh"}])
+    :name      "Major seventh"}
+   {:semitones ninth
+    :function  "9"
+    :name      "Ninth"}])
 
 (def intervals-map-by-function
   (->> (intervals)
