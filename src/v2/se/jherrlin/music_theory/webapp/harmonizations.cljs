@@ -25,7 +25,7 @@
      [:<>
       [:p "1   -   5   -   6   -   4"]
       [:p "1   -   4   -   6   -   5"]
-      [:p "1   -   4   -   5"]])
+      [:p "1   -   4   -   5           # Used in the 12 bar blues progressions"]])
 
    (when (and (= major-or-minor :minor) (= triad-or-seventh :triad))
      [:<>
