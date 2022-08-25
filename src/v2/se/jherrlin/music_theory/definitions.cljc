@@ -188,6 +188,11 @@
   {:sufix       "dim7"
    :explanation "diminished seven"}
   "1 b3 b5 bb7")
+
+(define-chord :sixth
+  {:sufix       "6"
+   :explanation "sixth"}
+  "1 3 5 6")
 ;; ---------------
 ;; Chords end
 ;; ---------------
@@ -756,6 +761,76 @@
    -   7
    -   -
    1   -")
+
+(define-chord-pattern :sixth-1
+  {:name   :sixth
+   :tuning standard-guitar-tuning}
+  "1   -   -
+   -   -   6
+   -   3   -
+   -   -   1
+   -   -   -
+   -   -   -")
+
+(define-chord-pattern :sixth-2
+  {:name   :sixth
+   :tuning standard-guitar-tuning}
+  "-   -   6
+   -   -   3
+   -   -   1
+   -   -   5
+   1   -   -
+   -   -   -")
+
+(define-chord-pattern :sixth-3
+  {:name   :sixth
+   :tuning standard-guitar-tuning}
+  "6   -   -
+   3   -   -
+   1   -   -
+   5   -   -
+   -   -   3
+   6   -   -")
+
+(define-chord-pattern :sixth-4
+  {:name   :sixth
+   :tuning standard-guitar-tuning}
+  "-   1   -
+   -   5   -
+   -   -   3
+   6   -   -
+   -   -   -
+   -   -   -")
+
+(define-chord-pattern :sixth-5
+  {:name   :sixth
+   :tuning standard-guitar-tuning}
+  "-   -   3
+   6   -   -
+   -   -   5
+   1   -   -
+   -   -   -
+   -   -   -")
+
+(define-chord-pattern :sixth-6
+  {:name   :sixth
+   :tuning standard-guitar-tuning}
+  "3   -   -
+   -   1   -
+   5   -   -
+   -   -   3
+   6   -   -
+   3   -   -")
+
+(define-chord-pattern :sixth-7
+  {:name   :sixth
+   :tuning standard-guitar-tuning}
+  "-   -   5
+   1   -   -
+   -   6   -
+   -   3   -
+   -   -   -
+   -   -   -")
 ;; --------------------
 ;; Chord patterns end
 ;; --------------------
