@@ -859,6 +859,26 @@
    3   -
    -   1
    -   -")
+
+(define-chord-pattern :ninth-2
+  {:name   :ninth
+   :tuning standard-guitar-tuning}
+  "-   9   -
+   -   -  b7
+   3   -   -
+   -   1   -
+   -   -   -
+   -   -   -")
+
+(define-chord-pattern :ninth-3
+  {:name   :ninth
+   :tuning standard-guitar-tuning}
+  "-   -
+   -   -
+   9   -
+   -  b7
+   3   -
+   -   1")
 ;; --------------------
 ;; Chord patterns end
 ;; --------------------
