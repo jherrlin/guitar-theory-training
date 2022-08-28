@@ -191,25 +191,32 @@
 
 (define-chord :sixth
   {:sufix       "6"
-   :explanation "sixth"}
+   :explanation "sixth"
+   :text        "There are 4 tones in sixth chords."}
   "1 3 5 6")
+
+(define-chord :minor-sixth
+  {:sufix       "m6"
+   :explanation "minor sixth"
+   :text        "There are 4 tones in sixth chords."}
+  "1 b3 5 6")
 
 (define-chord :ninth
   {:sufix       "9"
-   :explanation "ninth # fifth is the least important tone, it may be ignored"
-   :text        "The most important tones are 3 b7 and 9"}
+   :explanation "ninth"
+   :text        "The most important tones are 1, 3, b7 and 9. The 5 can be ignored in the chord."}
   "1 3 5 b7 9")
 
 (define-chord :maj-ninth
-  {:sufix       "Maj 9"
-   :explanation "Maj ninth # fifth is the least important tone, it may be ignored"
-   :text        "The most important tones are 3 7 and 9"}
+  {:sufix       "maj9"
+   :explanation "Maj ninth"
+   :text        "The most important tones are 1, 3, 7 and 9. The 5 can be ignored in the chord."}
   "1 3 5 7 9")
 
 (define-chord :minor-ninth
   {:sufix       "m9"
    :explanation "Maj ninth # fifth is the least important tone, it may be ignored"
-   :text        "The most important tones are b3 b7 and 9"}
+   :text        "The most important tones are 1, b3, b7 and 9. The 5 can be ignored in the chord."}
   "1 b3 5 b7 9")
 ;; ---------------
 ;; Chords end

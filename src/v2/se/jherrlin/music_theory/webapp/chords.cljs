@@ -33,7 +33,8 @@
         {indexes     :chord/indexes
          intervals   :chord/intervals
          explanation :chord/explanation
-         sufix       :chord/sufix}
+         sufix       :chord/sufix
+         text        :chord/text}
         (get-in @definitions/chords-atom [chord])]
     (when (and chord key-of)
       (let [tones ((utils/juxt-indexes-and-intervals indexes intervals)
@@ -78,6 +79,9 @@
           [:p {:style {:margin-left "4em"
                        :margin-top  "0.5em"}}
            (str "(" explanation ")")]]
+
+         (when text
+           [:p text])
 
          ;; Intervals
          [:pre {:style {:overflow-x "auto"}}
