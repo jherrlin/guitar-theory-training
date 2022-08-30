@@ -179,6 +179,16 @@
    :explanation "5th"}
   "1 5")
 
+(define-chord :diminished-whole
+  {:sufix       "°"
+   :explanation "diminished whole"}
+  "1 b3 b5 bb7")
+
+(define-chord :diminished-half
+  {:sufix       "Ø"
+   :explanation "diminished half"}
+  "1 b3 b5 b7")
+
 (define-chord :diminished-fifth
   {:sufix       "dim"
    :explanation "diminished fifth"}
