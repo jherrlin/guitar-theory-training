@@ -77,10 +77,17 @@
                               (cond-> {:tone tone}
                                 (seq (set/intersection tones-set tone))
                                 (assoc :match? true))))))]
-            ^{:key (str tone)}
+            ^{:key (str tone "somekey")}
             [:div {:style {:width     "4.5em"
                            :font-size "0.9em"}}
-             (for [t' tone]
+             (for [t' (sort-by (fn [x]
+                                 (let [x (str x)]
+                                   (cond
+                                     (and (= (count x) 3) (str/includes? x "#"))
+                                     1
+                                     (= (count x) 3)
+                                     2
+                                     :else 0))) tone)]
                ^{:key (str tone t')}
                [:div {:style {:margin-top "0em"}}
                 [:div

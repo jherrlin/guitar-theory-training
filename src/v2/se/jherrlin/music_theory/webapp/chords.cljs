@@ -64,7 +64,7 @@
                 (->> @definitions/chords-atom
                      vals
                      (sort-by :chord/order))]
-            ^{:key (str sufix "-chord")}
+            ^{:key (str id sufix "-chord")}
             [:div {:style {:margin-right "10px" :display "inline"}}
              [:a {:href (rfe/href :v3/chord {:key-of key-of :chord-name id :instrument tuning-name})}
               [:button
@@ -83,10 +83,17 @@
                               (cond-> {:tone tone}
                                 (seq (set/intersection tones-set tone))
                                 (assoc :match? true))))))]
-            ^{:key (str tone)}
+            ^{:key (str tone "something")}
             [:div {:style {:width     "4.5em"
                            :font-size "0.9em"}}
-             (for [t' tone]
+             (for [t' (sort-by (fn [x]
+                                 (let [x (str x)]
+                                   (cond
+                                     (and (= (count x) 3) (str/includes? x "#"))
+                                     1
+                                     (= (count x) 3)
+                                     2
+                                     :else 0))) tone)]
                ^{:key (str tone t')}
                [:div {:style {:margin-top "0em"}}
                 [:div
@@ -199,9 +206,11 @@
                               (vals)
                               (reverse)
                               (sort-by (comp #(apply + %) :triad-pattern/on-strings first)))]
+                   ^{:key (str "triad-" x)}
                    (let [tuning-tones [:e :b :g :d :a :e]
                          nr-of-frets  16
                          desc         (str "On strings: " (str/join "," (-> x first :triad-pattern/on-strings)))]
+                     ^{:key (str "triad-" x)}
                      [:<>
                       [:div {:style {:margin-top "2em"}}
                        ;; [:p desc]
