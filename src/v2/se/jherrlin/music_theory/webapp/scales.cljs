@@ -64,7 +64,6 @@
               [:button
                {:disabled (= scale id)}
                title]]])]
-         [:br]
 
          ;; Highlight tones
          [:div {:style {:margin-top  "1em"
@@ -92,7 +91,7 @@
          ;; Scale name
          (let [{title :scale/title}
                (get @definitions/scales-atom scale)]
-           [:div
+           [:div {:style {:margin-top "1em"}}
             [:h2 (str (-> key-of name str/capitalize) " - " (-> title str/capitalize))]])
          [:br]
 
