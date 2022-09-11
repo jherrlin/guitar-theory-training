@@ -228,6 +228,26 @@
    :explanation "Maj ninth # fifth is the least important tone, it may be ignored"
    :text        "The most important tones are 1, b3, b7 and 9. The 5 can be ignored in the chord."}
   "1 b3 5 b7 9")
+
+(define-chord :minor-add9
+  {:sufix       "m(add9)"
+   :explanation "minor with an added 9"}
+  "1 b3 5 9")
+
+(define-chord :minor-flat6
+  {:sufix       "mb6"
+   :explanation "minor with an added flat 6"}
+  "1 b3 5 b6")
+
+(define-chord :minor-seven-flat5
+  {:sufix       "m7b5"
+   :explanation "minor seventh with a flat 5"}
+  "1 b3 b5 b7")
+
+(define-chord :minor-sixth-added9
+  {:sufix       "m6/9"
+   :explanation "minor sixth with an added 9"}
+  "1 b3 5 6 9")
 ;; ---------------
 ;; Chords end
 ;; ---------------
