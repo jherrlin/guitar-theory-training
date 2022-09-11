@@ -79,7 +79,8 @@
                                 (seq (set/intersection tones-set tone))
                                 (assoc :match? true))))))]
             ^{:key (str tone)}
-            [:div {:style {:width "3em"}}
+            [:div {:style {:width     "4.5em"
+                           :font-size "0.9em"}}
              (for [t' tone]
                ^{:key (str tone t')}
                [:div {:style {:margin-top "0em"}}
