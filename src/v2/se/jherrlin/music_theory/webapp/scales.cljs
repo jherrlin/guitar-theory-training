@@ -66,6 +66,28 @@
                title]]])]
          [:br]
 
+         ;; Highlight tones
+         [:div {:style {:margin-top  "1em"
+                        :display     "flex"
+                        :align-items "center"}}
+          (for [{:keys [tone match?]}
+                (let [tones-set (set tones)]
+                  (->> utils/all-tones
+                       (utils/rotate-until #(% key-of))
+                       (map (fn [tone]
+                              (cond-> {:tone tone}
+                                (seq (set/intersection tones-set tone))
+                                (assoc :match? true))))))]
+            ^{:key (str tone)}
+            [:div {:style {:width "3em"}}
+             (for [t' tone]
+               ^{:key (str tone t')}
+               [:div {:style {:margin-top "0em"}}
+                [:div
+                 {:style {:color       (if-not match? "grey")
+                          :font-weight (if match? "bold")}}
+                 (-> t' name str/capitalize)]])])]
+
          ;; Scale name
          (let [{title :scale/title}
                (get @definitions/scales-atom scale)]
