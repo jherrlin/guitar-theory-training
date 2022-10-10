@@ -916,6 +916,47 @@
    -  b7
    3   -
    -   1")
+
+(define-chord-pattern :minor-seven-flat-5-1
+  {:name   :minor-seven-flat-5
+   :tuning standard-guitar-tuning}
+  "-   -
+  b5   -
+   -  b3
+   -  b7
+   -   -
+   -   1")
+
+(define-chord-pattern :minor-seven-flat-5-2
+  {:name   :minor-seven-flat-5
+   :tuning standard-guitar-tuning}
+  "-   -
+   -  b3
+  b7   -
+   -  b5
+   1   -
+   -   -")
+
+(define-chord-pattern :minor-seven-flat-5-3
+  {:name   :minor-seven-flat-5
+   :tuning standard-guitar-tuning}
+  "-   1
+  b5   -
+   -  b3
+   -  b7
+   -   -
+   -   -")
+
+(define-chord-pattern :minor-seven-flat-5-4
+  {:name   :minor-seven-flat-5
+   :tuning standard-guitar-tuning}
+  "-  b3
+   -  b7
+   -  b5
+   1   -
+   -   -
+   -   -")
+
 ;; --------------------
 ;; Chord patterns end
 ;; --------------------
