@@ -32,7 +32,8 @@
       [:p "1   -   6   -   3   -   7"]
       [:p "1   -   6   -   3   -   4"]
       [:p "1   -   4   -   5"]
-      [:p "1   -   4   -   1   -   6   -   5   -   [7]   -   1  # 12 bar blues"]])])
+      [:p "1   -   4   -   1   -   6   -   5   -   [7]   -   1  # 12 bar blues"]
+      [:p "2   -   5   -   1     # Replace 5 with a dominant chord."]])])
 
 (defn harmonization-view []
   (let [tuning-name      @(re-frame/subscribe [:tuning-name])
