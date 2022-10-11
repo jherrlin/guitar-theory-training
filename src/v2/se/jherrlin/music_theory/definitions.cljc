@@ -239,11 +239,6 @@
    :explanation "minor with an added flat 6"}
   "1 b3 5 b6")
 
-(define-chord :minor-seven-flat5
-  {:sufix       "m7b5"
-   :explanation "minor seventh with a flat 5"}
-  "1 b3 b5 b7")
-
 (define-chord :minor-sixth-added9
   {:sufix       "m6/9"
    :explanation "minor sixth with an added 9"}
