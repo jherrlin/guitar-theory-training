@@ -91,8 +91,18 @@
        (map str/trim)
        (mapv (fn [line]
                (->> line
-                    (re-seq #"(b{0,2}#{0,2}\d)|-")
+                    (re-seq #"(b{0,2}#{0,2}\d{1,2})|-")
                     (mapv (comp #(when-not (= "-" %) %) first)))))))
+
+(comment
+  (intevals-string->intervals-matrix
+  "3   -
+   -   1
+   5   -
+   -   -
+   -   -
+   -   -")
+  )
 
 (defn tones-and-intervals [tones intervals]
   {:pre [(= (count tones) (count intervals))]}
@@ -102,11 +112,18 @@
    tones
    intervals))
 
+(comment
+  (->> "1 b3 b5 bb7"
+       (re-seq #"b{0,2}#{0,2}\d{1,2}")
+       (vec))
+  )
+
+
 (defn define-chord
   ([intervals-map chord-id intervals-str]
    (define-chord intervals-map chord-id {} intervals-str))
   ([intervals-map chord-id meta-data intervals-str]
-   (let [intervals (->> (re-seq #"b{0,2}#{0,2}\d" intervals-str)
+   (let [intervals (->> (re-seq #"b{0,2}#{0,2}\d{1,2}" intervals-str)
                         (vec))
          indexes   (->> intervals
                         (mapv #(get-in intervals-map [% :semitones])))]
@@ -182,7 +199,7 @@
   ([intervals-map scale-id intervals-str]
    (define-scale intervals-map scale-id {} intervals-str))
   ([intervals-map scale-id meta-data intervals-str]
-   (let [intervals (->> (re-seq #"b{0,2}#{0,2}\d" intervals-str)
+   (let [intervals (->> (re-seq #"b{0,2}#{0,2}\d{1,2}" intervals-str)
                         (vec))
          indexes   (->> intervals
                         (mapv #(get-in intervals-map [% :semitones])))]

@@ -106,9 +106,10 @@
                         :height     "100%"
                         :display    "inline-flex"}}
           [:h2 (str (-> key-of name str/capitalize) sufix)]
-          [:p {:style {:margin-left "4em"
-                       :margin-top  "0.5em"}}
-           (str "(" explanation ")")]]
+          (when explanation
+            [:p {:style {:margin-left "4em"
+                         :margin-top  "0.5em"}}
+             (str "(" explanation ")")])]
 
          (when text
            [:p text])

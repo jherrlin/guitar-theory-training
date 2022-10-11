@@ -243,6 +243,14 @@
   {:sufix       "m6/9"
    :explanation "minor sixth with an added 9"}
   "1 b3 5 6 9")
+
+(define-chord :eleventh
+  {:sufix "11"}
+  "1 3 5 7 9 11")
+
+(define-chord :thirteen
+  {:sufix "13"}
+  "1 3 5 7 9 11 13")
 ;; ---------------
 ;; Chords end
 ;; ---------------
