@@ -952,6 +952,16 @@
    -   -
    -   -")
 
+(define-chord-pattern :minor-ninth-1
+  {:name   :minor-ninth
+   :tuning standard-guitar-tuning}
+  "-   -   -
+   -   -   9
+   -   -  b7
+  b3   -   -
+   -   -   1
+   -   -   -")
+
 ;; --------------------
 ;; Chord patterns end
 ;; --------------------
