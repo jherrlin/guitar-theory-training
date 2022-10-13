@@ -960,6 +960,16 @@
    -   -
    -   -")
 
+(define-chord-pattern :minor-seven-flat-5-5
+  {:name   :minor-seven-flat-5
+   :tuning standard-guitar-tuning}
+  "-  b5   -
+   1   -   -
+   -   -  b7
+  b3   -   -
+   -   -   -
+   -   -   -")
+
 (define-chord-pattern :minor-ninth-1
   {:name   :minor-ninth
    :tuning standard-guitar-tuning}
