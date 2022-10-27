@@ -687,6 +687,17 @@
    1   -   -
    -   -   -")
 
+(define-chord-pattern :dominant-seven-4
+  {:name   :dominant-seven
+   :tuning standard-guitar-tuning}
+  "
+   1   -   -   -
+   -   -   -  b7
+   -   3   -   -
+   -   -   1   -
+   -   -   5   -
+   1   -   -   -")
+
 (define-chord-pattern :minor-seven-1
   {:name   :minor-seven
    :tuning standard-guitar-tuning}
