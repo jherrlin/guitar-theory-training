@@ -12,3 +12,9 @@ to learn new things.
 * Develop
 
   Run the project with shadow-cljs.
+
+* Test suite
+
+  #+BEGIN_SRC shell
+    clojure -A:test:runner
+  #+END_SRC

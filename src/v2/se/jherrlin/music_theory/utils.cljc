@@ -24,6 +24,11 @@
   (let [[l r] (split-at index lst)]
     (concat l [elem] r)))
 
+(list-insert
+ 0
+ 3
+ [1 2 3 4])
+
 (defn rotate-until
   [pred xs]
   {:pre [(fn? pred) (coll? xs)]}
@@ -103,14 +108,6 @@
    -   -
    -   -")
   )
-
-(defn tones-and-intervals [tones intervals]
-  {:pre [(= (count tones) (count intervals))]}
-  (map
-   (fn [t i]
-     (sharp-or-flat t i))
-   tones
-   intervals))
 
 (comment
   (->> "1 b3 b5 bb7"
