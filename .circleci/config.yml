@@ -14,6 +14,7 @@ jobs:
           fingerprints:
             - "6a:34:9d:06:d9:29:cb:ca:f7:37:49:09:6b:df:29:0a"
       - checkout
+      - run: clojure -P
       - run: clojure -M:test
       - run: sudo npm install -g shadow-cljs
       - run: npm install
