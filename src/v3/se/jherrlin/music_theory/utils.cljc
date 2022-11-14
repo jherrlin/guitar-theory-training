@@ -164,9 +164,11 @@
   In:  `[[1 2 3] [3 4 5] [6 7 8]]`
   Out: `[[1 3 6] [2 4 7] [3 5 8]]`"
   [matrix]
-  (->> matrix
+  (if-not (seq matrix)
+    matrix
+    (->> matrix
        (apply mapv vector)
-       (mapv identity)))
+       (mapv identity))))
 
 (rotate-matrix
  [["3" nil nil]
@@ -182,27 +184,29 @@
   ([fretboard-matrix]
    (trim-matrix (partial every? nil?) fretboard-matrix))
   ([pred fretboard-matrix]
-   (let [rotated (rotate-matrix fretboard-matrix)
-         first?  (->> rotated first pred)
-         last?   (->> rotated last pred)]
-    (cond
-      (and first? last?)
-      (->> rotated
-           (drop 1)
-           (drop-last 1)
-           (rotate-matrix)
-           (trim-matrix pred))
-      (and first? (not last?))
-      (->> rotated
-           (drop 1)
-           (rotate-matrix)
-           (trim-matrix pred))
-      (and (not first?) last?)
-      (->> rotated
-           (drop-last 1)
-           (rotate-matrix)
-           (trim-matrix pred))
-      :else fretboard-matrix))))
+   (if (empty? fretboard-matrix)
+     fretboard-matrix
+     (let [rotated (rotate-matrix fretboard-matrix)
+           first?  (->> rotated first pred)
+           last?   (->> rotated last pred)]
+     (cond
+       (and first? last?)
+       (->> rotated
+            (drop 1)
+            (drop-last 1)
+            (rotate-matrix)
+            (trim-matrix pred))
+       (and first? (not last?))
+       (->> rotated
+            (drop 1)
+            (rotate-matrix)
+            (trim-matrix pred))
+       (and (not first?) last?)
+       (->> rotated
+            (drop-last 1)
+            (rotate-matrix)
+            (trim-matrix pred))
+       :else fretboard-matrix)))))
 
 (trim-matrix
  [["3" nil nil]
@@ -423,6 +427,28 @@
   [3]])
 
 
+
+(defn intervals->tones
+  [all-tones sharp-or-flat rotate-until intervals-map-by-function key-of intervals]
+  (let [rotated-tones (rotate-until #(% key-of) all-tones)]
+    (->> intervals
+         (mapv
+          (fn [interval]
+            (let [interval-index (get-in intervals-map-by-function [interval :semitones])]
+              (sharp-or-flat
+               (nth rotated-tones interval-index)
+               interval)))))))
+
+(intervals->tones
+ all-tones
+ sharp-or-flat
+ rotate-until
+ v2.se.jherrlin.music-theory.intervals/intervals-map-by-function
+ :c
+ ["1" "b3" "5"])
+
+
+
 (defn add-layer [f fretboard-matrix]
   (map-matrix #(assoc % :out (f %)) fretboard-matrix))
 
@@ -482,8 +508,8 @@
        [:e :b :g :d :a :e]
        4)
      (add-layer
-      #_(partial add-chord-tones [:e :b :g])
-      (partial add-intervals [[:e "1"] [:b "b3"] [:g "5"]])))
+      (partial add-chord-tones [:e :b :g])
+      #_(partial add-intervals [[:e "1"] [:b "b3"] [:g "5"]])))
 
 
 (defn fretboard-str
@@ -534,7 +560,7 @@
       #_add-flats
       #_add-sharps
       add-pattern)
-     (trim-matrix #(every? nil? (map :out %))) ;; Trim fretboard
+     ;; (trim-matrix #(every? nil? (map :out %))) ;; Trim fretboard
      (fretboard-str (fn [{:keys [out]}] (if (nil? out) "" out)))
      (println))
 
@@ -557,21 +583,15 @@
       #_add-flats
       #_add-sharps
       add-pattern)
-     (trim-matrix #(every? nil? (map :out %))) ;; Trim fretboard
+     ;; (trim-matrix #(every? nil? (map :out %))) ;; Trim fretboard
      (fretboard-str (fn [{:keys [out]}] (if (nil? out) "" out)))
      (println))
 
+
+
 ;; REPL stuff below line
 
-(defn fretboard-tone-str-chord-f-1 [chord-tones {:keys [x y tone pattern-match? interval] :as m}]
-  (if-let [tone' (first (set/intersection (set chord-tones) tone))]
-     (assoc m :str (-> tone' name str/capitalize))
-     m))
 
-
-
-
-(def all-tones [#{:c} #{:db :c#} #{:d} #{:d# :eb} #{:e} #{:f} #{:gb :f#} #{:g} #{:g# :ab} #{:a} #{:bb :a#} #{:b}])
 
 
 (let [tones     [:d :f# :a]
@@ -590,9 +610,6 @@
 
 
 
-(partial utils-v2/fretboard-tone-str-chord-f all-tones)
-
-
 
 
 
@@ -603,3 +620,31 @@
   (->> strings
        (map-matrix (partial fretboard-tone-str-chord-f-1 [:c :e :g])))
   )
+
+
+
+
+;; Find the chord, cartesian product of all chords and key-of
+(->> (for [{:chord/keys [intervals] :as chord} (vals @v2.se.jherrlin.music-theory.definitions/chords-atom)
+           tone                                (apply concat all-tones)]
+       (let [tones (intervals->tones
+                    all-tones
+                    sharp-or-flat
+                    rotate-until
+                    v2.se.jherrlin.music-theory.intervals/intervals-map-by-function
+                    tone
+                    intervals)]
+         (assoc chord :key-of tone :tones (set tones))))
+     (group-by :tones)
+     ;; (map (fn [[a b]] [a (count b)]))
+     ;; (sort-by  second #(compare %2 %1))
+     )
+
+
+
+(->> (for [{:chord/keys [intervals indexes] :as chord} (vals @v2.se.jherrlin.music-theory.definitions/chords-atom)
+           tone                                        (apply concat all-tones)]
+       (assoc chord :derp (->> ((juxt-indexes indexes)
+                                (rotate-until #(% tone) all-tones))
+                               (apply concat)
+                               (set)))))
