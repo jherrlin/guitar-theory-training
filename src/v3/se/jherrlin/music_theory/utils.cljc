@@ -70,6 +70,27 @@
  12)
 
 
+(defn fretboard-strings
+  "Generate freatboard matrix.
+
+  `all-tones`        - A collection of all the tones
+  `tunings`          - Tuning on strings
+  `number-of-frets`  - Width of the freatboard"
+  [all-tones string-tunes number-of-frets]
+  (->> string-tunes
+       (mapv
+        (fn [y string-tune]
+          (mapv
+           #(assoc % :y y)
+           (fretboard-string all-tones string-tune number-of-frets)))
+        (iterate inc 0))))
+
+(fretboard-strings
+ all-tones
+ [:e :b :g :d :a :e]
+ 2)
+
+
 
 (defn gen-fretboard-matrix
   "Generate a matrix that represents the fretboard.
@@ -331,7 +352,12 @@
 
 
 
-(defn match-chord-with-scales [scales-map chord-indexes]
+(defn match-chord-with-scales
+  "Find what scales that works with a chord, by the chord indexes.
+
+  `scales-map`     - Map with scales
+  `chord-indexes`  - Seq with chord indexes, example: `[0 4 7]`"
+  [scales-map chord-indexes]
   (->> scales-map
        (vals)
        (filter (fn [scale]
@@ -391,23 +417,24 @@
 
 
 (defn chord-name
-  [chords-map all-tones chord-tones]
+  [all-tones chords-map chord-tones]
   (let [root-tone             (first chord-tones)
         {:chord/keys [sufix]} (find-chord chords-map all-tones chord-tones)]
     (str (-> root-tone name str/lower-case str/capitalize) sufix)))
 
 (chord-name
-   {:major
-    #:chord{:id           :major,
-            :intervals    ["1" "3" "5"],
-            :indexes      [0 4 7],
-            :title        "major",
-            :order        1,
-            :sufix        "",
-            :explanation  "major",
-            :display-text "major"}}
-   all-tones
-   [:c :e :g])
+ all-tones
+ {:major
+  #:chord{:id           :major,
+          :intervals    ["1" "3" "5"],
+          :indexes      [0 4 7],
+          :title        "major",
+          :order        1,
+          :sufix        "",
+          :explanation  "major",
+          :display-text "major"}}
+
+ [:c :e :g])
 
 
 
@@ -429,7 +456,10 @@
 
 
 (defn intervals->tones
-  [all-tones sharp-or-flat rotate-until intervals-map-by-function key-of intervals]
+  "Match intervals in a key with tones.
+
+  "
+  [all-tones intervals-map-by-function key-of intervals]
   (let [rotated-tones (rotate-until #(% key-of) all-tones)]
     (->> intervals
          (mapv
@@ -441,8 +471,6 @@
 
 (intervals->tones
  all-tones
- sharp-or-flat
- rotate-until
  v2.se.jherrlin.music-theory.intervals/intervals-map-by-function
  :c
  ["1" "b3" "5"])
@@ -535,7 +563,7 @@
 (->> (fretboard-strings
        all-tones
        [:e :b :g :d :a :e]
-       4)
+       12)
      (add-layer
       #_(partial add-chord-tones [:e :b :g])
       (partial add-intervals [[:e "1"] [:b "b3"] [:g "5"]]))
@@ -613,13 +641,7 @@
 
 
 
-(let [strings (gen-fretboard-matrix
-                utils-v2/all-tones
-                [:e :b :g :d :a :e]
-                15)]
-  (->> strings
-       (map-matrix (partial fretboard-tone-str-chord-f-1 [:c :e :g])))
-  )
+
 
 
 
