@@ -22,7 +22,11 @@
       \"-   -   -   1\\n\"
       \"-   -   -   -\")}"
   (:require
-   [malli.core :as m]))
+   [malli.core :as m]
+   [v4.se.jherrlin.music-theory.models.chord :as chord]))
+
+
+(def regex (str "(" chord/regex ")|-"))
 
 
 (def FretboardPattern
@@ -33,7 +37,7 @@
    [:fretboard-pattern/tuning     [:+ keyword?]]
    [:fretboard-pattern/pattern    [:vector [:+ [:alt string? nil?]]]]
    [:fretboard-pattern/str        string?]
-   [:fretboard-pattern/inversion? boolean?]])
+   [:fretboard-pattern/inversion? {:optional true} boolean?]])
 
 (def FretboardPatterns
   [:map-of :keyword FretboardPattern])
@@ -76,4 +80,8 @@
   (m/validate FretboardPattern  fretboard-pattern)
   (m/validate FretboardPatterns {:major-1 fretboard-pattern})
   (explain-fretboard-pattern    fretboard-pattern)
+
+  (->> "-   1   -"
+       (re-seq (re-pattern regex))
+       (mapv (comp #(when-not (= "-" %) %) first)))
   )

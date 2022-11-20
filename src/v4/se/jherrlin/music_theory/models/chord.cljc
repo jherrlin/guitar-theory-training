@@ -9,6 +9,9 @@
   (:require [malli.core :as m]))
 
 
+(def regex "b{0,2}#{0,2}\\d{1,2}")
+
+
 (def Chord
   [:map
    [:chord/id          keyword?]
@@ -34,11 +37,11 @@
 
   (m/validate
    Chord
-   {:chord/id           :major,
-    :chord/intervals    ["1" "3" "5"],
-    :chord/indexes      [0 4 7],
-    :chord/title        "major",
-    :chord/sufix        ""})
+   {:chord/id        :major,
+    :chord/intervals ["1" "3" "5"],
+    :chord/indexes   [0 4 7],
+    :chord/title     "major",
+    :chord/sufix     ""})
 
   (m/validate
    Chords
@@ -63,4 +66,10 @@
      :chord/sufix        "",
      :chord/explanation  "major",
      :chord/display-text "major"}})
+
+  (re-seq (re-pattern regex) "1 3 #5")
+  (re-seq (re-pattern regex) "1 b3 b5 bb7")
+  (re-seq (re-pattern regex) "1, 3,  #5")
+  (re-seq (re-pattern regex) "1, b3 b5 bb7")
+
   )
