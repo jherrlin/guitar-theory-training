@@ -99,6 +99,10 @@
        (map (juxt :function identity))
        (into {})))
 
+(defn functions-to-semitones [functions]
+  (->> functions
+       (mapv #(get-in intervals-map-by-function [% :semitones]))))
+
 (comment
   intervals-map-by-function
   )
