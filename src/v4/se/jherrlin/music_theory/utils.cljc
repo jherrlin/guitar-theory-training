@@ -168,6 +168,7 @@
 (defn intevals-string->intervals-matrix
   [interval]
   (->> interval
+       (str/trim)
        (str/split-lines)
        (mapv (fn [line]
                (->> line
@@ -176,12 +177,13 @@
                     (mapv second))))))
 
 (intevals-string->intervals-matrix
- "    3   -   -
+ "   3   -   -
    -   bb1   -
    5   -   -
    -   -   -
    -   -   -
    -   -   -")
+
 
 
 
@@ -824,7 +826,9 @@
   ([pattern-id pattern]
    (define-pattern pattern-id {} pattern))
   ([pattern-id {:keys [tuning type] :as meta-data} pattern]
-   (let [pattern'   (intevals-string->intervals-matrix pattern)
+   (let [pattern'   (->> pattern
+                         (intevals-string->intervals-matrix)
+                         (utils/trim-matrix))
          meta-data  (->> meta-data
                          (map (fn [[k v]]
                                 [(->> k name (str "fretboard-pattern/") keyword) v]))

@@ -50,7 +50,8 @@
   "Take indexes from a collection"
   [coll indexes]
   (mapv
-   (fn [idx] (nth coll idx))
+   (fn [index]
+     (nth coll index))
    indexes))
 
 (take-indexes
