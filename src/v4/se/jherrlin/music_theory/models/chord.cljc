@@ -4,20 +4,30 @@
   {:chord/id           :major,
    :chord/intervals    [\"1\" \"3\" \"5\"],
    :chord/indexes      [0 4 7],
-   :chord/title        \"major\",
+   :chord/name        \"major\",
    :chord/sufix        \"\"}"
   (:require [malli.core :as m]))
 
 
-(def regex "b{0,2}#{0,2}\\d{1,2}")
+
+(def regex
+  "Pattern to find intervals in text.
+
+  \"1, b3 b5 bb7\"
+  =>
+  (\"1\" \"b3\" \"b5\" \"bb7\")"
+  "b{0,2}#{0,2}\\d{1,2}")
 
 
 (def Chord
+  "Chord model.
+
+  Defines a chord without notion of instrument."
   [:map
    [:chord/id          keyword?]
    [:chord/intervals   [:vector string?]]
    [:chord/indexes     [:vector number?]]
-   [:chord/title       string?]
+   [:chord/name       string?]
    [:chord/sufix       string?]
    [:chord/explanation {:optional true} string?]])
 
@@ -40,7 +50,7 @@
    {:chord/id        :major,
     :chord/intervals ["1" "3" "5"],
     :chord/indexes   [0 4 7],
-    :chord/title     "major",
+    :chord/name     "major",
     :chord/sufix     ""})
 
   (m/validate
@@ -49,7 +59,7 @@
     {:chord/id           :major,
      :chord/intervals    ["1" "3" "5"],
      :chord/indexes      [0 4 7],
-     :chord/title        "major",
+     :chord/name        "major",
      :chord/order        1,
      :chord/sufix        "",
      :chord/explanation  "major",
@@ -61,7 +71,7 @@
     {:chord/id           :major,
      :chord/intervals    ["1" "3" "5"],
      ;; :chord/indexes      [0 4 7],
-     :chord/title        "major",
+     :chord/name        "major",
      :chord/order        1,
      :chord/sufix        "",
      :chord/explanation  "major",

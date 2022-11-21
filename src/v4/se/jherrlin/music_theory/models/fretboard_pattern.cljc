@@ -38,8 +38,7 @@
 (def FretboardPattern
   [:map
    [:fretboard-pattern/id         keyword?]
-   [:fretboard-pattern/type       [:enum :triad :mode :scale]]
-   [:fretboard-pattern/chord-id   {:optional true} keyword?]
+   [:fretboard-pattern/type       [:enum :triad :mode :scale :chord]]
    [:fretboard-pattern/tuning     [:+ keyword?]]
    [:fretboard-pattern/pattern    [:vector [:+ [:alt string? nil?]]]]
    [:fretboard-pattern/str        string?]
