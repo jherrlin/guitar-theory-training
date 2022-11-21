@@ -26,7 +26,13 @@
    [v4.se.jherrlin.music-theory.models.chord :as chord]))
 
 
-(def regex (str "(" chord/regex ")|-"))
+(def regex
+  "Regex to find fretboard patterns from the DSL
+
+  \"3   -   -   -\"
+  =>
+  ([\"3\" \"3\"] [\"-\" nil] [\"-\" nil] [\"-\" nil])"
+  (str "(" chord/regex ")|-"))
 
 
 (def FretboardPattern
@@ -81,7 +87,13 @@
   (m/validate FretboardPatterns {:major-1 fretboard-pattern})
   (explain-fretboard-pattern    fretboard-pattern)
 
-  (->> "-   1   -"
+  (re-seq (re-pattern regex) "5   -   -   -")
+
+  (re-seq
+   #"(b{0,2}#{0,2}\d{1,2})|-"
+   "5   -   -   -")
+
+  (->> "5   -   -   -"
        (re-seq (re-pattern regex))
-       (mapv (comp #(when-not (= "-" %) %) first)))
+       (mapv second))
   )

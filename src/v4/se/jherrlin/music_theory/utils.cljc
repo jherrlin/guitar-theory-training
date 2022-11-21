@@ -745,7 +745,6 @@
      (println))
 
 
-
 (defn with-all-sharps
   [fretboard-matrix]
   (->> fretboard-matrix
@@ -797,11 +796,11 @@
                  @v2.se.jherrlin.music-theory.definitions/chords-atom
                  all-tones
                  chord-tones)
-                (assoc :key-of key-of :tones chord-tones)))))
-       (map (fn [{intervals :chord/intervals tones :tones :as m}]
+                (assoc :key-of key-of :chord/tones chord-tones)))))
+       (map (fn [{intervals :chord/intervals tones :chord/tones :as m}]
               (assoc
                m
-               :derp
+               :chord/root-tone
                (sharp-or-flat (first tones) (first intervals)))))
 
        (mapv
