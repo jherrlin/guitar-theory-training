@@ -67,8 +67,9 @@
                                         :tone      :g,
                                         :interval  "5",
                                         :index     7}]
+        show                          :tone #_:interval
         sharp-keys-styling            {:margin-left      "-1.5em"
-                                       :height           "70%"
+                                       :height           "65%"
                                        :width            "3em"
                                        :background-color "black"
                                        :border-radius    "0px 0px 5px 5px"}
@@ -77,77 +78,82 @@
                                        :border        "2px solid black"
                                        :border-radius "0px 0px 10px 10px"}
         full-keys-styling-with-margin (merge full-keys-styling
-                                             {:margin-left "-1.5em"})]
+                                             {:margin-left "-1.5em"})
+        column-reverse                {:flex-direction :column-reverse
+                                       :height         "100%"
+                                       :display        :flex
+                                       :align-self     :flex-end
+                                       :align-items    :center
+                                       :margin         "-1em"}
+        orange                        "#ff7400"
+        white                         "white"
+        black                         "black"
+        circle-style                  (fn [color] {:display          :flex
+                                                   :height           "2em"
+                                                   :width            "2em"
+                                                   :background-color color #_ "#ff7400"
+                                                   :border-radius    "50%"
+                                                   :z-index          0
+                                                   :align-items      :center
+                                                   :justify-content  :center})
+        the-comp                      (fn [tone-set]
+                                        [:div {:style column-reverse}
+                                         (when-let [{:keys [tone interval]} (first (filter (comp tone-set :tone) input))]
+                                           [:div {:style (circle-style orange)}
+                                            (condp = show
+                                              :interval interval
+                                              (-> tone name str/capitalize))])])]
     [:div {:style {:display        :flex
-                   :height         "200px"
+                   :height         "150px"
                    :flex-direction :row}}
 
      ;; C
      [:div {:style full-keys-styling}
-      [:div
-       {:style {:flex-direction :column-reverse
-                :height         "100%"
-                :display        :flex
-                :align-self     :flex-end
-                :align-items    :center
-                :margin         "-2em"}}
-       (when-let [{:keys [tone interval]} (first (filter (comp #{:c} :tone) input))]
-         #_(-> tone name str/upper-case)
-         interval
-         #_"C"
-         )
-       ]
-      ]
+      [the-comp #{:c}]]
 
      ;; C#
      [:div {:style sharp-keys-styling}
-      [:div
-       {:style {:flex-direction :column-reverse
-                :height         "100%"
-                :display        :flex
-                :align-self     :flex-end
-                :align-items    :center
-                :margin         "-2em"}}
-       [:div {:style {:display          :flex
-                      :height           "2em"
-                      :width            "2em"
-                      :background-color "#ff7400"
-                      :border-radius    "50%"
-                      :z-index          0
-                      :align-items      :center
-                      :justify-content  :center}}
-        "C#"]]]
+      [the-comp #{:db :c#}]]
 
      ;; D
      [:div {:style full-keys-styling-with-margin}
-      ]
+      [the-comp #{:d}]]
 
      ;; D#
      [:div {:style sharp-keys-styling}
-      ]
+      [the-comp #{:d# :eb}]]
 
      ;; E
-     [:div {:style full-keys-styling-with-margin}]
+     [:div {:style full-keys-styling-with-margin}
+      [the-comp #{:e}]]
 
      ;; F
-     [:div {:style full-keys-styling}]
+     [:div {:style full-keys-styling}
+      [the-comp #{:f}]]
 
      ;; F#
-     [:div {:style sharp-keys-styling}]
+     [:div {:style sharp-keys-styling}
+      [the-comp #{:gb :f#}]]
 
      ;; G
-     [:div {:style full-keys-styling-with-margin}]
+     [:div {:style full-keys-styling-with-margin}
+      [the-comp #{:g}]]
+
      ;; G#
-     [:div {:style sharp-keys-styling}]
+     [:div {:style sharp-keys-styling}
+      [the-comp #{:g# :ab}]]
 
      ;; A
-     [:div {:style full-keys-styling-with-margin}]
+     [:div {:style full-keys-styling-with-margin}
+      [the-comp #{:a}]]
 
      ;; A#
-     [:div {:style sharp-keys-styling}]
+     [:div {:style sharp-keys-styling}
+      [the-comp #{:bb :a#}]]
 
      ;; B
-     [:div {:style full-keys-styling-with-margin}]]))
+     [:div {:style full-keys-styling-with-margin}
+      [the-comp #{:b}]]]))
 
 (defn home-page []
   [:div
