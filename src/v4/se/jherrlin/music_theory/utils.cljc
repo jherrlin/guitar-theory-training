@@ -1,15 +1,16 @@
 (ns v4.se.jherrlin.music-theory.utils
+  "
+
+  Index tones are sets:        #{:db :c#}
+  Interval tones are keywords: :c#"
   (:require
-   [v2.se.jherrlin.music-theory.intervals :as intervals]
-   [v2.se.jherrlin.music-theory.utils :as utils-v2]
    [clojure.set :as set]
    [clojure.string :as str]
    [se.jherrlin.utils :as utils]
-   #?(:cljs [goog.string.format])
-   #?(:cljs [goog.string :as gstring])
    [malli.destructure :as md]
    [malli.provider :as mp]
    [malli.core :as m]
+   [v4.se.jherrlin.music-theory.intervals :as intervals]
    [v4.se.jherrlin.music-theory.models.chord :as models.chord]
    [v4.se.jherrlin.music-theory.models.scale :as models.scale]
    [v4.se.jherrlin.music-theory.models.fretboard-pattern :as models.fretboard-pattern]))
@@ -108,6 +109,22 @@
  "b3")
 
 
+(defn tones-on-indexes-with-intervals-2 [indexes intervals tones]
+  (mapv
+   (fn [index interval]
+     (merge
+      (get intervals/intervals-map-by-function interval)
+      {:tone     (sharp-or-flat (nth tones index) interval)
+       :interval interval
+       :index    index}))
+   indexes
+   intervals))
+
+(tones-on-indexes-with-intervals-2
+ [0 3 7]
+ ["1" "b3" "5"]
+ all-tones)
+
 (defn tones-on-indexes-with-intervals [indexes intervals tones]
   (mapv
    (fn [index interval]
@@ -163,6 +180,51 @@
  ["1" "3" "5"])
 ;;
 
+
+
+(defn tones-by-key-and-intervals-2
+  "
+
+  `key-of`    -  :c
+  `intervals` -  [\"1\" \"3\" \"5\"]
+  =>
+  [:c :e :g]"
+  [all-tones key-of intervals]
+  (tones-on-indexes-with-intervals-2
+   (->> intervals
+        (mapv (fn [interval-function]
+                (get-in intervals/intervals-map-by-function [interval-function :semitones]))))
+   intervals
+   (utils/rotate-until #(% key-of) all-tones)
+   ))
+
+(tones-by-key-and-intervals-2
+ all-tones
+ :c
+ ["1" "b3" "5"]
+ #_["1" "3" "5"])
+
+[{:semitones 0,
+  :function "1",
+  :name/en "Root",
+  :name/sv "Root",
+  :tone :c,
+  :interval "1",
+  :index 0}
+ {:semitones 3,
+  :function "b3",
+  :name/en "Minor third",
+  :name/sv "Moll-ters",
+  :tone :eb,
+  :interval "b3",
+  :index 3}
+ {:semitones 7,
+  :function "5",
+  :name/en "Perfect fifth",
+  :name/sv "Kvint",
+  :tone :g,
+  :interval "5",
+  :index 7}]
 
 
 (defn intevals-string->intervals-matrix
@@ -665,7 +727,7 @@
           (let [chord-tones ((juxt #(nth % 0) #(nth % 2) #(nth % 4))
                              (utils/rotate-until #(= % t) scale-tones))]
             (-> (find-chord
-                 @v2.se.jherrlin.music-theory.definitions/chords-atom
+                 @v4.se.jherrlin.music-theory.definitions/chords
                  all-tones
                  chord-tones)
                 (assoc :key-of key-of :chord/tones chord-tones)))))
@@ -722,8 +784,8 @@
 
 (let [tones     [:d :f# :a]
       tones-set (set tones)]
-  (->> utils-v2/all-tones
-       (utils-v2/rotate-until #(% :d#))
+  (->> all-tones
+       (utils/rotate-until #(% :d#))
        (map (fn [tone]
               (cond-> {:tone tone}
                 (seq (set/intersection tones-set tone))

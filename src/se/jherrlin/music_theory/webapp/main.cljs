@@ -44,6 +44,111 @@
  (fn [db]
    (:current-route db)))
 
+
+(defn piano []
+  (let [input                         [{:semitones 0,
+                                        :function  "1",
+                                        :name/en   "Root",
+                                        :name/sv   "Root",
+                                        :tone      :c,
+                                        :interval  "1",
+                                        :index     0}
+                                       {:semitones 3,
+                                        :function  "b3",
+                                        :name/en   "Minor third",
+                                        :name/sv   "Moll-ters",
+                                        :tone      :eb,
+                                        :interval  "b3",
+                                        :index     3}
+                                       {:semitones 7,
+                                        :function  "5",
+                                        :name/en   "Perfect fifth",
+                                        :name/sv   "Kvint",
+                                        :tone      :g,
+                                        :interval  "5",
+                                        :index     7}]
+        sharp-keys-styling            {:margin-left      "-1.5em"
+                                       :height           "70%"
+                                       :width            "3em"
+                                       :background-color "black"
+                                       :border-radius    "0px 0px 5px 5px"}
+        full-keys-styling             {:height        "100%"
+                                       :width         "4em"
+                                       :border        "2px solid black"
+                                       :border-radius "0px 0px 10px 10px"}
+        full-keys-styling-with-margin (merge full-keys-styling
+                                             {:margin-left "-1.5em"})]
+    [:div {:style {:display        :flex
+                   :height         "200px"
+                   :flex-direction :row}}
+
+     ;; C
+     [:div {:style full-keys-styling}
+      [:div
+       {:style {:flex-direction :column-reverse
+                :height         "100%"
+                :display        :flex
+                :align-self     :flex-end
+                :align-items    :center
+                :margin         "-2em"}}
+       (when-let [{:keys [tone interval]} (first (filter (comp #{:c} :tone) input))]
+         #_(-> tone name str/upper-case)
+         interval
+         #_"C"
+         )
+       ]
+      ]
+
+     ;; C#
+     [:div {:style sharp-keys-styling}
+      [:div
+       {:style {:flex-direction :column-reverse
+                :height         "100%"
+                :display        :flex
+                :align-self     :flex-end
+                :align-items    :center
+                :margin         "-2em"}}
+       [:div {:style {:display          :flex
+                      :height           "2em"
+                      :width            "2em"
+                      :background-color "#ff7400"
+                      :border-radius    "50%"
+                      :z-index          0
+                      :align-items      :center
+                      :justify-content  :center}}
+        "C#"]]]
+
+     ;; D
+     [:div {:style full-keys-styling-with-margin}
+      ]
+
+     ;; D#
+     [:div {:style sharp-keys-styling}
+      ]
+
+     ;; E
+     [:div {:style full-keys-styling-with-margin}]
+
+     ;; F
+     [:div {:style full-keys-styling}]
+
+     ;; F#
+     [:div {:style sharp-keys-styling}]
+
+     ;; G
+     [:div {:style full-keys-styling-with-margin}]
+     ;; G#
+     [:div {:style sharp-keys-styling}]
+
+     ;; A
+     [:div {:style full-keys-styling-with-margin}]
+
+     ;; A#
+     [:div {:style sharp-keys-styling}]
+
+     ;; B
+     [:div {:style full-keys-styling-with-margin}]]))
+
 (defn home-page []
   [:div
    [:h1 "Music / guitar theory"]
@@ -60,7 +165,16 @@ file with "
 overview of scales, chords and modes. So I made this webapp. The source
 code lives on "
     [:a {:href "https://github.com/jherrlin/guitar-theory-training" :target "_blank"} "GitHub"]
-    " and you are more than welcome to send pull requests or open issues."]])
+    " and you are more than welcome to send pull requests or open issues."]
+   [:br]
+   [:br]
+   [:div {:style {:display :flex}}
+    ;; [piano]
+    ;; [piano]
+    ;; [piano]
+    ]
+
+   #_(piano)])
 
 (def events-
   [{:n ::tone}
