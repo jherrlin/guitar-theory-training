@@ -49,7 +49,7 @@
              explanation :chord/explanation
              sufix       :chord/sufix
              :as m}
-            (get @definitions/chords @(re-frame/subscribe [::chord]))
+            (get @definitions/chords chord)
             tones (utils/tones-by-key-and-intervals
                    utils/all-tones
                    key-of

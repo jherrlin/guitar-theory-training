@@ -23,6 +23,21 @@
         {:disabled (= id chord)}
         (str (or display-text sufix))]]])])
 
+
+(defn links-to-scales [scales scale href-fn]
+  [:div
+   (for [{id         :scale/id
+          scale-name :scale/name}
+         (->> scales
+              vals
+              (sort-by :scale/order))]
+     ^{:key (str id scale-name "-scale")}
+     [:div {:style {:margin-right "10px" :display "inline"}}
+      [:a {:href (href-fn id)}
+       [:button
+        {:disabled (= id scale)}
+        (str scale-name)]]])])
+
 (defn links-to-keys [key-of href-fn]
   [:div
    (for [{tone' :tone

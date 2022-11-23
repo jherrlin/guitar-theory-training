@@ -18,7 +18,8 @@
    [v2.se.jherrlin.music-theory.webapp.chords :as chords]
    [v2.se.jherrlin.music-theory.webapp.main :as v2-main]
    [v2.se.jherrlin.music-theory.definitions :as definitions]
-   [v4.se.jherrlin.music-theory.webapp.piano.chords :as piano.chords]))
+   [v4.se.jherrlin.music-theory.webapp.piano.chords :as piano.chords]
+   [v4.se.jherrlin.music-theory.webapp.piano.scales :as piano.scales]))
 
 
 (re-frame/reg-fx
@@ -669,6 +670,7 @@ the org-drill mode."]
 (def routes
   [v2-main/routes
    piano.chords/routes
+   piano.scales/routes
    ["/"
     [""
      {:name      ::home
