@@ -718,49 +718,49 @@
 (def triad   (juxt #(nth % 0) #(nth % 2) #(nth % 4)))
 (def seventh (juxt #(nth % 0) #(nth % 2) #(nth % 4) #(nth % 6)))
 
-(let [key-of      :d
-      kind        :major
-      scale-tones (tones-by-indexes all-tones [0 2 4 5 7 9 11])]
-  (->> scale-tones
-       (map
-        (fn [t]
-          (let [chord-tones ((juxt #(nth % 0) #(nth % 2) #(nth % 4))
-                             (utils/rotate-until #(= % t) scale-tones))]
-            (-> (find-chord
-                 @v4.se.jherrlin.music-theory.definitions/chords
-                 all-tones
-                 chord-tones)
-                (assoc :key-of key-of :chord/tones chord-tones)))))
-       (map (fn [{intervals :chord/intervals tones :chord/tones :as m}]
-              (assoc
-               m
-               :chord/root-tone
-               (sharp-or-flat (first tones) (first intervals)))))
+;; (let [key-of      :d
+;;       kind        :major
+;;       scale-tones (tones-by-indexes all-tones [0 2 4 5 7 9 11])]
+;;   (->> scale-tones
+;;        (map
+;;         (fn [t]
+;;           (let [chord-tones ((juxt #(nth % 0) #(nth % 2) #(nth % 4))
+;;                              (utils/rotate-until #(= % t) scale-tones))]
+;;             (-> (find-chord
+;;                  @v4.se.jherrlin.music-theory.definitions/chords
+;;                  all-tones
+;;                  chord-tones)
+;;                 (assoc :key-of key-of :chord/tones chord-tones)))))
+;;        (map (fn [{intervals :chord/intervals tones :chord/tones :as m}]
+;;               (assoc
+;;                m
+;;                :chord/root-tone
+;;                (sharp-or-flat (first tones) (first intervals)))))
 
-       (mapv
-        #(assoc %7
-                :harmonization/index      %1
-                :harmonization/position   %2
-                :harmonization/mode       %3
-                :harmonization/mode-str   %4
-                :harmonization/family     %5
-                :harmonization/family-str %6)
-        (range 1 100)
-        (if (= kind :major)
-          ["I" "ii" "iii" "IV" "V" "vi" "vii"]
-          ["i" "ii" "III" "iv" "v" "VI" "VII"])
-        (if (= kind :major)
-          [:ionian  :dorian  :phrygian :lydian :mixolydian :aeolian :locrian]
-          [:aeolian :locrian :ionian   :dorian :phrygian   :lydian  :mixolydian])
-        (if (= kind :major)
-          ["Ionian"  "Dorian"  "Phrygian" "Lydian" "Mixolydian" "Aeolian" "Locrian"]
-          ["Aeolian" "Locrian" "Ionian"   "Dorian" "Phrygian"   "Lydian"  "Mixolydian"])
-        (if (= kind :major)
-          [:tonic :subdominant :tonic :subdominant :dominant :tonic :dominant]
-          [:tonic :subdominant :tonic :subdominant :dominant :subdominant :dominant])
-        (if (= kind :major)
-          ["T" "S" "T" "S" "D" "T" "D"]
-          ["T" "S" "T" "S" "D" "S" "D"]))))
+;;        (mapv
+;;         #(assoc %7
+;;                 :harmonization/index      %1
+;;                 :harmonization/position   %2
+;;                 :harmonization/mode       %3
+;;                 :harmonization/mode-str   %4
+;;                 :harmonization/family     %5
+;;                 :harmonization/family-str %6)
+;;         (range 1 100)
+;;         (if (= kind :major)
+;;           ["I" "ii" "iii" "IV" "V" "vi" "vii"]
+;;           ["i" "ii" "III" "iv" "v" "VI" "VII"])
+;;         (if (= kind :major)
+;;           [:ionian  :dorian  :phrygian :lydian :mixolydian :aeolian :locrian]
+;;           [:aeolian :locrian :ionian   :dorian :phrygian   :lydian  :mixolydian])
+;;         (if (= kind :major)
+;;           ["Ionian"  "Dorian"  "Phrygian" "Lydian" "Mixolydian" "Aeolian" "Locrian"]
+;;           ["Aeolian" "Locrian" "Ionian"   "Dorian" "Phrygian"   "Lydian"  "Mixolydian"])
+;;         (if (= kind :major)
+;;           [:tonic :subdominant :tonic :subdominant :dominant :tonic :dominant]
+;;           [:tonic :subdominant :tonic :subdominant :dominant :subdominant :dominant])
+;;         (if (= kind :major)
+;;           ["T" "S" "T" "S" "D" "T" "D"]
+;;           ["T" "S" "T" "S" "D" "S" "D"]))))
 
 
 {:minor

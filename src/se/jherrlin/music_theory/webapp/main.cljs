@@ -17,7 +17,8 @@
    [v2.se.jherrlin.music-theory.webapp.harmonizations :as harmonizations]
    [v2.se.jherrlin.music-theory.webapp.chords :as chords]
    [v2.se.jherrlin.music-theory.webapp.main :as v2-main]
-   [v2.se.jherrlin.music-theory.definitions :as definitions]))
+   [v2.se.jherrlin.music-theory.definitions :as definitions]
+   [v4.se.jherrlin.music-theory.webapp.piano.chords :as piano.chords]))
 
 
 (re-frame/reg-fx
@@ -44,117 +45,6 @@
  (fn [db]
    (:current-route db)))
 
-
-(defn piano []
-  (let [input                         [{:semitones 0,
-                                        :function  "1",
-                                        :name/en   "Root",
-                                        :name/sv   "Root",
-                                        :tone      :c,
-                                        :interval  "1",
-                                        :index     0}
-                                       {:semitones 3,
-                                        :function  "b3",
-                                        :name/en   "Minor third",
-                                        :name/sv   "Moll-ters",
-                                        :tone      :eb,
-                                        :interval  "b3",
-                                        :index     3}
-                                       {:semitones 7,
-                                        :function  "5",
-                                        :name/en   "Perfect fifth",
-                                        :name/sv   "Kvint",
-                                        :tone      :g,
-                                        :interval  "5",
-                                        :index     7}]
-        show                          :tone #_:interval
-        sharp-keys-styling            {:margin-left      "-1.5em"
-                                       :height           "65%"
-                                       :width            "3em"
-                                       :background-color "black"
-                                       :border-radius    "0px 0px 5px 5px"}
-        full-keys-styling             {:height        "100%"
-                                       :width         "4em"
-                                       :border        "2px solid black"
-                                       :border-radius "0px 0px 10px 10px"}
-        full-keys-styling-with-margin (merge full-keys-styling
-                                             {:margin-left "-1.5em"})
-        column-reverse                {:flex-direction :column-reverse
-                                       :height         "100%"
-                                       :display        :flex
-                                       :align-self     :flex-end
-                                       :align-items    :center
-                                       :margin         "-1em"}
-        orange                        "#ff7400"
-        white                         "white"
-        black                         "black"
-        circle-style                  (fn [color] {:display          :flex
-                                                   :height           "2em"
-                                                   :width            "2em"
-                                                   :background-color color #_ "#ff7400"
-                                                   :border-radius    "50%"
-                                                   :z-index          0
-                                                   :align-items      :center
-                                                   :justify-content  :center})
-        the-comp                      (fn [tone-set]
-                                        [:div {:style column-reverse}
-                                         (when-let [{:keys [tone interval]} (first (filter (comp tone-set :tone) input))]
-                                           [:div {:style (circle-style orange)}
-                                            (condp = show
-                                              :interval interval
-                                              (-> tone name str/capitalize))])])]
-    [:div {:style {:display        :flex
-                   :height         "150px"
-                   :flex-direction :row}}
-
-     ;; C
-     [:div {:style full-keys-styling}
-      [the-comp #{:c}]]
-
-     ;; C#
-     [:div {:style sharp-keys-styling}
-      [the-comp #{:db :c#}]]
-
-     ;; D
-     [:div {:style full-keys-styling-with-margin}
-      [the-comp #{:d}]]
-
-     ;; D#
-     [:div {:style sharp-keys-styling}
-      [the-comp #{:d# :eb}]]
-
-     ;; E
-     [:div {:style full-keys-styling-with-margin}
-      [the-comp #{:e}]]
-
-     ;; F
-     [:div {:style full-keys-styling}
-      [the-comp #{:f}]]
-
-     ;; F#
-     [:div {:style sharp-keys-styling}
-      [the-comp #{:gb :f#}]]
-
-     ;; G
-     [:div {:style full-keys-styling-with-margin}
-      [the-comp #{:g}]]
-
-     ;; G#
-     [:div {:style sharp-keys-styling}
-      [the-comp #{:g# :ab}]]
-
-     ;; A
-     [:div {:style full-keys-styling-with-margin}
-      [the-comp #{:a}]]
-
-     ;; A#
-     [:div {:style sharp-keys-styling}
-      [the-comp #{:bb :a#}]]
-
-     ;; B
-     [:div {:style full-keys-styling-with-margin}
-      [the-comp #{:b}]]]))
-
 (defn home-page []
   [:div
    [:h1 "Music / guitar theory"]
@@ -171,16 +61,7 @@ file with "
 overview of scales, chords and modes. So I made this webapp. The source
 code lives on "
     [:a {:href "https://github.com/jherrlin/guitar-theory-training" :target "_blank"} "GitHub"]
-    " and you are more than welcome to send pull requests or open issues."]
-   [:br]
-   [:br]
-   [:div {:style {:display :flex}}
-    ;; [piano]
-    ;; [piano]
-    ;; [piano]
-    ]
-
-   #_(piano)])
+    " and you are more than welcome to send pull requests or open issues."]])
 
 (def events-
   [{:n ::tone}
@@ -787,6 +668,7 @@ the org-drill mode."]
 
 (def routes
   [v2-main/routes
+   piano.chords/routes
    ["/"
     [""
      {:name      ::home
