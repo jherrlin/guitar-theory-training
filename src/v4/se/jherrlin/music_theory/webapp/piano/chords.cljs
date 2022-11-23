@@ -9,6 +9,7 @@
    [v4.se.jherrlin.music-theory.intervals :as intervals]
    [v4.se.jherrlin.music-theory.utils :as utils]
    [v4.se.jherrlin.music-theory.webapp.piano.view :as piano.view]
+   [v4.se.jherrlin.music-theory.webapp.piano.common :as common]
    [se.jherrlin.utils
     :refer [fformat rotate-until]]))
 
@@ -33,6 +34,7 @@
   (re-frame/reg-sub n (or s (fn [db [n']] (get db n'))))
   (re-frame/reg-event-db n (or e (fn [db [_ e]] (assoc db n e)))))
 
+
 (defn chords-view []
   (let [chord        @(re-frame/subscribe [::chord])
         as-intervals @(re-frame/subscribe [::as-intervals])
@@ -45,7 +47,8 @@
              indexes     :chord/indexes
              intervals   :chord/intervals
              explanation :chord/explanation
-             sufix       :chord/sufix}
+             sufix       :chord/sufix
+             :as m}
             (get @definitions/chords @(re-frame/subscribe [::chord]))
             tones (utils/tones-by-key-and-intervals
                    utils/all-tones
@@ -54,88 +57,26 @@
         [:div
 
          ;; Links to keys
-         [:div
-          (for [{tone' :tone
-                 :keys [url-name title]}
-                (->> (music-theory/find-root-p :a)
-                     (map (fn [x] {:tone     x
-                                   :url-name (-> x name str/lower-case (str/replace "#" "sharp"))
-                                   :title    (-> x name str/capitalize)})))]
-            ^{:key url-name}
-            [:div {:style {:margin-right "10px" :display "inline"}}
-             [:a {:href (rfe/href :v4.piano/chords (assoc path-params :key-of tone') query-params)}
-              [:button
-               {:disabled (= key-of tone')}
-               title]]])]
+         [common/links-to-keys
+          key-of
+          #(rfe/href :v4.piano/chords (assoc path-params :key-of %) query-params)]
+
          [:br]
 
          ;; Links to chords
-         [:div
-          (for [{id           :chord/id
-                 sufix        :chord/sufix
-                 display-text :chord/display-text}
-                (->> @definitions/chords
-                     vals
-                     (sort-by :chord/order))]
-            ^{:key (str id sufix "-chord")}
-            [:div {:style {:margin-right "10px" :display "inline"}}
-             [:a {:href (rfe/href :v4.piano/chords (assoc path-params :chord-name id) query-params)}
-              [:button
-               {:disabled (= id chord)}
-               (str (or display-text sufix))]]])]
+         [common/links-to-chords
+          @definitions/chords
+          chord
+          #(rfe/href :v4.piano/chords (assoc path-params :chord-name %) query-params)]
 
          ;; Highlight tones
-         [:div {:style {:margin-top  "1em"
-                        :display     "flex"
-                        :align-items "center"}}
-
-          (for [{:keys [tone match?]}
-                (let [tones-set (set tones)]
-                  (->> utils/all-tones
-                       (rotate-until #(% key-of))
-                       (map (fn [tone]
-                              (cond-> {:tone tone}
-                                (seq (set/intersection tones-set tone))
-                                (assoc :match? true))))))]
-            ^{:key (str tone "something")}
-            [:div {:style {:width     "4.5em"
-                           :font-size "0.9em"}}
-             (for [t' (sort-by (fn [x]
-                                 (let [x (str x)]
-                                   (cond
-                                     (and (= (count x) 3) (str/includes? x "#"))
-                                     1
-                                     (= (count x) 3)
-                                     2
-                                     :else 0))) tone)]
-               ^{:key (str tone t')}
-               [:div {:style {:margin-top "0em"}}
-                [:div
-                 {:style {:color       (if-not match? "grey")
-                          :font-weight (if match? "bold")}}
-                 (-> t' name str/capitalize)]])])]
+         [common/highlight-tones tones key-of]
 
          ;; Chord name
-         [:div {:style {:margin-top "1em"
-                        :height     "100%"
-                        :display    "inline-flex"}}
-          [:h2 (str (-> key-of name str/capitalize) sufix)]
-          (when explanation
-            [:p {:style {:margin-left "4em"
-                         :margin-top  "0.5em"}}
-             (str "(" explanation ")")])]
+         [common/chord-name key-of m]
 
          ;; Intervals
-         [:pre {:style {:overflow-x "auto"}}
-          (->> (map
-                (fn [interval index]
-                  (str (fformat "%8s" interval) " -> " (-> index name str/capitalize)))
-                intervals
-                tones)
-               (str/join "\n")
-               (apply str)
-               (str "Interval -> Tone\n"))]
-
+         [common/intervals-to-tones intervals tones]
 
          [:br]
 
