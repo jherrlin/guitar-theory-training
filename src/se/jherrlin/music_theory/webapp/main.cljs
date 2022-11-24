@@ -127,6 +127,18 @@ code lives on "
           :active (= ::drills current-route-name)}
          "Drills"]
 
+        [:> semantic-ui/Menu.Item
+         {:as     "a"
+          :href   (rfe/href :v4.piano/chords {:key-of key-of :chord-name :major})
+          :active (= :v4.piano/chords current-route-name)}
+         "Piano chords"]
+
+        [:> semantic-ui/Menu.Item
+         {:as     "a"
+          :href   (rfe/href :v4.piano/scales {:key-of key-of :scale-name :major})
+          :active (= :v4.piano/scales current-route-name)}
+         "Piano scales"]
+
         [:> semantic-ui/Menu.Menu {:position "right"}
          [:> semantic-ui/Menu.Item
           {:as     "a"

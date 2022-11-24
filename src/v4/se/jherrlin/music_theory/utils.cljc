@@ -359,15 +359,21 @@
 
 (defn find-chords [chords-map all-tones chord-tones]
   (let [[root-tone & _] chord-tones
-        tones           (utils/rotate-until #(= % root-tone) all-tones)]
+        tones           (utils/rotate-until
+                         #(if (set? root-tone)
+                            (= % root-tone)
+                            (% root-tone))
+                         all-tones)]
     (->> chords-map
          (vals)
          (filter (fn [{:chord/keys [indexes]}]
                    (let [chord-to-serch (tones-by-indexes tones indexes)
                          chord-to-match chord-tones]
                      (and (= (count chord-to-serch) (count chord-to-match))
-                          (->> (map
-                                #(= %1 %2)
+                          (->> (map (fn [a b]
+                                      (if (set? b)
+                                        (= a b)
+                                        (boolean (a b))))
                                 chord-to-serch
                                 chord-to-match)
                                (every? true?)))))))))
@@ -393,7 +399,9 @@
           :display-text "minor"}}
  all-tones
  #_[#{:c} #{:e} #{:g}]
- [#{:c} #{:d# :eb} #{:g}])
+ #_[#{:c} #{:d# :eb} #{:g}]
+ [:c :e :g]
+ )
 
 
 
@@ -718,50 +726,73 @@
 (def triad   (juxt #(nth % 0) #(nth % 2) #(nth % 4)))
 (def seventh (juxt #(nth % 0) #(nth % 2) #(nth % 4) #(nth % 6)))
 
-;; (let [key-of      :d
-;;       kind        :major
-;;       scale-tones (tones-by-indexes all-tones [0 2 4 5 7 9 11])]
-;;   (->> scale-tones
-;;        (map
-;;         (fn [t]
-;;           (let [chord-tones ((juxt #(nth % 0) #(nth % 2) #(nth % 4))
-;;                              (utils/rotate-until #(= % t) scale-tones))]
-;;             (-> (find-chord
-;;                  @v4.se.jherrlin.music-theory.definitions/chords
-;;                  all-tones
-;;                  chord-tones)
-;;                 (assoc :key-of key-of :chord/tones chord-tones)))))
-;;        (map (fn [{intervals :chord/intervals tones :chord/tones :as m}]
-;;               (assoc
-;;                m
-;;                :chord/root-tone
-;;                (sharp-or-flat (first tones) (first intervals)))))
+(defn gen-harmonization [scales chords key-of scale' steps-fn]
+  (let [scale         (get scales scale')
+        scale-indexes (get scale :scale/indexes)
+        scale-tones   (tones-by-indexes
+                       (utils/rotate-until
+                        #(% key-of)
+                        all-tones)
+                       scale-indexes)]
+  (->> scale-tones
+       (mapv
+        (fn [t]
+          (let [index-chord-tones (steps-fn
+                                   (utils/rotate-until #(= % t) scale-tones))
+                found-chord       (find-chord
+                                   chords
+                                   all-tones
+                                   index-chord-tones)
+                interval-tones    (mapv (fn [interval' index']
+                                          (sharp-or-flat index' interval'))
+                                        (:chord/intervals found-chord)
+                                        index-chord-tones)
+                ]
+            (assoc
+             found-chord
+             :key-of key-of
+             :chord/index-tones index-chord-tones
+             :chord/interval-tones interval-tones
+             :chord/root-tone (first interval-tones)
+             ))))
 
-;;        (mapv
-;;         #(assoc %7
-;;                 :harmonization/index      %1
-;;                 :harmonization/position   %2
-;;                 :harmonization/mode       %3
-;;                 :harmonization/mode-str   %4
-;;                 :harmonization/family     %5
-;;                 :harmonization/family-str %6)
-;;         (range 1 100)
-;;         (if (= kind :major)
-;;           ["I" "ii" "iii" "IV" "V" "vi" "vii"]
-;;           ["i" "ii" "III" "iv" "v" "VI" "VII"])
-;;         (if (= kind :major)
-;;           [:ionian  :dorian  :phrygian :lydian :mixolydian :aeolian :locrian]
-;;           [:aeolian :locrian :ionian   :dorian :phrygian   :lydian  :mixolydian])
-;;         (if (= kind :major)
-;;           ["Ionian"  "Dorian"  "Phrygian" "Lydian" "Mixolydian" "Aeolian" "Locrian"]
-;;           ["Aeolian" "Locrian" "Ionian"   "Dorian" "Phrygian"   "Lydian"  "Mixolydian"])
-;;         (if (= kind :major)
-;;           [:tonic :subdominant :tonic :subdominant :dominant :tonic :dominant]
-;;           [:tonic :subdominant :tonic :subdominant :dominant :subdominant :dominant])
-;;         (if (= kind :major)
-;;           ["T" "S" "T" "S" "D" "T" "D"]
-;;           ["T" "S" "T" "S" "D" "S" "D"]))))
+       (mapv
+        #(assoc %7
+                :harmonization/index      %1
+                :harmonization/position   %2
+                :harmonization/mode       %3
+                :harmonization/mode-str   %4
+                :harmonization/family     %5
+                :harmonization/family-str %6)
+        (range 1 100)
+        (if (= scale :major)
+          ["I" "ii" "iii" "IV" "V" "vi" "vii"]
+          ["i" "ii" "III" "iv" "v" "VI" "VII"])
+        (if (= scale :major)
+          [:ionian  :dorian  :phrygian :lydian :mixolydian :aeolian :locrian]
+          [:aeolian :locrian :ionian   :dorian :phrygian   :lydian  :mixolydian])
+        (if (= scale :major)
+          ["Ionian"  "Dorian"  "Phrygian" "Lydian" "Mixolydian" "Aeolian" "Locrian"]
+          ["Aeolian" "Locrian" "Ionian"   "Dorian" "Phrygian"   "Lydian"  "Mixolydian"])
+        (if (= scale :major)
+          [:tonic :subdominant :tonic :subdominant :dominant :tonic :dominant]
+          [:tonic :subdominant :tonic :subdominant :dominant :subdominant :dominant])
+        (if (= scale :major)
+          ["T" "S" "T" "S" "D" "T" "D"]
+          ["T" "S" "T" "S" "D" "S" "D"])))))
 
+(def triad   (juxt #(nth % 0) #(nth % 2) #(nth % 4)))
+(def seventh (juxt #(nth % 0) #(nth % 2) #(nth % 4) #(nth % 6)))
+
+
+(comment
+  (gen-harmonization
+   @v4.se.jherrlin.music-theory.definitions/scales
+   @v4.se.jherrlin.music-theory.definitions/chords
+   :c
+   :minor
+   seventh)
+  )
 
 {:minor
  #:scale{:id        :minor,

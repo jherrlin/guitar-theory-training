@@ -224,7 +224,8 @@
 (def triad   (juxt #(nth % 0) #(nth % 2) #(nth % 4)))
 (def seventh (juxt #(nth % 0) #(nth % 2) #(nth % 4) #(nth % 6)))
 
-(defn diatonic-chord-progressions [triad-or-seven-map scales-map chords-map all-tones tone kind triad-or-seven]
+(defn diatonic-chord-progressions
+  [triad-or-seven-map scales-map chords-map all-tones tone kind triad-or-seven]
   {:pre [(keyword? tone) (keyword? kind)]}
   (let [scale-tones ((get-in scales-map [kind :scale/f]) (find-root tone all-tones))]
     (->> scale-tones

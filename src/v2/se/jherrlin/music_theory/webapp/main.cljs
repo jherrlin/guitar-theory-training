@@ -10,16 +10,8 @@
    [v2.se.jherrlin.music-theory.webapp.neck :as neck]))
 
 
-(defn on-navigate [new-match]
-  (when new-match
-    (re-frame/dispatch [::events/navigated new-match])))
-
-(defn index []
-  [:div "hejsan"])
-
 (def routes
-  [""
-   chords/routes
+  [chords/routes
    modes/routes
    scales/routes
    harmonizations/routes
