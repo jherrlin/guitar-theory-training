@@ -781,9 +781,6 @@
           ["T" "S" "T" "S" "D" "T" "D"]
           ["T" "S" "T" "S" "D" "S" "D"])))))
 
-(def triad   (juxt #(nth % 0) #(nth % 2) #(nth % 4)))
-(def seventh (juxt #(nth % 0) #(nth % 2) #(nth % 4) #(nth % 6)))
-
 
 (comment
   (gen-harmonization
@@ -791,7 +788,7 @@
    @v4.se.jherrlin.music-theory.definitions/chords
    :c
    :minor
-   seventh)
+   triad #_seventh)
   )
 
 {:minor

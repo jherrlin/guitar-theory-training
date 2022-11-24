@@ -19,7 +19,8 @@
    [v2.se.jherrlin.music-theory.webapp.main :as v2-main]
    [v2.se.jherrlin.music-theory.definitions :as definitions]
    [v4.se.jherrlin.music-theory.webapp.piano.chords :as piano.chords]
-   [v4.se.jherrlin.music-theory.webapp.piano.scales :as piano.scales]))
+   [v4.se.jherrlin.music-theory.webapp.piano.scales :as piano.scales]
+   [v4.se.jherrlin.music-theory.webapp.piano.harmonizations :as piano.harmonizations]))
 
 
 (re-frame/reg-fx
@@ -138,6 +139,12 @@ code lives on "
           :href   (rfe/href :v4.piano/scales {:key-of key-of :scale-name :major})
           :active (= :v4.piano/scales current-route-name)}
          "Piano scales"]
+
+        [:> semantic-ui/Menu.Item
+         {:as     "a"
+          :href   (rfe/href :v4.piano/harmonizations {:key-of key-of :scale :major :steps :triad})
+          :active (= :v4.piano/scales current-route-name)}
+         "Piano harmonization"]
 
         [:> semantic-ui/Menu.Menu {:position "right"}
          [:> semantic-ui/Menu.Item
@@ -681,6 +688,7 @@ the org-drill mode."]
 
 (def routes
   [v2-main/routes
+   piano.harmonizations/routes
    piano.chords/routes
    piano.scales/routes
    ["/"
