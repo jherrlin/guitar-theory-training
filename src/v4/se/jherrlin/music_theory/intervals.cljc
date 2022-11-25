@@ -108,6 +108,14 @@
     :function  "9"
     :name/en   "Ninth"
     :name/sv   "Nia"}
+   {:semitones ninth
+    :function  "#9"
+    :name/en   "Augmented ninth"
+    :name/sv   "Augmented ninth"}
+   {:semitones ninth
+    :function  "b9"
+    :name/en   "Diminished ninth"
+    :name/sv   "Diminished ninth"}
    {:semitones eleventh
     :function  "11"
     :name/en   "Eleventh"

@@ -82,4 +82,15 @@
   (re-seq (re-pattern regex) "1, 3,  #5")
   (re-seq (re-pattern regex) "1, b3 b5 bb7")
 
+
+  (defn derp [xs]
+    {:malli/schema [:=> [:cat Chords] Chord]}
+    (->> xs vals first))
+
+  (m/=> derp [:=> [:cat Chords] Chord])
+
+  (derp "")
+
+  ((requiring-resolve 'malli.clj-kondo/emit!))
+
   )

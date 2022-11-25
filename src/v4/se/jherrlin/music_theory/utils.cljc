@@ -21,6 +21,23 @@
 
 (def all-tones [#{:c} #{:db :c#} #{:d} #{:d# :eb} #{:e} #{:f} #{:gb :f#} #{:g} #{:g# :ab} #{:a} #{:bb :a#} #{:b}])
 
+(defn tones-starting-at
+  "`x` - can be both a index tone and a interval tone.
+
+  Example:
+  `x` = `:d#`
+  =>
+  [#{:d# :eb} #{:e} #{:f} #{:gb :f#} #{:g} #{:g# :ab} #{:a} #{:bb :a#} #{:b} #{:c} #{:db :c#} #{:d}]"
+  [all-tones x]
+  (utils/rotate-until
+   #(if (set? x)
+      (= % x)
+      (% x))
+   all-tones))
+
+(tones-starting-at all-tones :c)
+(tones-starting-at all-tones #{:c})
+(tones-starting-at all-tones :d#)
 
 (defn fretboard-string
   "Generate a freatboard string.
@@ -34,7 +51,7 @@
           {:x          x
            :tone       t})
         (iterate inc 0)
-        (->> (utils/rotate-until #(% string-tune) all-tones)
+        (->> (tones-starting-at all-tones string-tune)
              (cycle)
              (take number-of-frets)))))
 
@@ -170,7 +187,7 @@
   [:c :e :g]"
   [all-tones key-of intervals]
   (tones-by-intervals
-   (utils/rotate-until #(% key-of) all-tones)
+   (tones-starting-at all-tones key-of)
    intervals))
 
 (tones-by-key-and-intervals
@@ -195,8 +212,7 @@
         (mapv (fn [interval-function]
                 (get-in intervals/intervals-map-by-function [interval-function :semitones]))))
    intervals
-   (utils/rotate-until #(% key-of) all-tones)
-   ))
+   (tones-starting-at all-tones key-of)))
 
 (tones-by-key-and-intervals-2
  all-tones
@@ -270,7 +286,7 @@
                             (every? (fn [[interval' {:keys [tone] :as tone'}]]
                                       (let [interval-semitones (get-in intervals/intervals-map-by-function [interval' :semitones])
                                             fretboard-tone     (nth
-                                                                (utils/rotate-until #(% key-of) all-tones)
+                                                                (tones-starting-at all-tones key-of)
                                                                 interval-semitones)]
                                         (and
                                          (= (-> combinations-p first count)
@@ -282,7 +298,7 @@
                  (map (fn [[interval' {:keys [tone] :as tone'}]]
                         (let [interval-semitones (get-in intervals/intervals-map-by-function [interval' :semitones])
                               fretboard-tone     (nth
-                                                  (utils/rotate-until #(% key-of) all-tones)
+                                                  (tones-starting-at all-tones key-of)
                                                   interval-semitones)]
                           (assoc tone'
                                  :match? (and box-match? (= tone fretboard-tone))
@@ -359,11 +375,7 @@
 
 (defn find-chords [chords-map all-tones chord-tones]
   (let [[root-tone & _] chord-tones
-        tones           (utils/rotate-until
-                         #(if (set? root-tone)
-                            (= % root-tone)
-                            (% root-tone))
-                         all-tones)]
+        tones           (tones-starting-at all-tones root-tone)]
     (->> chords-map
          (vals)
          (filter (fn [{:chord/keys [indexes]}]
@@ -730,15 +742,13 @@
   (let [scale         (get scales scale')
         scale-indexes (get scale :scale/indexes)
         scale-tones   (tones-by-indexes
-                       (utils/rotate-until
-                        #(% key-of)
-                        all-tones)
+                       (tones-starting-at all-tones key-of)
                        scale-indexes)]
   (->> scale-tones
        (mapv
         (fn [t]
           (let [index-chord-tones (steps-fn
-                                   (utils/rotate-until #(= % t) scale-tones))
+                                   (tones-starting-at scale-tones t))
                 found-chord       (find-chord
                                    chords
                                    all-tones
@@ -746,8 +756,7 @@
                 interval-tones    (mapv (fn [interval' index']
                                           (sharp-or-flat index' interval'))
                                         (:chord/intervals found-chord)
-                                        index-chord-tones)
-                ]
+                                        index-chord-tones)]
             (assoc
              found-chord
              :key-of key-of
@@ -787,7 +796,7 @@
    @v4.se.jherrlin.music-theory.definitions/scales
    @v4.se.jherrlin.music-theory.definitions/chords
    :c
-   :minor
+   :natural-minor #_:minor
    triad #_seventh)
   )
 

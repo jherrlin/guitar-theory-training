@@ -103,39 +103,44 @@
 (define-chord :major
   {:sufix        ""
    :explanation  "major"
-   :display-text "major"
-   :order        1}
+   :display-text "major"}
   "1 3 5")
 
 (define-chord :minor
   {:sufix        "m"
    :explanation  "minor"
-   :display-text "minor"
-   :order        2}
+   :display-text "minor"}
   "1 b3 5")
 
 (define-chord :major-maj-seven
   {:sufix       "maj7"
-   :explanation "major maj 7th"
-   :order       3}
+   :explanation "major maj 7th"}
   "1 3 5 7")
 
 (define-chord :dominant-seven
   {:sufix       "7"
-   :explanation "dominant 7th"
-   :order        4}
+   :explanation "dominant 7th"}
   "1 3 5 b7")
+
+(define-chord :dominant-seven-sharp-nine
+  {:sufix       "7#9"
+   :explanation "dominant 7th with a sharp nine"
+   :text        "Also knows as the Hendrix chord."}
+  "1 3 5 b7 #9")
+
+(define-chord :dominant-seven-flat-nine
+  {:sufix       "7b9"
+   :explanation "dominant 7th"}
+  "1 3 5 b7 b9")
 
 (define-chord :minor-maj-seven
   {:sufix       "m(maj7)"
-   :explanation "minor maj 7th"
-   :order        5}
+   :explanation "minor maj 7th"}
   "1 b3 5 7")
 
 (define-chord :minor-seven
   {:sufix       "m7"
-   :explanation "minor 7th"
-   :order       6}
+   :explanation "minor 7th"}
   "1 b3 5 b7")
 
 (define-chord :sus2
@@ -210,7 +215,7 @@
 (define-chord :ninth
   {:sufix       "9"
    :explanation "ninth"
-   :text        "The most important tones are 1, 3, b7 and 9. The 5 can be ignored in the chord."}
+   :text        "This is a dominant chord. The most important tones are 1, 3, b7 and 9. The 5 can be ignored in the chord."}
   "1 3 5 b7 9")
 
 (define-chord :maj-ninth
@@ -518,6 +523,27 @@
    -   -   5   -
    1   -   -   -
    -   -   -   -")
+
+(define-chord-pattern :dominant-seven-sharp-nine-1
+  {:name   :dominant-seven-sharp-nine
+   :tuning standard-guitar-tuning}
+  "
+   -   -   -
+   -   -  #9
+   -  b7   -
+   3   -   -
+   -   1   -
+   -   -   -")
+
+(define-chord-pattern :dominant-seven-flat-nine-1
+  {:name   :dominant-seven-flat-nine
+   :tuning standard-guitar-tuning}
+  "-   -
+  b9   -
+   -  b7
+   3   -
+   -   1
+   -   -")
 
 (define-chord-pattern :minor-seven-1
   {:name   :minor-seven
