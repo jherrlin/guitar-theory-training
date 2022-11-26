@@ -51,7 +51,7 @@
              :as m}
             (get @definitions/chords chord)
             tones (utils/tones-by-key-and-intervals
-                   utils/all-tones
+                   (utils/all-tones)
                    key-of
                    intervals)]
         [:div
@@ -87,11 +87,11 @@
              (if as-intervals
                :interval
                :tone)
-             (utils/tones-by-key-and-intervals-2
-              utils/all-tones
+             (utils/tones-data-from-key-of-and-intervals
+              (utils/all-tones)
               key-of
-              intervals)]
-            )]]))))
+              intervals)])]]))))
+
 
 (def routes
   [["/v4/piano/chord/:key-of/:chord-name"

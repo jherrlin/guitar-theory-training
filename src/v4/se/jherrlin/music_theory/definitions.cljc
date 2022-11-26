@@ -3,9 +3,7 @@
    [v4.se.jherrlin.music-theory.utils :as utils]))
 
 
-(def all-tones
-  [#{:c} #{:db :c#} #{:d} #{:d# :eb} #{:e} #{:f} #{:gb :f#} #{:g} #{:g# :ab} #{:a} #{:bb :a#} #{:b}])
-
+(def all-tones (utils/all-tones))
 
 (def standard-guitar-tuning  [:e :b :g :d :a :e])
 (def standard-ukulele-tuning [:a :e :c :g])
@@ -102,14 +100,12 @@
 ;; ---------------
 (define-chord :major
   {:sufix        ""
-   :explanation  "major"
-   :display-text "major"}
+   :explanation  "major"}
   "1 3 5")
 
 (define-chord :minor
-  {:sufix        "m"
-   :explanation  "minor"
-   :display-text "minor"}
+  {:sufix       "m"
+   :explanation "minor"}
   "1 b3 5")
 
 (define-chord :major-maj-seven
@@ -164,15 +160,14 @@
   "1 b3 b5 b7")
 
 (define-chord :major-seven-flat-5
-  {:sufix        "(maj7)b5"
-   :explanation  "major major seven flat 5"
-   :display-text "maj7b5"}
+  {:sufix       "maj7b5"
+   :explanation "major major seven flat 5"}
   "1 3 b5 7")
 
 (define-chord :major-seven-sharp-5
-  {:sufix        "(maj7)#5"
-   :explanation  "major major seven sharp 5"
-   :display-text "maj7#5"}
+  {:sufix             "(maj7)#5"
+   :explanation       "major major seven sharp 5"
+   :sufix-alternative "maj7#5"}
   "1 3 #5 7")
 
 (define-chord :fifth

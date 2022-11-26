@@ -65,3 +65,29 @@
 
 (valid-interval-tone?  :c)
 (valid-interval-tones? [:c])
+
+
+(def ToneData
+  [:map
+   [:index-tone    IndexTone]
+   [:interval-tone IntervalTone]
+   [:interval      string?]
+   [:semitones     int?]
+   [:name/en       string?]])
+
+(def TonesData
+  [:vector
+   {:min 1}
+   ToneData])
+
+(def valid-tone-data?  (partial m/validate ToneData))
+(def valid-tones-data? (partial m/validate TonesData))
+
+
+(m/validate
+ TonesData
+ [{:semitones 0,
+    :name/en "Root",
+    :index-tone #{:c},
+    :interval-tone :c,
+    :interval "1"}])

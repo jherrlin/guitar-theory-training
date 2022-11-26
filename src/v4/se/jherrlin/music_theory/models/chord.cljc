@@ -24,12 +24,13 @@
 
   Defines a chord without notion of instrument."
   [:map
-   [:chord/id          keyword?]
-   [:chord/intervals   [:vector string?]]
-   [:chord/indexes     [:vector number?]]
-   [:chord/name       string?]
-   [:chord/sufix       string?]
-   [:chord/explanation {:optional true} string?]])
+   [:chord/id           keyword?]
+   [:chord/intervals    [:vector string?]]
+   [:chord/indexes      [:vector number?]]
+   [:chord/name         string?]
+   [:chord/sufix        string?]
+   [:chord/explanation  {:optional true} string?]
+   [:chord/text         {:optional true} string?]])
 
 (def Chords
   [:map-of :keyword Chord])

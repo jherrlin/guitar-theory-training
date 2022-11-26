@@ -13,13 +13,19 @@
    [v4.se.jherrlin.music-theory.intervals :as intervals]
    [v4.se.jherrlin.music-theory.models.chord :as models.chord]
    [v4.se.jherrlin.music-theory.models.scale :as models.scale]
-   [v4.se.jherrlin.music-theory.models.fretboard-pattern :as models.fretboard-pattern]))
+   [v4.se.jherrlin.music-theory.models.fretboard-pattern :as models.fretboard-pattern]
+   [v4.se.jherrlin.music-theory.models.tone :as models.tone]))
 
 
 ;; Terms
 ;; fretboard-matrix
 
-(def all-tones [#{:c} #{:db :c#} #{:d} #{:d# :eb} #{:e} #{:f} #{:gb :f#} #{:g} #{:g# :ab} #{:a} #{:bb :a#} #{:b}])
+(defn all-tones
+  "All tones as index "
+  []
+  {:post [(models.tone/valid-index-tones? %)]
+   :malli/schema [:=> [] models.tone/IndexTones]}
+  [#{:c} #{:db :c#} #{:d} #{:d# :eb} #{:e} #{:f} #{:gb :f#} #{:g} #{:g# :ab} #{:a} #{:bb :a#} #{:b}])
 
 (defn tones-starting-at
   "`x` - can be both a index tone and a interval tone.
@@ -29,15 +35,16 @@
   =>
   [#{:d# :eb} #{:e} #{:f} #{:gb :f#} #{:g} #{:g# :ab} #{:a} #{:bb :a#} #{:b} #{:c} #{:db :c#} #{:d}]"
   [all-tones x]
+  {:pre [(models.tone/valid-index-tones? all-tones)]}
   (utils/rotate-until
-   #(if (set? x)
+   #(if (models.tone/valid-index-tone? x)
       (= % x)
       (% x))
    all-tones))
 
-(tones-starting-at all-tones :c)
-(tones-starting-at all-tones #{:c})
-(tones-starting-at all-tones :d#)
+(tones-starting-at (all-tones) :c)
+(tones-starting-at (all-tones) #{:c})
+(tones-starting-at (all-tones) :d#)
 
 (defn fretboard-string
   "Generate a freatboard string.
@@ -46,6 +53,8 @@
   `tuning`           - Tuning on string
   `number-of-frets`  - Width of the freatboard"
   [all-tones string-tune number-of-frets]
+  {:pre [(models.tone/valid-index-tones? all-tones)
+         (models.tone/valid-interval-tone? string-tune)]}
   (->> (mapv
         (fn [x t]
           {:x          x
@@ -56,7 +65,7 @@
              (take number-of-frets)))))
 
 (fretboard-string
- all-tones
+ (all-tones)
  :e
  12)
 
@@ -68,6 +77,8 @@
   `tunings`          - Tuning on strings
   `number-of-frets`  - Width of the freatboard"
   [all-tones string-tunes number-of-frets]
+  {:pre [(models.tone/valid-index-tones? all-tones)
+         (models.tone/valid-interval-tones? string-tunes)]}
   (->> string-tunes
        (mapv
         (fn [y string-tune]
@@ -77,7 +88,7 @@
         (iterate inc 0))))
 
 (fretboard-strings
- all-tones
+ (all-tones)
  [:e :b :g :d :a :e]
  2)
 
@@ -89,8 +100,10 @@
   `all-tones`        - A collection of all the tones
   `tunings`          - Tunings on each string
   `number-of-frets`  - Width of the freatboard"
-  [all-tones tunings number-of-frets]
-  (->> tunings
+  [all-tones string-tunings number-of-frets]
+  {:pre [(models.tone/valid-index-tones? all-tones)
+         (models.tone/valid-interval-tones? string-tunings)]}
+  (->> string-tunings
        (mapv
         (fn [y string-tune]
           (mapv
@@ -99,7 +112,7 @@
         (iterate inc 0))))
 
 (gen-fretboard-matrix
- all-tones
+ (all-tones)
  [:e :b :g :a :b]
  3)
 
@@ -109,12 +122,12 @@
   "Select tone from interval.
   Tone is a set: #{:db :c#}
   Interval is a string: \"3#\""
-  [tone interval]
-  {:pre [(set? tone)]}
+  [index-tone interval]
+  {:pre [(models.tone/valid-index-tone? index-tone)]}
   (-> (cond
-        (= 1 (count tone))           tone
-        (str/includes? interval "b") (filter (comp #(str/includes? % "b") name) tone)
-        :else                        (filter (comp #(str/includes? % "#") name) tone))
+        (= 1 (count index-tone))     index-tone
+        (str/includes? interval "b") (filter (comp #(str/includes? % "b") name) index-tone)
+        :else                        (filter (comp #(str/includes? % "#") name) index-tone))
       (first)))
 
 (sharp-or-flat
@@ -126,21 +139,24 @@
  "b3")
 
 
-(defn tones-on-indexes-with-intervals-2 [indexes intervals tones]
+(defn tones-data-from-indexes-and-intervals [all-tones indexes intervals]
   (mapv
    (fn [index interval]
      (merge
       (get intervals/intervals-map-by-function interval)
-      {:tone     (sharp-or-flat (nth tones index) interval)
-       :interval interval
-       :index    index}))
+      (let [index-tone (nth all-tones index)]
+        {:index-tone    index-tone
+         :interval-tone (sharp-or-flat (nth all-tones index) interval)
+         :interval      interval
+         :index         index})))
    indexes
    intervals))
 
-(tones-on-indexes-with-intervals-2
+(tones-data-from-indexes-and-intervals
+ (all-tones)
  [0 3 7]
  ["1" "b3" "5"]
- all-tones)
+ )
 
 (defn tones-on-indexes-with-intervals [indexes intervals tones]
   (mapv
@@ -152,7 +168,7 @@
 (tones-on-indexes-with-intervals
  [0 3 7]
  ["1" "b3" "5"]
- all-tones)
+ (all-tones))
 
 
 
@@ -174,7 +190,7 @@
 
 
 (tones-by-intervals
- all-tones
+ (all-tones)
  ["1" "3" "5"]
  )
 
@@ -191,7 +207,7 @@
    intervals))
 
 (tones-by-key-and-intervals
- all-tones
+ (all-tones)
  :c
  #_["1" "b3" "5"]
  ["1" "3" "5"])
@@ -199,7 +215,7 @@
 
 
 
-(defn tones-by-key-and-intervals-2
+(defn tones-data-from-key-of-and-intervals
   "
 
   `key-of`    -  :c
@@ -207,40 +223,24 @@
   =>
   [:c :e :g]"
   [all-tones key-of intervals]
-  (tones-on-indexes-with-intervals-2
+  {:pre  [(models.tone/valid-index-tones? all-tones)
+          (models.tone/valid-interval-tone? key-of)]
+   :post [(models.tone/valid-tones-data? %)]}
+  (tones-data-from-indexes-and-intervals
+   (tones-starting-at all-tones key-of)
    (->> intervals
         (mapv (fn [interval-function]
                 (get-in intervals/intervals-map-by-function [interval-function :semitones]))))
-   intervals
-   (tones-starting-at all-tones key-of)))
+   intervals))
 
-(tones-by-key-and-intervals-2
- all-tones
+(tones-data-from-key-of-and-intervals
+ (all-tones)
  :c
  ["1" "b3" "5"]
- #_["1" "3" "5"])
+ #_["1" "3" "5"]
+ )
 
-[{:semitones 0,
-  :function "1",
-  :name/en "Root",
-  :name/sv "Root",
-  :tone :c,
-  :interval "1",
-  :index 0}
- {:semitones 3,
-  :function "b3",
-  :name/en "Minor third",
-  :name/sv "Moll-ters",
-  :tone :eb,
-  :interval "b3",
-  :index 3}
- {:semitones 7,
-  :function "5",
-  :name/en "Perfect fifth",
-  :name/sv "Kvint",
-  :tone :g,
-  :interval "5",
-  :index 7}]
+
 
 
 (defn intevals-string->intervals-matrix
@@ -334,7 +334,7 @@
                (mapv #(mapv identity %))))))))
 
 (find-fretboard-pattern
- all-tones
+ (all-tones)
  :e
  [["1" nil nil]
   ["5" nil nil]
@@ -343,7 +343,7 @@
   [nil nil "5"]
   ["1" nil nil]]
  (fretboard-strings
-  all-tones
+  (all-tones)
   [:e :b :g :d :a :e]
   4))
 
@@ -409,7 +409,7 @@
           :sufix        "m",
           :explanation  "minor",
           :display-text "minor"}}
- all-tones
+ (all-tones)
  #_[#{:c} #{:e} #{:g}]
  #_[#{:c} #{:d# :eb} #{:g}]
  [:c :e :g]
@@ -432,7 +432,7 @@
           :sufix        "",
           :explanation  "major",
           :display-text "major"}}
- all-tones
+ (all-tones)
  [#{:c} #{:e} #{:g}])
 
 
@@ -507,7 +507,7 @@
 
 
 (->> (find-fretboard-pattern
-      all-tones
+      (all-tones)
       :e
       [["1" nil nil]
        ["5" nil nil]
@@ -516,7 +516,7 @@
        [nil nil "5"]
        ["1" nil nil]]
       (fretboard-strings
-       all-tones
+       (all-tones)
        [:e :b :g :d :a :e]
        12))
      (add-layer
@@ -525,7 +525,7 @@
       add-pattern))
 
 (->> (fretboard-strings
-      all-tones
+      (all-tones)
       [:e :b :g :d :a :e]
       10)
      (add-layer
@@ -553,7 +553,7 @@
 
 
 (->> (fretboard-strings
-      all-tones
+      (all-tones)
       [:e :b :g :d :a :e]
       12)
      (add-layer
@@ -563,7 +563,7 @@
      (println))
 
 (->> (find-fretboard-pattern
-      all-tones
+      (all-tones)
       :e
       [["1" nil nil]
        ["5" nil nil]
@@ -572,7 +572,7 @@
        [nil nil "5"]
        ["1" nil nil]]
       (fretboard-strings
-       all-tones
+       (all-tones)
        [:e :b :g :d :a :e]
        10))
      (add-layer
@@ -587,7 +587,7 @@
 
 
 (->> (find-fretboard-pattern
-      all-tones
+      (all-tones)
       :c
       [["5" nil nil]
        [nil nil "3"]
@@ -596,7 +596,7 @@
        ["1" nil nil]
        ["5" nil nil]]
       (fretboard-strings
-       all-tones
+       (all-tones)
        [:e :b :g :d :a :e]
        10))
      (add-layer
@@ -614,7 +614,7 @@
 (defn pattern-with-intervals
   [key-of pattern fretboard-matrix]
   (->> (find-fretboard-pattern
-        all-tones
+        (all-tones)
         key-of
         pattern
         fretboard-matrix)
@@ -629,7 +629,7 @@
        ["1" nil nil]
        ["5" nil nil]]
       (fretboard-strings
-       all-tones
+       (all-tones)
        [:e :b :g :d :a :e]
        10))
      (utils/trim-matrix #(every? nil? (map :out %)))
@@ -641,7 +641,7 @@
 (defn pattern-with-tones
   [key-of pattern fretboard-matrix]
   (->> (find-fretboard-pattern
-        all-tones
+        (all-tones)
         key-of
         pattern
         fretboard-matrix)
@@ -656,7 +656,7 @@
        ["1" nil nil]
        ["5" nil nil]]
       (fretboard-strings
-       all-tones
+       (all-tones)
        [:e :b :g :d :a :e]
        10))
      (utils/trim-matrix #(every? nil? (map :out %)))
@@ -675,7 +675,7 @@
 (->> (with-all-tones
        [:e :b :g]
        (fretboard-strings
-        all-tones
+        (all-tones)
         [:e :b :g :d :a :e]
         10))
      (utils/trim-matrix #(every? nil? (map :out %)))
@@ -694,7 +694,7 @@
 (->> (with-all-intervals
        [[:e "1"] [:b "b3"] [:g "5"]]
        (fretboard-strings
-        all-tones
+        (all-tones)
         [:e :b :g :d :a :e]
         12))
      (utils/trim-matrix #(every? nil? (map :out %)))
@@ -710,7 +710,7 @@
 
 (->> (with-all-sharps
        (fretboard-strings
-        all-tones
+        (all-tones)
         [:e :b :g :d :a :e]
         12))
      (fretboard-str (fn [{:keys [out]}] (if (nil? out) "" out)))
@@ -725,7 +725,7 @@
 
 (->> (with-all-flats
        (fretboard-strings
-        all-tones
+        (all-tones)
         [:e :b :g :d :a :e]
         12))
      (fretboard-str (fn [{:keys [out]}] (if (nil? out) "" out)))
@@ -742,7 +742,7 @@
   (let [scale         (get scales scale')
         scale-indexes (get scale :scale/indexes)
         scale-tones   (tones-by-indexes
-                       (tones-starting-at all-tones key-of)
+                       (tones-starting-at (all-tones) key-of)
                        scale-indexes)]
   (->> scale-tones
        (mapv
@@ -751,7 +751,7 @@
                                    (tones-starting-at scale-tones t))
                 found-chord       (find-chord
                                    chords
-                                   all-tones
+                                   (all-tones)
                                    index-chord-tones)
                 interval-tones    (mapv (fn [interval' index']
                                           (sharp-or-flat index' interval'))
@@ -821,7 +821,7 @@
 
 (let [tones     [:d :f# :a]
       tones-set (set tones)]
-  (->> all-tones
+  (->> (all-tones)
        (utils/rotate-until #(% :d#))
        (map (fn [tone]
               (cond-> {:tone tone}
@@ -845,9 +845,9 @@
 
 ;; Find the chord, cartesian product of all chords and key-of
 ;; (->> (for [{:chord/keys [intervals] :as chord} (vals @v2.se.jherrlin.music-theory.definitions/chords-atom)
-;;            tone                                (apply concat all-tones)]
+;;            tone                                (apply concat (all-tones))]
 ;;        (let [tones (intervals->tones
-;;                     all-tones
+;;                     (all-tones)
 ;;                     sharp-or-flat
 ;;                     rotate-until
 ;;                     tone

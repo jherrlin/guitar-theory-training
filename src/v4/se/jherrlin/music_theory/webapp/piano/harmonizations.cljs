@@ -54,7 +54,7 @@
              :as       m}
             (get @definitions/scales scale)
             tones (utils/tones-by-key-and-intervals
-                   utils/all-tones
+                   (utils/all-tones)
                    key-of
                    intervals)]
         [:div

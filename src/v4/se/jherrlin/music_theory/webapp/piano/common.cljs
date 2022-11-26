@@ -60,7 +60,7 @@
 
           (for [{:keys [tone match?]}
                 (let [tones-set (set tones)]
-                  (->> utils/all-tones
+                  (->> (utils/all-tones)
                        (rotate-until #(% key-of))
                        (map (fn [tone]
                               (cond-> {:tone tone}
