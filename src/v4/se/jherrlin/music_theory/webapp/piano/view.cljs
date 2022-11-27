@@ -45,11 +45,11 @@
                                                    :justify-content  :center})
         the-comp                      (fn [tone-set]
                                         [:div {:style column-reverse}
-                                         (when-let [{:keys [tone interval]} (first (filter (comp tone-set :tone) input))]
+                                         (when-let [{:keys [interval-tone interval]} (first (filter (comp tone-set :interval-tone) input))]
                                            [:div {:style (circle-style orange)}
                                             (condp = tone-or-interval
                                               :interval interval
-                                              (-> tone name str/capitalize))])])]
+                                              (-> interval-tone name str/capitalize))])])]
     [:div {:style {:display        :flex
                    :height         "150px"
                    :flex-direction :row}}

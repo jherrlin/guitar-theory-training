@@ -10,6 +10,7 @@
    [v4.se.jherrlin.music-theory.utils :as utils]
    [v4.se.jherrlin.music-theory.webapp.piano.view :as piano.view]
    [v4.se.jherrlin.music-theory.webapp.piano.common :as common]
+   [v4.se.jherrlin.music-theory.webapp.params]
    [se.jherrlin.utils
     :refer [fformat rotate-until]]))
 
@@ -25,8 +26,6 @@
    {:n ::as-intervals
     :s (fn [db [n']] (get db n' false))}
    {:n ::nr-of-octavs}
-   {:n ::path-params}
-   {:n ::query-params}
    {:n ::steps}])
 
 (comment
@@ -44,8 +43,8 @@
         steps        @(re-frame/subscribe [::steps])
         as-intervals @(re-frame/subscribe [::as-intervals])
         key-of       @(re-frame/subscribe [:key-of])
-        path-params  @(re-frame/subscribe [::path-params])
-        query-params @(re-frame/subscribe [::query-params])
+        path-params  @(re-frame/subscribe [:path-params])
+        query-params @(re-frame/subscribe [:query-params])
         nr-of-octavs @(re-frame/subscribe [::nr-of-octavs])]
     (when (and scale key-of)
       (let [{id        :scale/id
@@ -129,7 +128,7 @@
                   :tone)
                 (mapv
                  (fn [interval interval-tone]
-                   {:interval interval :tone interval-tone})
+                   {:interval interval :interval-tone interval-tone})
                  intervals
                  interval-tones)])]
             [:br]
@@ -142,12 +141,10 @@
      :controllers
      [{:parameters {:path  [:key-of :scale :steps]
                     :query [:as-intervalls :octavs]}
-       :start      (fn [{{:keys [key-of scale steps] :as p} :path
-                         {:keys [as-intervalls octavs] :as q}    :query}]
-                     (js/console.log "path params" p)
-                     (js/console.log "query params" q)
-                     (re-frame/dispatch [::path-params p])
-                     (re-frame/dispatch [::query-params q])
+       :start      (fn [{{:keys [key-of scale steps] :as p}   :path
+                         {:keys [as-intervalls octavs] :as q} :query}]
+                     (re-frame/dispatch [:path-params p])
+                     (re-frame/dispatch [:query-params q])
                      (let [octavs (if-not octavs
                                     2
                                     (js/parseInt octavs))

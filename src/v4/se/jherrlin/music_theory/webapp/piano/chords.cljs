@@ -25,15 +25,14 @@
    {:n ::path-params}
    {:n ::query-params}])
 
-(comment
-  @(re-frame/subscribe [::as-intervals])
-  @re-frame.db/app-db
-  )
-
 (doseq [{:keys [n s e]} events-]
   (re-frame/reg-sub n (or s (fn [db [n']] (get db n'))))
   (re-frame/reg-event-db n (or e (fn [db [_ e]] (assoc db n e)))))
 
+(comment
+  @(re-frame/subscribe [::as-intervals])
+  @re-frame.db/app-db
+  )
 
 (defn chords-view []
   (let [chord        @(re-frame/subscribe [::chord])
@@ -67,7 +66,7 @@
          [common/links-to-chords
           @definitions/chords
           chord
-          #(rfe/href :v4.piano/chords (assoc path-params :chord-name %) query-params)]
+          #(rfe/href :v4.piano/chords (assoc path-params :chord %) query-params)]
 
          ;; Highlight tones
          [common/highlight-tones tones key-of]
@@ -94,16 +93,14 @@
 
 
 (def routes
-  [["/v4/piano/chord/:key-of/:chord-name"
+  [["/v4/piano/chord/:key-of/:chord"
     {:name :v4.piano/chords
      :view [chords-view]
      :controllers
-     [{:parameters {:path  [:key-of :chord-name]
+     [{:parameters {:path  [:key-of :chord]
                     :query [:as-intervalls :octavs]}
-       :start      (fn [{{:keys [key-of chord-name] :as p}    :path
+       :start      (fn [{{:keys [key-of chord] :as p}    :path
                          {:keys [as-intervalls octavs] :as q} :query}]
-                     (js/console.log "path params" p)
-                     (js/console.log "query params" q)
                      (re-frame/dispatch [::path-params p])
                      (re-frame/dispatch [::query-params q])
                      (let [octavs (if-not octavs
@@ -111,8 +108,10 @@
                                     (js/parseInt octavs))
                            key-of (-> key-of
                                       (str/lower-case)
-                                      (str/replace "sharp" "#"))]
+                                      (str/replace "sharp" "#")
+                                      (keyword)
+                                      )]
                        (re-frame/dispatch [::nr-of-octavs octavs])
                        (re-frame/dispatch [:key-of (keyword key-of)])
-                       (re-frame/dispatch [::chord (keyword chord-name)])
+                       (re-frame/dispatch [::chord (keyword chord)])
                        (re-frame/dispatch [::as-intervals (boolean (seq as-intervalls))])))}]}]])

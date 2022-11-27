@@ -70,7 +70,7 @@
          [common/links-to-scales
           @definitions/scales
           scale
-          #(rfe/href :v4.piano/scales (assoc path-params :scale-name %) query-params)]
+          #(rfe/href :v4.piano/scales (assoc path-params :scale %) query-params)]
 
          ;; Highlight tones
          [common/highlight-tones tones key-of]
@@ -97,13 +97,13 @@
 
 
 (def routes
-  [["/v4/piano/scale/:key-of/:scale-name"
+  [["/v4/piano/scale/:key-of/:scale"
     {:name :v4.piano/scales
      :view [scales-view]
      :controllers
-     [{:parameters {:path  [:key-of :scale-name]
+     [{:parameters {:path  [:key-of :scale]
                     :query [:as-intervalls :octavs]}
-       :start      (fn [{{:keys [key-of scale-name] :as p}    :path
+       :start      (fn [{{:keys [key-of scale] :as p}         :path
                          {:keys [as-intervalls octavs] :as q} :query}]
                      (js/console.log "path params" p)
                      (js/console.log "query params" q)
@@ -117,5 +117,5 @@
                                       (str/replace "sharp" "#"))]
                        (re-frame/dispatch [::nr-of-octavs octavs])
                        (re-frame/dispatch [:key-of (keyword key-of)])
-                       (re-frame/dispatch [::scale (keyword scale-name)])
+                       (re-frame/dispatch [::scale (keyword scale)])
                        (re-frame/dispatch [::as-intervals (boolean (seq as-intervalls))])))}]}]])

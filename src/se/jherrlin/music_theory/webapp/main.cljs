@@ -130,20 +130,20 @@ code lives on "
 
         [:> semantic-ui/Menu.Item
          {:as     "a"
-          :href   (rfe/href :v4.piano/chords {:key-of key-of :chord-name :major})
+          :href   (rfe/href :v4.piano/chords {:key-of key-of :chord :major})
           :active (= :v4.piano/chords current-route-name)}
          "Piano chords"]
 
         [:> semantic-ui/Menu.Item
          {:as     "a"
-          :href   (rfe/href :v4.piano/scales {:key-of key-of :scale-name :major})
+          :href   (rfe/href :v4.piano/scales {:key-of key-of :scale :major})
           :active (= :v4.piano/scales current-route-name)}
          "Piano scales"]
 
         [:> semantic-ui/Menu.Item
          {:as     "a"
           :href   (rfe/href :v4.piano/harmonizations {:key-of key-of :scale :major :steps :triad})
-          :active (= :v4.piano/scales current-route-name)}
+          :active (= :v4.piano/harmonizations current-route-name)}
          "Piano harmonization"]
 
         [:> semantic-ui/Menu.Menu {:position "right"}
