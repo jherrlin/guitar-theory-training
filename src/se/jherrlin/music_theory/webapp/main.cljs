@@ -81,6 +81,8 @@ code lives on "
 (defn ^:dev/after-load header-menu [router]
   (let [key-of             @(re-frame/subscribe [:key-of])
         tuning-name        @(re-frame/subscribe [:tuning-name])
+        path-params        @(re-frame/subscribe [:path-params])
+        query-params       @(re-frame/subscribe [:query-params])
         current-route      @(re-frame/subscribe [:current-route])
         current-route-name (get-in current-route [:data :name])]
     (when (and current-route current-route-name)
@@ -130,19 +132,19 @@ code lives on "
 
         [:> semantic-ui/Menu.Item
          {:as     "a"
-          :href   (rfe/href :v4.piano/chords {:key-of key-of :chord :major})
+          :href   (rfe/href :v4.piano/chords (merge {:key-of :c :chord :major} path-params) query-params)
           :active (= :v4.piano/chords current-route-name)}
          "Piano chords"]
 
         [:> semantic-ui/Menu.Item
          {:as     "a"
-          :href   (rfe/href :v4.piano/scales {:key-of key-of :scale :major})
+          :href   (rfe/href :v4.piano/scales (merge {:key-of :c :scale :major} path-params) query-params)
           :active (= :v4.piano/scales current-route-name)}
          "Piano scales"]
 
         [:> semantic-ui/Menu.Item
          {:as     "a"
-          :href   (rfe/href :v4.piano/harmonizations {:key-of key-of :scale :major :steps :triad})
+          :href   (rfe/href :v4.piano/harmonizations (merge {:key-of :c :scale :major :steps :triad} path-params) query-params)
           :active (= :v4.piano/harmonizations current-route-name)}
          "Piano harmonization"]
 

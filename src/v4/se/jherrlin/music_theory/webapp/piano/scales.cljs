@@ -10,48 +10,28 @@
    [v4.se.jherrlin.music-theory.utils :as utils]
    [v4.se.jherrlin.music-theory.webapp.piano.view :as piano.view]
    [v4.se.jherrlin.music-theory.webapp.piano.common :as common]
+   [v4.se.jherrlin.music-theory.webapp.params :as params]
    [se.jherrlin.utils
     :refer [fformat rotate-until]]))
 
 
 
 
-(def events-
-  [{:n ::scale}
-   {:n ::tone-or-interval
-    :s (fn [db [n']] (get db n' :tone))}
-   {:n ::as-intervals
-    :s (fn [db [n']] (get db n' false))}
-   {:n ::nr-of-octavs}
-   {:n ::path-params}
-   {:n ::query-params}])
-
-(comment
-  @(re-frame/subscribe [::as-intervals])
-  @re-frame.db/app-db
-  )
-
-(doseq [{:keys [n s e]} events-]
-  (re-frame/reg-sub n (or s (fn [db [n']] (get db n'))))
-  (re-frame/reg-event-db n (or e (fn [db [_ e]] (assoc db n e)))))
-
-
-
-
-
 (defn scales-view []
-  (let [scale        @(re-frame/subscribe [::scale])
-        as-intervals @(re-frame/subscribe [::as-intervals])
-        key-of       @(re-frame/subscribe [:key-of])
-        path-params  @(re-frame/subscribe [::path-params])
-        query-params @(re-frame/subscribe [::query-params])
-        nr-of-octavs @(re-frame/subscribe [::nr-of-octavs])]
+  (let [scale             @(re-frame/subscribe [:scale])
+        as-intervals      @(re-frame/subscribe [:as-intervals])
+        key-of            @(re-frame/subscribe [:key-of])
+        path-params       @(re-frame/subscribe [:path-params])
+        query-params      @(re-frame/subscribe [:query-params])
+        nr-of-octavs      @(re-frame/subscribe [:nr-of-octavs])
+        highlighted-tones @(re-frame/subscribe [:highlighted-tones])
+        interval-to-tone @(re-frame/subscribe [:interval-to-tone])]
     (when (and scale key-of)
-      (let [{id          :scale/id
-             indexes     :scale/indexes
-             intervals   :scale/intervals
-             scale-name  :scale/name
-             :as m}
+      (let [{id         :scale/id
+             indexes    :scale/indexes
+             intervals  :scale/intervals
+             scale-name :scale/name
+             :as        m}
             (get @definitions/scales scale)
             tones (utils/tones-by-key-and-intervals
                    (utils/all-tones)
@@ -73,13 +53,17 @@
           #(rfe/href :v4.piano/scales (assoc path-params :scale %) query-params)]
 
          ;; Highlight tones
-         [common/highlight-tones tones key-of]
+         (when highlighted-tones
+           [common/highlight-tones tones key-of])
+
 
          ;; Chord name
          [common/chord-name key-of m]
 
          ;; Intervals
-         [common/intervals-to-tones intervals tones]
+         (when interval-to-tone
+           [common/intervals-to-tones intervals tones])
+
 
          [:br]
 
@@ -101,21 +85,8 @@
     {:name :v4.piano/scales
      :view [scales-view]
      :controllers
-     [{:parameters {:path  [:key-of :scale]
-                    :query [:as-intervalls :octavs]}
-       :start      (fn [{{:keys [key-of scale] :as p}         :path
-                         {:keys [as-intervalls octavs] :as q} :query}]
-                     (js/console.log "path params" p)
-                     (js/console.log "query params" q)
-                     (re-frame/dispatch [::path-params p])
-                     (re-frame/dispatch [::query-params q])
-                     (let [octavs (if-not octavs
-                                    2
-                                    (js/parseInt octavs))
-                           key-of (-> key-of
-                                      (str/lower-case)
-                                      (str/replace "sharp" "#"))]
-                       (re-frame/dispatch [::nr-of-octavs octavs])
-                       (re-frame/dispatch [:key-of (keyword key-of)])
-                       (re-frame/dispatch [::scale (keyword scale)])
-                       (re-frame/dispatch [::as-intervals (boolean (seq as-intervalls))])))}]}]])
+     [{:parameters {:path  params/path-params
+                    :query params/query-params}
+       :start      (fn [{p :path q :query}]
+                     (re-frame/dispatch [:path-params p])
+                     (re-frame/dispatch [:query-params q]))}]}]])

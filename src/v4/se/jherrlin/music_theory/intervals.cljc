@@ -47,6 +47,7 @@
    {:semitones minor-third
     :function  "b3"
     :name/en   "Minor third"
+    :text/en   "Blue note"
     :name/sv   "Moll-ters"}
    {:semitones major-third
     :function  "3"
@@ -99,6 +100,7 @@
    {:semitones minor-seventh
     :function  "b7"
     :name/en   "Minor seventh"
+    :text/en   "Blue note"
     :name/sv   "Liten sjua"}
    {:semitones major-seventh
     :function  "7"

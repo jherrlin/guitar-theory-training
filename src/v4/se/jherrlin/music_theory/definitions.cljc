@@ -100,12 +100,19 @@
 ;; ---------------
 (define-chord :major
   {:sufix        ""
+   :display-text "major"
    :explanation  "major"}
   "1 3 5")
 
+(define-chord :major-plus-5
+  {:sufix        "+5"
+   :explanation  "major where 5 is raised one half tone"}
+  "1 3 #5")
+
 (define-chord :minor
-  {:sufix       "m"
-   :explanation "minor"}
+  {:sufix        "m"
+   :display-text "minor"
+   :explanation  "minor"}
   "1 b3 5")
 
 (define-chord :major-maj-seven
@@ -404,6 +411,19 @@
    -   -   3   -
    -   -   -   1")
 
+;; Fix when migrated to v4 on guitars
+;; https://www.hobby-hour.com/guitar/chords.php?chord=e-plus-5
+;; (define-chord-pattern :major-plus-5-1
+;;   {:name   :major-plus-5
+;;    :tuning standard-guitar-tuning}
+;;   "-   -   -   1
+;;    3   -   -   -
+;;    1   -   -   -
+;;    5   -   -   -
+;;    -   -   3   -
+;;    -   -   -   1")
+
+
 (define-chord-pattern :minor-10
   {:name   :minor
    :tuning standard-ukulele-tuning}
@@ -489,8 +509,7 @@
 (define-chord-pattern :dominant-seven-3
   {:name   :dominant-seven
    :tuning standard-guitar-tuning}
-  "
-   5   -   -
+  "5   -   -
    -   -   3
   b7   -   -
    -   -   5
@@ -500,8 +519,7 @@
 (define-chord-pattern :dominant-seven-4
   {:name   :dominant-seven
    :tuning standard-guitar-tuning}
-  "
-   1   -   -   -
+  "1   -   -   -
    -   -   -  b7
    -   3   -   -
    -   -   1   -
@@ -511,13 +529,22 @@
 (define-chord-pattern :dominant-seven-5
   {:name   :dominant-seven
    :tuning standard-guitar-tuning}
-  "
-   -   -   -  b7
+  "-   -   -  b7
    -   -   3   -
    -   -   1   -
    -   -   5   -
    1   -   -   -
    -   -   -   -")
+
+(define-chord-pattern :dominant-seven-6
+  {:name   :dominant-seven
+   :tuning standard-guitar-tuning}
+  "-   -   -
+   1   -   -
+   -   -  b7
+   -   3   -
+   -   -   1
+   -   -   -")
 
 (define-chord-pattern :dominant-seven-sharp-nine-1
   {:name   :dominant-seven-sharp-nine

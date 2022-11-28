@@ -10,44 +10,30 @@
    [v4.se.jherrlin.music-theory.utils :as utils]
    [v4.se.jherrlin.music-theory.webapp.piano.view :as piano.view]
    [v4.se.jherrlin.music-theory.webapp.piano.common :as common]
+   [v4.se.jherrlin.music-theory.webapp.params :as params]
    [se.jherrlin.utils
     :refer [fformat rotate-until]]))
 
 
 
-(def events-
-  [{:n ::chord}
-   {:n ::tone-or-interval
-    :s (fn [db [n']] (get db n' :tone))}
-   {:n ::as-intervals
-    :s (fn [db [n']] (get db n' false))}
-   {:n ::nr-of-octavs}
-   {:n ::path-params}
-   {:n ::query-params}])
 
-(doseq [{:keys [n s e]} events-]
-  (re-frame/reg-sub n (or s (fn [db [n']] (get db n'))))
-  (re-frame/reg-event-db n (or e (fn [db [_ e]] (assoc db n e)))))
-
-(comment
-  @(re-frame/subscribe [::as-intervals])
-  @re-frame.db/app-db
-  )
 
 (defn chords-view []
-  (let [chord        @(re-frame/subscribe [::chord])
-        as-intervals @(re-frame/subscribe [::as-intervals])
-        key-of       @(re-frame/subscribe [:key-of])
-        path-params  @(re-frame/subscribe [::path-params])
-        query-params @(re-frame/subscribe [::query-params])
-        nr-of-octavs @(re-frame/subscribe [::nr-of-octavs])]
+  (let [chord             @(re-frame/subscribe [:chord])
+        as-intervals      @(re-frame/subscribe [:as-intervals])
+        key-of            @(re-frame/subscribe [:key-of])
+        path-params       @(re-frame/subscribe [:path-params])
+        query-params      @(re-frame/subscribe [:query-params])
+        nr-of-octavs      @(re-frame/subscribe [:nr-of-octavs])
+        highlighted-tones @(re-frame/subscribe [:highlighted-tones])
+        interval-to-tone  @(re-frame/subscribe [:interval-to-tone])]
     (when (and chord key-of)
       (let [{id          :chord/id
              indexes     :chord/indexes
              intervals   :chord/intervals
              explanation :chord/explanation
              sufix       :chord/sufix
-             :as m}
+             :as         m}
             (get @definitions/chords chord)
             tones (utils/tones-by-key-and-intervals
                    (utils/all-tones)
@@ -69,13 +55,16 @@
           #(rfe/href :v4.piano/chords (assoc path-params :chord %) query-params)]
 
          ;; Highlight tones
-         [common/highlight-tones tones key-of]
+         (when highlighted-tones
+           [common/highlight-tones tones key-of])
 
          ;; Chord name
          [common/chord-name key-of m]
 
          ;; Intervals
-         [common/intervals-to-tones intervals tones]
+         (when interval-to-tone
+           [common/intervals-to-tones intervals tones])
+
 
          [:br]
 
@@ -97,21 +86,8 @@
     {:name :v4.piano/chords
      :view [chords-view]
      :controllers
-     [{:parameters {:path  [:key-of :chord]
-                    :query [:as-intervalls :octavs]}
-       :start      (fn [{{:keys [key-of chord] :as p}    :path
-                         {:keys [as-intervalls octavs] :as q} :query}]
-                     (re-frame/dispatch [::path-params p])
-                     (re-frame/dispatch [::query-params q])
-                     (let [octavs (if-not octavs
-                                    2
-                                    (js/parseInt octavs))
-                           key-of (-> key-of
-                                      (str/lower-case)
-                                      (str/replace "sharp" "#")
-                                      (keyword)
-                                      )]
-                       (re-frame/dispatch [::nr-of-octavs octavs])
-                       (re-frame/dispatch [:key-of (keyword key-of)])
-                       (re-frame/dispatch [::chord (keyword chord)])
-                       (re-frame/dispatch [::as-intervals (boolean (seq as-intervalls))])))}]}]])
+     [{:parameters {:path  params/path-params
+                    :query params/query-params}
+       :start      (fn [{p :path q :query}]
+                     (re-frame/dispatch [:path-params p])
+                     (re-frame/dispatch [:query-params q]))}]}]])
