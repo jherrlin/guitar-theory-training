@@ -202,6 +202,9 @@
   =>
   [:c :e :g]"
   [all-tones key-of intervals]
+  {:pre  [(m/validate models.tone/IntervalTone key-of)
+          (m/validate models.tone/Intervals intervals)]
+   :post [(m/validate models.tone/IntervalTones %)]}
   (tones-by-intervals
    (tones-starting-at all-tones key-of)
    intervals))
@@ -211,7 +214,23 @@
  :c
  #_["1" "b3" "5"]
  ["1" "3" "5"])
-;;
+
+
+
+(defn intervals-to-indexes
+  "Indexes from intervals
+
+  `intervals` -  [\"1\" \"3\" \"5\"]
+  =>
+  `[0 3 7]`"
+  [intervals]
+  {:pre  [(m/validate models.tone/Intervals intervals)]
+   :post [(m/validate models.tone/Indexes %)]}
+  (->> intervals
+       (mapv (fn [interval]
+               (get-in intervals/intervals-map-by-function [interval :semitones])))))
+
+(intervals-to-indexes ["1" "b3" "5"])
 
 
 
@@ -223,15 +242,14 @@
   =>
   [:c :e :g]"
   [all-tones key-of intervals]
-  {:pre  [(models.tone/valid-index-tones? all-tones)
-          (models.tone/valid-interval-tone? key-of)]
+  {:pre  [(m/validate models.tone/IndexTones all-tones)
+          (m/validate models.tone/IntervalTone key-of)]
    :post [(models.tone/valid-tones-data? %)]}
-  (tones-data-from-indexes-and-intervals
-   (tones-starting-at all-tones key-of)
-   (->> intervals
-        (mapv (fn [interval-function]
-                (get-in intervals/intervals-map-by-function [interval-function :semitones]))))
-   intervals))
+  (let [indexes (intervals-to-indexes intervals)]
+    (tones-data-from-indexes-and-intervals
+     (tones-starting-at all-tones key-of)
+     indexes
+     intervals)))
 
 (tones-data-from-key-of-and-intervals
  (all-tones)
@@ -418,6 +436,69 @@
 
 
 
+(defn scales-to-chord [scales chord-indexes]
+  (->> scales
+       (vals)
+       (filter
+        (fn [{:scale/keys [indexes]}]
+          (set/subset? (set chord-indexes) (set indexes))))))
+
+(comment
+  (scales-to-chord
+   @v4.se.jherrlin.music-theory.definitions/scales
+   [0 4 7])
+  )
+
+
+
+
+(defn chords-to-scale [chords scale-indexes]
+  (->> chords
+       (vals)
+       (sort-by :chord/order)
+       (filter (fn [{:chord/keys [indexes]}]
+                 (set/subset? (set indexes) (set scale-indexes))))))
+
+(comment
+  (chords-to-scale
+   @v4.se.jherrlin.music-theory.definitions/chords
+   [0 2 4 5 7 9 11])
+  )
+
+
+(defn index-tones
+  "Index tones from indexes and key-of"
+  ([indexes key-of]
+   (index-tones (all-tones) indexes key-of))
+  ([all-tones indexes key-of]
+   {:pre  [(m/validate models.tone/Indexes indexes)
+           (m/validate models.tone/IntervalTone key-of)]
+    :post [(m/validate models.tone/IndexTones %)]}
+   (let [tones (tones-starting-at all-tones key-of)]
+     (tones-by-indexes tones indexes))))
+
+
+(index-tones [0 1 2] :c)
+
+
+
+
+(defn interval-tones
+  "Interval tones from intervals and key-of"
+  ([intervals key-of]
+   (interval-tones (all-tones) intervals key-of))
+  ([all-tones intervals key-of]
+   {:pre  [(m/validate models.tone/Intervals intervals)
+           (m/validate models.tone/IntervalTone key-of)]
+    :post [(m/validate models.tone/IntervalTones %)]}
+   (tones-by-intervals
+    (tones-starting-at all-tones key-of)
+    intervals)))
+
+(interval-tones ["1" "b3" "5"] :c)
+
+
+
 (defn find-chord [chords-map all-tones chord-tones]
   (->> (find-chords chords-map all-tones chord-tones)
        (first)))
@@ -547,7 +628,7 @@
              (map add-table-stuff))
         row-length (-> rows first count)]
     (->> rows
-         (utils/list-insert (add-table-stuff (->> matrix first (map :x))) 0)
+         (utils/list-insert (add-table-stuff (->> matrix first (map (comp str :x)))) 0)
          (utils/list-insert (str "|" (apply str (take (- row-length 2) (repeat "-"))) "|") 1)
          (str/join "\n"))))
 

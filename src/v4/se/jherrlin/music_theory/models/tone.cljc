@@ -91,3 +91,18 @@
     :index-tone #{:c},
     :interval-tone :c,
     :interval "1"}])
+
+
+(def Indexes
+  "[0 3 7]"
+  [:vector int?])
+
+(m/validate Indexes [0 3 7])
+
+
+
+(def Intervals
+  "[\"1\" \"3\" \"5\"]"
+  [:vector string?])
+
+(m/validate Intervals ["1" "b3" "7"])

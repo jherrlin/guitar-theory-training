@@ -25,7 +25,7 @@
         query-params      @(re-frame/subscribe [:query-params])
         nr-of-octavs      @(re-frame/subscribe [:nr-of-octavs])
         highlighted-tones @(re-frame/subscribe [:highlighted-tones])
-        interval-to-tone @(re-frame/subscribe [:interval-to-tone])]
+        interval-to-tone  @(re-frame/subscribe [:interval-to-tone])]
     (when (and scale key-of)
       (let [{id         :scale/id
              indexes    :scale/indexes
@@ -66,6 +66,23 @@
 
 
          [:br]
+
+         [:button
+          {:on-click
+           #(re-frame/dispatch
+             [:notebook/add
+              {:id      (cljs.core/random-uuid)
+               :version :v1
+               :view    :css/piano
+               :data    {:as-intervals   as-intervals
+                         :index-tones    (utils/index-tones indexes key-of)
+                         :interval-tones (utils/interval-tones intervals key-of)
+                         :intervals      intervals
+                         :key-of         key-of
+                         :nr-of-octavs   nr-of-octavs
+                         :title          scale-name
+                         :text           "Scale"}}])}
+             "add"]
 
          [:div {:style {:display :flex}}
           (for [index (range 0 nr-of-octavs)]

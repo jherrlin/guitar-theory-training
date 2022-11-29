@@ -7,10 +7,11 @@
 
 (def PathParams
   [:map {:closed true}
-   [:key-of {:optional true} keyword?]
-   [:scale  {:optional true} keyword?]
-   [:chord  {:optional true} keyword?]
-   [:steps  {:optional true} keyword?]])
+   [:key-of      {:optional true} keyword?]
+   [:scale       {:optional true} keyword?]
+   [:chord       {:optional true} keyword?]
+   [:steps       {:optional true} keyword?]
+   [:instrument  {:optional true} keyword?]])
 
 (def path-params
   (->> PathParams
@@ -31,7 +32,9 @@
    [:nr-of-frets       {:optional true} pos-int?]
    [:interval-to-tone  {:optional true} :boolean]
    [:highlighted-tones {:optional true} :boolean]
-   [:trim              {:optional true} :boolean]])
+   [:trim              {:optional true} :boolean]
+   [:debug             {:optional true} :boolean]
+   [:combined-triads   {:optional true} :boolean]])
 
 
 (def query-params
@@ -69,7 +72,9 @@
      (vec))
 
 (def events-
-  [{:n :chord,
+  [
+   ;; :path-params
+   {:n :chord,
     :s (fn [db [k]] (get-in db [:path-params k] :major)),
     :e (fn [db [k v]] (assoc-in db [:path-params k] v))}
    {:n :key-of,
@@ -81,6 +86,11 @@
    {:n :steps,
     :s (fn [db [k]] (get-in db [:path-params k] :triad)),
     :e (fn [db [k v]] (assoc-in db [:path-params k] v))}
+   {:n :instrument,
+    :s (fn [db [k]] (get-in db [:path-params k] :guitar)),
+    :e (fn [db [k v]] (assoc-in db [:path-params k] v))}
+
+   ;; :query-params
    {:n :as-intervals,
     :s (fn [db [k]] (get-in db [:query-params k] false)),
     :e (fn [db [k v]] (assoc-in db [:query-params k] v))}
@@ -91,14 +101,26 @@
     :s (fn [db [k]] (get-in db [:query-params k] true)),
     :e (fn [db [k v]] (assoc-in db [:query-params k] v))}
    {:n :nr-of-frets,
-    :s (fn [db [k]] (get-in db [:query-params k]) 16),
+    :s (fn [db [k]] (get-in db [:query-params k] 16)),
     :e (fn [db [k v]] (assoc-in db [:query-params k] v))}
    {:n :nr-of-octavs,
     :s (fn [db [k]] (get-in db [:query-params k] 2)),
     :e (fn [db [k v]] (assoc-in db [:query-params k] v))}
    {:n :trim,
     :s (fn [db [k]] (get-in db [:query-params k] false)),
-    :e (fn [db [k v]] (assoc-in db [:query-params k] v))}])
+    :e (fn [db [k v]] (assoc-in db [:query-params k] v))}
+   {:n :debug,
+    :s (fn [db [k]] (get-in db [:query-params k] false)),
+    :e (fn [db [k v]] (assoc-in db [:query-params k] v))}
+   {:n :combined-triads,
+    :s (fn [db [k]] (get-in db [:query-params k] false)),
+    :e (fn [db [k v]] (assoc-in db [:query-params k] v))}
+   ])
+
+(comment
+  (re-frame/dispatch [:debug true])
+  (re-frame/dispatch [:debug false])
+  )
 
 
 (defmulti  convert (fn [k _] k))
@@ -107,14 +129,19 @@
 (defmethod convert :highlighted-tones  [_ v] (= "true" v))
 (defmethod convert :interval-to-tone   [_ v] (= "true" v))
 (defmethod convert :key-of             [_ v] (-> v (str/lower-case) (str/replace "sharp" "#") (keyword)))
-(defmethod convert :nr-of-frets        [_ v] (js/parseInt v))
+(defmethod convert :nr-of-frets        [_ v] (inc (js/parseInt v)))
 (defmethod convert :nr-of-octavs       [_ v] (js/parseInt v))
 (defmethod convert :scale              [_ v] (keyword v))
 (defmethod convert :steps              [_ v] (keyword v))
 (defmethod convert :trim               [_ v] (= "true" v))
+(defmethod convert :debug              [_ v] (= "true" v))
+(defmethod convert :combined-triads    [_ v] (= "true" v))
+(defmethod convert :instrument         [_ v] (keyword v))
 
 
-(defn convert-map [m]
+(defn convert-map
+  "Convert values from URL params map."
+  [m]
   (->> m
        (map (fn [[k v]] [k (convert k v)]))
        (into {})))
@@ -123,9 +150,6 @@
   [{:n :path-params
     :s (fn [db [k]] (get db k))
     :e (fn [db1 [k1 v1]]
-         (def k1 k1)
-         (def v1 v1)
-         (def db1 db1)
          (let [converted (convert-map v1)
                schema    PathParams]
            (if (m/validate schema converted)
@@ -137,15 +161,11 @@
    {:n :query-params
     :s (fn [db [k]] (get db k))
     :e (fn [db2 [k2 v2]]
-         (def k2 k2)
-         (def v2 v2)
-         (def db2 db2)
          (let [converted (convert-map v2)
                schema    QueryParams]
            (if (m/validate schema converted)
              (update db2 k2 merge converted)
-             (js/console.log (m/explain schema converted))))
-         )}
+             (js/console.log (m/explain schema converted)))))}
    {:n :clear-query-params
     :e (fn [db [_]] (assoc db :query-params {}))}])
 

@@ -68,6 +68,23 @@
 
          [:br]
 
+         [:button
+          {:on-click
+           #(re-frame/dispatch
+             [:notebook/add
+              {:id      (cljs.core/random-uuid)
+               :version :v1
+               :view    :css/piano
+               :data    {:as-intervals   as-intervals
+                         :index-tones    (utils/index-tones indexes key-of)
+                         :interval-tones (utils/interval-tones intervals key-of)
+                         :intervals      intervals
+                         :key-of         key-of
+                         :nr-of-octavs   nr-of-octavs
+                         :title          (str (-> key-of name str/capitalize) sufix)
+                         :text           "Chord"}}])}
+             "add"]
+
          [:div {:style {:display :flex}}
           (for [index (range 0 nr-of-octavs)]
             ^{:key (str "piano-octav-index-" index)}

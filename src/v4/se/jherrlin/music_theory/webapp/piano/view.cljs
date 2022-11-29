@@ -5,6 +5,8 @@
 
 
 
+
+
 (defn piano
   "tone-or-interval: `:tone` `:interval`"
   [tone-or-interval input]
@@ -103,9 +105,18 @@
       [the-comp #{:b}]]]))
 
 
-(defn derp []
-  #_[:div {:style {:display :flex}}
-    [piano]
-    [piano]
-    ;; [piano]
-    ])
+(defn piano-unit
+  [{:keys [as-intervals index-tones interval-tones intervals key-of nr-of-octavs title] :as m}]
+  [:div {:style {:display         :flex
+                 :justify-content :center}}
+   (for [index (range 0 nr-of-octavs)]
+     ^{:key (str "piano-octav-index-" index)}
+     [piano
+      (if as-intervals
+        :interval
+        :tone)
+      (mapv
+       (fn [interval interval-tone]
+         {:interval interval :interval-tone interval-tone})
+       intervals
+       interval-tones)])])

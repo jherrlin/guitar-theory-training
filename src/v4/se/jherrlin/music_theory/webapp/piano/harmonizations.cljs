@@ -23,6 +23,9 @@
   )
 
 
+
+
+
 (defn harmonizations-view []
   (let [scale        @(re-frame/subscribe [:scale])
         steps        @(re-frame/subscribe [:steps])
@@ -41,6 +44,7 @@
                    (utils/all-tones)
                    key-of
                    intervals)]
+
         [:div
 
          ;; Links to keys
@@ -71,7 +75,6 @@
            #_{:disabled (= key-of tone')}
            "minor"]]
 
-
          [:br]
 
          (for [{index          :harmonization/index
@@ -98,10 +101,25 @@
                            :justify-content :center}}
              [:h3 {:style {:margin-right "2em"}} index]
              [:p {:style {:margin-right "2em"}}
-              (str (-> interval-tones first name str/capitalize) sufix)]
+              (str (some-> interval-tones first name str/capitalize) sufix)]
              [:p {:style {:margin-right "2em"}} mode-str]
-             [:p {:style {:margin-right "2em"}} family-str]
-             ]
+             [:p {:style {:margin-right "2em"}} family-str]]
+            [:button
+             {:on-click
+              #(re-frame/dispatch
+                [:notebook/add
+                 {:id      (cljs.core/random-uuid)
+                  :version :v1
+                  :view    :css/piano
+                  :data    {:as-intervals   as-intervals
+                            :index-tones    index-tones
+                            :interval-tones interval-tones
+                            :intervals      intervals
+                            :key-of         key-of
+                            :nr-of-octavs   nr-of-octavs
+                            :title          (str (some-> interval-tones first name str/capitalize) sufix)
+                            :text           "Chord"}}])}
+             "add"]
             [:div {:style {:display         :flex
                            :justify-content :center}}
 
