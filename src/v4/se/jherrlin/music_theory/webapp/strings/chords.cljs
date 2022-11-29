@@ -92,20 +92,32 @@
                       data' (if-not trim?
                               data
                               (utils-tools/trim-matrix #(every? nil? (map :out %)) data))]
-                  [:div
-                   [:button
-                    {:on-click
-                     #(re-frame/dispatch
-                       [:notebook/add
-                        {:id      (cljs.core/random-uuid)
-                         :version :v1
-                         :view    :text/fretboard
-                         :data    data}])}
-                    "add"]
-                   [:pre {:style {:overflow-x "auto"}}
-                   (utils/fretboard-str
-                    (fn [{:keys [out]}] (if (nil? out) "" out))
-                    data')]]
+                  [:div {:style {:display :flex
+                                 :margin-top     "2em"}}
+
+
+                   [:pre {:style {:overflow-x "auto"
+                                  :margin     "0em"}}
+                    (utils/fretboard-str
+                     (fn [{:keys [out]}] (if (nil? out) "" out))
+                     data')]
+
+                   [:div {:style {:display         :flex
+                                  :flex-direction  :column
+                                  :justify-content :center
+                                  }}
+                    [:button
+                     {:style {:background-color "white"
+                              :border           "none"}
+                      :on-click
+                      #(re-frame/dispatch
+                        [:notebook/add
+                         {:id      (cljs.core/random-uuid)
+                          :version :v1
+                          :view    :text/fretboard
+                          :data    data}])}
+                     "Add"]]
+                   ]
                   ))))]))
      (when debug?
        [debug-view])]))

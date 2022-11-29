@@ -164,7 +164,7 @@
          (let [converted (convert-map v2)
                schema    QueryParams]
            (if (m/validate schema converted)
-             (update db2 k2 merge converted)
+             (assoc db2 k2 converted)
              (js/console.log (m/explain schema converted)))))}
    {:n :clear-query-params
     :e (fn [db [_]] (assoc db :query-params {}))}])
