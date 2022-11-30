@@ -109,6 +109,8 @@
               #(re-frame/dispatch
                 [:notebook/add
                  {:id      (cljs.core/random-uuid)
+                  :title   (str (some-> interval-tones first name str/capitalize) sufix)
+                  :url     [:v4.piano/harmonizations path-params query-params]
                   :version :v1
                   :view    :css/piano
                   :data    {:as-intervals   as-intervals

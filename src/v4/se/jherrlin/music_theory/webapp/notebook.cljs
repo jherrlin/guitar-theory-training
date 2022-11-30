@@ -1,5 +1,6 @@
 (ns v4.se.jherrlin.music-theory.webapp.notebook
   (:require
+   [reitit.frontend.easy :as rfe]
    [v4.se.jherrlin.music-theory.webapp.piano.view :as piano.view]
    [v4.se.jherrlin.music-theory.utils :as utils]
    [v4.se.jherrlin.music-theory.webapp.params :as params]
@@ -29,6 +30,7 @@
 ;;     [:notebook/add
 ;;      {:id      (cljs.core/random-uuid)
 ;;       :url     ;; URL BACK TO CHORD / SCALE
+;;       :title   ;;
 ;;       :version :v1
 ;;       :view    :css/piano
 ;;       :data    {:as-intervals   as-intervals
@@ -69,7 +71,7 @@
     [:div
      [:div "Notebook"]
      (when derps
-       (for [{:keys [view data id]} (vals derps)]
+       (for [{:keys [view data id url]} (vals derps)]
          ^{:key (str id)}
          (let [{:keys [title text]} data]
            [:div {:style {:display         :flex
@@ -80,6 +82,9 @@
              [:p {:style {:margin-right "2em"}} text]
              [:p title]]
             [:button {:on-click #(re-frame/dispatch [:notebook/remove id])} "remove"]
+            [:a {:href (apply rfe/href url)}
+             [:button  "Goto"]]
+
             [(get faces view) data]])))
      (when debug?
        [debug-view])]))

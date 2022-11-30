@@ -26,13 +26,15 @@
 
 
 (defn scales-view []
-  (let [key-of           @(re-frame/subscribe [:key-of])
-        scale            @(re-frame/subscribe [:scale])
-        nr-of-frets      @(re-frame/subscribe [:nr-of-frets])
-        instrument       @(re-frame/subscribe [:instrument])
-        debug?           @(re-frame/subscribe [:debug])
-        trim?            @(re-frame/subscribe [:trim])
-        as-intervals     @(re-frame/subscribe [:as-intervals])]
+  (let [key-of       @(re-frame/subscribe [:key-of])
+        scale        @(re-frame/subscribe [:scale])
+        nr-of-frets  @(re-frame/subscribe [:nr-of-frets])
+        path-params  @(re-frame/subscribe [:path-params])
+        query-params @(re-frame/subscribe [:query-params])
+        instrument   @(re-frame/subscribe [:instrument])
+        debug?       @(re-frame/subscribe [:debug])
+        trim?        @(re-frame/subscribe [:trim])
+        as-intervals @(re-frame/subscribe [:as-intervals])]
     [:div
      (when (and scale key-of)
        (let [{id         :scale/id
@@ -70,6 +72,8 @@
                   [:notebook/add
                    {:id      (cljs.core/random-uuid)
                     :version :v1
+                    :url     [:v4.strings/scale path-params query-params]
+                    :title   (str key-of " " scale)
                     :view    :text/fretboard
                     :data    data}])}
                "Add"]])]
@@ -116,6 +120,8 @@
                         [:notebook/add
                          {:id      (cljs.core/random-uuid)
                           :version :v1
+                          :url     [:v4.strings/scale path-params query-params]
+                          :title   (str key-of " " scale)
                           :view    :text/fretboard
                           :data    data}])}
                      "Add"]]]))))
@@ -129,7 +135,7 @@
                [:h3 "Scales to chord"]
                [:p "TODO fix link"]
                (for [{chord-name :chord/name
-                      chord-id    :chord/id}
+                      chord-id   :chord/id}
                      chords-to-scale]
                  ^{:key chord-name}
                  [:div {:style {:margin-right "10px" :display "inline"}}

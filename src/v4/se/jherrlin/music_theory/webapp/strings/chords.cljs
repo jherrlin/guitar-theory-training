@@ -30,6 +30,8 @@
   (let [key-of           @(re-frame/subscribe [:key-of])
         chord            @(re-frame/subscribe [:chord])
         nr-of-frets      @(re-frame/subscribe [:nr-of-frets])
+        path-params      @(re-frame/subscribe [:path-params])
+        query-params     @(re-frame/subscribe [:query-params])
         instrument       @(re-frame/subscribe [:instrument])
         debug?           @(re-frame/subscribe [:debug])
         trim?            @(re-frame/subscribe [:trim])
@@ -74,6 +76,8 @@
                 #(re-frame/dispatch
                   [:notebook/add
                    {:id      (cljs.core/random-uuid)
+                    :url     [:v4.strings/chord path-params query-params]
+                    :title   (str key-of "" chord)
                     :version :v1
                     :view    :text/fretboard
                     :data    data}])}
@@ -121,6 +125,8 @@
                       #(re-frame/dispatch
                         [:notebook/add
                          {:id      (cljs.core/random-uuid)
+                          :url     [:v4.strings/chord path-params query-params]
+                          :title   (str key-of "" chord)
                           :version :v1
                           :view    :text/fretboard
                           :data    data}])}
@@ -166,6 +172,8 @@
                        [:notebook/add
                         {:id      (cljs.core/random-uuid)
                          :version :v1
+                         :url     [:v4.strings/chord path-params query-params]
+                         :title   (str key-of "" chord)
                          :view    :text/fretboard
                          :data    combined-triads}])}
               "Add"]]))
@@ -187,25 +195,22 @@
                                 fretboard-strings))]
                     [:<>
                      [:pre {:style {:overflow-x "auto"
-                                   :margin     "0em"}}
+                                    :margin     "0em"}}
                      (utils/fretboard-str
                       (fn [{:keys [out]}] (if (nil? out) "" out))
                       data)]
                      [:button
-                    {:on-click
-                     #(re-frame/dispatch
-                       [:notebook/add
-                        {:id      (cljs.core/random-uuid)
-                         :version :v1
-                         :view    :text/fretboard
-                         :data    data}])}
-              "Add"]
-                     ]
+                      {:on-click
+                       #(re-frame/dispatch
+                         [:notebook/add
+                          {:id      (cljs.core/random-uuid)
+                           :version :v1
+                           :url     [:v4.strings/chord path-params query-params]
+                           :title   (str key-of "" chord)
+                           :view    :text/fretboard
+                           :data    data}])}
+              "Add"]])]])))
 
-
-                    )]])))
-
-          (def indexes indexes)
           (let [scales-to-chord (utils/scales-to-chord @definitions/scales indexes)]
            (when (seq scales-to-chord)
              [:<>
@@ -219,9 +224,7 @@
                  [:a {:href
                       #(js/console.log "TODO")
                       #_ (rfe/href :v3/scale {:scale scale-id :key-of key-of :instrument tuning-name})}
-                  [:button scale-title]]])]))
-          ]
-         ))
+                  [:button scale-title]]])]))]))
      (when debug?
        [debug-view])]))
 

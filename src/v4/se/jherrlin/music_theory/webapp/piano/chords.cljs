@@ -74,6 +74,8 @@
              [:notebook/add
               {:id      (cljs.core/random-uuid)
                :version :v1
+               :url     [:v4.piano/chords path-params query-params]
+               :title   (str (-> key-of name str/capitalize) sufix)
                :view    :css/piano
                :data    {:as-intervals   as-intervals
                          :index-tones    (utils/index-tones indexes key-of)

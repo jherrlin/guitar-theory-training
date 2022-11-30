@@ -72,6 +72,8 @@
            #(re-frame/dispatch
              [:notebook/add
               {:id      (cljs.core/random-uuid)
+               :url     [:v4.piano/scales path-params query-params]
+               :title   (str (-> key-of name str/upper-case) " " scale-name)
                :version :v1
                :view    :css/piano
                :data    {:as-intervals   as-intervals
