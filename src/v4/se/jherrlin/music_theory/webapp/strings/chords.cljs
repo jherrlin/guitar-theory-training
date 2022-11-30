@@ -49,15 +49,8 @@
                                 (utils/all-tones)
                                 definitions/standard-guitar-tuning
                                 nr-of-frets)
-             tuning-tones      definitions/standard-guitar-tuning]
-         (def fretboard-strings fretboard-strings)
-         (def interval-tones interval-tones)
-         (def intervals intervals)
-         (def chord chord)
-         (def tuning-tones tuning-tones)
-         (def trim? trim?)
-         (def key-of key-of)
-         (def nr-of-frets nr-of-frets)
+             tuning-tones      definitions/standard-guitar-tuning
+             ]
          [:div
 
           ;; All chord tones
@@ -84,10 +77,7 @@
                     :version :v1
                     :view    :text/fretboard
                     :data    data}])}
-              "Add"]
-              ]
-
-             )]
+              "Add"]])]
 
 
           ;; Chord patterns
@@ -215,6 +205,7 @@
 
                     )]])))
 
+          (def indexes indexes)
           (let [scales-to-chord (utils/scales-to-chord @definitions/scales indexes)]
            (when (seq scales-to-chord)
              [:<>

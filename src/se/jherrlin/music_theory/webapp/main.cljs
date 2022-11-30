@@ -21,6 +21,7 @@
    [v4.se.jherrlin.music-theory.webapp.piano.chords :as piano.chords]
    [v4.se.jherrlin.music-theory.webapp.piano.scales :as piano.scales]
    [v4.se.jherrlin.music-theory.webapp.strings.chords :as strings.chords]
+   [v4.se.jherrlin.music-theory.webapp.strings.scales :as strings.scales]
    [v4.se.jherrlin.music-theory.webapp.notebook :as notebook]
    [v4.se.jherrlin.music-theory.webapp.piano.harmonizations :as piano.harmonizations]))
 
@@ -697,6 +698,7 @@ the org-drill mode."]
    piano.scales/routes
    notebook/routes
    strings.chords/routes
+   strings.scales/routes
    ["/"
     [""
      {:name      ::home
