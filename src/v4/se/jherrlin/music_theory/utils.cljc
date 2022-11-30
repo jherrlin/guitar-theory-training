@@ -435,6 +435,14 @@
 
 
 
+(defn merge-matrix [width f xs]
+  (->> xs
+       (map f)
+       (map (partial apply concat))
+       (apply map merge)
+       (partition-all width)
+       (mapv #(mapv identity %))))
+
 
 (defn scales-to-chord [scales chord-indexes]
   (->> scales
@@ -1013,6 +1021,14 @@
                          (map (fn [[k v]]
                                 [(->> k name (str "fretboard-pattern/") keyword) v]))
                          (into {}))
+         ;; On what strings are the pattern defined. Mainly used for triads.
+         on-strings (->> pattern'
+                         (map-indexed vector)
+                         (vec)
+                         (filter (fn [[string-idx intervals-on-string]]
+                                   (some seq intervals-on-string)))
+                         (map (fn [[string-idx _]] string-idx))
+                         (vec))
          inversion? (->> pattern'
                          (reverse)
                          (apply concat)
@@ -1027,7 +1043,8 @@
                       :fretboard-pattern/tuning     tuning
                       :fretboard-pattern/pattern    pattern'
                       :fretboard-pattern/str        pattern
-                      :fretboard-pattern/inversion? inversion?})]
+                      :fretboard-pattern/inversion? inversion?
+                      :fretboard-pattern/on-strings on-strings})]
      (if (models.fretboard-pattern/validate-fretboard-pattern? pattern*)
        pattern*
        (throw (ex-info "Pattern is not valid" (models.fretboard-pattern/explain-fretboard-pattern pattern*)))))))

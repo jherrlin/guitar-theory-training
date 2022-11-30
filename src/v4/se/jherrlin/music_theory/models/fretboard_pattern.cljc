@@ -41,6 +41,7 @@
    [:fretboard-pattern/type       [:enum :triad :mode :scale :chord]]
    [:fretboard-pattern/tuning     [:+ keyword?]]
    [:fretboard-pattern/pattern    [:vector [:+ [:alt string? nil?]]]]
+   [:fretboard-pattern/on-strings {:optional true} [:vector int?]]
    [:fretboard-pattern/str        string?]
    [:fretboard-pattern/inversion? {:optional true} boolean?]])
 
