@@ -117,6 +117,16 @@ code lives on "
          "Scales"]
         [:> semantic-ui/Menu.Item
          {:as     "a"
+          :href   (rfe/href :v4.strings/chord (merge {:chord :major :key-of :c :instrument :guitar} path-params) query-params)
+          :active (= :v4.strings/chord current-route-name)}
+         "Guitar chords v4"]
+        [:> semantic-ui/Menu.Item
+         {:as     "a"
+          :href   (rfe/href :v4.strings/scale (merge {:scale :major :key-of :c :instrument :guitar} path-params) query-params)
+          :active (= :v4.strings/scale current-route-name)}
+         "Guitar scales v4"]
+        [:> semantic-ui/Menu.Item
+         {:as     "a"
           :href   (rfe/href :v2/harmonization {:key-of key-of :major-or-minor :major :triad-or-seventh :triad})
           :active (= :v2/harmonization current-route-name)}
          "Harmonizations"]

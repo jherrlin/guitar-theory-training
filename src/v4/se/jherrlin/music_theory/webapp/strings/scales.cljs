@@ -17,24 +17,19 @@
 
 
 
-(defn debug-view
-  ([]
-   (debug-view @re-frame.db/app-db))
-  ([x]
-   [:pre
-    (with-out-str (cljs.pprint/pprint x))]))
-
 
 (defn scales-view []
-  (let [key-of       @(re-frame/subscribe [:key-of])
-        scale        @(re-frame/subscribe [:scale])
-        nr-of-frets  @(re-frame/subscribe [:nr-of-frets])
-        path-params  @(re-frame/subscribe [:path-params])
-        query-params @(re-frame/subscribe [:query-params])
-        instrument   @(re-frame/subscribe [:instrument])
-        debug?       @(re-frame/subscribe [:debug])
-        trim?        @(re-frame/subscribe [:trim])
-        as-intervals @(re-frame/subscribe [:as-intervals])]
+  (let [key-of            @(re-frame/subscribe [:key-of])
+        scale             @(re-frame/subscribe [:scale])
+        nr-of-frets       @(re-frame/subscribe [:nr-of-frets])
+        path-params       @(re-frame/subscribe [:path-params])
+        query-params      @(re-frame/subscribe [:query-params])
+        instrument        @(re-frame/subscribe [:instrument])
+        debug?            @(re-frame/subscribe [:debug])
+        trim?             @(re-frame/subscribe [:trim])
+        as-intervals      @(re-frame/subscribe [:as-intervals])
+        highlighted-tones @(re-frame/subscribe [:highlighted-tones])
+        interval-to-tone  @(re-frame/subscribe [:interval-to-tone])]
     [:div
      (when (and scale key-of)
        (let [{id         :scale/id
@@ -50,6 +45,35 @@
                                   nr-of-frets)
              tuning-tones        definitions/standard-guitar-tuning]
          [:<>
+
+
+         ;; Links to keys
+         [common/links-to-keys
+          key-of
+          #(rfe/href :v4.strings/scale (assoc path-params :key-of %) query-params)]
+
+         [:br]
+
+         ;; Links to scales
+         [common/links-to-scales
+          @definitions/scales
+          scale
+          #(rfe/href :v4.strings/scale (assoc path-params :scale %) query-params)]
+
+         ;; Highlight tones
+         (when highlighted-tones
+           [common/highlight-tones interval-tones key-of])
+
+
+         ;; Chord name
+         [common/chord-name key-of scale']
+
+         ;; Intervals
+         (when interval-to-tone
+           [common/intervals-to-tones intervals interval-tones])
+
+
+
 
           ;; All tones in scale
           [:div
@@ -128,40 +152,21 @@
 
           ;; Chords to scale
           [:p "Chords to scale"]
-          ;; (def indexes indexes)
           (let [chords-to-scale (utils/chords-to-scale @definitions/chords indexes)]
             (when (seq chords-to-scale)
               [:<>
                [:h3 "Scales to chord"]
-               [:p "TODO fix link"]
                (for [{chord-name :chord/name
                       chord-id   :chord/id}
                      chords-to-scale]
                  ^{:key chord-name}
                  [:div {:style {:margin-right "10px" :display "inline"}}
                   [:a {:href
-                       #(js/console.log "TODO")
-                       #_ (rfe/href :v3/scale {:scale scale-id :key-of key-of :instrument tuning-name})}
+                       (rfe/href :v4.strings/chord (assoc path-params :chord chord-id) query-params)}
                    [:button chord-name]]])]))
 
           (when debug?
-            (debug-view scale'))
-
-          ]
-
-         )
-       )
-     ]
-    )
-  )
-
-
-
-
-
-
-
-
+            (common/debug-view scale'))]))]))
 
 
 (def routes

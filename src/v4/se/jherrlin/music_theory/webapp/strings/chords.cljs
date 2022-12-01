@@ -27,23 +27,27 @@
 
 
 (defn chords-view []
-  (let [key-of           @(re-frame/subscribe [:key-of])
-        chord            @(re-frame/subscribe [:chord])
-        nr-of-frets      @(re-frame/subscribe [:nr-of-frets])
-        path-params      @(re-frame/subscribe [:path-params])
-        query-params     @(re-frame/subscribe [:query-params])
-        instrument       @(re-frame/subscribe [:instrument])
-        debug?           @(re-frame/subscribe [:debug])
-        trim?            @(re-frame/subscribe [:trim])
-        as-intervals     @(re-frame/subscribe [:as-intervals])
-        combined-triads? @(re-frame/subscribe [:combined-triads])]
+  (let [key-of            @(re-frame/subscribe [:key-of])
+        chord             @(re-frame/subscribe [:chord])
+        nr-of-frets       @(re-frame/subscribe [:nr-of-frets])
+        path-params       @(re-frame/subscribe [:path-params])
+        query-params      @(re-frame/subscribe [:query-params])
+        highlighted-tones @(re-frame/subscribe [:highlighted-tones])
+        instrument        @(re-frame/subscribe [:instrument])
+        debug?            @(re-frame/subscribe [:debug])
+        trim?             @(re-frame/subscribe [:trim])
+        as-intervals      @(re-frame/subscribe [:as-intervals])
+        combined-triads?  @(re-frame/subscribe [:combined-triads])
+        interval-to-tone  @(re-frame/subscribe [:interval-to-tone])
+        ]
     [:div
      (when (and chord key-of)
        (let [{indexes     :chord/indexes
               intervals   :chord/intervals
               explanation :chord/explanation
               sufix       :chord/sufix
-              text        :chord/text}
+              text        :chord/text
+              :as         m}
              (get @definitions/chords chord)
              index-tones       (utils/index-tones indexes key-of)
              interval-tones    (utils/interval-tones intervals key-of)
@@ -51,9 +55,29 @@
                                 (utils/all-tones)
                                 definitions/standard-guitar-tuning
                                 nr-of-frets)
-             tuning-tones      definitions/standard-guitar-tuning
-             ]
+             tuning-tones      definitions/standard-guitar-tuning]
          [:div
+
+          [common/links-to-keys
+           key-of
+           #(rfe/href :v4.strings/chord (assoc path-params :key-of %) query-params)]
+
+          [common/links-to-chords
+           @definitions/chords
+           chord
+           #(rfe/href :v4.strings/chord (assoc path-params :chord %) query-params)]
+
+          ;; Highlight tones
+         (when highlighted-tones
+           [common/highlight-tones interval-tones key-of])
+
+                   ;; Chord name
+         [common/chord-name key-of m]
+
+                   ;; Intervals
+         (when interval-to-tone
+           [common/intervals-to-tones intervals interval-tones])
+
 
           ;; All chord tones
           [:p "All notes in chord"]
@@ -215,15 +239,13 @@
            (when (seq scales-to-chord)
              [:<>
               [:h3 "Scales to chord"]
-              [:p "TODO fix link"]
               (for [{scale-title :scale/name
                      scale-id    :scale/id}
                     scales-to-chord]
                 ^{:key scale-title}
                 [:div {:style {:margin-right "10px" :display "inline"}}
                  [:a {:href
-                      #(js/console.log "TODO")
-                      #_ (rfe/href :v3/scale {:scale scale-id :key-of key-of :instrument tuning-name})}
+                      (rfe/href :v4.strings/scale (assoc path-params :scale scale-id) query-params)}
                   [:button scale-title]]])]))]))
      (when debug?
        [debug-view])]))

@@ -23,6 +23,13 @@
         {:disabled (= id chord)}
         (str (or display-text sufix))]]])])
 
+(defn debug-view
+  ([]
+   (debug-view @re-frame.db/app-db))
+  ([x]
+   [:pre
+    (with-out-str (cljs.pprint/pprint x))]))
+
 
 (defn links-to-scales [scales scale href-fn]
   [:div

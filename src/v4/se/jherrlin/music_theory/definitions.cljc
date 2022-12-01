@@ -413,15 +413,15 @@
 
 ;; Fix when migrated to v4 on guitars
 ;; https://www.hobby-hour.com/guitar/chords.php?chord=e-plus-5
-;; (define-chord-pattern :major-plus-5-1
-;;   {:name   :major-plus-5
-;;    :tuning standard-guitar-tuning}
-;;   "-   -   -   1
-;;    3   -   -   -
-;;    1   -   -   -
-;;    5   -   -   -
-;;    -   -   3   -
-;;    -   -   -   1")
+(define-chord-pattern :major-plus-5-1
+  {:name   :major-plus-5
+   :tuning standard-guitar-tuning}
+  "1   -   -   -
+   -  #5   -   -
+   -   3   -   -
+   -   -   1   -
+   -   -   -  #5
+   1   -   -   -")
 
 
 (define-chord-pattern :minor-10
@@ -549,13 +549,12 @@
 (define-chord-pattern :dominant-seven-sharp-nine-1
   {:name   :dominant-seven-sharp-nine
    :tuning standard-guitar-tuning}
-  "
-   -   -   -
-   -   -  #9
-   -  b7   -
-   3   -   -
-   -   1   -
-   -   -   -")
+  "-   -
+   -  #9
+   -  b7
+   3   -
+   -   1
+   -   -")
 
 (define-chord-pattern :dominant-seven-flat-nine-1
   {:name   :dominant-seven-flat-nine
