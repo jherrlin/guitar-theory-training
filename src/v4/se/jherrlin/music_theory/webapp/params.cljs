@@ -115,6 +115,9 @@
    {:n :combined-triads,
     :s (fn [db [k]] (get-in db [:query-params k] true)),
     :e (fn [db [k v]] (assoc-in db [:query-params k] v))}
+
+   {:n :path-name,
+    :s (fn [db [k]] (get db k :v4.strings/chord))}
    ])
 
 (comment

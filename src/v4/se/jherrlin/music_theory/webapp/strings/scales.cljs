@@ -29,7 +29,8 @@
         trim?             @(re-frame/subscribe [:trim])
         as-intervals      @(re-frame/subscribe [:as-intervals])
         highlighted-tones @(re-frame/subscribe [:highlighted-tones])
-        interval-to-tone  @(re-frame/subscribe [:interval-to-tone])]
+        interval-to-tone  @(re-frame/subscribe [:interval-to-tone])
+        path-name         @(re-frame/subscribe [:path-name])]
     [:div
      (when (and scale key-of)
        (let [{id         :scale/id
@@ -45,35 +46,38 @@
                                   nr-of-frets)
              tuning-tones        definitions/standard-guitar-tuning]
          [:<>
+          ;; Links to keys
+          [common/links-to-keys
+           key-of
+           #(rfe/href path-name (assoc path-params :key-of %) query-params)]
+
+          [:br]
+
+          ;; Links to scales
+          [common/links-to-scales
+           @definitions/scales
+           scale
+           #(rfe/href path-name (assoc path-params :scale %) query-params)]
+
+          ;; Highlight tones
+          (when highlighted-tones
+            [common/highlight-tones interval-tones key-of])
 
 
-         ;; Links to keys
-         [common/links-to-keys
-          key-of
-          #(rfe/href :v4.strings/scale (assoc path-params :key-of %) query-params)]
+          ;; Scale name
+          (let [{scale-name :scale/name}
+                (get @definitions/scales scale)]
+            [:div {:style {:margin-top "1em"}}
+             [:h2 (str (-> key-of name str/capitalize) " - " (-> scale-name str/capitalize))]])
 
-         [:br]
-
-         ;; Links to scales
-         [common/links-to-scales
-          @definitions/scales
-          scale
-          #(rfe/href :v4.strings/scale (assoc path-params :scale %) query-params)]
-
-         ;; Highlight tones
-         (when highlighted-tones
-           [common/highlight-tones interval-tones key-of])
+          ;; Intervals
+          (when interval-to-tone
+            [common/intervals-to-tones intervals interval-tones])
 
 
-         ;; Chord name
-         [common/chord-name key-of scale']
-
-         ;; Intervals
-         (when interval-to-tone
-           [common/intervals-to-tones intervals interval-tones])
-
-
-
+          [:a {:href (rfe/href path-name path-params (assoc query-params :as-intervals (not as-intervals)))}
+           [:button
+            (str "Show as " (if as-intervals "tones" "intervals"))]]
 
           ;; All tones in scale
           [:div
@@ -96,62 +100,61 @@
                   [:notebook/add
                    {:id      (cljs.core/random-uuid)
                     :version :v1
-                    :url     [:v4.strings/scale path-params query-params]
+                    :url     [path-name path-params query-params]
                     :title   (str key-of " " scale)
                     :view    :text/fretboard
                     :data    data}])}
                "Add"]])]
 
           ;; Scale patterns
-          [:p "Patterns"]
-
           (let [chord-patterns (->> (merge @definitions/mode-patterns @definitions/scale-patterns)
                                     (vals)
                                     (filter (comp #{scale} :fretboard-pattern/scale))
                                     (filter (comp #{tuning-tones} :fretboard-pattern/tuning)))]
             (when (seq chord-patterns)
-              (for [{id      :fretboard-pattern/id
-                     pattern :fretboard-pattern/pattern}
-                    chord-patterns]
-                ^{:key (str "chord-pattern-" id)}
-                (let [data  (if as-intervals
-                              (utils/pattern-with-intervals
-                               key-of
-                               pattern
-                               fretboard-strings)
-                              (utils/pattern-with-tones
-                               key-of
-                               pattern
-                               fretboard-strings))
-                      data' (if-not trim?
-                              data
-                              (utils-tools/trim-matrix #(every? nil? (map :out %)) data))]
-                  [:div {:style {:display    :flex
-                                 :margin-top "2em"}}
-                   [:pre {:style {:overflow-x "auto"
-                                  :margin     "0em"}}
-                    (utils/fretboard-str
-                     (fn [{:keys [out]}] (if (nil? out) "" out))
-                     data')]
-                   [:div {:style {:display         :flex
-                                  :flex-direction  :column
-                                  :justify-content :center}}
-                    [:button
-                     {:style {:background-color "white"
-                              :border           "none"}
-                      :on-click
-                      #(re-frame/dispatch
-                        [:notebook/add
-                         {:id      (cljs.core/random-uuid)
-                          :version :v1
-                          :url     [:v4.strings/scale path-params query-params]
-                          :title   (str key-of " " scale)
-                          :view    :text/fretboard
-                          :data    data}])}
-                     "Add"]]]))))
+              [:<>
+               [:h3 "Patterns"]
+               (for [{id      :fretboard-pattern/id
+                      pattern :fretboard-pattern/pattern}
+                     chord-patterns]
+                 ^{:key (str "chord-pattern-" id)}
+                 (let [data  (if as-intervals
+                               (utils/pattern-with-intervals
+                                key-of
+                                pattern
+                                fretboard-strings)
+                               (utils/pattern-with-tones
+                                key-of
+                                pattern
+                                fretboard-strings))
+                       data' (if-not trim?
+                               data
+                               (utils-tools/trim-matrix #(every? nil? (map :out %)) data))]
+                   [:div {:style {:display    :flex
+                                  :margin-top "2em"}}
+                    [:pre {:style {:overflow-x "auto"
+                                   :margin     "0em"}}
+                     (utils/fretboard-str
+                      (fn [{:keys [out]}] (if (nil? out) "" out))
+                      data')]
+                    [:div {:style {:display         :flex
+                                   :flex-direction  :column
+                                   :justify-content :center}}
+                     [:button
+                      {:style {:background-color "white"
+                               :border           "none"}
+                       :on-click
+                       #(re-frame/dispatch
+                         [:notebook/add
+                          {:id      (cljs.core/random-uuid)
+                           :version :v1
+                           :url     [path-name path-params query-params]
+                           :title   (str key-of " " scale)
+                           :view    :text/fretboard
+                           :data    data}])}
+                      "Add"]]]))]))
 
           ;; Chords to scale
-          [:p "Chords to scale"]
           (let [chords-to-scale (utils/chords-to-scale @definitions/chords indexes)]
             (when (seq chords-to-scale)
               [:<>
@@ -170,12 +173,14 @@
 
 
 (def routes
-  [["/v4/strings/:instrument/scale/:key-of/:scale"
-    {:name :v4.strings/scale
-     :view [scales-view]
-     :controllers
-     [{:parameters {:path  params/path-params
-                    :query params/query-params}
-       :start      (fn [{p :path q :query}]
-                     (re-frame/dispatch [:path-params p])
-                     (re-frame/dispatch [:query-params q]))}]}]])
+  (let [path-name :v4.strings/scale]
+    [["/v4/strings/:instrument/scale/:key-of/:scale"
+      {:name path-name
+       :view [scales-view]
+       :controllers
+       [{:parameters {:path  params/path-params
+                      :query params/query-params}
+         :start      (fn [{p :path q :query}]
+                       (re-frame/dispatch [:path-params p])
+                       (re-frame/dispatch [:query-params q])
+                       (re-frame/dispatch [:path-name path-name]))}]}]]))

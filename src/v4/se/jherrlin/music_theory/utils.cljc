@@ -428,11 +428,59 @@
           :explanation  "minor",
           :display-text "minor"}}
  (all-tones)
- #_[#{:c} #{:e} #{:g}]
+ [#{:c} #{:e} #{:g}]
  #_[#{:c} #{:d# :eb} #{:g}]
- [:c :e :g]
+ #_[:c :e :g]
  )
 
+
+(defn find-chord [chords-map all-tones chord-tones]
+  (->> (find-chords chords-map all-tones chord-tones)
+       (first)))
+
+(find-chord
+ {:major
+  #:chord{:id           :major,
+          :intervals    ["1" "3" "5"],
+          :indexes      [0 4 7],
+          :title        "major",
+          :order        1,
+          :sufix        "",
+          :explanation  "major",
+          :display-text "major"}}
+ (all-tones)
+ [#{:c} #{:e} #{:g}])
+
+
+(defn chord-name
+  [chords-map chord-tones]
+  (let [root-tone             (first chord-tones)
+        {:chord/keys [sufix]} (find-chord chords-map (all-tones) chord-tones)]
+    (str (-> root-tone name str/lower-case str/capitalize) sufix)))
+
+
+(chord-name
+ {:major
+  #:chord{:id           :major,
+          :intervals    ["1" "3" "5"],
+          :indexes      [0 4 7],
+          :title        "major",
+          :order        1,
+          :sufix        "",
+          :explanation  "major",
+          :display-text "major"}
+  :minor
+  #:chord{:id           :minor,
+          :intervals    ["1" "b3" "5"],
+          :indexes      [0 3 7],
+          :title        "minor",
+          :order        2,
+          :sufix        "m",
+          :explanation  "minor",
+          :display-text "minor"}}
+ #_[:c :e :g]
+ [:c :eb :g]
+ )
 
 
 (defn merge-matrix [width f xs]
@@ -504,49 +552,6 @@
     intervals)))
 
 (interval-tones ["1" "b3" "5"] :c)
-
-
-
-(defn find-chord [chords-map all-tones chord-tones]
-  (->> (find-chords chords-map all-tones chord-tones)
-       (first)))
-
-(find-chord
- {:major
-  #:chord{:id           :major,
-          :intervals    ["1" "3" "5"],
-          :indexes      [0 4 7],
-          :title        "major",
-          :order        1,
-          :sufix        "",
-          :explanation  "major",
-          :display-text "major"}}
- (all-tones)
- [#{:c} #{:e} #{:g}])
-
-
-
-
-;; Doesnt work yet
-;; (defn chord-name
-;;   [all-tones chords-map chord-tones]
-;;   (let [root-tone             (first chord-tones)
-;;         {:chord/keys [sufix]} (find-chord chords-map all-tones chord-tones)]
-;;     (str (-> root-tone name str/lower-case str/capitalize) sufix)))
-
-;; (chord-name
-;;  all-tones
-;;  {:major
-;;   #:chord{:id           :major,
-;;           :intervals    ["1" "3" "5"],
-;;           :indexes      [0 4 7],
-;;           :title        "major",
-;;           :order        1,
-;;           :sufix        "",
-;;           :explanation  "major",
-;;           :display-text "major"}}
-;;  [#{:c} #{:e} #{:g}])
-
 
 
 
@@ -852,8 +857,7 @@
              :chord/index-tones index-chord-tones
              :chord/interval-tones interval-tones
              :chord/root-tone (first interval-tones)
-             ))))
-
+             :chord-name (chord-name chords interval-tones)))))
        (mapv
         #(assoc %7
                 :harmonization/index      %1
@@ -863,19 +867,19 @@
                 :harmonization/family     %5
                 :harmonization/family-str %6)
         (range 1 100)
-        (if (= scale :major)
+        (if (= scale' :major)
           ["I" "ii" "iii" "IV" "V" "vi" "vii"]
           ["i" "ii" "III" "iv" "v" "VI" "VII"])
-        (if (= scale :major)
+        (if (= scale' :major)
           [:ionian  :dorian  :phrygian :lydian :mixolydian :aeolian :locrian]
           [:aeolian :locrian :ionian   :dorian :phrygian   :lydian  :mixolydian])
-        (if (= scale :major)
+        (if (= scale' :major)
           ["Ionian"  "Dorian"  "Phrygian" "Lydian" "Mixolydian" "Aeolian" "Locrian"]
           ["Aeolian" "Locrian" "Ionian"   "Dorian" "Phrygian"   "Lydian"  "Mixolydian"])
-        (if (= scale :major)
+        (if (= scale' :major)
           [:tonic :subdominant :tonic :subdominant :dominant :tonic :dominant]
           [:tonic :subdominant :tonic :subdominant :dominant :subdominant :dominant])
-        (if (= scale :major)
+        (if (= scale' :major)
           ["T" "S" "T" "S" "D" "T" "D"]
           ["T" "S" "T" "S" "D" "S" "D"])))))
 
@@ -901,6 +905,33 @@
          :indexes   [0    2   4   5   7   9  11],
          :title     "major",
          :order     1}}
+
+
+(defn harmonization-str [xs]
+  (str
+   "  T = Tonic (stable), S = Subdominant (leaving), D = Dominant (back home)"
+   "\n\n"
+   (->> xs (map (comp #(utils/fformat "  %-10s" %) str :harmonization/index)) (str/join) (str/trim))
+   "\n"
+   (->> xs (map (comp #(utils/fformat "  %-10s" %) str :harmonization/position)) (str/join) (str/trim))
+   "\n"
+   (->> xs (map (comp #(utils/fformat "  %-10s" %) str :harmonization/mode-str)) (str/join) (str/trim))
+   "\n"
+   (->> xs (map (comp #(utils/fformat "  %-10s" %) str :harmonization/family-str)) (str/join) (str/trim))
+   "\n"
+   (->> xs (map (comp #(utils/fformat "  %-10s" %) str :chord-name)) (str/join) (str/trim))))
+
+
+(comment
+  (->> (gen-harmonization
+        @v4.se.jherrlin.music-theory.definitions/scales
+        @v4.se.jherrlin.music-theory.definitions/chords
+        :c
+        :major
+        triad)
+       (harmonization-str)
+       (println))
+  )
 
 
 ;; REPL stuff below line
