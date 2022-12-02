@@ -16,7 +16,8 @@
   {:css/piano      piano.view/piano-unit
    :css/fretboard  :b
    :text/fretboard (fn [data]
-                     [:pre {:style {:overflow-x "auto"}}
+                     [:pre {:style {:overflow-x "auto"
+                                    :margin "0em"}}
                       (utils/fretboard-str
                        (fn [{:keys [out]}] (if (nil? out) "" out))
                        data)]
@@ -52,8 +53,16 @@
          (assoc-in db [:notebook id] v))}
    {:n :notebook/remove
     :e (fn [db [k v]]
-         (update-in db [:notebook] dissoc v))}])
+         (update-in db [:notebook] dissoc v))}
+   {:n :nodebook/ids
+    :s (fn [db [k]]
+         (->> (get db :notebook)
+              (keys)
+              (set)))}])
 
+(comment
+  @(re-frame/subscribe [:nodebook/ids])
+  )
 
 (doseq [{:keys [n s e]} events-]
   (re-frame/reg-sub      n (or s (fn [db [n']] (get db n'))))
@@ -66,36 +75,34 @@
      (with-out-str (cljs.pprint/pprint data))]))
 
 (defn notebook-view []
-  (let [derps  @(re-frame/subscribe [:notebook])
+  (let [added  @(re-frame/subscribe [:notebook])
         debug? @(re-frame/subscribe [:debug])]
     [:div
-     [:div "Notebook"]
-     (when derps
-       (for [{:keys [view data id url]} (vals derps)]
+     [:h3 "Notebook"]
+     (when added
+       (for [{:keys [view data id url title]} (vals added)]
          ^{:key (str id)}
-         (let [{:keys [title text]} data]
-           [:div {:style {:display         :flex
-                          :flex-direction  :column
-                          :justify-content :center}}
-            [:div {:style {:display         :flex
-                           :justify-content :center}}
-             [:p {:style {:margin-right "2em"}} text]
-             [:p title]]
-            [:button {:on-click #(re-frame/dispatch [:notebook/remove id])} "remove"]
-            [:a {:href (apply rfe/href url)}
-             [:button  "Goto"]]
+         (let [{:keys [text]} data]
+           [:div {:style {:margin-top "2em"
+                          :display "flex"}}
+            [(get faces view) data]
+            [:div {:style {:display        "flex"
+                           :flex-direction "column-reverse"}}
 
-            [(get faces view) data]])))
+             [:button {:on-click #(re-frame/dispatch [:notebook/remove id])} "Remove"]
+             [:a {:href (apply rfe/href url)}
+              [:button  "Goto"]]
+             [:div title]]])))
      (when debug?
        [debug-view])]))
 
 (def routes
   ["/v4/notebook"
-    {:name :v4/notebook
-     :view [notebook-view]
-     :controllers
-     [{:parameters {:path  params/path-params
-                    :query params/query-params}
-       :start      (fn [{p :path q :query}]
-                     (re-frame/dispatch [:path-params p])
-                     (re-frame/dispatch [:query-params q]))}]}])
+   {:name :v4/notebook
+    :view [notebook-view]
+    :controllers
+    [{:parameters {:path  params/path-params
+                   :query params/query-params}
+      :start      (fn [{p :path q :query}]
+                    (re-frame/dispatch [:path-params p])
+                    (re-frame/dispatch [:query-params q]))}]}])

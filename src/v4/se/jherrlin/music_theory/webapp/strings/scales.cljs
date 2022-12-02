@@ -33,7 +33,7 @@
         path-name         @(re-frame/subscribe [:path-name])]
     [:div
      (when (and scale key-of)
-       (let [{id         :scale/id
+       (let [{scale-id   :scale/id
               intervals  :scale/intervals
               indexes    :scale/indexes
               scale-name :scale/name
@@ -74,10 +74,12 @@
           (when interval-to-tone
             [common/intervals-to-tones intervals interval-tones])
 
-
           [:a {:href (rfe/href path-name path-params (assoc query-params :as-intervals (not as-intervals)))}
            [:button
             (str "Show as " (if as-intervals "tones" "intervals"))]]
+
+          [:br]
+          [:br]
 
           ;; All tones in scale
           [:div
@@ -89,28 +91,28 @@
                  data' (if-not trim?
                          data
                          (utils-tools/trim-matrix #(every? nil? (map :out %)) data))]
-             [:<>
-              [:pre {:style {:overflow-x "auto"}}
-               (utils/fretboard-str
-                (fn [{:keys [out]}] (if (nil? out) "" out))
-                data')]
-              [:button
-               {:on-click
+             (let [id (str scale-id "-all-tones-" as-intervals)]
+               [common/fretboard-str-with-add-button
+                id
+                data'
                 #(re-frame/dispatch
                   [:notebook/add
-                   {:id      (cljs.core/random-uuid)
+                   {:id      id
                     :version :v1
                     :url     [path-name path-params query-params]
-                    :title   (str key-of " " scale)
+                    :title   (str "Scale: " key-of " " scale)
                     :view    :text/fretboard
-                    :data    data}])}
-               "Add"]])]
+                    :data    data}])]))]
 
           ;; Scale patterns
           (let [chord-patterns (->> (merge @definitions/mode-patterns @definitions/scale-patterns)
                                     (vals)
                                     (filter (comp #{scale} :fretboard-pattern/scale))
-                                    (filter (comp #{tuning-tones} :fretboard-pattern/tuning)))]
+                                    (filter (comp #{tuning-tones} :fretboard-pattern/tuning))
+                                    (sort-by
+                                     (fn [{on-strings :fretboard-pattern/on-strings}]
+                                       (apply + on-strings))
+                                     #(compare %2 %1)))]
             (when (seq chord-patterns)
               [:<>
                [:h3 "Patterns"]
@@ -130,29 +132,19 @@
                        data' (if-not trim?
                                data
                                (utils-tools/trim-matrix #(every? nil? (map :out %)) data))]
-                   [:div {:style {:display    :flex
-                                  :margin-top "2em"}}
-                    [:pre {:style {:overflow-x "auto"
-                                   :margin     "0em"}}
-                     (utils/fretboard-str
-                      (fn [{:keys [out]}] (if (nil? out) "" out))
-                      data')]
-                    [:div {:style {:display         :flex
-                                   :flex-direction  :column
-                                   :justify-content :center}}
-                     [:button
-                      {:style {:background-color "white"
-                               :border           "none"}
-                       :on-click
+                   [:div {:style {:margin-top "2em"}}
+                    (let [id' (str id as-intervals)]
+                      [common/fretboard-str-with-add-button
+                       id'
+                       data'
                        #(re-frame/dispatch
                          [:notebook/add
-                          {:id      (cljs.core/random-uuid)
+                          {:id      id'
                            :version :v1
                            :url     [path-name path-params query-params]
-                           :title   (str key-of " " scale)
+                           :title   (str "Scale: " key-of " " scale)
                            :view    :text/fretboard
-                           :data    data}])}
-                      "Add"]]]))]))
+                           :data    data}])])]))]))
 
           ;; Chords to scale
           (let [chords-to-scale (utils/chords-to-scale @definitions/chords indexes)]

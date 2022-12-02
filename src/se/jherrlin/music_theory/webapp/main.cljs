@@ -105,12 +105,12 @@ code lives on "
           :active (= ::the-neck current-route-name)}
          "Neck"]
 
-        [:> semantic-ui/Menu.Item
+        #_[:> semantic-ui/Menu.Item
          {:as     "a"
           :href   (rfe/href :v3/chord {:key-of key-of :chord-name :major :instrument tuning-name})
           :active (= :v3/chord current-route-name)}
          "Chords"]
-        [:> semantic-ui/Menu.Item
+        #_[:> semantic-ui/Menu.Item
          {:as     "a"
           :href   (rfe/href :v3/scale {:scale :major :key-of key-of :instrument tuning-name})
           :active (= :v3/scale current-route-name)}
@@ -119,12 +119,19 @@ code lives on "
          {:as     "a"
           :href   (rfe/href :v4.strings/chord (merge {:chord :major :key-of :c :instrument :guitar} path-params) query-params)
           :active (= :v4.strings/chord current-route-name)}
-         "Guitar chords v4"]
+         "Guitar chords"]
         [:> semantic-ui/Menu.Item
          {:as     "a"
           :href   (rfe/href :v4.strings/scale (merge {:scale :major :key-of :c :instrument :guitar} path-params) query-params)
           :active (= :v4.strings/scale current-route-name)}
-         "Guitar scales v4"]
+         "Guitar scales"]
+
+        [:> semantic-ui/Menu.Item
+         {:as     "a"
+          :href   (rfe/href :v4/notebook path-params query-params)
+          :active (= :v4/notebook current-route-name)}
+         "Notebook"]
+
         [:> semantic-ui/Menu.Item
          {:as     "a"
           :href   (rfe/href :v2/harmonization {:key-of key-of :major-or-minor :major :triad-or-seventh :triad})

@@ -42,7 +42,8 @@
         path-name         @(re-frame/subscribe [:path-name])]
     [:div
      (when (and chord key-of)
-       (let [{indexes     :chord/indexes
+       (let [{chord-id    :chord/id
+              indexes     :chord/indexes
               intervals   :chord/intervals
               explanation :chord/explanation
               sufix       :chord/sufix
@@ -86,32 +87,26 @@
 
           ;; All chord tones
           [:h3 "All " (if as-intervals "interval" "tone") " positions in the chord"]
-          [:div
-           (let [data  (if as-intervals
-                         (utils/with-all-intervals
-                           (mapv vector interval-tones intervals)
-                           fretboard-strings)
-                         (utils/with-all-tones interval-tones fretboard-strings))
-                 data' (if-not trim?
-                         data
-                         (utils-tools/trim-matrix #(every? nil? (map :out %)) data))]
-             [:<>
-              [:pre {:style {:overflow-x "auto"}}
-               (utils/fretboard-str
-                (fn [{:keys [out]}] (if (nil? out) "" out))
-                data')]
-              [:button
-               {:on-click
-                #(re-frame/dispatch
-                  [:notebook/add
-                   {:id      (cljs.core/random-uuid)
-                    :url     [path-name path-params query-params]
-                    :title   (str key-of "" chord)
-                    :version :v1
-                    :view    :text/fretboard
-                    :data    data}])}
-               "Add"]])]
-
+          (let [data  (if as-intervals
+                        (utils/with-all-intervals
+                          (mapv vector interval-tones intervals)
+                          fretboard-strings)
+                        (utils/with-all-tones interval-tones fretboard-strings))
+                data' (if-not trim?
+                        data
+                        (utils-tools/trim-matrix #(every? nil? (map :out %)) data))]
+            (let [id' (str chord-id as-intervals)]
+              [common/fretboard-str-with-add-button
+               id'
+               data'
+               #(re-frame/dispatch
+                 [:notebook/add
+                  {:id      id'
+                   :url     [path-name path-params query-params]
+                   :title   (str key-of "" chord)
+                   :version :v1
+                   :view    :text/fretboard
+                   :data    data}])]))
 
           ;; Chord patterns
           (let [chord-patterns (->> @definitions/chord-patterns
@@ -138,29 +133,19 @@
                        data' (if-not trim?
                                data
                                (utils-tools/trim-matrix #(every? nil? (map :out %)) data))]
-                   [:div {:style {:display    :flex
-                                  :margin-top "2em"}}
-                    [:pre {:style {:overflow-x "auto"
-                                   :margin     "0em"}}
-                     (utils/fretboard-str
-                      (fn [{:keys [out]}] (if (nil? out) "" out))
-                      data')]
-                    [:div {:style {:display         :flex
-                                   :flex-direction  :column
-                                   :justify-content :center}}
-                     [:button
-                      {:style {:background-color "white"
-                               :border           "none"}
-                       :on-click
+                   [:div {:style {:margin-top "2em"}}
+                    (let [id' (str "chord-pattern-" id "-" as-intervals)]
+                      [common/fretboard-str-with-add-button
+                       id'
+                       data'
                        #(re-frame/dispatch
                          [:notebook/add
-                          {:id      (cljs.core/random-uuid)
+                          {:id      id'
                            :url     [path-name path-params query-params]
-                           :title   (str key-of "" chord)
+                           :title   (str "Chord: " key-of "" chord)
                            :version :v1
                            :view    :text/fretboard
-                           :data    data}])}
-                      "Add"]]]))]))
+                           :data    data}])])]))]))
 
           ;; triad patterns
           (let [triad-patterns     (->> @definitions/triad-patterns
@@ -171,7 +156,9 @@
                                         (group-by :fretboard-pattern/on-strings)
                                         (vals)
                                         (reverse)
-                                        (sort-by (comp #(apply + %) :fretboard-pattern/on-strings first)))]
+                                        (sort-by (comp #(apply + %) :fretboard-pattern/on-strings first)))
+                _                  (def triad-patterns triad-patterns)
+                _                  (def grouped-on-strings grouped-on-strings)]
             (when (or (seq triad-patterns) (seq grouped-on-strings))
               [:<>
                [:h3 "Triads"]
@@ -197,55 +184,49 @@
                                                     pattern
                                                     fretboard-strings)))))]
                      [:div {:style {:margin-top "2em"}}
-                      [:pre {:style {:overflow-x "auto"
-                                     :margin     "0em"}}
-                       (utils/fretboard-str
-                        (fn [{:keys [out]}] (if (nil? out) "" out))
-                        combined-triads)]
-                      [:button
-                       {:on-click
-                        #(re-frame/dispatch
-                          [:notebook/add
-                           {:id      (cljs.core/random-uuid)
-                            :version :v1
-                            :url     [path-name path-params query-params]
-                            :title   (str key-of "" chord)
-                            :view    :text/fretboard
-                            :data    combined-triads}])}
-                       "Add"]]))
+                      (let [id (->> triad-groups first :fretboard-pattern/id (str "combined-") (str as-intervals))]
+                        [common/fretboard-str-with-add-button
+                         id
+                         combined-triads
+                         #(re-frame/dispatch
+                           [:notebook/add
+                            {:id      id
+                             :version :v1
+                             :url     [path-name path-params query-params]
+                             :title   (str "Triad: " key-of "" chord)
+                             :view    :text/fretboard
+                             :data    combined-triads}])])]))
 
                  (for [{id      :fretboard-pattern/id
                         pattern :fretboard-pattern/pattern}
-                       triad-patterns]
+                       (->> triad-patterns
+                            (sort-by
+                             (fn [{on-strings :fretboard-pattern/on-strings}]
+                               (apply + on-strings))))]
                    ^{:key (-> id name)}
-                   [:div {:style {:margin-top "2em"}}
-                    [:pre {:style {:overflow-x "auto"}}
-                     (let [data (if as-intervals
-                                  (utils/pattern-with-intervals
-                                   key-of
-                                   pattern
-                                   fretboard-strings)
-                                  (utils/pattern-with-tones
-                                   key-of
-                                   pattern
-                                   fretboard-strings))]
-                       [:<>
-                        [:pre {:style {:overflow-x "auto"
-                                       :margin     "0em"}}
-                         (utils/fretboard-str
-                          (fn [{:keys [out]}] (if (nil? out) "" out))
-                          data)]
-                        [:button
-                         {:on-click
-                          #(re-frame/dispatch
-                            [:notebook/add
-                             {:id      (cljs.core/random-uuid)
-                              :version :v1
-                              :url     [path-name path-params query-params]
-                              :title   (str key-of "" chord)
-                              :view    :text/fretboard
-                              :data    data}])}
-                         "Add"]])]]))]))
+                   (let [data (if as-intervals
+                                (utils/pattern-with-intervals
+                                 key-of
+                                 pattern
+                                 fretboard-strings)
+                                (utils/pattern-with-tones
+                                 key-of
+                                 pattern
+                                 fretboard-strings))]
+
+                     [:div {:style {:margin-top "2em"}}
+                      (let [id' (str id as-intervals)]
+                        [common/fretboard-str-with-add-button
+                         id'
+                         data
+                         #(re-frame/dispatch
+                           [:notebook/add
+                            {:id      id'
+                             :version :v1
+                             :url     [path-name path-params query-params]
+                             :title   (str "Triad: " key-of "" chord)
+                             :view    :text/fretboard
+                             :data    data}])])])))]))
 
           (let [scales-to-chord (utils/scales-to-chord @definitions/scales indexes)]
             (when (seq scales-to-chord)
