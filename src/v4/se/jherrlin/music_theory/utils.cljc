@@ -994,12 +994,21 @@
          name'      (-> chord-id
                         name
                         (str/replace "-" " "))
+         types      (let [intervals (set intervals')]
+                      (def intervals intervals)
+                      (cond-> #{}
+                        (intervals "3")                      (conj :major)
+                        (intervals "b3")                     (conj :minor)
+                        (intervals "b7")                     (conj :dominant)
+                        (set/subset? #{"b3" "b5"} intervals) (conj :diminished)
+                        (-> (count intervals) (= 3))         (conj :triad)))
          chord      (merge
                      {:chord/id        chord-id
                       :chord/intervals intervals'
                       :chord/indexes   indexes
                       :chord/name      name'
-                      :chord/sufix     sufix}
+                      :chord/sufix     sufix
+                      :chord/types     types}
                      (->> meta-data
                           (map (fn [[k v]]
                                  [(->> k name (str "chord/") keyword) v]))

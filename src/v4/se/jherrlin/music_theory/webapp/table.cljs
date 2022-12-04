@@ -31,13 +31,15 @@
            [:th "Sufix"]
            [:th "Intervals"]
            [:th "Tones"]
-           [:th "Description"]]]
+           [:th "Description"]
+           [:th "Types"]]]
          [:tbody
           (for [{chord-id    :chord/id
                  intervals   :chord/intervals
                  indexes     :chord/indexes
                  sufix       :chord/sufix
-                 explanation :chord/explanation}
+                 explanation :chord/explanation
+                 types       :chord/types}
                 (->> @definitions/chords
                      (vals)
                      (sort-by :chord/id))]
@@ -56,7 +58,8 @@
               (->> (utils/tones-by-key-and-intervals key-of intervals)
                    (map (comp str/capitalize name))
                    (str/join ", "))]
-             [:td explanation]])]]]
+             [:td (str/capitalize explanation)]
+             [:td (->> types sort (map (comp str/capitalize name)) (str/join ", "))]])]]]
 
        [:<>
         [:h3 "Scales"]

@@ -161,6 +161,11 @@
    :explanation "suspended 4"}
   "1 4 5")
 
+(define-chord :sus4-add-7
+  {:sufix       "7sus4"
+   :explanation "suspended 4 with added b7"}
+  "1 4 5 b7")
+
 (define-chord :minor-seven-flat-5
   {:sufix       "m7b5"
    :explanation "minor seven flat 5"}
@@ -184,7 +189,8 @@
 
 (define-chord :diminished-whole
   {:sufix       "°"
-   :explanation "diminished whole"}
+   :explanation "diminished whole"
+   :text        "diminished seventh chord comprises a diminished triad plus a diminished seventh"}
   "1 b3 b5 bb7")
 
 (define-chord :diminished-half
@@ -199,7 +205,8 @@
 
 (define-chord :diminished-seventh
   {:sufix       "dim7"
-   :explanation "diminished seven"}
+   :explanation "diminished seven"
+   :text        "diminished seventh chord comprises a diminished triad plus a diminished seventh"}
   "1 b3 b5 bb7")
 
 (define-chord :sixth
@@ -222,13 +229,13 @@
 
 (define-chord :maj-ninth
   {:sufix       "maj9"
-   :explanation "Maj ninth"
+   :explanation "major ninth"
    :text        "The most important tones are 1, 3, 7 and 9. The 5 can be ignored in the chord."}
   "1 3 5 7 9")
 
 (define-chord :minor-ninth
   {:sufix       "m9"
-   :explanation "Maj ninth # fifth is the least important tone, it may be ignored"
+   :explanation "minor ninth # fifth is the least important tone, it may be ignored"
    :text        "The most important tones are 1, b3, b7 and 9. The 5 can be ignored in the chord."}
   "1 b3 5 b7 9")
 
@@ -248,7 +255,8 @@
   "1 b3 5 6 9")
 
 (define-chord :maj-eleventh
-  {:sufix "maj11"}
+  {:sufix       "maj11"
+   :explanation "major eleventh"}
   "1 3 5 7 9 11")
 
 (define-chord :eleventh
@@ -257,12 +265,25 @@
   "1 3 5 b7 9 11")
 
 (define-chord :minor-eleventh
-  {:sufix "m11"}
+  {:sufix       "m11"
+   :explanation "minor eleventh"}
   "1 b3 5 b7 9 11")
 
 (define-chord :thirteen
-  {:sufix "13"}
+  {:sufix       "13"
+   :explanation "thirteenth. Dominant"}
+  "1 3 5 b7 9 11 13")
+
+(define-chord :maj-thirteen
+  {:sufix "13"
+   :explanation "major thirteenth"}
   "1 3 5 7 9 11 13")
+
+(define-chord :minor-thirteen
+  {:sufix "13"
+   :explanation "major thirteenth"}
+  "1 b3 5 7 9 11 13")
+
 ;; ---------------
 ;; Chords end
 ;; ---------------
@@ -868,12 +889,22 @@
 (define-chord-pattern :eleventh-1
   {:name   :eleventh
    :tuning standard-guitar-tuning}
-  "-   -   -   -
-   -   -   -   -
-   -   -   -   -
-   -   -  b7   -
-   -   -   -   -
-   -   -   1   -")
+  "5
+   9
+  b7
+  11
+   1
+   -")
+
+(define-chord-pattern :eleventh-2
+  {:name   :eleventh
+   :tuning standard-guitar-tuning}
+  "-   -   -
+  11   -   -
+   -   9   -
+   -   -  b7
+   -   -   -
+   -   -   1")
 ;; --------------------
 ;; Chord patterns end
 ;; --------------------
