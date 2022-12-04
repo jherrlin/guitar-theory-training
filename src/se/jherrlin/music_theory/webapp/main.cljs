@@ -14,6 +14,7 @@
    [reitit.frontend.easy :as rfe]
    [clojure.string :as str]
    [clojure.set :as set]
+   [v4.se.jherrlin.music-theory.webapp.table :as table]
    [v2.se.jherrlin.music-theory.webapp.harmonizations :as harmonizations]
    [v2.se.jherrlin.music-theory.webapp.chords :as chords]
    [v2.se.jherrlin.music-theory.webapp.main :as v2-main]
@@ -104,6 +105,11 @@ code lives on "
           :href   (rfe/href :v3/neck {:instrument tuning-name})
           :active (= ::the-neck current-route-name)}
          "Neck"]
+        [:> semantic-ui/Menu.Item
+         {:as     "a"
+          :href   (rfe/href :v4/table path-params query-params)
+          :active (= ::the-neck current-route-name)}
+         "Table"]
 
         #_[:> semantic-ui/Menu.Item
          {:as     "a"
@@ -716,6 +722,7 @@ the org-drill mode."]
    notebook/routes
    strings.chords/routes
    strings.scales/routes
+   table/routes
    ["/"
     [""
      {:name      ::home

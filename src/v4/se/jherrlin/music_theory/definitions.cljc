@@ -247,9 +247,18 @@
    :explanation "minor sixth with an added 9"}
   "1 b3 5 6 9")
 
-(define-chord :eleventh
-  {:sufix "11"}
+(define-chord :maj-eleventh
+  {:sufix "maj11"}
   "1 3 5 7 9 11")
+
+(define-chord :eleventh
+  {:sufix       "11"
+   :explanation "dominant 11"}
+  "1 3 5 b7 9 11")
+
+(define-chord :minor-eleventh
+  {:sufix "m11"}
+  "1 b3 5 b7 9 11")
 
 (define-chord :thirteen
   {:sufix "13"}
@@ -411,8 +420,6 @@
    -   -   3   -
    -   -   -   1")
 
-;; Fix when migrated to v4 on guitars
-;; https://www.hobby-hour.com/guitar/chords.php?chord=e-plus-5
 (define-chord-pattern :major-plus-5-1
   {:name   :major-plus-5
    :tuning standard-guitar-tuning}
@@ -422,7 +429,6 @@
    -   -   1   -
    -   -   -  #5
    1   -   -   -")
-
 
 (define-chord-pattern :minor-10
   {:name   :minor
@@ -858,6 +864,16 @@
   b3   -   -
    -   -   1
    -   -   -")
+
+(define-chord-pattern :eleventh-1
+  {:name   :eleventh
+   :tuning standard-guitar-tuning}
+  "-   -   -   -
+   -   -   -   -
+   -   -   -   -
+   -   -  b7   -
+   -   -   -   -
+   -   -   1   -")
 ;; --------------------
 ;; Chord patterns end
 ;; --------------------

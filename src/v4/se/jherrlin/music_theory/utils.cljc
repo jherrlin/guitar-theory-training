@@ -201,13 +201,15 @@
   `intervals` -  [\"1\" \"3\" \"5\"]
   =>
   [:c :e :g]"
-  [all-tones key-of intervals]
-  {:pre  [(m/validate models.tone/IntervalTone key-of)
-          (m/validate models.tone/Intervals intervals)]
-   :post [(m/validate models.tone/IntervalTones %)]}
-  (tones-by-intervals
+  ([key-of intervals]
+   (tones-by-key-and-intervals (all-tones) key-of intervals))
+  ([all-tones key-of intervals]
+   {:pre  [(m/validate models.tone/IntervalTone key-of)
+           (m/validate models.tone/Intervals intervals)]
+    :post [(m/validate models.tone/IntervalTones %)]}
+   (tones-by-intervals
    (tones-starting-at all-tones key-of)
-   intervals))
+   intervals)))
 
 (tones-by-key-and-intervals
  (all-tones)

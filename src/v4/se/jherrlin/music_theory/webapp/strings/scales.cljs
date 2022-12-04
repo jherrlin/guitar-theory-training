@@ -166,13 +166,13 @@
 
 (def routes
   (let [path-name :v4.strings/scale]
-    [["/v4/strings/:instrument/scale/:key-of/:scale"
-      {:name path-name
-       :view [scales-view]
-       :controllers
-       [{:parameters {:path  params/path-params
-                      :query params/query-params}
-         :start      (fn [{p :path q :query}]
-                       (re-frame/dispatch [:path-params p])
-                       (re-frame/dispatch [:query-params q])
-                       (re-frame/dispatch [:path-name path-name]))}]}]]))
+    ["/v4/strings/:instrument/scale/:key-of/:scale"
+     {:name path-name
+      :view [scales-view]
+      :controllers
+      [{:parameters {:path  params/path-params
+                     :query params/query-params}
+        :start      (fn [{p :path q :query}]
+                      (re-frame/dispatch [:path-params p])
+                      (re-frame/dispatch [:query-params q])
+                      (re-frame/dispatch [:path-name path-name]))}]}]))
