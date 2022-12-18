@@ -140,12 +140,12 @@
             [:br]])]))))
 
 (def routes
-  [["/v4/piano/harmonization/:key-of/:scale/:steps"
-    {:name :v4.piano/harmonizations
-     :view [harmonizations-view]
-     :controllers
-     [{:parameters {:path  params/path-params
-                    :query params/query-params}
-       :start      (fn [{p :path q :query}]
-                     (re-frame/dispatch [:path-params p])
-                     (re-frame/dispatch [:query-params q]))}]}]])
+  ["/v4/piano/harmonization/:key-of/:scale/:steps"
+   {:name :v4.piano/harmonizations
+    :view [harmonizations-view]
+    :controllers
+    [{:parameters {:path  params/path-params
+                   :query params/query-params}
+      :start      (fn [{p :path q :query}]
+                    (re-frame/dispatch [:path-params p])
+                    (re-frame/dispatch [:query-params q]))}]}])

@@ -90,11 +90,13 @@
 
           ;; Buttons
           [:div {:style {:display "flex"}}
-           [:a {:href (rfe/href path-name path-params (assoc query-params :as-intervals (not as-intervals)))}
+           [:a {:style {:margin-right "10px"}
+                :href  (rfe/href path-name path-params (assoc query-params :as-intervals (not as-intervals)))}
             [:button
              (str "Show as " (if as-intervals "tones" "intervals"))]]
 
-           [:a {:href (rfe/href path-name path-params (assoc query-params :as-text (not as-text)))}
+           [:a {:style {:margin-right "10px"}
+                :href  (rfe/href path-name path-params (assoc query-params :as-text (not as-text)))}
             [:button
              (str "Show " (if as-text "styled" "as text"))]]
 

@@ -25,7 +25,7 @@
    [v4.se.jherrlin.music-theory.webapp.strings.scales :as strings.scales]
    [v4.se.jherrlin.music-theory.webapp.notebook :as notebook]
    [v4.se.jherrlin.music-theory.webapp.piano.harmonizations :as piano.harmonizations]
-   [v4.se.jherrlin.music-theory.webapp.strings.styled-fretboard :as strings.styled-fretboard]))
+   [v4.se.jherrlin.music-theory.webapp.strings.harmonizations :as strings.harmonizations]))
 
 
 (re-frame/reg-fx
@@ -724,7 +724,7 @@ the org-drill mode."]
    strings.chords/routes
    strings.scales/routes
    table/routes
-   #_strings.styled-fretboard/routes
+   strings.harmonizations/routes
    ["/"
     [""
      {:name      ::home

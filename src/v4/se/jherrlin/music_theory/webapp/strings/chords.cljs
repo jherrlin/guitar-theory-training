@@ -91,11 +91,13 @@
 
           ;; Buttons
           [:div {:style {:display "flex"}}
-           [:a {:href (rfe/href path-name path-params (assoc query-params :as-intervals (not as-intervals)))}
+           [:a {:style {:margin-right "10px"}
+                :href  (rfe/href path-name path-params (assoc query-params :as-intervals (not as-intervals)))}
             [:button
              (str "Show as " (if as-intervals "tones" "intervals"))]]
 
-           [:a {:href (rfe/href path-name path-params (assoc query-params :as-text (not as-text)))}
+           [:a {:style {:margin-right "10px"}
+                :href (rfe/href path-name path-params (assoc query-params :as-text (not as-text)))}
             [:button
              (str "Show " (if as-text "styled" "as text"))]]
 
@@ -265,13 +267,13 @@
 
 (def routes
   (let [path-name :v4.strings/chord]
-    [["/v4/strings/:instrument/chord/:key-of/:chord"
-      {:name path-name
-       :view [chords-view]
-       :controllers
-       [{:parameters {:path  params/path-params
-                      :query params/query-params}
-         :start      (fn [{p :path q :query}]
-                       (re-frame/dispatch [:path-params p])
-                       (re-frame/dispatch [:query-params q])
-                       (re-frame/dispatch [:path-name path-name]))}]}]]))
+    ["/v4/strings/:instrument/chord/:key-of/:chord"
+     {:name path-name
+      :view [chords-view]
+      :controllers
+      [{:parameters {:path  params/path-params
+                     :query params/query-params}
+        :start      (fn [{p :path q :query}]
+                      (re-frame/dispatch [:path-params p])
+                      (re-frame/dispatch [:query-params q])
+                      (re-frame/dispatch [:path-name path-name]))}]}]))

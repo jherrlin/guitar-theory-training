@@ -34,18 +34,19 @@
                     :margin     "0em"}}
       (if-not as-text
         [styled-view data]
-          (utils/fretboard-str
-           (fn [{:keys [out]}] (if (nil? out) "" out))
+        (utils/fretboard-str
+         (fn [{:keys [out]}] (if (nil? out) "" out))
          data))]
-     [:div {:style {:display        "flex"
-                    :flex-direction "column-reverse"}}
-        [:button
-         {:style    (when (ids id)
-                      {:background-color "#FFA500"})
-          :on-click #(if-not (ids id)
-                       (f)
-                       (re-frame/dispatch [:notebook/remove id]))}
-         "Add"]]]))
+     [:div {:style {:display         "flex"
+                    :flex-direction  "column-reverse"
+                    :justify-content "center"}}
+      [:button
+       {:style    (when (ids id)
+                    {:background-color "#FFA500"})
+        :on-click #(if-not (ids id)
+                     (f)
+                     (re-frame/dispatch [:notebook/remove id]))}
+       "Add"]]]))
 
 (defn debug-view
   ([]
@@ -86,34 +87,34 @@
 
 (defn highlight-tones [tones key-of]
   [:div {:style {:margin-top  "1em"
-                        :display     "flex"
-                        :align-items "center"}}
+                 :display     "flex"
+                 :align-items "center"}}
 
-          (for [{:keys [tone match?]}
-                (let [tones-set (set tones)]
-                  (->> (utils/all-tones)
-                       (rotate-until #(% key-of))
-                       (map (fn [tone]
-                              (cond-> {:tone tone}
-                                (seq (set/intersection tones-set tone))
-                                (assoc :match? true))))))]
-            ^{:key (str tone "something")}
-            [:div {:style {:width     "4.5em"
-                           :font-size "0.9em"}}
-             (for [t' (sort-by (fn [x]
-                                 (let [x (str x)]
-                                   (cond
-                                     (and (= (count x) 3) (str/includes? x "#"))
-                                     1
-                                     (= (count x) 3)
-                                     2
-                                     :else 0))) tone)]
-               ^{:key (str tone t')}
-               [:div {:style {:margin-top "0em"}}
-                [:div
-                 {:style {:color       (if-not match? "grey")
-                          :font-weight (if match? "bold")}}
-                 (-> t' name str/capitalize)]])])])
+   (for [{:keys [tone match?]}
+         (let [tones-set (set tones)]
+           (->> (utils/all-tones)
+                (rotate-until #(% key-of))
+                (map (fn [tone]
+                       (cond-> {:tone tone}
+                         (seq (set/intersection tones-set tone))
+                         (assoc :match? true))))))]
+     ^{:key (str tone "something")}
+     [:div {:style {:width     "4.5em"
+                    :font-size "0.9em"}}
+      (for [t' (sort-by (fn [x]
+                          (let [x (str x)]
+                            (cond
+                              (and (= (count x) 3) (str/includes? x "#"))
+                              1
+                              (= (count x) 3)
+                              2
+                              :else 0))) tone)]
+        ^{:key (str tone t')}
+        [:div {:style {:margin-top "0em"}}
+         [:div
+          {:style {:color       (if-not match? "grey")
+                   :font-weight (if match? "bold")}}
+          (-> t' name str/capitalize)]])])])
 
 (defn intervals-to-tones [intervals tones]
   [:pre {:style {:overflow-x "auto"}}
@@ -133,8 +134,8 @@
   [:div {:style {:margin-top "1em"
                  :height     "100%"
                  :display    "inline-flex"}}
-          [:h2 (str (-> key-of name str/capitalize) sufix)]
-          (when explanation
-            [:p {:style {:margin-left "4em"
-                         :margin-top  "0.5em"}}
-             (str "(" explanation ")")])])
+   [:h2 (str (-> key-of name str/capitalize) sufix)]
+   (when explanation
+     [:p {:style {:margin-left "4em"
+                  :margin-top  "0.5em"}}
+      (str "(" explanation ")")])])
