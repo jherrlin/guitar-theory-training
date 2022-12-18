@@ -8,6 +8,30 @@
 (def standard-guitar-tuning  [:e :b :g :d :a :e])
 (def standard-ukulele-tuning [:a :e :c :g])
 (def standard-bass-tuning    [:g :d :a :e])
+(def banjo-standard          [:a :d :g :c])
+(def banjo-irish             [:e :a :d :g])
+(def banjo-chicago           [:e :b :g :d])
+
+
+(def instrument-with-tuning
+  {:guitar         {:tuning standard-guitar-tuning
+                    :text   "Standard gitar tuning"}
+   :bass           {:tuning standard-bass-tuning
+                    :text   "Standard bass tuning"}
+   :ukulele        {:tuning standard-ukulele-tuning
+                    :text   "Standard ukulele tuning"}
+   :banjo-standard {:tuning banjo-standard
+                    :text   "Standard tenor tuning"}
+   :banjo-irish    {:tuning banjo-irish
+                    :text   "Irish tenor tuning"}
+   :banjo-chicago  {:tuning banjo-chicago
+                    :text   "Chicago tuning"}})
+
+
+(defn tuning
+  "Get tuning and text from key `k`"
+  [k]
+  (get instrument-with-tuning k))
 
 
 ;; ---------------
@@ -733,7 +757,7 @@
    -   -   6
    -   3   -
    -   -   1
-   -   -   -
+   -   -   5
    -   -   -")
 
 (define-chord-pattern :sixth-2

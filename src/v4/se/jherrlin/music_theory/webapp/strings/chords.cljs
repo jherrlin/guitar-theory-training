@@ -16,15 +16,9 @@
     :refer [fformat rotate-until]]))
 
 
-
-
-
 (defn debug-view []
   [:pre
    (with-out-str (cljs.pprint/pprint @re-frame.db/app-db))])
-
-
-
 
 (defn chords-view []
   (let [key-of            @(re-frame/subscribe [:key-of])
@@ -52,11 +46,13 @@
              (get @definitions/chords chord)
              index-tones       (utils/index-tones indexes key-of)
              interval-tones    (utils/interval-tones intervals key-of)
+             instrument-data   (definitions/tuning instrument)
+             instrument-info   (:text instrument-data)
+             instrument-tuning (:tuning instrument-data)
              fretboard-strings (utils/fretboard-strings
                                 (utils/all-tones)
-                                definitions/standard-guitar-tuning
-                                nr-of-frets)
-             tuning-tones      definitions/standard-guitar-tuning]
+                                instrument-tuning
+                                nr-of-frets)]
          [:div
 
           [common/links-to-keys
@@ -77,6 +73,16 @@
           ;; Chord name
           [common/chord-name key-of m]
 
+          ;; Instrument tuing
+          [:div
+           [:p
+            (str
+             "Instrument tuning (lowest string first). "
+             (when instrument-info
+               instrument-info)
+             ": "
+             (->> instrument-tuning reverse (map (comp str/capitalize name)) (str/join " ")))]]
+
           ;; Intervals
           (when interval-to-tone
             [common/intervals-to-tones intervals interval-tones])
@@ -94,25 +100,25 @@
                         (utils/with-all-tones interval-tones fretboard-strings))
                 data' (if-not trim?
                         data
-                        (utils-tools/trim-matrix #(every? nil? (map :out %)) data))]
-            (let [id' (str chord-id as-intervals)]
-              [common/fretboard-str-with-add-button
-               id'
-               data'
-               #(re-frame/dispatch
-                 [:notebook/add
-                  {:id      id'
-                   :url     [path-name path-params query-params]
-                   :title   (str key-of "" chord)
-                   :version :v1
-                   :view    :text/fretboard
-                   :data    data}])]))
+                        (utils-tools/trim-matrix #(every? nil? (map :out %)) data))
+                id'   (str chord-id as-intervals)]
+            [common/fretboard-str-with-add-button
+             id'
+             data'
+             #(re-frame/dispatch
+               [:notebook/add
+                {:id      id'
+                 :url     [path-name path-params query-params]
+                 :title   (str key-of "" chord)
+                 :version :v1
+                 :view    :text/fretboard
+                 :data    data}])])
 
           ;; Chord patterns
           (let [chord-patterns (->> @definitions/chord-patterns
                                     (vals)
                                     (filter (comp #{chord} :fretboard-pattern/name))
-                                    (filter (comp #{tuning-tones} :fretboard-pattern/tuning))
+                                    (filter (comp #{instrument-tuning} :fretboard-pattern/tuning))
                                     (sort-by :chord/pattern-title))]
             (when (seq chord-patterns)
               [:<>
@@ -151,7 +157,7 @@
           (let [triad-patterns     (->> @definitions/triad-patterns
                                         vals
                                         (filter (comp #{chord} :fretboard-pattern/name))
-                                        (filter (comp #{tuning-tones} :fretboard-pattern/tuning)))
+                                        (filter (comp #{instrument-tuning} :fretboard-pattern/tuning)))
                 grouped-on-strings (->> triad-patterns
                                         (group-by :fretboard-pattern/on-strings)
                                         (vals)

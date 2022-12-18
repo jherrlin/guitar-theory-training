@@ -40,11 +40,13 @@
               :as        scale'} (get @definitions/scales scale)
              index-tones         (utils/index-tones indexes key-of)
              interval-tones      (utils/interval-tones intervals key-of)
+             instrument-data     (definitions/tuning instrument)
+             instrument-info     (:text instrument-data)
+             instrument-tuning   (:tuning instrument-data)
              fretboard-strings   (utils/fretboard-strings
                                   (utils/all-tones)
-                                  definitions/standard-guitar-tuning
-                                  nr-of-frets)
-             tuning-tones        definitions/standard-guitar-tuning]
+                                  instrument-tuning
+                                  nr-of-frets)]
          [:<>
           ;; Links to keys
           [common/links-to-keys
@@ -69,6 +71,17 @@
                 (get @definitions/scales scale)]
             [:div {:style {:margin-top "1em"}}
              [:h2 (str (-> key-of name str/capitalize) " - " (-> scale-name str/capitalize))]])
+
+          ;; Instrument tuing
+          [:div
+           [:p
+            (str
+             "Instrument tuning (lowest string first). "
+             (when instrument-info
+               instrument-info)
+             ": "
+             (->> instrument-tuning reverse (map (comp str/capitalize name)) (str/join " ")))]]
+
 
           ;; Intervals
           (when interval-to-tone
@@ -108,7 +121,7 @@
           (let [chord-patterns (->> (merge @definitions/mode-patterns @definitions/scale-patterns)
                                     (vals)
                                     (filter (comp #{scale} :fretboard-pattern/scale))
-                                    (filter (comp #{tuning-tones} :fretboard-pattern/tuning))
+                                    (filter (comp #{instrument-tuning} :fretboard-pattern/tuning))
                                     (sort-by
                                      (fn [{on-strings :fretboard-pattern/on-strings}]
                                        (apply + on-strings))
