@@ -30,7 +30,8 @@
         as-intervals      @(re-frame/subscribe [:as-intervals])
         highlighted-tones @(re-frame/subscribe [:highlighted-tones])
         interval-to-tone  @(re-frame/subscribe [:interval-to-tone])
-        path-name         @(re-frame/subscribe [:path-name])]
+        path-name         @(re-frame/subscribe [:path-name])
+        as-text           @(re-frame/subscribe [:as-text])]
     [:div
      (when (and scale key-of)
        (let [{scale-id   :scale/id
@@ -87,9 +88,19 @@
           (when interval-to-tone
             [common/intervals-to-tones intervals interval-tones])
 
-          [:a {:href (rfe/href path-name path-params (assoc query-params :as-intervals (not as-intervals)))}
-           [:button
-            (str "Show as " (if as-intervals "tones" "intervals"))]]
+          ;; Buttons
+          [:div {:style {:display "flex"}}
+           [:a {:href (rfe/href path-name path-params (assoc query-params :as-intervals (not as-intervals)))}
+            [:button
+             (str "Show as " (if as-intervals "tones" "intervals"))]]
+
+           [:a {:href (rfe/href path-name path-params (assoc query-params :as-text (not as-text)))}
+            [:button
+             (str "Show " (if as-text "styled" "as text"))]]
+
+           [:a {:href (rfe/href path-name path-params (assoc query-params :trim (not trim?)))}
+            [:button
+             (if trim? "Full" "Trim" )]]]
 
           [:br]
           [:br]
@@ -114,7 +125,7 @@
                     :version :v1
                     :url     [path-name path-params query-params]
                     :title   (str "Scale: " key-of " " scale)
-                    :view    :text/fretboard
+                    :view    (if as-text :text/fretboard :css/fretboard)
                     :data    data}])]))]
 
           ;; Scale patterns
@@ -156,7 +167,7 @@
                            :version :v1
                            :url     [path-name path-params query-params]
                            :title   (str "Scale: " key-of " " scale)
-                           :view    :text/fretboard
+                           :view    (if as-text :text/fretboard :css/fretboard)
                            :data    data}])])]))]))
 
           ;; Chords to scale

@@ -5,6 +5,7 @@
    [re-frame.core :as re-frame]
    [se.jherrlin.music-theory :as music-theory]
    [v4.se.jherrlin.music-theory.utils :as utils]
+   [v4.se.jherrlin.music-theory.webapp.strings.styled-fretboard :refer [styled-view]]
    [se.jherrlin.utils
     :refer [fformat rotate-until]]))
 
@@ -26,22 +27,25 @@
 
 (defn fretboard-str-with-add-button
   [id data f]
-  (let [ids @(re-frame/subscribe [:nodebook/ids])]
+  (let [ids     @(re-frame/subscribe [:nodebook/ids])
+        as-text @(re-frame/subscribe [:as-text])]
     [:div {:style {:display "flex"}}
      [:pre {:style {:overflow-x "auto"
                     :margin     "0em"}}
-      (utils/fretboard-str
-       (fn [{:keys [out]}] (if (nil? out) "" out))
-       data)]
+      (if-not as-text
+        [styled-view data]
+          (utils/fretboard-str
+           (fn [{:keys [out]}] (if (nil? out) "" out))
+         data))]
      [:div {:style {:display        "flex"
                     :flex-direction "column-reverse"}}
-      [:button
-       {:style    (when (ids id)
-                    {:background-color "#FFA500"})
-        :on-click #(if-not (ids id)
-                     (f)
-                     (re-frame/dispatch [:notebook/remove id]))}
-       "Add"]]]))
+        [:button
+         {:style    (when (ids id)
+                      {:background-color "#FFA500"})
+          :on-click #(if-not (ids id)
+                       (f)
+                       (re-frame/dispatch [:notebook/remove id]))}
+         "Add"]]]))
 
 (defn debug-view
   ([]

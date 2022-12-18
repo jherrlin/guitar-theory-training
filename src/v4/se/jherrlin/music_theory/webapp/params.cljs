@@ -34,7 +34,8 @@
    [:highlighted-tones {:optional true} :boolean]
    [:trim              {:optional true} :boolean]
    [:debug             {:optional true} :boolean]
-   [:combined-triads   {:optional true} :boolean]])
+   [:combined-triads   {:optional true} :boolean]
+   [:as-text           {:optional true} :boolean]])
 
 
 (def query-params
@@ -115,6 +116,9 @@
    {:n :combined-triads,
     :s (fn [db [k]] (get-in db [:query-params k] true)),
     :e (fn [db [k v]] (assoc-in db [:query-params k] v))}
+   {:n :as-text,
+    :s (fn [db [k]] (get-in db [:query-params k] false)),
+    :e (fn [db [k v]] (assoc-in db [:query-params k] v))}
 
    {:n :path-name,
     :s (fn [db [k]] (get db k :v4.strings/chord))}
@@ -139,6 +143,7 @@
 (defmethod convert :trim               [_ v] (= "true" v))
 (defmethod convert :debug              [_ v] (= "true" v))
 (defmethod convert :combined-triads    [_ v] (= "true" v))
+(defmethod convert :as-text            [_ v] (= "true" v))
 (defmethod convert :instrument         [_ v] (keyword v))
 
 

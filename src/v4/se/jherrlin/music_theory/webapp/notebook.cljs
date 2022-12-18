@@ -2,6 +2,7 @@
   (:require
    [reitit.frontend.easy :as rfe]
    [v4.se.jherrlin.music-theory.webapp.piano.view :as piano.view]
+   [v4.se.jherrlin.music-theory.webapp.strings.styled-fretboard :refer [styled-view]]
    [v4.se.jherrlin.music-theory.utils :as utils]
    [v4.se.jherrlin.music-theory.webapp.params :as params]
    [re-frame.core :as re-frame]
@@ -14,10 +15,10 @@
 
 (def faces
   {:css/piano      piano.view/piano-unit
-   :css/fretboard  :b
+   :css/fretboard  styled-view
    :text/fretboard (fn [data]
                      [:pre {:style {:overflow-x "auto"
-                                    :margin "0em"}}
+                                    :margin     "0em"}}
                       (utils/fretboard-str
                        (fn [{:keys [out]}] (if (nil? out) "" out))
                        data)]

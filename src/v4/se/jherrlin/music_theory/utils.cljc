@@ -775,8 +775,9 @@
         [:e :b :g :d :a :e]
         10))
      (utils/trim-matrix #(every? nil? (map :out %)))
-     (fretboard-str (fn [{:keys [out]}] (if (nil? out) "" out)))
-     (println))
+     ;; (fretboard-str (fn [{:keys [out]}] (if (nil? out) "" out)))
+     ;; (println)
+     )
 
 
 

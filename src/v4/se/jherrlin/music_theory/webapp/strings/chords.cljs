@@ -7,6 +7,7 @@
    [se.jherrlin.music-theory :as music-theory]
    [v4.se.jherrlin.music-theory.definitions :as definitions]
    [v4.se.jherrlin.music-theory.intervals :as intervals]
+   [v4.se.jherrlin.music-theory.webapp.strings.styled-fretboard :refer [styled-view]]
    [se.jherrlin.utils :as utils-tools]
    [v4.se.jherrlin.music-theory.utils :as utils]
    [v4.se.jherrlin.music-theory.webapp.piano.view :as piano.view]
@@ -33,7 +34,8 @@
         as-intervals      @(re-frame/subscribe [:as-intervals])
         combined-triads?  @(re-frame/subscribe [:combined-triads])
         interval-to-tone  @(re-frame/subscribe [:interval-to-tone])
-        path-name         @(re-frame/subscribe [:path-name])]
+        path-name         @(re-frame/subscribe [:path-name])
+        as-text           @(re-frame/subscribe [:as-text])]
     [:div
      (when (and chord key-of)
        (let [{chord-id    :chord/id
@@ -87,9 +89,20 @@
           (when interval-to-tone
             [common/intervals-to-tones intervals interval-tones])
 
-          [:a {:href (rfe/href path-name path-params (assoc query-params :as-intervals (not as-intervals)))}
-           [:button
-            (str "Show as " (if as-intervals "tones" "intervals"))]]
+          ;; Buttons
+          [:div {:style {:display "flex"}}
+           [:a {:href (rfe/href path-name path-params (assoc query-params :as-intervals (not as-intervals)))}
+            [:button
+             (str "Show as " (if as-intervals "tones" "intervals"))]]
+
+           [:a {:href (rfe/href path-name path-params (assoc query-params :as-text (not as-text)))}
+            [:button
+             (str "Show " (if as-text "styled" "as text"))]]
+
+           [:a {:href (rfe/href path-name path-params (assoc query-params :trim (not trim?)))}
+            [:button
+             (if trim? "Full" "Trim" )]]]
+
 
           ;; All chord tones
           [:h3 "All " (if as-intervals "interval" "tone") " positions in the chord"]
@@ -111,7 +124,7 @@
                  :url     [path-name path-params query-params]
                  :title   (str key-of "" chord)
                  :version :v1
-                 :view    :text/fretboard
+                 :view    (if as-text :text/fretboard :css/fretboard)
                  :data    data}])])
 
           ;; Chord patterns
@@ -150,7 +163,7 @@
                            :url     [path-name path-params query-params]
                            :title   (str "Chord: " key-of "" chord)
                            :version :v1
-                           :view    :text/fretboard
+                           :view    (if as-text :text/fretboard :css/fretboard)
                            :data    data}])])]))]))
 
           ;; triad patterns
@@ -200,7 +213,7 @@
                              :version :v1
                              :url     [path-name path-params query-params]
                              :title   (str "Triad: " key-of "" chord)
-                             :view    :text/fretboard
+                             :view    (if as-text :text/fretboard :css/fretboard)
                              :data    combined-triads}])])]))
 
                  (for [{id      :fretboard-pattern/id
@@ -231,7 +244,7 @@
                              :version :v1
                              :url     [path-name path-params query-params]
                              :title   (str "Triad: " key-of "" chord)
-                             :view    :text/fretboard
+                             :view    (if as-text :text/fretboard :css/fretboard)
                              :data    data}])])])))]))
 
           (let [scales-to-chord (utils/scales-to-chord @definitions/scales indexes)]
