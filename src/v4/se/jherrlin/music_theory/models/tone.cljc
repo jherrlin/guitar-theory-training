@@ -38,7 +38,6 @@
 
 
 
-
 (def IntervalTone
   "Interval tone is a tone within the context of an interval.
   As an index tone can have two tones, the interval helps distinguish them.
@@ -46,6 +45,11 @@
   Example: `:eb`"
   [:enum
    :a :a# :ab :b :bb :c :c# :d :d# :db :e :eb :f :f# :g :g# :gb])
+
+
+(m/validate IntervalTone :c)  ;; => true
+(m/validate IntervalTone :k)  ;; => false
+(m/validate IntervalTone nil) ;; => false
 
 (def IntervalTones
   "Interval tones are a vector of interval tones.
