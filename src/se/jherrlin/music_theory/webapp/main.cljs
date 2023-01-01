@@ -102,6 +102,13 @@ code lives on "
           :active (= :v3/settings current-route-name)}
          "Settings"]
 
+
+        [:> semantic-ui/Menu.Item
+         {:as     "a"
+          :href   (rfe/href :v4/guess-the-key path-params query-params)
+          :active (= :v4/guess-the-key current-route-name)}
+         "Guess the key"]
+
         [:> semantic-ui/Menu.Item
          {:as     "a"
           :href   (rfe/href :v3/neck {:instrument tuning-name})
