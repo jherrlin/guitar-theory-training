@@ -26,14 +26,16 @@
 
 
 (defn guess-the-key-view []
-  (let [chords @(re-frame/subscribe [::chords])
-        data   @(re-frame/subscribe [::data])]
+  (let [chords       @(re-frame/subscribe [::chords])
+        data         @(re-frame/subscribe [::data])
+        path-params  @(re-frame/subscribe [:path-params])
+        query-params @(re-frame/subscribe [:query-params])]
     [:div
 
      [:h1 "Guess the key"]
 
      [:p "Will try to find what key the chords are in."]
-     [:p "The algorithm will try to match the chords against a major or minor scale."]
+     [:p "The algorithm will try to match the chords against a major or minor harmonization."]
 
      [:br]
 
@@ -63,8 +65,10 @@
          ^{:key (str scale key-of)}
          [:<>
           [:div
-           [:h2
-            (str (str/capitalize (name key-of)) " " (name scale) " scale")]
+           [:a {:href
+                (rfe/href :v4.strings/scale (merge {:scale scale :key-of key-of} path-params) query-params)}
+            [:h2
+            (str (str/capitalize (name key-of)) " " (name scale) " scale")]]
 
            [:p {:style {:display "flex"}}
             (str "Total score: " total-match-score)]]
@@ -89,11 +93,18 @@
                      match-score-by-intervals :match-score/by-intervals
                      harmonization-family     :harmonization/family
                      harmonization-position   :harmonization/position
-                     chord-interval-tones     :chord/interval-tones}
+                     chord-interval-tones     :chord/interval-tones
+
+                     chord-id     :chord/id
+                     chord-root-tone :chord/root-tone
+
+                     }
                     possible-chord]
                 [:<>
                  [:tr
-                  [:td (:chord-name possible-chord)]
+                  [:td
+                   [:a {:href (rfe/href :v4.strings/chord (assoc path-params :key-of chord-root-tone :chord chord-id) query-params)}
+                    (:chord-name possible-chord)]]
                   [:td (-> harmonization-family name str/capitalize)]
                   [:td harmonization-position]
                   [:td (->> chord-interval-tones (map (comp str/capitalize name)) (str/join ", "))]
