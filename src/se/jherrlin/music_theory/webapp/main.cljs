@@ -25,7 +25,8 @@
    [v4.se.jherrlin.music-theory.webapp.strings.scales :as strings.scales]
    [v4.se.jherrlin.music-theory.webapp.notebook :as notebook]
    [v4.se.jherrlin.music-theory.webapp.piano.harmonizations :as piano.harmonizations]
-   [v4.se.jherrlin.music-theory.webapp.strings.harmonizations :as strings.harmonizations]))
+   [v4.se.jherrlin.music-theory.webapp.strings.harmonizations :as strings.harmonizations]
+   [v4.se.jherrlin.music-theory.webapp.guess-the-key :as webapp.guess-the-key]))
 
 
 (re-frame/reg-fx
@@ -725,6 +726,7 @@ the org-drill mode."]
    strings.scales/routes
    table/routes
    strings.harmonizations/routes
+   webapp.guess-the-key/routes
    ["/"
     [""
      {:name      ::home
