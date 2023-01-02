@@ -110,6 +110,12 @@
            [:button
             (str "Show " (if as-text "styled" "as text"))]]]
 
+         [:br]
+
+         ;; Highlight tones
+         (let [interval-tones (utils/interval-tones intervals key-of)]
+           (when interval-tones
+             [common/highlight-tones interval-tones key-of]))
 
          [:br]
 
