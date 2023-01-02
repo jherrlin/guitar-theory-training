@@ -109,11 +109,12 @@ code lives on "
           :active (= :v4/guess-the-key current-route-name)}
          "Guess the key"]
 
-        [:> semantic-ui/Menu.Item
-         {:as     "a"
-          :href   (rfe/href :v3/neck {:instrument tuning-name})
-          :active (= ::the-neck current-route-name)}
-         "Neck"]
+        #_[:> semantic-ui/Menu.Item
+           {:as     "a"
+            :href   (rfe/href :v3/neck {:instrument tuning-name})
+            :active (= ::the-neck current-route-name)}
+           "Neck"]
+
         [:> semantic-ui/Menu.Item
          {:as     "a"
           :href   (rfe/href :v4/table path-params query-params)
@@ -121,15 +122,15 @@ code lives on "
          "Table"]
 
         #_[:> semantic-ui/Menu.Item
-         {:as     "a"
-          :href   (rfe/href :v3/chord {:key-of key-of :chord-name :major :instrument tuning-name})
-          :active (= :v3/chord current-route-name)}
-         "Chords"]
+           {:as     "a"
+            :href   (rfe/href :v3/chord {:key-of key-of :chord-name :major :instrument tuning-name})
+            :active (= :v3/chord current-route-name)}
+           "Chords"]
         #_[:> semantic-ui/Menu.Item
-         {:as     "a"
-          :href   (rfe/href :v3/scale {:scale :major :key-of key-of :instrument tuning-name})
-          :active (= :v3/scale current-route-name)}
-         "Scales"]
+           {:as     "a"
+            :href   (rfe/href :v3/scale {:scale :major :key-of key-of :instrument tuning-name})
+            :active (= :v3/scale current-route-name)}
+           "Scales"]
         [:> semantic-ui/Menu.Item
          {:as     "a"
           :href   (rfe/href :v4.strings/chord (merge {:chord :major :key-of :c :instrument :guitar} path-params) query-params)
@@ -148,9 +149,9 @@ code lives on "
          "Notebook"]
 
         #_[:> semantic-ui/Menu.Item
-         {:as     "a"
-          :href   (rfe/href :v2/harmonization {:key-of key-of :major-or-minor :major :triad-or-seventh :triad})
-          :active (= :v2/harmonization current-route-name)}
+           {:as     "a"
+            :href   (rfe/href :v2/harmonization {:key-of key-of :major-or-minor :major :triad-or-seventh :triad})
+            :active (= :v2/harmonization current-route-name)}
            "Harmonizations"]
 
         (let [path-name  :v4.strings/harmonizations]

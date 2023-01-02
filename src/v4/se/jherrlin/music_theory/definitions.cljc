@@ -192,7 +192,7 @@
 
 (define-chord :minor-seven-flat-5
   {:sufix       "m7b5"
-   :text        "Also know as diminished half, Ø"
+   :text        "diminished half, often sufixed with Ø"
    :explanation "minor seven flat 5"}
   "1 b3 b5 b7")
 
@@ -212,12 +212,6 @@
    :explanation "5th"}
   "1 5")
 
-(define-chord :diminished-whole
-  {:sufix       "°"
-   :explanation "diminished whole"
-   :text        "diminished seventh chord comprises a diminished triad plus a diminished seventh"}
-  "1 b3 b5 bb7")
-
 (define-chord :diminished-fifth
   {:sufix       "dim"
    :explanation "diminished fifth"}
@@ -226,7 +220,7 @@
 (define-chord :diminished-seventh
   {:sufix       "dim7"
    :explanation "diminished seven"
-   :text        "diminished seventh chord comprises a diminished triad plus a diminished seventh"}
+   :text        "diminished whole, often sufixed with °"}
   "1 b3 b5 bb7")
 
 (define-chord :sixth

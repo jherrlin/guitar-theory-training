@@ -32,11 +32,13 @@
            [:th "Intervals"]
            [:th "Tones"]
            [:th "Description"]
+           [:th "Text"]
            [:th "Types"]]]
          [:tbody
           (for [{chord-id    :chord/id
                  intervals   :chord/intervals
                  indexes     :chord/indexes
+                 text        :chord/text
                  sufix       :chord/sufix
                  explanation :chord/explanation
                  types       :chord/types}
@@ -59,6 +61,7 @@
                    (map (comp str/capitalize name))
                    (str/join ", "))]
              [:td (str/capitalize explanation)]
+             [:td text]
              [:td (->> types sort (map (comp str/capitalize name)) (str/join ", "))]])]]]
 
        [:<>
