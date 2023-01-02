@@ -52,6 +52,7 @@
                                             @definitions/chords))])}
       "Analyse"]
 
+
      [:br]
      [:br]
      [:br]
@@ -62,13 +63,19 @@
               chords            :chords
               total-match-score :total-match-score}
              data]
-         ^{:key (str scale key-of)}
+         ^{:key (str "guess-the-key-" scale key-of)}
          [:<>
           [:div
            [:a {:href
-                (rfe/href :v4.strings/scale (merge {:scale scale :key-of key-of} path-params) query-params)}
+                (rfe/href
+                 :v4.strings/scale
+                 (merge
+                  {:instrument :guitar}
+                  path-params
+                  {:scale scale :key-of key-of})
+                 query-params)}
             [:h2
-            (str (str/capitalize (name key-of)) " " (name scale) " scale")]]
+             (str (str/capitalize (name key-of)) " " (name scale) " scale")]]
 
            [:p {:style {:display "flex"}}
             (str "Total score: " total-match-score)]]
@@ -103,7 +110,13 @@
                 [:<>
                  [:tr
                   [:td
-                   [:a {:href (rfe/href :v4.strings/chord (assoc path-params :key-of chord-root-tone :chord chord-id) query-params)}
+                   [:a {:href (rfe/href
+                               :v4.strings/chord
+                               (merge
+                                {:instrument :guitar}
+                                path-params
+                                {:key-of chord-root-tone :chord chord-id})
+                               query-params)}
                     (:chord-name possible-chord)]]
                   [:td (-> harmonization-family name str/capitalize)]
                   [:td harmonization-position]
@@ -140,9 +153,9 @@
 (let [chords "Dm7 G7 Cmaj7"]
   (re-frame/dispatch [::chords chords])
   (re-frame/dispatch [::data
-                    (->> (utils/read-incomming-chord-names chords)
-                         (map (partial utils/chord-by-name @definitions/chords))
-                         (utils/possible-scales)
-                         (utils/posibble-chord-in-harmonization
-                          @definitions/scales
-                          @definitions/chords))]))
+                      (->> (utils/read-incomming-chord-names chords)
+                           (map (partial utils/chord-by-name @definitions/chords))
+                           (utils/possible-scales)
+                           (utils/posibble-chord-in-harmonization
+                            @definitions/scales
+                            @definitions/chords))]))
