@@ -161,7 +161,7 @@ code lives on "
             :active (= path-name current-route-name)}
            "Harmonizations"])
 
-        [:> semantic-ui/Menu.Item
+        #_[:> semantic-ui/Menu.Item
          {:as     "a"
           :href   (rfe/href :v2/mode {:scale :ionian :key-of :c})
           :active (= :v2/mode current-route-name)}
