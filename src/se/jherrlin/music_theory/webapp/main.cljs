@@ -117,7 +117,7 @@ code lives on "
         [:> semantic-ui/Menu.Item
          {:as     "a"
           :href   (rfe/href :v4/table path-params query-params)
-          :active (= ::the-neck current-route-name)}
+          :active (= :v4/table current-route-name)}
          "Table"]
 
         #_[:> semantic-ui/Menu.Item
@@ -147,11 +147,18 @@ code lives on "
           :active (= :v4/notebook current-route-name)}
          "Notebook"]
 
-        [:> semantic-ui/Menu.Item
+        #_[:> semantic-ui/Menu.Item
          {:as     "a"
           :href   (rfe/href :v2/harmonization {:key-of key-of :major-or-minor :major :triad-or-seventh :triad})
           :active (= :v2/harmonization current-route-name)}
-         "Harmonizations"]
+           "Harmonizations"]
+
+        (let [path-name  :v4.strings/harmonizations]
+          [:> semantic-ui/Menu.Item
+           {:as     "a"
+            :href   (rfe/href path-name (merge {:scale :major :key-of :c :instrument :guitar :steps :triad} path-params) query-params)
+            :active (= path-name current-route-name)}
+           "Harmonizations"])
 
         [:> semantic-ui/Menu.Item
          {:as     "a"
