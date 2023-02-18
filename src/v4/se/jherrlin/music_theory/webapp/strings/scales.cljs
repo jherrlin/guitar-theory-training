@@ -126,7 +126,7 @@
                    {:id      id
                     :version :v1
                     :url     [path-name path-params query-params]
-                    :title   (str "Scale: " key-of " " scale)
+                    :title   (str "Scale: " (-> key-of name str/capitalize) " " (name scale))
                     :view    (if as-text :text/fretboard :css/fretboard)
                     :data    data}])]))]
 
@@ -168,7 +168,7 @@
                           {:id      id'
                            :version :v1
                            :url     [path-name path-params query-params]
-                           :title   (str "Scale: " key-of " " scale)
+                           :title   (str "Scale: " (-> key-of name str/capitalize) " " (name scale))
                            :view    (if as-text :text/fretboard :css/fretboard)
                            :data    data}])])]))]))
 

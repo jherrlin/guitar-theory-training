@@ -124,7 +124,7 @@
                [:notebook/add
                 {:id      id'
                  :url     [path-name path-params query-params]
-                 :title   (str key-of "" chord)
+                 :title   (str "All tones: " (-> key-of name str/capitalize) "" (name chord))
                  :version :v1
                  :view    (if as-text :text/fretboard :css/fretboard)
                  :data    data}])])
@@ -163,7 +163,7 @@
                          [:notebook/add
                           {:id      id'
                            :url     [path-name path-params query-params]
-                           :title   (str "Chord: " key-of "" chord)
+                           :title   (str "Chord: " (-> key-of name str/capitalize) " " (-> chord name))
                            :version :v1
                            :view    (if as-text :text/fretboard :css/fretboard)
                            :data    data}])])]))]))
@@ -214,7 +214,7 @@
                             {:id      id
                              :version :v1
                              :url     [path-name path-params query-params]
-                             :title   (str "Triad: " key-of "" chord)
+                             :title   (str "Triad: " (-> key-of name str/capitalize) " " (name chord))
                              :view    (if as-text :text/fretboard :css/fretboard)
                              :data    combined-triads}])])]))
 
@@ -245,7 +245,7 @@
                             {:id      id'
                              :version :v1
                              :url     [path-name path-params query-params]
-                             :title   (str "Triad: " key-of "" chord)
+                             :title   (str "Triad: " (-> key-of name str/capitalize) " " (name chord))
                              :view    (if as-text :text/fretboard :css/fretboard)
                              :data    data}])])])))]))
 
