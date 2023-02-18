@@ -155,7 +155,7 @@
                                data
                                (utils-tools/trim-matrix #(every? nil? (map :out %)) data))]
                    [:div {:style {:margin-top "2em"}}
-                    (let [id' (str "chord-pattern-" id "-" as-intervals)]
+                    (let [id' (str "chord-pattern-" (name key-of) "-" (name id) "-as-intervals=" as-intervals)]
                       [common/fretboard-str-with-add-button
                        id'
                        data'
