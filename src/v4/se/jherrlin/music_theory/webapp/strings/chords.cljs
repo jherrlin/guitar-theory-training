@@ -116,7 +116,7 @@
                 data' (if-not trim?
                         data
                         (utils-tools/trim-matrix #(every? nil? (map :out %)) data))
-                id'   (str chord-id as-intervals)]
+                id'   (str key-of chord-id as-intervals)]
             [common/fretboard-str-with-add-button
              id'
              data'
@@ -124,7 +124,7 @@
                [:notebook/add
                 {:id      id'
                  :url     [path-name path-params query-params]
-                 :title   (str "All tones: " (-> key-of name str/capitalize) "" (name chord))
+                 :title   (str "All tones: " (-> key-of name str/capitalize) " " (name chord))
                  :version :v1
                  :view    (if as-text :text/fretboard :css/fretboard)
                  :data    data}])])
