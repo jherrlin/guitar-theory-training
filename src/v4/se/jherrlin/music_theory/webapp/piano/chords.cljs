@@ -44,7 +44,7 @@
          ;; Links to keys
          [common/links-to-keys
           key-of
-          #(rfe/href :v4.piano/chord (assoc path-params :key-of %) query-params)]
+          #(rfe/href :v4.piano/chords (assoc path-params :key-of %) query-params)]
 
          [:br]
 
@@ -52,7 +52,7 @@
          [common/links-to-chords
           @definitions/chords
           chord
-          #(rfe/href :v4.piano/chord (assoc path-params :chord %) query-params)]
+          #(rfe/href :v4.piano/chords (assoc path-params :chord %) query-params)]
 
          ;; Highlight tones
          (when highlighted-tones
@@ -74,7 +74,7 @@
              [:notebook/add
               {:id      (cljs.core/random-uuid)
                :version :v1
-               :url     [:v4.piano/chord path-params query-params]
+               :url     [:v4.piano/chords path-params query-params]
                :title   (str (-> key-of name str/capitalize) sufix)
                :view    :css/piano
                :data    {:as-intervals   as-intervals
@@ -102,7 +102,7 @@
 
 (def routes
   [["/v4/piano/chord/:key-of/:chord"
-    {:name :v4.piano/chord
+    {:name :v4.piano/chords
      :view [chords-view]
      :controllers
      [{:parameters {:path  params/path-params

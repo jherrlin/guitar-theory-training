@@ -42,7 +42,7 @@
          ;; Links to keys
          [common/links-to-keys
           key-of
-          #(rfe/href :v4.piano/scale (assoc path-params :key-of %) query-params)]
+          #(rfe/href :v4.piano/scales (assoc path-params :key-of %) query-params)]
 
          [:br]
 
@@ -50,7 +50,7 @@
          [common/links-to-scales
           @definitions/scales
           scale
-          #(rfe/href :v4.piano/scale (assoc path-params :scale %) query-params)]
+          #(rfe/href :v4.piano/scales (assoc path-params :scale %) query-params)]
 
          ;; Highlight tones
          (when highlighted-tones
@@ -72,7 +72,7 @@
            #(re-frame/dispatch
              [:notebook/add
               {:id      (cljs.core/random-uuid)
-               :url     [:v4.piano/scale path-params query-params]
+               :url     [:v4.piano/scales path-params query-params]
                :title   (str (-> key-of name str/upper-case) " " scale-name)
                :version :v1
                :view    :css/piano
@@ -99,10 +99,9 @@
               intervals)])]]))))
 
 
-
 (def routes
   [["/v4/piano/scale/:key-of/:scale"
-    {:name :v4.piano/scale
+    {:name :v4.piano/scales
      :view [scales-view]
      :controllers
      [{:parameters {:path  params/path-params
