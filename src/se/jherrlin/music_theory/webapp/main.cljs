@@ -84,6 +84,35 @@ code lives on "
   (re-frame/reg-sub n (or s (fn [db [n']] (get db n'))))
   (re-frame/reg-event-db n (or e (fn [db [_ e]] (assoc db n e)))))
 
+(defn select-new-namespace [old-kw new]
+  (let [[ns n]      ((juxt namespace name) old-kw)
+        [version _] (str/split ns #"\.")]
+    (keyword (str version "." new) n)))
+
+(comment
+  (select-new-namespace
+   :v4.piano/chord
+   "piano")
+  )
+
+(defn select-new-name [old-kw new]
+  (let [[ns _] ((juxt namespace name) old-kw)]
+    (keyword ns new)))
+
+(comment
+  (select-new-name
+   :v4.piano/chord
+   "scale"
+   )
+  )
+
+(defn instrument-dropdown-text [current-route]
+  (-> current-route
+      :path-params
+      :instrument
+      (or "piano")
+      (str/capitalize)))
+
 (defn ^:dev/after-load header-menu [router]
   (let [key-of             @(re-frame/subscribe [:key-of])
         tuning-name        @(re-frame/subscribe [:tuning-name])
@@ -96,11 +125,66 @@ code lives on "
        [:> semantic-ui/Menu {:size       "small"
                              :borderless true
                              :style      {:background "#FFFFFF"}}
-        [:> semantic-ui/Menu.Item
-         {:as     "a"
-          :href   (rfe/href :v3/settings {:instrument tuning-name})
-          :active (= :v3/settings current-route-name)}
-         "Settings"]
+        #_[:> semantic-ui/Menu.Item
+           {:as     "a"
+            :href   (rfe/href :v3/settings {:instrument tuning-name})
+            :active (= :v3/settings current-route-name)}
+           "Settings"]
+
+        [:> semantic-ui/Dropdown
+         {:item true
+          :text (instrument-dropdown-text current-route)}
+         [:> semantic-ui/Dropdown.Menu
+
+          [:> semantic-ui/Dropdown.Item
+           {:as   "a"
+            :href (rfe/href
+                   (select-new-namespace current-route-name "piano")
+                   (assoc path-params :instrument :piano) query-params)}
+           "Piano"]
+
+          [:> semantic-ui/Dropdown.Item
+           {:as   "a"
+            :href (rfe/href
+                   (select-new-namespace current-route-name "strings")
+                   (assoc path-params :instrument :guitar) query-params)}
+           "Guitar"]
+
+          [:> semantic-ui/Dropdown.Item
+           {:as   "a"
+            :href (rfe/href
+                   (select-new-namespace current-route-name "strings")
+                   (assoc path-params :instrument :bass) query-params)}
+           "Bass"]
+
+          [:> semantic-ui/Dropdown.Item
+           {:as   "a"
+            :href (rfe/href
+                   (select-new-namespace current-route-name "strings")
+                   (assoc path-params :instrument :ukulele) query-params)}
+           "Ukulele"]
+
+
+          [:> semantic-ui/Dropdown.Item
+           {:as   "a"
+            :href (rfe/href
+                   (select-new-namespace current-route-name "strings")
+                   (assoc path-params :instrument :banjo-standard) query-params)}
+           "Banjo standard"]
+
+          [:> semantic-ui/Dropdown.Item
+           {:as   "a"
+            :href (rfe/href
+                   (select-new-namespace current-route-name "strings")
+                   (assoc path-params :instrument :banjo-irish) query-params)}
+           "Banjo irish"]
+
+          [:> semantic-ui/Dropdown.Item
+           {:as   "a"
+            :href (rfe/href
+                   (select-new-namespace current-route-name "strings")
+                   (assoc path-params :instrument :banjo-chicago) query-params)}
+           "Banjo chicago"]]]
 
 
         [:> semantic-ui/Menu.Item
@@ -131,22 +215,21 @@ code lives on "
             :href   (rfe/href :v3/scale {:scale :major :key-of key-of :instrument tuning-name})
             :active (= :v3/scale current-route-name)}
            "Scales"]
-        [:> semantic-ui/Menu.Item
-         {:as     "a"
-          :href   (rfe/href :v4.strings/chord (merge {:chord :major :key-of :c :instrument :guitar} path-params) query-params)
-          :active (= :v4.strings/chord current-route-name)}
-         "Guitar chords"]
-        [:> semantic-ui/Menu.Item
-         {:as     "a"
-          :href   (rfe/href :v4.strings/scale (merge {:scale :major :key-of :c :instrument :guitar} path-params) query-params)
-          :active (= :v4.strings/scale current-route-name)}
-         "Guitar scales"]
 
         [:> semantic-ui/Menu.Item
          {:as     "a"
-          :href   (rfe/href :v4/notebook path-params query-params)
-          :active (= :v4/notebook current-route-name)}
-         "Notebook"]
+          :href   (rfe/href
+                   (select-new-name current-route-name "chord")
+                   (merge {:chord :major :key-of :c :instrument :guitar} path-params) query-params)
+          :active (= :v4.strings/chord current-route-name)}
+         "Chords"]
+        [:> semantic-ui/Menu.Item
+         {:as     "a"
+          :href   (rfe/href
+                   (select-new-name current-route-name "scale")
+                   (merge {:scale :major :key-of :c :instrument :guitar} path-params) query-params)
+          :active (= :v4.strings/scale current-route-name)}
+         "Scales"]
 
         #_[:> semantic-ui/Menu.Item
            {:as     "a"
@@ -154,18 +237,26 @@ code lives on "
             :active (= :v2/harmonization current-route-name)}
            "Harmonizations"]
 
-        (let [path-name  :v4.strings/harmonizations]
+        (let [path-name :v4.strings/harmonizations]
           [:> semantic-ui/Menu.Item
            {:as     "a"
-            :href   (rfe/href path-name (merge {:scale :major :key-of :c :instrument :guitar :steps :triad} path-params) query-params)
+            :href   (rfe/href
+                     (select-new-name path-name "harmonizations")
+                     (merge {:scale :major :key-of :c :instrument :guitar :steps :triad} path-params) query-params)
             :active (= path-name current-route-name)}
            "Harmonizations"])
 
         #_[:> semantic-ui/Menu.Item
+           {:as     "a"
+            :href   (rfe/href :v2/mode {:scale :ionian :key-of :c})
+            :active (= :v2/mode current-route-name)}
+           "Modes"]
+
+        [:> semantic-ui/Menu.Item
          {:as     "a"
-          :href   (rfe/href :v2/mode {:scale :ionian :key-of :c})
-          :active (= :v2/mode current-route-name)}
-         "Modes"]
+          :href   (rfe/href :v4/notebook path-params query-params)
+          :active (= :v4/notebook current-route-name)}
+         "Notebook"]
 
         [:> semantic-ui/Menu.Item
          {:as     "a"
@@ -173,23 +264,23 @@ code lives on "
           :active (= ::drills current-route-name)}
          "Drills"]
 
-        [:> semantic-ui/Menu.Item
-         {:as     "a"
-          :href   (rfe/href :v4.piano/chords (merge {:key-of :c :chord :major} path-params) query-params)
-          :active (= :v4.piano/chords current-route-name)}
-         "Piano chords"]
+        #_[:> semantic-ui/Menu.Item
+           {:as     "a"
+            :href   (rfe/href :v4.piano/chord (merge {:key-of :c :chord :major} path-params) query-params)
+            :active (= :v4.piano/chord current-route-name)}
+           "Piano chords"]
 
-        [:> semantic-ui/Menu.Item
-         {:as     "a"
-          :href   (rfe/href :v4.piano/scales (merge {:key-of :c :scale :major} path-params) query-params)
-          :active (= :v4.piano/scales current-route-name)}
-         "Piano scales"]
+        #_[:> semantic-ui/Menu.Item
+           {:as     "a"
+            :href   (rfe/href :v4.piano/scale (merge {:key-of :c :scale :major} path-params) query-params)
+            :active (= :v4.piano/scale current-route-name)}
+           "Piano scales"]
 
-        [:> semantic-ui/Menu.Item
-         {:as     "a"
-          :href   (rfe/href :v4.piano/harmonizations (merge {:key-of :c :scale :major :steps :triad} path-params) query-params)
-          :active (= :v4.piano/harmonizations current-route-name)}
-         "Piano harmonization"]
+        #_[:> semantic-ui/Menu.Item
+           {:as     "a"
+            :href   (rfe/href :v4.piano/harmonizations (merge {:key-of :c :scale :major :steps :triad} path-params) query-params)
+            :active (= :v4.piano/harmonizations current-route-name)}
+           "Piano harmonization"]
 
         [:> semantic-ui/Menu.Menu {:position "right"}
          [:> semantic-ui/Menu.Item
