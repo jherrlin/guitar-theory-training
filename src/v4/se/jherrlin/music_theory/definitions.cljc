@@ -6,7 +6,7 @@
 (def all-tones (utils/all-tones))
 
 (def standard-guitar-tuning  [:e :b :g :d :a :e])
-(def dadgad                  [:d :a :d :g :a :d])
+(def dadgad                  [:d :a :g :d :a :d])
 (def standard-ukulele-tuning [:a :e :c :g])
 (def standard-bass-tuning    [:g :d :a :e])
 (def banjo-standard          [:a :d :g :c])
