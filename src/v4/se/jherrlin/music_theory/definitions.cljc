@@ -6,6 +6,7 @@
 (def all-tones (utils/all-tones))
 
 (def standard-guitar-tuning  [:e :b :g :d :a :e])
+(def dadgad                  [:d :a :d :g :a :d])
 (def standard-ukulele-tuning [:a :e :c :g])
 (def standard-bass-tuning    [:g :d :a :e])
 (def banjo-standard          [:a :d :g :c])
@@ -16,6 +17,8 @@
 (def instrument-with-tuning
   {:guitar         {:tuning standard-guitar-tuning
                     :text   "Standard gitar tuning"}
+   :dadgad         {:tuning dadgad
+                    :text   "DADGAD"}
    :bass           {:tuning standard-bass-tuning
                     :text   "Standard bass tuning"}
    :ukulele        {:tuning standard-ukulele-tuning
