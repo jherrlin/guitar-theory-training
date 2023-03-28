@@ -5,6 +5,7 @@
 
 (def all-tones (utils/all-tones))
 
+;; Tunings seems to always be defined with the upper (lowest) string first
 (def standard-guitar-tuning  [:e :b :g :d :a :e])
 (def dadgad                  [:d :a :g :d :a :d])
 (def standard-ukulele-tuning [:a :e :c :g])
@@ -1636,6 +1637,25 @@
    -   -   -   -
    -   -   -   -
    -   -   -   -")
+
+
+(define-scale-pattern :major-1
+  {:scale  :major
+   :tuning standard-ukulele-tuning
+   :order  1}
+  "-   2   -   3   4
+   -   6   -   7   1
+   3   4   -   5   -
+   -   1   -   2   -")
+
+(define-scale-pattern :major-2
+  {:scale  :major
+   :tuning standard-ukulele-tuning
+   :order  1}
+  "6   -   7   1   -
+   3   4   -   5   -
+   1   -   2   -   -
+   -   -   -   -   -")
 ;; ---------------
 ;; Scales patterns end
 ;; ---------------
