@@ -1651,7 +1651,7 @@
 (define-scale-pattern :major-2
   {:scale  :major
    :tuning standard-ukulele-tuning
-   :order  1}
+   :order  2}
   "6   -   7   1   -
    3   4   -   5   -
    1   -   2   -   -
