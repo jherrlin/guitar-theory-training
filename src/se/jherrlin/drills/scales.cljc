@@ -1,14 +1,12 @@
 (ns se.jherrlin.drills.scales
   (:require
+   [clojure.string :as str]
    [se.jherrlin.music-theory.utils
     :refer [fformat]
-    :as utils]
-   [clojure.string :as str]))
-
+    :as utils]))
 
 (defn intervals-in-scales [scales-map]
-  (let [
-        ;; scales-map @v2.se.jherrlin.music-theory.definitions/scales-atom
+  (let [;; scales-map @v2.se.jherrlin.music-theory.definitions/scales-atom
         ]
     (->> scales-map
          vals

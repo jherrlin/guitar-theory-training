@@ -1,14 +1,12 @@
 (ns se.jherrlin.music-theory
   (:require
+   [clojure.set :as set]
    [se.jherrlin.music-theory.intervals
     :as intervals]
    [se.jherrlin.music-theory.utils
-    :refer [find-chord find-chord-name find-root
-            fret-table-with-tones match-chord-with-scales]
-    :as utils]
-   [clojure.set :as set]
-   [clojure.string :as str]))
-
+    :refer [find-chord find-chord-name find-root fret-table-with-tones
+            match-chord-with-scales]
+    :as utils]))
 
 (def tones           [:c :c# :d :d# :e :f :f# :g :g# :a :a# :b])
 (def sharp-tones     [:c :c# :d :d# :e :f :f# :g :g# :a :a# :b])
@@ -123,8 +121,7 @@
   (interval->tone :f# "3")
   (interval->tone :f# "3")
   (interval->tone :a# "b5")
-  (interval->tone :e "b3")
-  )
+  (interval->tone :e "b3"))
 
 (defn fretboard-strings [tuning]
   (utils/fretboard-strings flat-tones sharp-tones tuning))
@@ -516,7 +513,6 @@
    4   -   5  b6
    1  b2   -  b3")
 
-
 (define-mode :phrygian-6
   {:scale  :phrygian}
   "-   -   -   -
@@ -581,8 +577,6 @@
    6  b7   -   1   -
    3   4  b5   5   -
    -   1   -   2  b3")
-
-
 
 ;; --------------------
 ;; Modes end
@@ -801,8 +795,7 @@
        (set)
        (vec))
 
-  (fret-table-with-tones-p
-   )
+  (fret-table-with-tones-p)
 
   (find-chord-p [:g :b :d# :f#])
 
@@ -810,13 +803,11 @@
    (diatonic-chord-progressions-str
     (diatonic-chord-progressions-p :c :major :triad)))
 
-
-  ;; mode to chord
+;; mode to chord
   (for [scale (vals @scales-atom)
         chord (vals @chords-atom)
         :when (set/subset? (set (:chord/indexes chord)) (set (:scale/indexes scale)))]
     (merge chord scale))
-
 
   (for [scale (vals @scales-atom)
         chord (vals @chords-atom)
@@ -854,8 +845,6 @@
        ;; intervals-and-key-to-fretboard-matrix-str
        ;; println
        )
-
-
   (intervals-and-key-to-fretboard-matrix
    (utils/fretboard-strings
     flat-tones sharp-tones standard-tuning)  ;; fretboard
@@ -863,6 +852,4 @@
    ["1" "b3" "5"]                            ;; interval
    13                                        ;; fretboard lenght
    pattern                                   ;; modes / chord patterns
-   )
-
-  )
+   ))

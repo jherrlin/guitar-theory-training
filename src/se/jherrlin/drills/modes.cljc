@@ -1,15 +1,12 @@
 (ns se.jherrlin.drills.modes
   (:require
+   [clojure.string :as str]
    [se.jherrlin.music-theory.utils
-    :refer [fformat find-chord find-chord-name  find-root
-            fret-table-with-tones match-chord-with-scales]
-    :as utils]
-   [clojure.string :as str]))
-
+    :refer [fformat]
+    :as utils]))
 
 (defn modes-in-each-key [all-tones modes-map mode-pattern-str-f]
-  (let [
-        ;; all-tones          #_se.jherrlin.music-theory/tones [:c :e]
+  (let [;; all-tones          #_se.jherrlin.music-theory/tones [:c :e]
         ;; modes-map          @se.jherrlin.music-theory/modes-atom
         ;; mode-pattern-str-f se.jherrlin.music-theory/mode-pattern-str-p
         ]
@@ -48,5 +45,4 @@
 #?(:clj
    (comment
      (modes-in-each-key
-      se.jherrlin.music-theory/tones @se.jherrlin.music-theory/modes-atom se.jherrlin.music-theory/mode-pattern-str-p)
-     ))
+      se.jherrlin.music-theory/tones @se.jherrlin.music-theory/modes-atom se.jherrlin.music-theory/mode-pattern-str-p)))

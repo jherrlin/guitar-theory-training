@@ -3,7 +3,6 @@
    [v2.se.jherrlin.music-theory.intervals :as intervals]
    [v2.se.jherrlin.music-theory.utils :as utils]))
 
-
 (def all-tones
   [#{:c}
    #{:db :c#}
@@ -528,7 +527,6 @@
 ;; ---------------
 ;; Triad patterns end
 ;; ---------------
-
 
 ;; --------------------
 ;; Chord patterns
@@ -1377,7 +1375,6 @@
   b7   -   1  b2
    4   -   5  b6
    1  b2   -  b3")
-
 
 (define-mode :phrygian-6
   {:scale  :phrygian

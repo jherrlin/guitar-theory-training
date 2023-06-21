@@ -6,9 +6,8 @@
    :chord/indexes      [0 4 7],
    :chord/name        \"major\",
    :chord/sufix        \"\"}"
-  (:require [malli.core :as m]))
-
-
+  (:require
+   [malli.core :as m]))
 
 (def regex
   "Pattern to find intervals in text.
@@ -17,7 +16,6 @@
   =>
   (\"1\" \"b3\" \"b5\" \"bb7\")"
   "b{0,2}#{0,2}\\d{1,2}")
-
 
 (def Chord
   "Chord model.
@@ -35,12 +33,10 @@
 (def Chords
   [:map-of :keyword Chord])
 
-
 (def valid-chord?   (partial m/validate Chord))
 (def valid-chords?  (partial m/validate Chords))
 (def explain-chord  (partial m/explain  Chord))
 (def explain-chords (partial m/explain  Chords))
-
 
 (comment
   (m/schema Chord)
@@ -83,7 +79,6 @@
   (re-seq (re-pattern regex) "1, 3,  #5")
   (re-seq (re-pattern regex) "1, b3 b5 bb7")
 
-
   (defn derp [xs]
     {:malli/schema [:=> [:cat Chords] Chord]}
     (->> xs vals first))
@@ -92,6 +87,4 @@
 
   (derp "")
 
-  ((requiring-resolve 'malli.clj-kondo/emit!))
-
-  )
+  ((requiring-resolve 'malli.clj-kondo/emit!)))

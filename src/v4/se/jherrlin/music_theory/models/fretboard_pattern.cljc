@@ -25,7 +25,6 @@
    [malli.core :as m]
    [v4.se.jherrlin.music-theory.models.chord :as chord]))
 
-
 (def regex
   "Regex to find fretboard patterns from the DSL
 
@@ -33,7 +32,6 @@
   =>
   ([\"3\" \"3\"] [\"-\" nil] [\"-\" nil] [\"-\" nil])"
   (str "(" chord/regex ")|-"))
-
 
 (def FretboardPattern
   [:map
@@ -48,12 +46,10 @@
 (def FretboardPatterns
   [:map-of :keyword FretboardPattern])
 
-
 (def validate-fretboard-pattern?  (partial m/validate FretboardPattern))
 (def validate-fretboard-patterns? (partial m/validate FretboardPatterns))
 (def explain-fretboard-pattern    (partial m/explain  FretboardPattern))
 (def explain-fretboard-patterns   (partial m/explain  FretboardPatterns))
-
 
 (comment
 
@@ -95,5 +91,4 @@
 
   (->> "5   -   -   -"
        (re-seq (re-pattern regex))
-       (mapv second))
-  )
+       (mapv second)))

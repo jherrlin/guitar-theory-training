@@ -1,14 +1,12 @@
 (ns v2.se.jherrlin.music-theory.utils
   (:require
-   [clojure.string :as str]
-   [clojure.set :as set]
    #?(:cljs [goog.string.format])
-   #?(:cljs [goog.string :as gstring])))
-
+   #?(:cljs [goog.string :as gstring])
+   [clojure.set :as set]
+   [clojure.string :as str]))
 
 (comment
-  (def all-tones [#{:c} #{:db :c#} #{:d} #{:d# :eb} #{:e} #{:f} #{:gb :f#} #{:g} #{:g# :ab} #{:a} #{:bb :a#} #{:b}])
-  )
+  (def all-tones [#{:c} #{:db :c#} #{:d} #{:d# :eb} #{:e} #{:f} #{:gb :f#} #{:g} #{:g# :ab} #{:a} #{:bb :a#} #{:b}]))
 
 (def all-tones [#{:c} #{:db :c#} #{:d} #{:d# :eb} #{:e} #{:f} #{:gb :f#} #{:g} #{:g# :ab} #{:a} #{:bb :a#} #{:b}])
 
@@ -67,8 +65,7 @@
 
 (comment
   ((juxt-indexes [0 3 7]) all-tones)
-  (tones-on-indexes [0 3 7] all-tones)
-  )
+  (tones-on-indexes [0 3 7] all-tones))
 
 (defn juxt-indexes-and-intervals [indexes intervals]
   (apply juxt
@@ -86,8 +83,7 @@
 
 (comment
   ((juxt-indexes-and-intervals [0 3 7] ["1" "b3" "5"]) all-tones)
-  (tones-on-indexes-with-intervals [0 3 7] ["1" "b3" "5"] all-tones)
-  )
+  (tones-on-indexes-with-intervals [0 3 7] ["1" "b3" "5"] all-tones))
 
 (defn intevals-string->intervals-matrix [interval]
   (->> interval
@@ -101,20 +97,17 @@
 
 (comment
   (intevals-string->intervals-matrix
-  "3   -
+   "3   -
    -   1
    5   -
    -   -
    -   -
-   -   -")
-  )
+   -   -"))
 
 (comment
   (->> "1 b3 b5 bb7"
        (re-seq #"b{0,2}#{0,2}\d{1,2}")
-       (vec))
-  )
-
+       (vec)))
 
 (defn define-chord
   ([intervals-map chord-id intervals-str]
@@ -217,8 +210,7 @@
   (define-scale
     v2.se.jherrlin.music-theory.intervals/intervals-map-by-function
     :major
-    "1, 2, 3, 4, 5, 6, 7")
-  )
+    "1, 2, 3, 4, 5, 6, 7"))
 
 (defn define-mode
   ([pattern-name pattern]
@@ -328,8 +320,7 @@
    rotate-until
    v2.se.jherrlin.music-theory.intervals/intervals-map-by-function
    :c
-   ["1" "b3" "5"])
-  )
+   ["1" "b3" "5"]))
 
 (defn find-pattern [all-tones intervals-map-by-function fretboard key-of interval-matrix]
   (let [interval-matrix-width (-> interval-matrix first count)
@@ -448,8 +439,7 @@
             :explanation  "major",
             :display-text "major"}}
    all-tones
-   [:c :e :g])
-  )
+   [:c :e :g]))
 
 (defn chord-name
   [chords-map all-tones chord-tones]
@@ -496,9 +486,7 @@
               :explanation  "minor",
               :display-text "minor"}}
      all-tones
-     (tones-on-indexes-with-intervals indexes intervals (rotate-until #(% tone) all-tones)))
-    )
-  )
+     (tones-on-indexes-with-intervals indexes intervals (rotate-until #(% tone) all-tones)))))
 
 (defn fretboard-str
   [matrix tone-f]
@@ -577,9 +565,7 @@
     #_fretboard-tone-str-sharps-f
     #_fretboard-tone-str-flats-f
     fretboard-tone-str-pattern-f
-    #_(partial fretboard-tone-str-chord-f [:c :e :g])
-    ))
-
+    #_(partial fretboard-tone-str-chord-f [:c :e :g])))
 
   (print
    (fretboard-str
@@ -610,7 +596,6 @@
      15)
     (partial
      fretboard-tone-str-chord-f [:c :e :g])))
-
 
 ;; Interval -> Tone
 ;;        1 -> C
@@ -644,9 +629,6 @@
     (partial
      fretboard-tone-str-chord-f [:c :e :g])))
 
-
-
-
   (find-pattern
    all-tones
    v2.se.jherrlin.music-theory.intervals/intervals-map-by-function
@@ -661,5 +643,4 @@
     ["5" nil nil]
     [nil nil "3"]
     [nil nil nil]
-    [nil nil nil]])
-  )
+    [nil nil nil]]))

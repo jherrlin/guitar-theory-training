@@ -1,14 +1,12 @@
 (ns se.jherrlin.drills.tones
   (:require
+   [clojure.string :as str]
    [se.jherrlin.music-theory.utils
     :refer [fformat]
-    :as utils]
-   [clojure.string :as str]))
-
+    :as utils]))
 
 (defn find-all-locations-of-tone [all-tones fret-table-with-tones-f]
-  (let [
-        ;; all-tones               se.jherrlin.music-theory/tones
+  (let [;; all-tones               se.jherrlin.music-theory/tones
         ;; fret-table-with-tones-f se.jherrlin.music-theory/fret-table-with-tones-p
         ]
     (->> all-tones
@@ -18,7 +16,7 @@
                 (let [tone-str    (-> tone name str/upper-case)
                       nr-of-frets 13]
                   (str
-                   "** " (fformat "%-60s:music:theory:tonelocation:drill:" (str "Tone " tone-str " locations on the fretboard" ))
+                   "** " (fformat "%-60s:music:theory:tonelocation:drill:" (str "Tone " tone-str " locations on the fretboard"))
                    "\n\n"
                    "   " "Find all locations on the fretboard where tone " tone-str " is located."
                    "\n\n"

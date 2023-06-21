@@ -1,6 +1,5 @@
 (ns v4.se.jherrlin.music-theory.intervals)
 
-
 (def perfect-unison     0)
 (def root               0)
 (def minor-second       1)
@@ -137,5 +136,4 @@
        (mapv #(get-in intervals-map-by-function [% :semitones]))))
 
 (comment
-  intervals-map-by-function
-  )
+  intervals-map-by-function)

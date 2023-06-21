@@ -18,11 +18,7 @@
     {:x 1, :tone #{:c}, :y 4}
     {:x 2, :tone #{:db :c#}, :y 4}]]"
   (:require
-   [malli.destructure :as md]
-   [malli.provider :as mp]
    [malli.core :as m]))
-
-
 
 (def FretboardMatrix
   [:vector
@@ -32,10 +28,8 @@
      [:y int?]
      [:tone [:set keyword?]]]]])
 
-
 (def validate-fretboard-matrix?  (partial m/validate FretboardMatrix))
 (def explain-fretboard-matrix    (partial m/explain  FretboardMatrix))
-
 
 (comment
 
@@ -54,6 +48,4 @@
      {:x 2, :tone #{:b}, :y 3}]
     [{:x 0, :tone #{:b}, :y 4}
      {:x 1, :tone #{:c}, :y 4}
-     {:x 2, :tone #{:db :c#}, :y 4}]])
-
-  )
+     {:x 2, :tone #{:db :c#}, :y 4}]]))

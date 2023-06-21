@@ -1,10 +1,7 @@
 (ns se.jherrlin.utils
   (:require
    #?(:cljs [goog.string.format])
-   #?(:cljs [goog.string :as gstring])
-   [clojure.string :as str]))
-
-
+   #?(:cljs [goog.string :as gstring])))
 
 (defn list-insert [elem index lst]
   (let [[l r] (split-at index lst)]
@@ -14,8 +11,6 @@
  0
  3
  [1 2 3 4])
-
-
 
 #?(:cljs
    (defn fformat
@@ -27,8 +22,6 @@
 
 (fformat "%5d" 3)
 (fformat "Hello there, %s" "bob")
-
-
 
 (defn rotate-until
   "Rotate collection `xs` util `pred`."
@@ -44,8 +37,6 @@
  #(% :f#)
  [#{:c} #{:db :c#} #{:d} #{:d# :eb} #{:e} #{:f} #{:gb :f#} #{:g} #{:g# :ab} #{:a} #{:bb :a#} #{:b}])
 
-
-
 (defn take-indexes
   "Take indexes from a collection"
   [coll indexes]
@@ -57,8 +48,6 @@
 (take-indexes
  [#{:c} #{:db :c#} #{:d} #{:d# :eb} #{:e} #{:f}]
  [0 3 5])
-
-
 
 (defn rotate-matrix
   "Rotate matrix.
@@ -78,8 +67,6 @@
   [nil nil nil]
   [nil nil nil]
   [nil nil nil]])
-
-
 
 (defn trim-matrix
   "Trim a matrix left and right by `pred`"
@@ -125,8 +112,6 @@
   [nil nil nil "1"]
   [nil nil nil "5"]
   [nil "1" nil nil]])
-
-
 
 (defn map-matrix
   "Flatten matrix into one dim list and run `f` on each item. The convert it back

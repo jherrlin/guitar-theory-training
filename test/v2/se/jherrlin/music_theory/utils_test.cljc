@@ -1,8 +1,8 @@
 (ns v2.se.jherrlin.music-theory.utils-test
-  (:require [v2.se.jherrlin.music-theory.utils :as sut]
-            #?(:clj [clojure.test :as t]
-               :cljs [cljs.test :as t :include-macros true])))
-
+  (:require
+   #?(:clj [clojure.test :as t]
+               :cljs [cljs.test :as t :include-macros true])
+   [v2.se.jherrlin.music-theory.utils :as sut]))
 
 (t/deftest list-insert
   (t/is

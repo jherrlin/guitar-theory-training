@@ -1,9 +1,9 @@
 (ns se.jherrlin.music-theory.utils
   (:require
-   [clojure.string :as str]
-   [clojure.set :as set]
    #?(:cljs [goog.string.format])
-   #?(:cljs [goog.string :as gstring])))
+   #?(:cljs [goog.string :as gstring])
+   [clojure.set :as set]
+   [clojure.string :as str]))
 
 #?(:cljs
    (defn fformat

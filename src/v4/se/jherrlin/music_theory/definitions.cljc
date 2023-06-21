@@ -2,7 +2,6 @@
   (:require
    [v4.se.jherrlin.music-theory.utils :as utils]))
 
-
 (def all-tones (utils/all-tones))
 
 ;; Tunings seems to always be defined with the upper (lowest) string first
@@ -13,7 +12,6 @@
 (def banjo-standard          [:a :d :g :c])
 (def banjo-irish             [:e :a :d :g])
 (def banjo-chicago           [:e :b :g :d])
-
 
 (def instrument-with-tuning
   {:guitar         {:tuning standard-guitar-tuning
@@ -31,12 +29,10 @@
    :banjo-chicago  {:tuning banjo-chicago
                     :text   "Chicago tuning"}})
 
-
 (defn tuning
   "Get tuning and text from key `k`"
   [k]
   (get instrument-with-tuning k))
-
 
 ;; ---------------
 ;; State / data
@@ -61,7 +57,6 @@
 ;; ---------------
 ;; State / data end
 ;; ---------------
-
 
 ;; ---------------
 ;; Define helpers
@@ -121,7 +116,6 @@
 ;; ---------------
 ;; Define helpers end.
 ;; ---------------
-
 
 ;; ---------------
 ;; Chords
@@ -306,9 +300,6 @@
 ;; Chords end
 ;; ---------------
 
-
-
-
 ;; ---------------
 ;; Scales
 ;; ---------------
@@ -392,8 +383,6 @@
 ;; ---------------
 ;; Scales end
 ;; ---------------
-
-
 
 ;; --------------------
 ;; Chord patterns
@@ -927,9 +916,6 @@
 ;; Chord patterns end
 ;; --------------------
 
-
-
-
 ;; ---------------
 ;; Triad patterns
 ;; ---------------
@@ -1201,9 +1187,6 @@
 ;; Triad patterns end
 ;; ---------------
 
-
-
-
 ;; --------------------
 ;; Modes
 ;; --------------------
@@ -1433,7 +1416,6 @@
    4   -   5  b6
    1  b2   -  b3")
 
-
 (define-mode-pattern :phrygian-6
   {:scale  :phrygian
    :tuning standard-guitar-tuning}
@@ -1587,10 +1569,6 @@
 ;; Modes end
 ;; --------------------
 
-
-
-
-
 ;; ---------------
 ;; Scales patterns
 ;; ---------------
@@ -1637,7 +1615,6 @@
    -   -   -   -
    -   -   -   -
    -   -   -   -")
-
 
 (define-scale-pattern :major-1
   {:scale  :major

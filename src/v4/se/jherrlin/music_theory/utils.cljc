@@ -6,16 +6,13 @@
   (:require
    [clojure.set :as set]
    [clojure.string :as str]
-   [se.jherrlin.utils :as utils]
-   [malli.destructure :as md]
-   [malli.provider :as mp]
    [malli.core :as m]
+   [se.jherrlin.utils :as utils]
    [v4.se.jherrlin.music-theory.intervals :as intervals]
    [v4.se.jherrlin.music-theory.models.chord :as models.chord]
-   [v4.se.jherrlin.music-theory.models.scale :as models.scale]
    [v4.se.jherrlin.music-theory.models.fretboard-pattern :as models.fretboard-pattern]
+   [v4.se.jherrlin.music-theory.models.scale :as models.scale]
    [v4.se.jherrlin.music-theory.models.tone :as models.tone]))
-
 
 ;; Terms
 ;; fretboard-matrix
@@ -31,8 +28,6 @@
   [#{:c} #{:db :c#} #{:d} #{:d# :eb} #{:e} #{:f} #{:gb :f#} #{:g} #{:g# :ab} #{:a} #{:bb :a#} #{:b}])
 
 (all-tones)
-
-
 
 (defn tones-starting-at
   "`x` - can be both a index tone and a interval tone.
@@ -79,8 +74,6 @@
  :e
  12)
 
-
-
 (defn fretboard-strings
   "Generate freatboard matrix.
 
@@ -103,8 +96,6 @@
  [:e :b :g :d :a :e]
  2)
 
-
-
 (defn gen-fretboard-matrix
   "Generate a matrix that represents the fretboard.
 
@@ -126,8 +117,6 @@
  (all-tones)
  [:e :b :g :a :b]
  3)
-
-
 
 (defn sharp-or-flat
   "Select tone from interval.
@@ -152,7 +141,6 @@
  #{:db :c#}
  "b3")
 
-
 (defn tones-data-from-indexes-and-intervals [all-tones indexes intervals]
   (mapv
    (fn [index interval]
@@ -169,8 +157,7 @@
 (tones-data-from-indexes-and-intervals
  (all-tones)
  [0 3 7]
- ["1" "b3" "5"]
- )
+ ["1" "b3" "5"])
 
 (defn tones-on-indexes-with-intervals [indexes intervals tones]
   (mapv
@@ -184,8 +171,6 @@
  ["1" "b3" "5"]
  (all-tones))
 
-
-
 (defn tones-by-indexes
   "Tones by indexes"
   [all-tones indexes]
@@ -197,7 +182,6 @@
 (tones-by-indexes
  (all-tones)
  [0 4 7])
-
 
 (defn tones-by-key-and-indexes
   "Index tones by `key-of` and `indexes`
@@ -226,9 +210,6 @@
  #{:c}
  [0 4 7])
 
-
-
-
 (defn tones-by-intervals
   "Get tones from intervals
 
@@ -245,14 +226,12 @@
                 (let [interval-index (get-in intervals/intervals-map-by-function [interval-function :semitones])]
                   (sharp-or-flat (nth all-tones interval-index) interval-function)))))))
 
-
 (tones-by-intervals
  (all-tones)
  ["1" "3" "5"])
 
 (tones-by-intervals
  ["1" "3" "5"])
-
 
 (defn tones-by-key-and-intervals
   "
@@ -277,8 +256,6 @@
  #_["1" "b3" "5"]
  ["1" "3" "5"])
 
-
-
 (defn intervals-to-indexes
   "Indexes from intervals
 
@@ -293,8 +270,6 @@
                (get-in intervals/intervals-map-by-function [interval :semitones])))))
 
 (intervals-to-indexes ["1" "b3" "5"])
-
-
 
 (defn tones-data-from-key-of-and-intervals
   "
@@ -317,11 +292,7 @@
  (all-tones)
  :c
  ["1" "b3" "5"]
- #_["1" "3" "5"]
- )
-
-
-
+ #_["1" "3" "5"])
 
 (defn intevals-string->intervals-matrix
   [interval]
@@ -342,14 +313,10 @@
    -   -   -
    -   -   -")
 
-
-
-
 (defn find-fretboard-pattern
   "Find patterns on the "
   [all-tones key-of interval-matrix fretboard-matrix]
-  (let [
-        ;; interval-matrix       (trim-matrix interval-matrix)
+  (let [;; interval-matrix       (trim-matrix interval-matrix)
         interval-matrix-width (-> interval-matrix first count)
         fretboard-count       (-> fretboard-matrix first count)]
     (loop [counter           0
@@ -427,8 +394,6 @@
   [:e :b :g :d :a :e]
   4))
 
-
-
 (defn match-chord-with-scales
   "Find what scales that works with a chord, by the chord indexes.
 
@@ -449,9 +414,6 @@
           :title     "ionian",
           :order     4}}
  [0 4 7])
-
-
-
 
 (defn find-chords [chords-map all-tones chord-tones]
   (let [[root-tone & _] chord-tones
@@ -492,9 +454,7 @@
  (all-tones)
  [#{:c} #{:e} #{:g}]
  #_[#{:c} #{:d# :eb} #{:g}]
- #_[:c :e :g]
- )
-
+ #_[:c :e :g])
 
 (defn find-chord [chords-map all-tones chord-tones]
   (->> (find-chords chords-map all-tones chord-tones)
@@ -513,13 +473,11 @@
  (all-tones)
  [#{:c} #{:e} #{:g}])
 
-
 (defn chord-name
   [chords-map chord-tones]
   (let [root-tone             (first chord-tones)
         {:chord/keys [sufix]} (find-chord chords-map (all-tones) chord-tones)]
     (str (-> root-tone name str/lower-case str/capitalize) sufix)))
-
 
 (chord-name
  {:major
@@ -541,9 +499,7 @@
           :explanation  "minor",
           :display-text "minor"}}
  #_[:c :e :g]
- [:c :eb :g]
- )
-
+ [:c :eb :g])
 
 (defn merge-matrix [width f xs]
   (->> xs
@@ -552,7 +508,6 @@
        (apply map merge)
        (partition-all width)
        (mapv #(mapv identity %))))
-
 
 (defn scales-to-chord [scales chord-indexes]
   (->> scales
@@ -564,11 +519,7 @@
 (comment
   (scales-to-chord
    @v4.se.jherrlin.music-theory.definitions/scales
-   [0 4 7])
-  )
-
-
-
+   [0 4 7]))
 
 (defn chords-to-scale [chords scale-indexes]
   (->> chords
@@ -580,9 +531,7 @@
 (comment
   (chords-to-scale
    @v4.se.jherrlin.music-theory.definitions/chords
-   [0 2 4 5 7 9 11])
-  )
-
+   [0 2 4 5 7 9 11]))
 
 (defn index-tones
   "Index tones from indexes and key-of"
@@ -595,11 +544,7 @@
    (let [tones (tones-starting-at all-tones key-of)]
      (tones-by-indexes tones indexes))))
 
-
 (index-tones [0 1 2] :c)
-
-
-
 
 (defn interval-tones
   "Interval tones from intervals and key-of"
@@ -614,8 +559,6 @@
     intervals)))
 
 (interval-tones ["1" "b3" "5"] :c)
-
-
 
 (defn add-layer [f fretboard-matrix]
   (utils/map-matrix
@@ -661,7 +604,6 @@
   (when (and pattern-match? interval)
     interval))
 
-
 (->> (find-fretboard-pattern
       (all-tones)
       :e
@@ -688,7 +630,6 @@
       #_(partial add-chord-tones [:e :b :g])
       (partial add-intervals [[:e "1"] [:b "b3"] [:g "5"]])))
 
-
 (defn fretboard-str
   [tone-f matrix]
   (let [add-table-stuff
@@ -706,7 +647,6 @@
          (utils/list-insert (add-table-stuff (->> matrix first (map (comp str :x)))) 0)
          (utils/list-insert (str "|" (apply str (take (- row-length 2) (repeat "-"))) "|") 1)
          (str/join "\n"))))
-
 
 (->> (fretboard-strings
       (all-tones)
@@ -735,12 +675,10 @@
       #_add-flats
       #_add-sharps
       #_add-pattern
-      (partial add-intervals [[:e "1"] [:b "b3"] [:g "5"]])
-      )
+      (partial add-intervals [[:e "1"] [:b "b3"] [:g "5"]]))
      ;; (trim-matrix #(every? nil? (map :out %))) ;; Trim fretboard
      (fretboard-str (fn [{:keys [out]}] (if (nil? out) "" out)))
      (println))
-
 
 (->> (find-fretboard-pattern
       (all-tones)
@@ -762,8 +700,6 @@
      ;; (trim-matrix #(every? nil? (map :out %))) ;; Trim fretboard
      (fretboard-str (fn [{:keys [out]}] (if (nil? out) "" out)))
      (println))
-
-
 
 ;; Public functions
 
@@ -792,8 +728,6 @@
      (fretboard-str (fn [{:keys [out]}] (if (nil? out) "" out)))
      (println))
 
-
-
 (defn pattern-with-tones
   [key-of pattern fretboard-matrix]
   (->> (find-fretboard-pattern
@@ -803,24 +737,22 @@
         fretboard-matrix)
        (add-layer add-pattern)))
 
-(->> (pattern-with-tones
+(->> (fretboard-strings
+      (all-tones)
+      [:e :b :g :d :a :e]
+      10)
+     (pattern-with-tones
       :c
       [["5" nil nil]
        [nil nil "3"]
        [nil nil "1"]
        [nil nil "5"]
        ["1" nil nil]
-       ["5" nil nil]]
-      (fretboard-strings
-       (all-tones)
-       [:e :b :g :d :a :e]
-       10))
+       ["5" nil nil]])
      (utils/trim-matrix #(every? nil? (map :out %)))
-     (fretboard-str (fn [{:keys [out]}] (if (nil? out) "" out)))
-     (println))
-
-
-
+     ;; (fretboard-str (fn [{:keys [out]}] (if (nil? out) "" out)))
+     ;; (println)
+     )
 (defn with-all-tones
   "
   `tones` - `[:e :b :g]`"
@@ -828,19 +760,15 @@
   (->> fretboard-matrix
        (add-layer (partial add-chord-tones tones))))
 
-(->> (with-all-tones
-       [:e :b :g]
-       (fretboard-strings
-        (all-tones)
-        [:e :b :g :d :a :e]
-        10))
-     (utils/trim-matrix #(every? nil? (map :out %)))
+(->> (fretboard-strings
+      (all-tones)
+      [:e :b :g :d :a :e]
+      10)
+     (with-all-tones [:e :b :g])
+     #_(utils/trim-matrix #(every? nil? (map :out %)))
      ;; (fretboard-str (fn [{:keys [out]}] (if (nil? out) "" out)))
      ;; (println)
      )
-
-
-
 (defn with-all-intervals
   "
   chord-tones-and-intervals: `[[:c \"1\"] [:d \"2\"] [:e \"3\"] [:f \"4\"] [:g \"5\"] [:a \"6\"] [:b \"7\"]]`"
@@ -858,12 +786,10 @@
      (fretboard-str (fn [{:keys [out]}] (if (nil? out) "" out)))
      (println))
 
-
 (defn with-all-sharps
   [fretboard-matrix]
   (->> fretboard-matrix
        (add-layer add-sharps)))
-
 
 (->> (with-all-sharps
        (fretboard-strings
@@ -873,12 +799,10 @@
      (fretboard-str (fn [{:keys [out]}] (if (nil? out) "" out)))
      (println))
 
-
 (defn with-all-flats
   [fretboard-matrix]
   (->> fretboard-matrix
        (add-layer add-flats)))
-
 
 (->> (with-all-flats
        (fretboard-strings
@@ -887,8 +811,6 @@
         12))
      (fretboard-str (fn [{:keys [out]}] (if (nil? out) "" out)))
      (println))
-
-
 
 ;; Harmonization
 
@@ -946,15 +868,13 @@
             ["T" "S" "T" "S" "D" "T" "D"]
             ["T" "S" "T" "S" "D" "S" "D"])))))
 
-
 (comment
   (gen-harmonization
    @v4.se.jherrlin.music-theory.definitions/scales
    @v4.se.jherrlin.music-theory.definitions/chords
    :c
    :natural-minor #_:minor
-   triad #_seventh)
-  )
+   triad #_seventh))
 
 {:minor
  #:scale{:id        :minor,
@@ -968,7 +888,6 @@
          :indexes   [0    2   4   5   7   9  11],
          :title     "major",
          :order     1}}
-
 
 (defn harmonization-str [xs]
   (str
@@ -984,7 +903,6 @@
    "\n"
    (->> xs (map (comp #(utils/fformat "  %-10s" %) str :chord-name)) (str/join) (str/trim))))
 
-
 (comment
   (->> (gen-harmonization
         @v4.se.jherrlin.music-theory.definitions/scales
@@ -993,14 +911,9 @@
         :major
         triad)
        (harmonization-str)
-       (println))
-  )
-
+       (println)))
 
 ;; REPL stuff below line
-
-
-
 
 (let [tones     [:d :f# :a]
       tones-set (set tones)]
@@ -1013,18 +926,6 @@
 
 (set/intersection #{:d :f# :a} #{:gb :f#})
 (set/intersection #{:d :f# :a} #{:gb})
-
-
-
-
-
-
-
-
-
-
-
-
 
 ;; Find the chord, cartesian product of all chords and key-of
 ;; (->> (for [{:chord/keys [intervals] :as chord} (vals @v2.se.jherrlin.music-theory.definitions/chords-atom)
@@ -1040,9 +941,6 @@
 ;;      ;; (map (fn [[a b]] [a (count b)]))
 ;;      ;; (sort-by  second #(compare %2 %1))
 ;;      )
-
-
-
 
 (defn define-chord
   ([chord-id intervals-str]
@@ -1084,8 +982,6 @@
    :display-text "major"}
   "1 3 5")
 
-
-
 (defn define-scale
   ([scale-id intervals-str]
    (define-scale scale-id {} intervals-str))
@@ -1110,8 +1006,6 @@
 
 (define-scale :major
   "1, 2, 3, 4, 5, 6, 7")
-
-
 
 (defn define-pattern
   ([pattern-id pattern]
@@ -1164,13 +1058,11 @@
    -   -
    -   -")
 
-
-
 (defn chords-map [chords]
   (->> (for [root                                              (->> (all-tones)
                                                                     (apply concat))
              {:chord/keys [sufix intervals indexes] :as chord} (->> #_@v4.se.jherrlin.music-theory.definitions/chords
-                                                                    chords
+                                                                chords
                                                                     vals)]
          (assoc chord
                 :root root
@@ -1180,38 +1072,26 @@
        (map (juxt :name identity))
        (into {})))
 
-
 (comment
   (chords-map
-   @v4.se.jherrlin.music-theory.definitions/chords)
-  )
-
-
-
+   @v4.se.jherrlin.music-theory.definitions/chords))
 
 (defn chord-by-name [chords chord-name]
   (get (chords-map chords) chord-name))
 
-
 (comment
-  (chord-by-name @v4.se.jherrlin.music-theory.definitions/chords "dm7")
-  )
-
-
+  (chord-by-name @v4.se.jherrlin.music-theory.definitions/chords "dm7"))
 
 (defn chords-by-names [chords chord-names]
   (map (partial chord-by-name chords) chord-names))
 
 (comment
-  (chords-by-names @v4.se.jherrlin.music-theory.definitions/chords ["dm7" "g7" "cmaj7"])
-  )
-
+  (chords-by-names @v4.se.jherrlin.music-theory.definitions/chords ["dm7" "g7" "cmaj7"]))
 
 (defn read-incomming-chord-names [s]
   (->> (str/split s #"[ |,-]")
        (remove str/blank?)
        (map str/lower-case)))
-
 
 (defn scale-match-score
   "How well does a chord"
@@ -1223,8 +1103,6 @@
 
 (scale-match-score #{:a :b :c} #{:a :b})
 
-
-
 (defn filter-map-by-namespace-key
   [namespace-kw m]
   {:pre [(keyword? namespace-kw)
@@ -1233,14 +1111,11 @@
        (filter (comp #{namespace-kw} keyword namespace first))
        (into {})))
 
-
 (->> {:match-score/first-chord-root 1,
       :chord/types                  #{:triad :minor},
       :root                         :a,
       :match-score/scale            3}
      (filter-map-by-namespace-key :match-score))
-
-
 
 (defn possible-scales [chords]
   (let [major-indexes [0 2 4 5 7 9 11]
@@ -1285,8 +1160,6 @@
          (sort-by :match-score/tone-intersection #(compare %2 %1))
          (take 10))))
 
-
-
 (defn total-match-score [ms]
   (->> ms
        (map (fn [{:keys [chords] :as m}]
@@ -1300,8 +1173,6 @@
                                            match-score-by-intervals
                                            match-score-scale
                                            match-score-first-chord-root)))))))
-
-
 
 (defn possible-chord [harmonization incomming-chord-types incomming-chord-intervals interval-tones]
   (dissoc
@@ -1340,7 +1211,6 @@
         (first))
    :chord-match-score))
 
-
 (defn posibble-chord-in-harmonization
   "Match chords with chords in harmonization"
   [scales chords' ms]
@@ -1369,8 +1239,6 @@
        (total-match-score)
        (sort-by :total-match-score #(compare %2 %1))))
 
-
-
 (comment
 
   (->> (read-incomming-chord-names "Am C Am G F")
@@ -1380,46 +1248,31 @@
         @v4.se.jherrlin.music-theory.definitions/scales
         @v4.se.jherrlin.music-theory.definitions/chords))
 
-
   (->> (read-incomming-chord-names "Dm7 G7 Cmaj7")
        (chords-by-names @v4.se.jherrlin.music-theory.definitions/chords)
        (possible-scales)
        (posibble-chord-in-harmonization
-          @v4.se.jherrlin.music-theory.definitions/scales
-          @v4.se.jherrlin.music-theory.definitions/chords
-          )
-       )
-
+        @v4.se.jherrlin.music-theory.definitions/scales
+        @v4.se.jherrlin.music-theory.definitions/chords))
 
   (->> (read-incomming-chord-names "E7, A7, B7")
        (map (partial chord-by-name @v4.se.jherrlin.music-theory.definitions/chords))
        (possible-scales)
        (posibble-chord-in-harmonization
         @v4.se.jherrlin.music-theory.definitions/scales
-        @v4.se.jherrlin.music-theory.definitions/chords
-        ))
+        @v4.se.jherrlin.music-theory.definitions/chords))
 
   (->> (read-incomming-chord-names "Fmaj7 C E Dm Am E")
        (map (partial chord-by-name @v4.se.jherrlin.music-theory.definitions/chords))
        (possible-scales)
        (posibble-chord-in-harmonization
         @v4.se.jherrlin.music-theory.definitions/scales
-        @v4.se.jherrlin.music-theory.definitions/chords))
-
-
-  )
-
-
-
-
-
+        @v4.se.jherrlin.music-theory.definitions/chords)))
 
 ;; major
 
-
 ;; minor
 [0 2 3 5 7 8 10]
-
 
 ;; 1. Find chord tones and data
 ;; 2. Find scale with most tones in common with the chords

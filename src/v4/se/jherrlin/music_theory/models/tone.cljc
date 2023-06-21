@@ -2,7 +2,6 @@
   (:require
    [malli.core :as m]))
 
-
 (def IndexTone
   "Index tone is a tone without the notion of an interval.
   It's always a set that contains one or two interval tones.
@@ -36,8 +35,6 @@
 (valid-index-tone?  #{:d# :eb})
 (valid-index-tones? [#{:d# :eb}])
 
-
-
 (def IntervalTone
   "Interval tone is a tone within the context of an interval.
   As an index tone can have two tones, the interval helps distinguish them.
@@ -45,7 +42,6 @@
   Example: `:eb`"
   [:enum
    :a :a# :ab :b :bb :c :c# :d :d# :db :e :eb :f :f# :g :g# :gb])
-
 
 (m/validate IntervalTone :c)  ;; => true
 (m/validate IntervalTone :k)  ;; => false
@@ -70,7 +66,6 @@
 (valid-interval-tone?  :c)
 (valid-interval-tones? [:c])
 
-
 (def ToneData
   [:map
    [:index-tone    IndexTone]
@@ -87,23 +82,19 @@
 (def valid-tone-data?  (partial m/validate ToneData))
 (def valid-tones-data? (partial m/validate TonesData))
 
-
 (m/validate
  TonesData
  [{:semitones 0,
-    :name/en "Root",
-    :index-tone #{:c},
-    :interval-tone :c,
-    :interval "1"}])
-
+   :name/en "Root",
+   :index-tone #{:c},
+   :interval-tone :c,
+   :interval "1"}])
 
 (def Indexes
   "[0 3 7]"
   [:vector int?])
 
 (m/validate Indexes [0 3 7])
-
-
 
 (def Intervals
   "[\"1\" \"3\" \"5\"]"

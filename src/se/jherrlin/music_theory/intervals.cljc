@@ -88,5 +88,4 @@
        (into {})))
 
 (comment
-  intervals-map-by-function
-  )
+  intervals-map-by-function)

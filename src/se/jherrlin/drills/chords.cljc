@@ -1,16 +1,12 @@
 (ns se.jherrlin.drills.chords
   (:require
+   [clojure.string :as str]
    [se.jherrlin.music-theory.utils
-    :refer [fformat find-chord find-chord-name  find-root
-            fret-table-with-tones match-chord-with-scales]
-    :as utils]
-   [clojure.string :as str])
-  )
-
+    :refer [fformat]
+    :as utils]))
 
 (defn tones-in-chords [find-root-f all-tones chords-map]
-  (let [
-        ;; find-root-f        se.jherrlin.music-theory/find-root-p
+  (let [;; find-root-f        se.jherrlin.music-theory/find-root-p
         ;; all-tones          se.jherrlin.music-theory/tones
         ;; chords-map         @se.jherrlin.music-theory/chords-atom
         ]
@@ -53,13 +49,10 @@
           ;; se.jherrlin.music-theory/fret-table-with-tones-p
           se.jherrlin.music-theory/find-root-p
           se.jherrlin.music-theory/tones
-          @se.jherrlin.music-theory/chords-atom)))))
-   )
-
+          @se.jherrlin.music-theory/chords-atom))))))
 
 (defn name-the-chord [find-root-f all-tones chords-map]
-  (let [
-        ;; find-root-f        se.jherrlin.music-theory/find-root-p
+  (let [;; find-root-f        se.jherrlin.music-theory/find-root-p
         ;; all-tones          se.jherrlin.music-theory/tones
         ;; chords-map         @se.jherrlin.music-theory/chords-atom
         ]
@@ -90,13 +83,10 @@
           ;; se.jherrlin.music-theory/fret-table-with-tones-p
           se.jherrlin.music-theory/find-root-p
           se.jherrlin.music-theory/tones
-          @se.jherrlin.music-theory/chords-atom))))
-     ))
-
+          @se.jherrlin.music-theory/chords-atom))))))
 
 (defn intervals-in-chord [find-root-f all-tones chords-map]
-  (let [
-        ;; find-root-f        se.jherrlin.music-theory/find-root-p
+  (let [;; find-root-f        se.jherrlin.music-theory/find-root-p
         ;; all-tones          se.jherrlin.music-theory/tones
         ;; chords-map         @se.jherrlin.music-theory/chords-atom
         ]
