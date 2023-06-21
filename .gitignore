@@ -4,3 +4,4 @@ node_modules/
 .shadow-cljs/
 resources/public/js/
 .clj-kondo/
+.lsp/
