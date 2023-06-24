@@ -113,7 +113,7 @@
            (when-not (= x max-x)
              [:div {:style {:background-image (if (= x 0)
                                                 "linear-gradient(to right, black , black)"
-                                                "linear-gradient(to right, #ad9336 , #706e68)")
+                                                "linear-gradient(to right, #FFFFFF , #706e68)")
                             :width            "6px"
                             :height           "3em"}}])])])]))
 
