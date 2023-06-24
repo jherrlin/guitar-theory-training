@@ -57,17 +57,19 @@
   `all-tones`        - A collection of all the tones
   `tuning`           - Tuning on string
   `number-of-frets`  - Width of the freatboard"
-  [all-tones string-tune number-of-frets]
-  {:pre [(models.tone/valid-index-tones? all-tones)
-         (models.tone/valid-interval-tone? string-tune)]}
-  (->> (mapv
-        (fn [x t]
-          {:x    x
-           :tone t})
-        (iterate inc 0)
-        (->> (tones-starting-at all-tones string-tune)
-             (cycle)
-             (take number-of-frets)))))
+  ([string-tune number-of-frets]
+   (fretboard-string (all-tones) string-tune number-of-frets))
+  ([all-tones string-tune number-of-frets]
+   {:pre [(models.tone/valid-index-tones? all-tones)
+          (models.tone/valid-interval-tone? string-tune)]}
+   (->> (mapv
+         (fn [x t]
+           {:x    x
+            :tone t})
+         (iterate inc 0)
+         (->> (tones-starting-at all-tones string-tune)
+              (cycle)
+              (take number-of-frets))))))
 
 (fretboard-string
  (all-tones)
@@ -80,16 +82,18 @@
   `all-tones`        - A collection of all the tones
   `tunings`          - Tuning on strings
   `number-of-frets`  - Width of the freatboard"
-  [all-tones string-tunes number-of-frets]
-  {:pre [(models.tone/valid-index-tones? all-tones)
-         (models.tone/valid-interval-tones? string-tunes)]}
-  (->> string-tunes
-       (mapv
-        (fn [y string-tune]
-          (mapv
-           #(assoc % :y y)
-           (fretboard-string all-tones string-tune number-of-frets)))
-        (iterate inc 0))))
+  ([string-tunes number-of-frets]
+   (fretboard-strings (all-tones) string-tunes number-of-frets))
+  ([all-tones string-tunes number-of-frets]
+   {:pre [(models.tone/valid-index-tones? all-tones)
+          (models.tone/valid-interval-tones? string-tunes)]}
+   (->> string-tunes
+        (mapv
+         (fn [y string-tune]
+           (mapv
+            #(assoc % :y y)
+            (fretboard-string all-tones string-tune number-of-frets)))
+         (iterate inc 0)))))
 
 (fretboard-strings
  (all-tones)
@@ -102,16 +106,18 @@
   `all-tones`        - A collection of all the tones
   `tunings`          - Tunings on each string
   `number-of-frets`  - Width of the freatboard"
-  [all-tones string-tunings number-of-frets]
-  {:pre [(models.tone/valid-index-tones? all-tones)
-         (models.tone/valid-interval-tones? string-tunings)]}
-  (->> string-tunings
-       (mapv
-        (fn [y string-tune]
-          (mapv
-           #(assoc % :y y)
-           (fretboard-string all-tones string-tune number-of-frets)))
-        (iterate inc 0))))
+  ([string-tunings number-of-frets]
+   (gen-fretboard-matrix (all-tones) string-tunings number-of-frets))
+  ([all-tones string-tunings number-of-frets]
+   {:pre [(models.tone/valid-index-tones? all-tones)
+          (models.tone/valid-interval-tones? string-tunings)]}
+   (->> string-tunings
+        (mapv
+         (fn [y string-tune]
+           (mapv
+            #(assoc % :y y)
+            (fretboard-string all-tones string-tune number-of-frets)))
+         (iterate inc 0)))))
 
 (gen-fretboard-matrix
  (all-tones)
@@ -173,11 +179,13 @@
 
 (defn tones-by-indexes
   "Tones by indexes"
-  [all-tones indexes]
-  {:pre  [(models.tone/valid-index-tones? all-tones)
-          (m/validate models.tone/Indexes indexes)]
-   :post [(models.tone/valid-index-tones? %)]}
-  (utils/take-indexes all-tones indexes))
+  ([indexes]
+   (tones-by-indexes (all-tones) indexes))
+  ([all-tones indexes]
+   {:pre  [(models.tone/valid-index-tones? all-tones)
+           (m/validate models.tone/Indexes indexes)]
+    :post [(models.tone/valid-index-tones? %)]}
+   (utils/take-indexes all-tones indexes)))
 
 (tones-by-indexes
  (all-tones)
