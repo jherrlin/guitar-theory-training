@@ -11,6 +11,7 @@
 (def standard-bass-tuning    [:g :d :a :e])
 (def banjo-standard          [:a :d :g :c])
 (def banjo-irish             [:e :a :d :g])
+(def mandolin                [:e :a :d :g])
 (def banjo-chicago           [:e :b :g :d])
 
 (def instrument-with-tuning
@@ -27,7 +28,9 @@
    :banjo-irish    {:tuning banjo-irish
                     :text   "Irish tenor tuning"}
    :banjo-chicago  {:tuning banjo-chicago
-                    :text   "Chicago tuning"}})
+                    :text   "Chicago tuning"}
+   :mandolin       {:tuning mandolin
+                    :text   "Mandolin standard tuning"}})
 
 (defn tuning
   "Get tuning and text from key `k`"
