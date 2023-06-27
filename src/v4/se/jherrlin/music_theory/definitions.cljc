@@ -13,24 +13,30 @@
 (def banjo-irish             [:e :a :d :g])
 (def mandolin                [:e :a :d :g])
 (def banjo-chicago           [:e :b :g :d])
+(def mandola                 [:a :d :g :c])
+(def octave-mandolin         [:e :a :d :g])
 
 (def instrument-with-tuning
-  {:guitar         {:tuning standard-guitar-tuning
-                    :text   "Standard gitar tuning"}
-   :dadgad         {:tuning dadgad
-                    :text   "DADGAD"}
-   :bass           {:tuning standard-bass-tuning
-                    :text   "Standard bass tuning"}
-   :ukulele        {:tuning standard-ukulele-tuning
-                    :text   "Standard ukulele tuning"}
-   :banjo-standard {:tuning banjo-standard
-                    :text   "Standard tenor tuning"}
-   :banjo-irish    {:tuning banjo-irish
-                    :text   "Irish tenor tuning"}
-   :banjo-chicago  {:tuning banjo-chicago
-                    :text   "Chicago tuning"}
-   :mandolin       {:tuning mandolin
-                    :text   "Mandolin standard tuning"}})
+  {:guitar          {:tuning standard-guitar-tuning
+                     :text   "Standard gitar tuning"}
+   :dadgad          {:tuning dadgad
+                     :text   "DADGAD"}
+   :bass            {:tuning standard-bass-tuning
+                     :text   "Standard bass tuning"}
+   :ukulele         {:tuning standard-ukulele-tuning
+                     :text   "Standard ukulele tuning"}
+   :banjo-standard  {:tuning banjo-standard
+                     :text   "Standard tenor tuning"}
+   :banjo-irish     {:tuning banjo-irish
+                     :text   "Irish tenor tuning"}
+   :banjo-chicago   {:tuning banjo-chicago
+                     :text   "Chicago tuning"}
+   :mandolin        {:tuning mandolin
+                     :text   "Mandolin standard tuning"}
+   :mandola         {:tuning mandola
+                     :text   "Mandola standard tuning"}
+   :octave-mandolin {:tuning octave-mandolin
+                     :text   "Octave mandolin standard tuning"}})
 
 (defn tuning
   "Get tuning and text from key `k`"
