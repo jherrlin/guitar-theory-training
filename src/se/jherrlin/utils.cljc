@@ -1,11 +1,18 @@
 (ns se.jherrlin.utils
-  (:require
-   #?(:cljs [goog.string.format])
-   #?(:cljs [goog.string :as gstring])))
+  #?(:cljs (:require
+            [goog.string.format]
+            [goog.string :as gstring])))
 
-(defn list-insert [elem index lst]
+(defn list-insert
+  "Insert `element` on `index` on `lst`.
+
+ (list-insert
+  0
+  3
+  [1 2 3 4])"
+  [element index lst]
   (let [[l r] (split-at index lst)]
-    (concat l [elem] r)))
+    (concat l [element] r)))
 
 (list-insert
  0
@@ -24,7 +31,11 @@
 (fformat "Hello there, %s" "bob")
 
 (defn rotate-until
-  "Rotate collection `xs` util `pred`."
+  "Rotate collection `xs` util `pred`.
+
+  (rotate-until
+   #(% :f#)
+   [#{:c} #{:db :c#} #{:d} #{:d# :eb} #{:e} #{:f} #{:gb :f#} #{:g}])"
   [pred xs]
   {:pre [(fn? pred) (coll? xs)]}
   (let [xs-count (count xs)]
@@ -38,7 +49,11 @@
  [#{:c} #{:db :c#} #{:d} #{:d# :eb} #{:e} #{:f} #{:gb :f#} #{:g} #{:g# :ab} #{:a} #{:bb :a#} #{:b}])
 
 (defn take-indexes
-  "Take indexes from a collection"
+  "Take indexes from a collection.
+
+  (take-indexes
+   [#{:c} #{:db :c#} #{:d} #{:d# :eb} #{:e} #{:f}]
+   [0 3 5])"
   [coll indexes]
   (mapv
    (fn [index]
@@ -52,7 +67,15 @@
 (defn rotate-matrix
   "Rotate matrix.
   In:  `[[1 2 3] [3 4 5] [6 7 8]]`
-  Out: `[[1 3 6] [2 4 7] [3 5 8]]`"
+  Out: `[[1 3 6] [2 4 7] [3 5 8]]`
+
+  (rotate-matrix
+   [[\"3\" nil nil]
+    [nil \"1\" nil]
+    [\"5\" nil nil]
+    [nil nil nil]
+    [nil nil nil]
+    [nil nil nil]])"
   [matrix]
   (if-not (seq matrix)
     matrix
@@ -69,7 +92,17 @@
   [nil nil nil]])
 
 (defn trim-matrix
-  "Trim a matrix left and right by `pred`"
+  "Trim a matrix left and right by `pred`.
+
+  Will remove the columns and rows that have `nil` values.
+
+ (trim-matrix
+  [[\"3\" nil nil]
+   [nil \"1\" nil]
+   [\"5\" nil nil]
+   [nil nil nil]
+   [nil nil nil]
+   [nil nil nil]])"
   ([fretboard-matrix]
    (trim-matrix (partial every? nil?) fretboard-matrix))
   ([pred fretboard-matrix]
@@ -115,7 +148,13 @@
 
 (defn map-matrix
   "Flatten matrix into one dim list and run `f` on each item. The convert it back
-  into a matrix."
+  into a matrix.
+
+  (map-matrix
+   inc
+   [[1]
+    [2]
+    [3]])"
   [f matrix]
   (->> (apply concat matrix)
        (map f)
