@@ -7,7 +7,7 @@
    [clojure.set :as set]
    [clojure.string :as str]
    [malli.core :as m]
-   [se.jherrlin.utils :as utils]
+   [se.jherrlin.utils :as base-utils]
    [v4.se.jherrlin.music-theory.intervals :as intervals]
    [v4.se.jherrlin.music-theory.models.chord :as models.chord]
    [v4.se.jherrlin.music-theory.models.fretboard-pattern :as models.fretboard-pattern]
@@ -16,6 +16,8 @@
 
 ;; Terms
 ;; fretboard-matrix
+
+
 
 (defn all-tones
   "All tones as index.
@@ -40,7 +42,7 @@
    (tones-starting-at (all-tones) x))
   ([all-tones x]
    {:pre [(models.tone/valid-index-tones? all-tones)]}
-   (utils/rotate-until
+   (base-utils/rotate-until
     #(if (models.tone/valid-index-tone? x)
        (= % x)
        (% x))
@@ -185,11 +187,12 @@
    {:pre  [(models.tone/valid-index-tones? all-tones)
            (m/validate models.tone/Indexes indexes)]
     :post [(models.tone/valid-index-tones? %)]}
-   (utils/take-indexes all-tones indexes)))
+   (base-utils/take-indexes all-tones indexes)))
 
 (tones-by-indexes
  (all-tones)
  [0 4 7])
+
 
 (defn tones-by-key-and-indexes
   "Index tones by `key-of` and `indexes`
@@ -206,8 +209,7 @@
      (tones-by-indexes all-tones' indexes))))
 
 (tones-by-key-and-indexes
- (all-tones)
- :c
+ :d
  [0 2 4 5 7 9 11])
 
 (tones-by-key-and-indexes
@@ -259,10 +261,9 @@
     intervals)))
 
 (tones-by-key-and-intervals
- (all-tones)
  :c
  #_["1" "b3" "5"]
- ["1" "3" "5"])
+ ["1" "2" "3" "4" "5" "6" "7"])
 
 (defn intervals-to-indexes
   "Indexes from intervals
@@ -569,7 +570,7 @@
 (interval-tones ["1" "b3" "5"] :c)
 
 (defn add-layer [f fretboard-matrix]
-  (utils/map-matrix
+  (base-utils/map-matrix
    (fn [x]
      (if-let [x' (f x)]
        (assoc x :out x')
@@ -642,7 +643,7 @@
   [tone-f matrix]
   (let [add-table-stuff
         (fn [row]
-          (str "|" (apply str (interpose "|" (map #(utils/fformat " %-3s" %) row))) "|"))
+          (str "|" (apply str (interpose "|" (map #(base-utils/fformat " %-3s" %) row))) "|"))
         rows
         (->> matrix
              (map
@@ -652,8 +653,8 @@
              (map add-table-stuff))
         row-length (-> rows first count)]
     (->> rows
-         (utils/list-insert (add-table-stuff (->> matrix first (map (comp str :x)))) 0)
-         (utils/list-insert (str "|" (apply str (take (- row-length 2) (repeat "-"))) "|") 1)
+         (base-utils/list-insert (add-table-stuff (->> matrix first (map (comp str :x)))) 0)
+         (base-utils/list-insert (str "|" (apply str (take (- row-length 2) (repeat "-"))) "|") 1)
          (str/join "\n"))))
 
 (->> (fretboard-strings
@@ -732,7 +733,7 @@
        (all-tones)
        [:e :b :g :d :a :e]
        10))
-     (utils/trim-matrix #(every? nil? (map :out %)))
+     (base-utils/trim-matrix #(every? nil? (map :out %)))
      (fretboard-str (fn [{:keys [out]}] (if (nil? out) "" out)))
      (println))
 
@@ -757,7 +758,7 @@
        [nil nil "5"]
        ["1" nil nil]
        ["5" nil nil]])
-     (utils/trim-matrix #(every? nil? (map :out %)))
+     (base-utils/trim-matrix #(every? nil? (map :out %)))
      ;; (fretboard-str (fn [{:keys [out]}] (if (nil? out) "" out)))
      ;; (println)
      )
@@ -790,7 +791,7 @@
         (all-tones)
         [:e :b :g :d :a :e]
         12))
-     (utils/trim-matrix #(every? nil? (map :out %)))
+     (base-utils/trim-matrix #(every? nil? (map :out %)))
      (fretboard-str (fn [{:keys [out]}] (if (nil? out) "" out)))
      (println))
 
@@ -882,7 +883,8 @@
    @v4.se.jherrlin.music-theory.definitions/chords
    :c
    :natural-minor #_:minor
-   triad #_seventh))
+   triad #_seventh)
+  )
 
 {:minor
  #:scale{:id        :minor,
@@ -901,15 +903,15 @@
   (str
    "  T = Tonic (stable), S = Subdominant (leaving), D = Dominant (back home)"
    "\n\n"
-   (->> xs (map (comp #(utils/fformat "  %-10s" %) str :harmonization/index)) (str/join) (str/trim))
+   (->> xs (map (comp #(base-utils/fformat "  %-10s" %) str :harmonization/index)) (str/join) (str/trim))
    "\n"
-   (->> xs (map (comp #(utils/fformat "  %-10s" %) str :harmonization/position)) (str/join) (str/trim))
+   (->> xs (map (comp #(base-utils/fformat "  %-10s" %) str :harmonization/position)) (str/join) (str/trim))
    "\n"
-   (->> xs (map (comp #(utils/fformat "  %-10s" %) str :harmonization/mode-str)) (str/join) (str/trim))
+   (->> xs (map (comp #(base-utils/fformat "  %-10s" %) str :harmonization/mode-str)) (str/join) (str/trim))
    "\n"
-   (->> xs (map (comp #(utils/fformat "  %-10s" %) str :harmonization/family-str)) (str/join) (str/trim))
+   (->> xs (map (comp #(base-utils/fformat "  %-10s" %) str :harmonization/family-str)) (str/join) (str/trim))
    "\n"
-   (->> xs (map (comp #(utils/fformat "  %-10s" %) str :chord-name)) (str/join) (str/trim))))
+   (->> xs (map (comp #(base-utils/fformat "  %-10s" %) str :chord-name)) (str/join) (str/trim))))
 
 (comment
   (->> (gen-harmonization
@@ -926,7 +928,7 @@
 (let [tones     [:d :f# :a]
       tones-set (set tones)]
   (->> (all-tones)
-       (utils/rotate-until #(% :d#))
+       (base-utils/rotate-until #(% :d#))
        (map (fn [tone]
               (cond-> {:tone tone}
                 (seq (set/intersection tones-set tone))
@@ -1021,7 +1023,7 @@
   ([pattern-id {:keys [tuning type] :as meta-data} pattern]
    (let [pattern'   (->> pattern
                          (intevals-string->intervals-matrix)
-                         (utils/trim-matrix))
+                         (base-utils/trim-matrix))
          meta-data  (->> meta-data
                          (map (fn [[k v]]
                                 [(->> k name (str "fretboard-pattern/") keyword) v]))
@@ -1277,11 +1279,24 @@
         @v4.se.jherrlin.music-theory.definitions/scales
         @v4.se.jherrlin.music-theory.definitions/chords)))
 
-;; major
-
-;; minor
-[0 2 3 5 7 8 10]
 
 ;; 1. Find chord tones and data
 ;; 2. Find scale with most tones in common with the chords
 ;; 3. Match scale harmonization
+
+(comment
+  (let [intervals         ["1" "2" "3" "4" "5" "6" "7"]
+      tones-to-interval (->> (tones-by-key-and-intervals
+                              :d
+                              intervals)
+                             (map (fn [a b]
+                                    {b a})
+                                  intervals)
+
+                             (apply merge))
+      tones-in-original (->> (-> "f# a a b a a b c# d d e d c# b c# d e d c#"
+                                 (str/split #"\s"))
+                             (map keyword))]
+  (->> tones-in-original
+       (mapv #(get tones-to-interval %))))
+  )
