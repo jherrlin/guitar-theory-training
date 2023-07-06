@@ -921,6 +921,38 @@
    -   -  b7
    -   -   -
    -   -   1")
+
+(define-chord-pattern :mandolin-major-1
+  {:name   :major
+   :tuning mandolin}
+  "-   -   -   1
+   -   -   3   -
+   5   -   -   -
+   1   -   -   -")
+
+(define-chord-pattern :mandolin-major-2
+  {:name   :major
+   :tuning mandolin}
+  "-   -   3
+   5   -   -
+   1   -   -
+   -   -   5")
+
+(define-chord-pattern :mandolin-major-3
+  {:name   :major
+   :tuning mandolin}
+  "-   -   -   5
+   -   -   -   1
+   -   -   3   -
+   5   -   -   -")
+
+(define-chord-pattern :mandolin-major-3
+  {:name   :minor
+   :tuning mandolin}
+  "1   -   -
+   -   -   5
+   -   -   1
+   -   3   -")
 ;; --------------------
 ;; Chord patterns end
 ;; --------------------
@@ -1642,6 +1674,33 @@
    3   4   -   5   -
    1   -   2   -   -
    -   -   -   -   -")
+
+(define-scale-pattern :mandolin-major-1
+  {:scale :major
+   :tuning mandolin
+   :order 1}
+  "-   -   -   -   -   -
+   -   -   -   -   -   -
+   5   -   6   -   7   1
+   1   -   2   -   3   4")
+
+(define-scale-pattern :mandolin-major-2
+  {:scale :major
+   :tuning mandolin
+   :order 2}
+  "6   -   7   1   -   -
+   2   -   3   4   -   5
+   -   -   -   -   -   1
+   -   -   -   -   -   -")
+
+(define-scale-pattern :mandolin-major-3
+  {:scale :major
+   :tuning mandolin
+   :order 3}
+  "-   -   -   -   -   -
+   5   -   6   -   7   1
+   1   -   2   -   3   4
+   -   -   -   -   -   -")
 ;; ---------------
 ;; Scales patterns end
 ;; ---------------
