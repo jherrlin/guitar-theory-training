@@ -947,12 +947,45 @@
    5   -   -   -")
 
 (define-chord-pattern :mandolin-major-3
-  {:name   :minor
+  {:name   :major
    :tuning mandolin}
   "1   -   -
    -   -   5
    -   -   1
    -   3   -")
+
+(define-chord-pattern :mandolin-minor-1
+  {:name   :minor
+   :tuning mandolin}
+  "-   -   -   1
+   -  b3   -   -
+   5   -   -   -
+   1   -   -   -")
+
+(define-chord-pattern :mandolin-major-maj-seven-1
+  {:name   :major-maj-seven
+   :tuning mandolin}
+  "-   -   7
+   -   -   3
+   5   -   -
+   1   -   -")
+
+(define-chord-pattern :mandolin-dominant-seven-1
+  {:name   :dominant-seven
+   :tuning mandolin}
+  "-  b7   -
+   -   -   3
+   5   -   -
+   1   -   -")
+
+(define-chord-pattern :mandolin-minor-seven-1
+  {:name   :minor-seven
+   :tuning mandolin}
+  "-  b7
+   -  b3
+   5   -
+   1   -")
+
 ;; --------------------
 ;; Chord patterns end
 ;; --------------------
@@ -1224,6 +1257,79 @@
     1   -
     5   -
     -  b3")
+
+(define-triad-pattern :major-1
+  {:name   :major
+   :tuning mandolin
+   :order  1}
+  "-   -   -
+   -   -   3
+   5   -   -
+   1   -   -")
+
+(define-triad-pattern :major-2
+  {:name   :major
+   :tuning mandolin
+   :order  2}
+  "-   -   3
+   5   -   -
+   1   -   -
+   -   -   -")
+
+(define-triad-pattern :major-3
+  {:name   :major
+   :tuning mandolin
+   :order  3}
+  "-   -
+   -   5
+   -   1
+   3   -")
+
+(define-triad-pattern :major-4
+  {:name   :major
+   :tuning mandolin
+   :order  4}
+  "-   -   -   -
+   -   -   -   1
+   -   -   3   -
+   5   -   -   -")
+
+(define-triad-pattern :minor-1
+  {:name   :minor
+   :tuning mandolin
+   :order  1}
+  "-   -   -   -
+   -  b3   -   -
+   5   -   -   -
+   1   -   -   -")
+
+(define-triad-pattern :minor-2
+  {:name   :minor
+   :tuning mandolin
+   :order  2}
+  "-  b3   -   -
+   5   -   -   -
+   1   -   -   -
+   -   -   -   -")
+
+(define-triad-pattern :minor-3
+  {:name   :minor
+   :tuning mandolin
+   :order  3}
+  "-   -   -   -
+   -   -   -   1
+   -  b3   -   -
+   5   -   -   -")
+
+(define-triad-pattern :minor-4
+  {:name   :minor
+   :tuning mandolin
+   :order  4}
+  "-   -   -
+   -   -   5
+   -   -   1
+  b3   -   -")
+
 ;; ---------------
 ;; Triad patterns end
 ;; ---------------
