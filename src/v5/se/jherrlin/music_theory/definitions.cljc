@@ -152,7 +152,6 @@
        (ex-info
         "Scale pattern error"
         (models-fretboard-pattern/explain-fretboard-pattern chord-pattern))))))
-
 ;; ---------------
 ;; Define helpers end.
 ;; ---------------

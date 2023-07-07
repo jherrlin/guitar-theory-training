@@ -149,7 +149,8 @@
  #{:db :c#}
  "b3")
 
-(defn tones-data-from-indexes-and-intervals [all-tones indexes intervals]
+(defn tones-data-from-indexes-and-intervals
+  [all-tones indexes intervals]
   (mapv
    (fn [index interval]
      (merge
@@ -167,17 +168,20 @@
  [0 3 7]
  ["1" "b3" "5"])
 
-(defn tones-on-indexes-with-intervals [indexes intervals tones]
-  (mapv
-   (fn [index interval]
-     (sharp-or-flat (nth tones index) interval))
-   indexes
-   intervals))
+(defn tones-on-indexes-with-intervals
+  ([indexes intervals]
+   (tones-on-indexes-with-intervals (all-tones) indexes intervals))
+  ([tones indexes intervals]
+   (mapv
+    (fn [index interval]
+      (sharp-or-flat (nth tones index) interval))
+    indexes
+    intervals)))
 
 (tones-on-indexes-with-intervals
+ (all-tones)
  [0 3 7]
- ["1" "b3" "5"]
- (all-tones))
+ ["1" "b3" "5"])
 
 (defn tones-by-indexes
   "Tones by indexes"
@@ -287,15 +291,17 @@
   `intervals` -  [\"1\" \"3\" \"5\"]
   =>
   [:c :e :g]"
-  [all-tones key-of intervals]
-  {:pre  [(m/validate models.tone/IndexTones all-tones)
-          (m/validate models.tone/IntervalTone key-of)]
-   :post [(models.tone/valid-tones-data? %)]}
-  (let [indexes (intervals-to-indexes intervals)]
-    (tones-data-from-indexes-and-intervals
-     (tones-starting-at all-tones key-of)
-     indexes
-     intervals)))
+  ([key-of intervals]
+   (tones-data-from-key-of-and-intervals (all-tones) key-of intervals))
+  ([all-tones key-of intervals]
+   {:pre  [(m/validate models.tone/IndexTones all-tones)
+           (m/validate models.tone/IntervalTone key-of)]
+    :post [(models.tone/valid-tones-data? %)]}
+   (let [indexes (intervals-to-indexes intervals)]
+     (tones-data-from-indexes-and-intervals
+      (tones-starting-at all-tones key-of)
+      indexes
+      intervals))))
 
 (tones-data-from-key-of-and-intervals
  (all-tones)
@@ -408,27 +414,27 @@
 
   `scales-map`     - Map with scales
   `chord-indexes`  - Seq with chord indexes, example: `[0 4 7]`"
-  [scales-map chord-indexes]
-  (->> scales-map
-       (vals)
+  [scales-maps chord-indexes]
+  {:pre [(seq scales-maps)]}
+  (->> scales-maps
        (filter (fn [scale]
                  (let [scale-indexes (get scale :scale/indexes)]
                    (set/subset? (set chord-indexes) (set scale-indexes)))))))
 
 (match-chord-with-scales
- {:ionian
-  #:scale{:id        :ionian,
+ [#:scale{:id        :ionian,
           :intervals ["1" "2" "3" "4" "5" "6" "7"],
           :indexes   [0 2 4 5 7 9 11],
           :title     "ionian",
-          :order     4}}
+          :order     4}]
  [0 4 7])
 
-(defn find-chords [chords-map all-tones chord-tones]
+(defn find-chords
+  [chord-maps all-tones chord-tones]
+  {:pre [(seq chord-maps)]}
   (let [[root-tone & _] chord-tones
         tones           (tones-starting-at all-tones root-tone)]
-    (->> chords-map
-         (vals)
+    (->> chord-maps
          (filter (fn [{:chord/keys [indexes]}]
                    (let [chord-to-serch (tones-by-indexes tones indexes)
                          chord-to-match chord-tones]
@@ -442,8 +448,7 @@
                                (every? true?)))))))))
 
 (find-chords
- {:major
-  #:chord{:id           :major,
+ [#:chord{:id           :major,
           :intervals    ["1" "3" "5"],
           :indexes      [0 4 7],
           :title        "major",
@@ -451,7 +456,6 @@
           :sufix        "",
           :explanation  "major",
           :display-text "major"}
-  :minor
   #:chord{:id           :minor,
           :intervals    ["1" "b3" "5"],
           :indexes      [0 3 7],
@@ -459,38 +463,41 @@
           :order        2,
           :sufix        "m",
           :explanation  "minor",
-          :display-text "minor"}}
+          :display-text "minor"}]
  (all-tones)
  [#{:c} #{:e} #{:g}]
  #_[#{:c} #{:d# :eb} #{:g}]
  #_[:c :e :g])
 
-(defn find-chord [chords-map all-tones chord-tones]
-  (->> (find-chords chords-map all-tones chord-tones)
+(defn find-chord
+  [chord-maps all-tones chord-tones]
+  {:pre [(coll? chord-maps)]}
+  (->> (find-chords chord-maps all-tones chord-tones)
        (first)))
 
+
+
 (find-chord
- {:major
-  #:chord{:id           :major,
+ [#:chord{:id           :major,
           :intervals    ["1" "3" "5"],
           :indexes      [0 4 7],
           :title        "major",
           :order        1,
           :sufix        "",
           :explanation  "major",
-          :display-text "major"}}
+          :display-text "major"}]
  (all-tones)
  [#{:c} #{:e} #{:g}])
 
 (defn chord-name
-  [chords-map chord-tones]
+  [chord-maps chord-tones]
+  {:pre [(coll? chord-maps)]}
   (let [root-tone             (first chord-tones)
-        {:chord/keys [sufix]} (find-chord chords-map (all-tones) chord-tones)]
+        {:chord/keys [sufix]} (find-chord chord-maps (all-tones) chord-tones)]
     (str (-> root-tone name str/lower-case str/capitalize) sufix)))
 
 (chord-name
- {:major
-  #:chord{:id           :major,
+ [#:chord{:id           :major,
           :intervals    ["1" "3" "5"],
           :indexes      [0 4 7],
           :title        "major",
@@ -498,7 +505,6 @@
           :sufix        "",
           :explanation  "major",
           :display-text "major"}
-  :minor
   #:chord{:id           :minor,
           :intervals    ["1" "b3" "5"],
           :indexes      [0 3 7],
@@ -506,7 +512,7 @@
           :order        2,
           :sufix        "m",
           :explanation  "minor",
-          :display-text "minor"}}
+          :display-text "minor"}]
  #_[:c :e :g]
  [:c :eb :g])
 
@@ -827,10 +833,13 @@
 (def seventh (juxt #(nth % 0) #(nth % 2) #(nth % 4) #(nth % 6)))
 
 (defn gen-harmonization [scales chords key-of scale' steps-fn]
-  (let [scale         (get scales scale')
+  (let [scale         (->> scales
+                           vals
+                           (filter (comp #{scale'} :scale/scale))
+                           first)
         scale-indexes (get scale :scale/indexes)
         scale-tones   (tones-by-indexes
-                       (tones-starting-at (all-tones) key-of)
+                       (tones-starting-at key-of)
                        scale-indexes)]
     (->> scale-tones
          (mapv
@@ -879,10 +888,10 @@
 
 (comment
   (gen-harmonization
-   @v4.se.jherrlin.music-theory.definitions/scales
-   @v4.se.jherrlin.music-theory.definitions/chords
+   @v5.se.jherrlin.music-theory.definitions/scales
+   @v5.se.jherrlin.music-theory.definitions/chords
    :c
-   :natural-minor #_:minor
+   :major
    triad #_seventh)
   )
 
