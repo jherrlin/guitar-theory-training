@@ -22,7 +22,8 @@
 
   Defines a chord without notion of instrument."
   [:map
-   [:chord/id           keyword?]
+   [:id                 uuid?]
+   [:chord/chord        keyword?]
    [:chord/intervals    [:vector string?]]
    [:chord/indexes      [:vector number?]]
    [:chord/name         string?]
@@ -31,7 +32,7 @@
    [:chord/text         {:optional true} string?]])
 
 (def Chords
-  [:map-of :keyword Chord])
+  [:map-of :uuid Chord])
 
 (def valid-chord?   (partial m/validate Chord))
 (def valid-chords?  (partial m/validate Chords))
@@ -42,18 +43,22 @@
   (m/schema Chord)
   (m/schema? (m/schema Chord))
 
+  ;; validates to true
   (m/validate
    Chord
-   {:chord/id        :major,
+   {:id              (random-uuid)
+    :chord/chord     :major,
     :chord/intervals ["1" "3" "5"],
     :chord/indexes   [0 4 7],
     :chord/name     "major",
     :chord/sufix     ""})
 
+  ;; validates to true
   (m/validate
    Chords
-   {:major
-    {:chord/id           :major,
+   {(random-uuid)
+    {:id                 (random-uuid)
+     :chord/chord        :major,
      :chord/intervals    ["1" "3" "5"],
      :chord/indexes      [0 4 7],
      :chord/name        "major",
@@ -62,10 +67,12 @@
      :chord/explanation  "major",
      :chord/display-text "major"}})
 
+  ;; validates to false but explains what's wrong.
   (m/explain
    Chords
-   {:major
-    {:chord/id           :major,
+   {(random-uuid)
+    {:id                 (random-uuid)
+     :chord/chord        :major,
      :chord/intervals    ["1" "3" "5"],
      ;; :chord/indexes      [0 4 7],
      :chord/name        "major",
