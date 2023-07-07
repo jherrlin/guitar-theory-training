@@ -1024,9 +1024,9 @@
   "1, 2, 3, 4, 5, 6, 7")
 
 (defn define-pattern
-  ([pattern-id pattern]
-   (define-pattern pattern-id {} pattern))
-  ([pattern-id {:keys [tuning type] :as meta-data} pattern]
+  ([id pattern]
+   (define-pattern id {} pattern))
+  ([id {:keys [tuning type belongs-to] :as meta-data} pattern]
    (let [pattern'   (->> pattern
                          (intevals-string->intervals-matrix)
                          (base-utils/trim-matrix))
@@ -1051,7 +1051,8 @@
                          (not))
          pattern*   (merge
                      meta-data
-                     {:fretboard-pattern/id         pattern-id
+                     {:id                           id
+                      :fretboard-pattern/belongs-to belongs-to
                       :fretboard-pattern/type       type
                       :fretboard-pattern/tuning     tuning
                       :fretboard-pattern/pattern    pattern'
@@ -1062,8 +1063,9 @@
        pattern*
        (throw (ex-info "Pattern is not valid" (models.fretboard-pattern/explain-fretboard-pattern pattern*)))))))
 
-(define-pattern :major-1
-  {:name   :major
+(define-pattern (random-uuid)
+  {:belongs-to :major
+   :name   :major
    :chord  :major
    :tuning [:e :b :g :d :a :e]
    :type   :chord}
