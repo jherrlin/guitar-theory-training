@@ -1,7 +1,8 @@
 (ns v5.se.jherrlin.music-theory.definitions
   (:require
    [v5.se.jherrlin.music-theory.utils :as utils]
-   [v5.se.jherrlin.music-theory.models.chord :as models-chord]))
+   [v5.se.jherrlin.music-theory.models.chord :as models-chord]
+   [v5.se.jherrlin.music-theory.models.scale :as models-scale]))
 
 
 (def guitar                  [:e :a :d :g :b :e])
@@ -88,12 +89,18 @@
        chords
        (models-chord/explain-chords chords)))))
 
+
+(comment
+  ;; Scale model
+  models-scale/Scale
+  )
 (defn define-scale
-  ([scale-id intervals-str]
-   (define-scale scale-id {} intervals-str))
-  ([scale-id meta-data intervals-str]
-   (let [scale (utils/define-scale scale-id meta-data intervals-str)
-         id    (get scale :scale/id)]
+  ([id scale intervals-str]
+   (define-scale id scale {} intervals-str))
+  ([id scale meta-data intervals-str]
+   {:pre [(uuid? id)]}
+   (let [meta-data (assoc meta-data :scale scale)
+         scale     (utils/define-scale id meta-data intervals-str)]
      (swap! scales assoc id scale))))
 
 (defn define-chord-pattern
@@ -382,3 +389,142 @@
   {:sufix "13"
    :explanation "major thirteenth"}
   "1 b3 5 7 9 11 13")
+;; ---------------
+;; Chords end
+;; ---------------
+
+;; ---------------
+;; Scales
+;; ---------------
+(define-scale
+  #uuid "39af7096-b5c6-45e9-b743-6791b217a3df"
+  :major
+  "1, 2, 3, 4, 5, 6, 7")
+
+(define-scale
+  #uuid "d091b747-63b9-4db2-9daa-6e9974852080"
+  :minor
+  "1, 2, b3, 4, 5, b6, b7")
+
+(define-scale
+  #uuid "8c0a7209-4ac4-4ec7-b8a5-e4fdaf449ad6"
+  :lydian
+  "1, 2, 3, #4, 5, 6, 7")
+
+(define-scale
+  #uuid "ee53b723-dc42-41ee-8467-61e5c0af3ffe"
+  :ionian
+  "1, 2, 3, 4, 5, 6, 7")
+
+(define-scale
+  #uuid "5a5a5751-9213-4116-9ca7-894cc00be2dc"
+  :mixolydian
+  "1, 2, 3, 4, 5, 6, b7")
+
+(define-scale
+  #uuid "825e9d0e-9b9d-461c-90b3-c2e71c9730aa"
+  :dorian
+  "1, 2, b3, 4, 5, 6, b7")
+
+(define-scale
+  #uuid "8136955a-a4cd-4978-98f6-4d4ff596b5db"
+  :aeolian
+  "1, 2, b3, 4, 5, b6, b7")
+
+(define-scale
+  #uuid "dbf44d25-75b9-4608-8e11-ba733b6edfc0"
+  :phrygian
+  "1, b2, b3, 4, 5, b6, b7")
+
+(define-scale
+  #uuid "862ef869-25e9-47f9-ab5e-8146f8a8b3e6"
+  :locrian
+  "1, b2, b3, 4, b5, b6, b7")
+
+(define-scale
+  #uuid "ddf306a1-b119-4eda-b3c3-1f5215cbe6d8"
+  :harmonic-minor
+  "1, 2, b3, 4, 5, b6, 7")
+
+(define-scale
+  #uuid "6d8e0cba-658d-4072-838e-3d50d926ed0f"
+  :melodic-minor
+  "1, 2, b3, 4, 5, 6, 7")
+
+(define-scale
+  #uuid "2b5857e2-e368-4847-ae91-d385e9286148"
+  :natural-minor
+  "1, 2, b3, 4, 5, b6, b7")
+
+(define-scale
+  #uuid "e7ad3188-1e4c-4d19-bd4b-99e97213c6f6"
+  :pentatonic-major
+  "1, 2, 3, 5, 6")
+
+(define-scale
+  #uuid "82751272-7c3a-445e-a589-24c1ad87a30e"
+  :pentatonic-minor
+  "1, b3, 4, 5, b7")
+
+(define-scale
+  #uuid "bac1ab62-34df-4232-b205-b197d25d8892"
+  :pentatonic-blues
+  "1, b3, 4, b5, 5, b7")
+
+(define-scale
+  #uuid "2dd35839-9d00-45bd-b4e8-43868aa9836c"
+  :pentatonic-neutral
+  "1, 2, 4, 5, b7")
+
+(define-scale
+  #uuid "0995cd25-a646-4347-918d-cfc9f06aa9a1"
+  :diatonic
+  "1, 2, 3, 5, 6")
+
+(define-scale
+  #uuid "c5500473-a4e1-44c3-833b-95d0c840c9e8"
+  :diminished
+  "1, 2, b3, 4, b5, b6, 6, 7")
+
+(define-scale
+  #uuid "3df70e72-dd4c-4e91-85b5-13de2bb062ce"
+  :mixolydian-blues-hybrid
+  "1, 2, b3, 3, 4, b5, 5, 6, b7")
+
+(define-scale
+  #uuid "888bff34-1059-4f11-b5e0-79d6708dd3c7"
+  :diminished-half
+  "1, b2, b3, 3, b5, 5, 6, b7")
+
+(define-scale
+  #uuid "4bd060d3-6a6a-48d2-910e-4c2962af1f30"
+  :diminished-whole
+  "1, 2, b3, 4, b5, b6, 6, 7")
+
+(define-scale
+  #uuid "5867c2d8-e2cf-4221-872e-dc2e50507abd"
+  :diminished-whole-tone
+  "1, b2, b3, 3, b5, b6, b7")
+
+(define-scale
+  #uuid "96b278ae-704e-46d7-9bd3-2b24bcd91d3b"
+  :dominant-7th
+  "1, 2, 3, 4, 5, 6, b7")
+
+(define-scale
+  #uuid "1694ffaf-7fcd-4447-ada4-42f272e6ae5e"
+  :lydian-augmented
+  "1, 2, 3, #4, #5, 6, 7")
+
+(define-scale
+  #uuid "6d32a072-cbbc-4b20-ae01-bda5a87071c6"
+  :lydian-minor
+  "1, 2, 3, #4, 5, b6, b7")
+
+(define-scale
+  #uuid "656b338a-7938-447b-ad89-c478023a21d4"
+  :lydian-diminished
+  "1, 2, b3, #4, 5, 6, 7")
+;; ---------------
+;; Scales end
+;; ---------------

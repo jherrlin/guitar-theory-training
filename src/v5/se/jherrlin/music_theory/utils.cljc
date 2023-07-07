@@ -982,31 +982,32 @@
                      (->> meta-data
                           (map (fn [[k v]]
                                  [(->> k name (str "chord/") keyword) v]))
-                          (into {})))
-         _ (def chord chord)
-         ]
+                          (into {})))]
      (if (models.chord/valid-chord? chord)
        chord
        (throw (ex-info "Chord is not valid" (models.chord/explain-chord chord)))))))
 
-(define-chord :major
-  {:sufix        ""
+(define-chord
+  (random-uuid)
+  {:chord        :major
+   :sufix        ""
    :explanation  "major"
    :display-text "major"}
   "1 3 5")
 
 (defn define-scale
-  ([scale-id intervals-str]
-   (define-scale scale-id {} intervals-str))
-  ([scale-id meta-data intervals-str]
+  ([id intervals-str]
+   (define-scale id {} intervals-str))
+  ([id meta-data intervals-str]
    (let [intervals' (->> (re-seq (re-pattern models.chord/regex) intervals-str)
                          (vec))
          indexes    (intervals/functions-to-semitones intervals')
          scale      (merge
-                     {:scale/id        scale-id
+                     {:id              id
+                      :scale/scale     (get meta-data :scale)
                       :scale/intervals intervals'
                       :scale/indexes   indexes
-                      :scale/name      (-> scale-id
+                      :scale/name      (-> (get meta-data :scale)
                                            name
                                            (str/replace "-" " "))}
                      (->> meta-data
@@ -1017,7 +1018,9 @@
        scale
        (throw (ex-info "Scale is not valid" (models.scale/explain-scale scale)))))))
 
-(define-scale :major
+(define-scale
+  (random-uuid)
+  {:scale :major}
   "1, 2, 3, 4, 5, 6, 7")
 
 (defn define-pattern
