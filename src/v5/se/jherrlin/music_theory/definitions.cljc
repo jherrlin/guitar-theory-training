@@ -114,7 +114,7 @@
   (let [meta-data'    (assoc meta-data :type :chord)
         chord-pattern (utils/define-pattern id meta-data' pattern)]
     (if (models-fretboard-pattern/validate-fretboard-pattern? chord-pattern)
-      (swap! triad-patterns assoc id chord-pattern)
+      (swap! chord-patterns assoc id chord-pattern)
       (throw
        (ex-info
         "Chord pattern error"
@@ -136,7 +136,7 @@
   (let [meta-data'    (assoc meta-data :type :mode)
         chord-pattern (utils/define-pattern id meta-data' pattern)]
     (if (models-fretboard-pattern/validate-fretboard-pattern? chord-pattern)
-      (swap! triad-patterns assoc id chord-pattern)
+      (swap! mode-patterns assoc id chord-pattern)
       (throw
        (ex-info
         "Mode pattern error"
@@ -147,7 +147,7 @@
   (let [meta-data'    (assoc meta-data :type :scale)
         chord-pattern (utils/define-pattern id meta-data' pattern)]
     (if (models-fretboard-pattern/validate-fretboard-pattern? chord-pattern)
-      (swap! triad-patterns assoc id chord-pattern)
+      (swap! scale-patterns assoc id chord-pattern)
       (throw
        (ex-info
         "Scale pattern error"

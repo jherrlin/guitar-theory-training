@@ -834,7 +834,6 @@
 
 (defn gen-harmonization [scales chords key-of scale' steps-fn]
   (let [scale         (->> scales
-                           vals
                            (filter (comp #{scale'} :scale/scale))
                            first)
         scale-indexes (get scale :scale/indexes)
@@ -888,8 +887,8 @@
 
 (comment
   (gen-harmonization
-   @v5.se.jherrlin.music-theory.definitions/scales
-   @v5.se.jherrlin.music-theory.definitions/chords
+   (vals @v5.se.jherrlin.music-theory.definitions/scales)
+   (vals @v5.se.jherrlin.music-theory.definitions/chords)
    :c
    :major
    triad #_seventh)
@@ -973,7 +972,6 @@
                         name
                         (str/replace "-" " "))
          types      (let [intervals (set intervals')]
-                      (def intervals intervals)
                       (cond-> #{}
                         (intervals "3")                      (conj :major)
                         (intervals "b3")                     (conj :minor)
@@ -1101,7 +1099,8 @@
 
 (comment
   (chords-map
-   @v4.se.jherrlin.music-theory.definitions/chords))
+   @v5.se.jherrlin.music-theory.definitions/chords)
+  )
 
 (defn chord-by-name [chords chord-name]
   (get (chords-map chords) chord-name))
@@ -1144,157 +1143,7 @@
       :match-score/scale            3}
      (filter-map-by-namespace-key :match-score))
 
-(defn possible-scales [chords]
-  (let [major-indexes [0 2 4 5 7 9 11]
-        minor-indexes [0 2 3 5 7 8 10]
-        tones         (all-tones)]
-    (->> (for [{:keys [scale indexes]} [{:scale   :major
-                                         :indexes major-indexes}
-                                        {:scale   :minor
-                                         :indexes minor-indexes}]
-               tone                    tones]
-           (let [scale-tones-set (->> (tones-by-key-and-indexes tone indexes)
-                                      (apply concat)
-                                      (set))
-                 chords'         (->> chords
-                                      (map-indexed vector)
-                                      (map (fn [[idx {:keys [interval-tones root] :as m}]]
-                                             (assoc m
-                                                    :match-score/first-chord-root (if (and (= idx 0)
-                                                                                           (tone root))
-                                                                                    1 0)
-                                                    :match-score/scale (scale-match-score
-                                                                        scale-tones-set
-                                                                        (-> interval-tones set))))))]
-             {:possible-scale/scale                      scale
-              :possible-scale/key-of                     (first tone)
-              :possible-scale/indexes                    indexes
-              :possible-scale/index-tones-set            scale-tones-set
-              :tones-intersections-with-scale-and-chords (->> (set/intersection
-                                                               scale-tones-set
-                                                               (->> chords
-                                                                    (map :interval-tones)
-                                                                    (apply concat)
-                                                                    (set)))
-                                                              (vec)
-                                                              (sort))
-              :incomming-chords                          chords'
-              :match-score/tone-intersection             (->> chords'
-                                                              (map #(select-keys % [:match-score/first-chord-root :match-score/scale]))
-                                                              (map vals)
-                                                              (apply concat)
-                                                              (apply +))}))
-         (sort-by :match-score/tone-intersection #(compare %2 %1))
-         (take 10))))
 
-(defn total-match-score [ms]
-  (->> ms
-       (map (fn [{:keys [chords] :as m}]
-              (let [match-score-by-type          (->> chords (map :possible-chord) (map :match-score/by-type) (apply +))
-                    match-score-by-intervals     (->> chords (map :possible-chord) (map :match-score/by-intervals) (apply +))
-                    match-score-scale            (->> chords (map :incomming-chord) (map :match-score/scale) (apply +))
-                    match-score-first-chord-root (->> chords (map :incomming-chord) (map :match-score/first-chord-root) (apply +))]
-                (assoc m
-                       :total-match-score (+
-                                           match-score-by-type
-                                           match-score-by-intervals
-                                           match-score-scale
-                                           match-score-first-chord-root)))))))
-
-(defn possible-chord [harmonization incomming-chord-types incomming-chord-intervals interval-tones]
-  (dissoc
-   (->> harmonization
-        (map (fn [{possible-chord-types     :chord/types
-                   possible-interval-tones  :chord/interval-tones
-                   possible-chord-intervals :chord/intervals
-                   :as                      m}]
-               (assoc m
-                      :match-score/by-tone-positions (->> (map
-                                                           (fn [a b]
-                                                             (= a b))
-                                                           interval-tones
-                                                           possible-interval-tones)
-                                                          (remove false?)
-                                                          (count))
-                      :match-score/by-tones (count (set/intersection (set possible-interval-tones) (set interval-tones)))
-                      :match-score/by-type  (count (set/intersection possible-chord-types incomming-chord-types))
-                      :match-score/by-intervals (->> (map
-                                                      (fn [a b]
-                                                        (= a b))
-                                                      possible-chord-intervals
-                                                      incomming-chord-intervals)
-                                                     (remove false?)
-                                                     (count)))))
-        (map (fn [{match-score-by-tones          :match-score/by-tones
-                   match-score-by-tone-positions :match-score/by-tone-positions
-                   match-score-by-type           :match-score/by-type
-                   match-score-by-intervals      :match-score/by-intervals
-                   :as                           m}]
-               (assoc m :chord-match-score (+ match-score-by-intervals
-                                              match-score-by-type
-                                              match-score-by-tone-positions
-                                              match-score-by-tones))))
-        (sort-by :chord-match-score #(compare %2 %1))
-        (first))
-   :chord-match-score))
-
-(defn posibble-chord-in-harmonization
-  "Match chords with chords in harmonization"
-  [scales chords' ms]
-  (->> ms
-       (map (fn [{chords               :incomming-chords
-                  :possible-scale/keys [scale key-of] :as m}]
-              (->> chords
-                   (map (fn [{incomming-chord-types     :chord/types
-                              incomming-chord-intervals :chord/intervals
-                              :keys                     [interval-tones] :as chord}]
-                          (let [triad-or-seventh (if (= (count interval-tones) 4) seventh triad)
-                                harmonization    (gen-harmonization scales chords' key-of scale triad-or-seventh)]
-                            (-> m
-                                (dissoc :incomming-chords)
-                                (assoc :incomming-chord chord)
-                                (assoc :possible-chord (possible-chord
-                                                        harmonization
-                                                        incomming-chord-types
-                                                        incomming-chord-intervals
-                                                        interval-tones)))))))))
-       (map (fn [data]
-              (let [m (-> data first (dissoc :incomming-chord :possible-chord))]
-                (assoc
-                 m
-                 :chords (map #(select-keys % [:incomming-chord :possible-chord]) data)))))
-       (total-match-score)
-       (sort-by :total-match-score #(compare %2 %1))))
-
-(comment
-
-  (->> (read-incomming-chord-names "Am C Am G F")
-       (chords-by-names @v4.se.jherrlin.music-theory.definitions/chords)
-       (possible-scales)
-       (posibble-chord-in-harmonization
-        @v4.se.jherrlin.music-theory.definitions/scales
-        @v4.se.jherrlin.music-theory.definitions/chords))
-
-  (->> (read-incomming-chord-names "Dm7 G7 Cmaj7")
-       (chords-by-names @v4.se.jherrlin.music-theory.definitions/chords)
-       (possible-scales)
-       (posibble-chord-in-harmonization
-        @v4.se.jherrlin.music-theory.definitions/scales
-        @v4.se.jherrlin.music-theory.definitions/chords))
-
-  (->> (read-incomming-chord-names "E7, A7, B7")
-       (map (partial chord-by-name @v4.se.jherrlin.music-theory.definitions/chords))
-       (possible-scales)
-       (posibble-chord-in-harmonization
-        @v4.se.jherrlin.music-theory.definitions/scales
-        @v4.se.jherrlin.music-theory.definitions/chords))
-
-  (->> (read-incomming-chord-names "Fmaj7 C E Dm Am E")
-       (map (partial chord-by-name @v4.se.jherrlin.music-theory.definitions/chords))
-       (possible-scales)
-       (posibble-chord-in-harmonization
-        @v4.se.jherrlin.music-theory.definitions/scales
-        @v4.se.jherrlin.music-theory.definitions/chords)))
 
 
 ;; 1. Find chord tones and data
