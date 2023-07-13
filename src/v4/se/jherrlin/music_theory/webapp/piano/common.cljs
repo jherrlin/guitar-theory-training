@@ -37,7 +37,7 @@
         (utils/fretboard-str
          (fn [{:keys [out]}] (if (nil? out) "" out))
          data))]
-     [:div {:style {:display         "flex"
+     #_[:div {:style {:display         "flex"
                     :flex-direction  "column-reverse"
                     :justify-content "center"}}
       [:button
