@@ -71,17 +71,20 @@
   (let [circle-comp (fn [color] {:display          :flex
                                  :height           "2em"
                                  :width            "2em"
-                                 :background-color color #_ "#ff7400"
+                                 :background-color color #_"#ff7400"
                                  :border-radius    "50%"
                                  :z-index          0
                                  :align-items      :center
                                  :justify-content  :center})
-        max-x       (->> matrix first (map :x) (apply max))]
+        max-x       (->> matrix first (map :x) (apply max))
+        fret-width "5"]
     [:div
      [:div {:style {:display "flex"}}
       (for [{:keys [x]} (-> matrix first)]
         ^{:key (str "fretboard-fret-" x)}
-        [:div {:style {:width           "6.4em"
+        [:div {:style {:width           (if (= x 0)
+                                          "3.4em"
+                                          (str fret-width ".4em"))
                        :display         "flex"
                        :justify-content "center"}}
          x])]
@@ -91,10 +94,13 @@
         (for [{:keys [x y tone out]} fretboard-string]
           ^{:key (str "fretboard-string-" x "-" y)}
           [:<>
-           [:div {:style {:display          "flex"
+           [:div {:id "hejsan"
+                  :style {:display          "flex"
                           :flex-direction   "column"
                           :height           "3em"
-                          :width            "6em"
+                          :width            (if (= x 0)
+                                              "3em"
+                                              (str fret-width "em"))
                           :background-color (when-not (= x 0) "#000000d6")
                           :justify-content  "center"}}
             [:div {:style {:background-image "linear-gradient(#737270 , #b9bab3, #737270)"

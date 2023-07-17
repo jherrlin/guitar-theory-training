@@ -102,7 +102,7 @@
     :s (fn [db [k]] (get-in db [:query-params k] true)),
     :e (fn [db [k v]] (assoc-in db [:query-params k] v))}
    {:n :nr-of-frets,
-    :s (fn [db [k]] (get-in db [:query-params k] 16)),
+    :s (fn [db [k]] (get-in db [:query-params k] 15)),
     :e (fn [db [k v]] (assoc-in db [:query-params k] v))}
    {:n :nr-of-octavs,
     :s (fn [db [k]] (get-in db [:query-params k] 2)),
