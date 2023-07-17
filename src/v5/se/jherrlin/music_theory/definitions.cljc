@@ -1895,6 +1895,15 @@
    5   -   6   -   7   1
    1   -   2   -   3   4
    -   -   -   -   -   -")
+
+(define-scale-pattern #uuid "dbe70a92-9ca1-42f9-b5b4-fc43ff08914e"
+  {:belongs-to :major
+   :tuning     mandolin
+   :order      4}
+  "5   -   6   -   7   1
+   1   -   2   -   3   4
+   -   -   -   -   -   -
+   -   -   -   -   -   -")
 ;; ---------------
 ;; Scales patterns end
 ;; ---------------

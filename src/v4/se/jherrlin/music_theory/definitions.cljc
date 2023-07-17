@@ -1807,6 +1807,15 @@
    5   -   6   -   7   1
    1   -   2   -   3   4
    -   -   -   -   -   -")
+
+(define-scale-pattern :mandolin-major-4
+  {:scale :major
+   :tuning mandolin
+   :order 4}
+  "5   -   6   -   7   1
+   1   -   2   -   3   4
+   -   -   -   -   -   -
+   -   -   -   -   -   -")
 ;; ---------------
 ;; Scales patterns end
 ;; ---------------
