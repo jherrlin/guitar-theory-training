@@ -96,6 +96,11 @@ code lives on "
        [:> semantic-ui/Menu {:size       "small"
                              :borderless true
                              :style      {:background "#FFFFFF"}}
+        [:> semantic-ui/Menu.Item
+          {:as     "a"
+           :href   "https://jherrlin.github.io/music-theory/"
+           :target "_blank"}
+          "New version!"]
         #_[:> semantic-ui/Menu.Item
            {:as     "a"
             :href   (rfe/href :v3/settings {:instrument tuning-name})
